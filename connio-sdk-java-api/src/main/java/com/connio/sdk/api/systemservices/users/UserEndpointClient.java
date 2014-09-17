@@ -1,0 +1,60 @@
+package com.connio.sdk.api.systemservices.users;
+
+import com.connio.sdk.api.core.ConnioEndpointClient;
+import com.connio.sdk.api.core.UnsupportedOperation;
+import com.connio.sdk.api.exception.ConnioClientException;
+import com.connio.sdk.api.exception.ConnioEndpointException;
+import com.connio.sdk.api.systemservices.users.model.*;
+
+/**
+ * TODO: javadoc
+ *
+ * @author bdirik
+ * @since 10.09.2014
+ */
+public interface UserEndpointClient extends ConnioEndpointClient {
+
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     */
+    public GetUserDetailsResponse getUserDetails(GetUserDetailsRequest request)
+            throws ConnioEndpointException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @return
+     */
+    public GetAllUserDetailsResponse getAllUserDetails()
+            throws ConnioEndpointException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     */
+    public CreateUserResponse createUser(CreateUserRequest request)
+            throws ConnioEndpointException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     */
+    public UpdateUserResponse updateUser(UpdateUserRequest request)
+            throws ConnioEndpointException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     */
+    public DeleteUserResponse deleteUser(DeleteUserRequest request)
+            throws ConnioEndpointException, ConnioClientException;
+}

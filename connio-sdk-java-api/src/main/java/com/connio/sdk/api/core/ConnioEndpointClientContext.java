@@ -1,0 +1,37 @@
+package com.connio.sdk.api.core;
+
+import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.ConnioResponse;
+
+/**
+ * TODO: javadoc
+ *
+ * @author bdirik
+ * @since 15.09.2014
+ */
+public interface ConnioEndpointClientContext {
+
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @param responseType
+     * @param <T>
+     * @return
+     */
+    public <T extends ConnioResponse> T execute(ConnioRequest request, Class<T> responseType);
+
+    /**
+     * TODO: javadoc
+     *
+     * @param handler
+     */
+    public void addRequestHandler(ConnioRequestHandler handler);
+
+    /**
+     * TODO: javadoc
+     *
+     * @param handler
+     */
+    public void addResponseHandler(ConnioResponseHandler handler);
+}
