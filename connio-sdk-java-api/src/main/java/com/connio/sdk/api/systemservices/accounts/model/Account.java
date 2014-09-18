@@ -48,4 +48,35 @@ public class Account implements Serializable {
     public void setStatus(StatusType status) {
         this.status = status;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Account account = (Account) o;
+
+        if (displayName != null ? !displayName.equals(account.displayName) : account.displayName != null) return false;
+        if (planType != account.planType) return false;
+        if (status != account.status) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = displayName != null ? displayName.hashCode() : 0;
+        result = 31 * result + (planType != null ? planType.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "displayName='" + displayName + '\'' +
+                ", planType=" + planType +
+                ", status=" + status +
+                '}';
+    }
 }

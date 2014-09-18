@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.utils.Asserts;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,31 +14,36 @@ import static com.connio.sdk.api.model.Method.DELETE;
  * @author bdirik
  * @since 10.09.2014
  */
-public class DeleteSubAccountRequest extends AccountEndpointRequest {
+public class DeleteSubAccountRequest extends AccountEndpointRequest<Sid> {
 
     @Override
-    public RequestMetaData getRequestMetaData() {
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+
+        Asserts.notNull(content, "Content");
+        Asserts.notEmpty(content.getSid(), "Sid");
+
         Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", getSid());
+        pathParams.put("account-sid", content.getSid());
 
-        RequestMetaData data = super.getRequestMetaData();
-        data.setMethod(DELETE);
-        data.setPath("{account-sid}");
-        data.setPathParams(pathParams);
-
-        return data;
+        metaData.setMethod(DELETE);
+        metaData.setPath("{account-sid}");
+        metaData.setPathParams(pathParams);
     }
 
-    /**
-     * TODO: javadoc
-     */
-    private String sid;
+    private Sid content;
 
-    public String getSid() {
-        return sid;
+    public DeleteSubAccountRequest(Sid content) {
+        this.content = content;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    @Override
+    public Class<Sid> getContentType() {
+        return Sid.class;
+    }
+
+    @Override
+    public Sid getContent() {
+        return content;
     }
 }

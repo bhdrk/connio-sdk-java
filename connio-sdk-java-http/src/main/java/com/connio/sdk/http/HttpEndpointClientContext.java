@@ -1,11 +1,13 @@
 package com.connio.sdk.http;
 
+import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.core.AbstractEndpointClientContext;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.AbstractConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
 import com.connio.sdk.http.factory.HttpClientFactory;
 import com.connio.sdk.http.factory.HttpRequestFactory;
+import com.connio.sdk.http.factory.HttpResponseFactory;
 import com.connio.sdk.http.model.ClientConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -29,31 +31,26 @@ public class HttpEndpointClientContext extends AbstractEndpointClientContext imp
     private ClientConfig clientConfig;
 
     public HttpEndpointClientContext() {
-        this(ClientConfig.instance());
-    }
-
-    public HttpEndpointClientContext(ClientConfig clientConfig) {
-        this(clientConfig, HttpClientFactory.create(clientConfig));
-    }
-
-    public HttpEndpointClientContext(ClientConfig clientConfig, CloseableHttpClient httpClient) {
-        this.clientConfig = clientConfig;
-        this.httpClient = httpClient;
     }
 
     @Override
-    protected <T extends ConnioResponse> T doExecute(ConnioRequest request, Class<T> responseType) {
+    public void init(ConnioCredentials credentials) {
+        this.clientConfig = ClientConfig.instance();
+        this.httpClient = HttpClientFactory.create(clientConfig, credentials);
+    }
+
+    @Override
+    protected <T extends ConnioResponse> T doExecute(AbstractConnioRequest request, Class<T> responseType) {
         CloseableHttpResponse httpResponse = null;
         try {
             HttpRequestBase httpRequest = HttpRequestFactory.create(clientConfig, request);
             httpResponse = httpClient.execute(httpRequest);
-
+            return HttpResponseFactory.create(httpResponse, responseType);
         } catch (IOException e) {
             throw new ConnioClientException("An error occurred while executing http request.", e);
         } finally {
             closeSilently(httpResponse);
         }
-        return null;
     }
 
     @Override

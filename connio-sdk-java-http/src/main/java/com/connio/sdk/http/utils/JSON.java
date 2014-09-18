@@ -2,7 +2,10 @@ package com.connio.sdk.http.utils;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 
@@ -13,7 +16,10 @@ import java.io.IOException;
  * @since 16.09.2014
  */
 public class JSON {
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    public static final ObjectMapper MAPPER = new ObjectMapper()
+            .configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true)
+            .configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true)
+            .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
     public static String toString(Object obj) {
         try {

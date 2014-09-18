@@ -12,9 +12,8 @@ import static com.connio.sdk.api.model.Method.GET;
  */
 public class GetAllSubAccountsDetailsRequest extends AccountEndpointRequest {
     @Override
-    public RequestMetaData getRequestMetaData() {
-        RequestMetaData data = super.getRequestMetaData();
-        data.setMethod(GET);
-        return data;
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+        metaData.setMethod(GET);
     }
 }

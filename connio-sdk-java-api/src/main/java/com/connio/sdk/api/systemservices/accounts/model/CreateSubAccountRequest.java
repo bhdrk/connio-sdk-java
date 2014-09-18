@@ -1,6 +1,5 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
-import com.connio.sdk.api.model.Method;
 import com.connio.sdk.api.model.RequestMetaData;
 
 import static com.connio.sdk.api.model.Method.POST;
@@ -11,25 +10,27 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 10.09.2014
  */
-public class CreateSubAccountRequest extends AccountEndpointRequest {
+public class CreateSubAccountRequest extends AccountEndpointRequest<SubAccount> {
 
     @Override
-    public RequestMetaData getRequestMetaData() {
-        RequestMetaData data = super.getRequestMetaData();
-        data.setMethod(POST);
-        return data;
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+        metaData.setMethod(POST);
     }
 
-    /**
-     * TODO: javadoc
-     */
-    private SubAccount subAccount;
+    private SubAccount content;
 
-    public SubAccount getSubAccount() {
-        return subAccount;
+    public CreateSubAccountRequest(SubAccount content) {
+        this.content = content;
     }
 
-    public void setSubAccount(SubAccount subAccount) {
-        this.subAccount = subAccount;
+    @Override
+    public Class<SubAccount> getContentType() {
+        return SubAccount.class;
+    }
+
+    @Override
+    public SubAccount getContent() {
+        return content;
     }
 }

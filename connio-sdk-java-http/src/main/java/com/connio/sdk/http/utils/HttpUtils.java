@@ -1,7 +1,7 @@
 package com.connio.sdk.http.utils;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.AbstractConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.http.model.ClientConfig;
 import org.apache.http.client.utils.URIBuilder;
@@ -25,7 +25,7 @@ public class HttpUtils {
      *
      * @return
      */
-    public static URI buildURI(ClientConfig clientConfig, ConnioRequest request) {
+    public static URI buildURI(ClientConfig clientConfig, AbstractConnioRequest request) {
 
         URIBuilder uriBuilder = new URIBuilder()
                 .setScheme(clientConfig.getProtocol())
@@ -51,7 +51,7 @@ public class HttpUtils {
         }
     }
 
-    public static String buildPath(ConnioRequest request) {
+    public static String buildPath(AbstractConnioRequest request) {
         RequestMetaData metaData = request.getRequestMetaData();
         String version = metaData.getVersion();
         String endpoint = metaData.getEndpoint();

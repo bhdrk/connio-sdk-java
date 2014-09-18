@@ -1,9 +1,8 @@
 package com.connio.sdk.api.systemservices.users;
 
 import com.connio.sdk.api.core.ConnioEndpointClient;
-import com.connio.sdk.api.core.UnsupportedOperation;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.exception.ConnioEndpointException;
+import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.systemservices.users.model.*;
 
 /**
@@ -21,7 +20,7 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetUserDetailsResponse getUserDetails(GetUserDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -29,7 +28,7 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetAllUserDetailsResponse getAllUserDetails()
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -38,7 +37,7 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public CreateUserResponse createUser(CreateUserRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -47,7 +46,7 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public UpdateUserResponse updateUser(UpdateUserRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -56,5 +55,5 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public DeleteUserResponse deleteUser(DeleteUserRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 }

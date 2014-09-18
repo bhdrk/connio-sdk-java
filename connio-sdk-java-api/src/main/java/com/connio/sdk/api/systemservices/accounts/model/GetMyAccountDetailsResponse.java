@@ -6,15 +6,22 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetMyAccountDetailsResponse extends AccountEndpointResponse {
+public class GetMyAccountDetailsResponse extends AccountEndpointResponse<AccountDetails> {
 
-    private AccountDetails accountDetails;
+    private AccountDetails result;
 
-    public AccountDetails getAccountDetails() {
-        return accountDetails;
+    @Override
+    public Class<AccountDetails> getResultType() {
+        return AccountDetails.class;
     }
 
-    public void setAccountDetails(AccountDetails accountDetails) {
-        this.accountDetails = accountDetails;
+    @Override
+    public AccountDetails getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(AccountDetails result) {
+        this.result = result;
     }
 }

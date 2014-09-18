@@ -1,5 +1,6 @@
 package com.connio.sdk.http.factory;
 
+import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.http.gzip.GzipRequestInterceptor;
 import com.connio.sdk.http.gzip.GzipResponseInterceptor;
 import com.connio.sdk.http.model.ClientConfig;
@@ -28,11 +29,12 @@ public class HttpClientFactory {
     private HttpClientFactory() {
     }
 
-    public static CloseableHttpClient create(ClientConfig clientConfig) {
-        return factory.doCreate(clientConfig);
+    public static CloseableHttpClient create(ClientConfig clientConfig, ConnioCredentials credentials) {
+        return factory.doCreate(clientConfig, credentials);
     }
 
-    private CloseableHttpClient doCreate(ClientConfig clientConfig) {
+    private CloseableHttpClient doCreate(ClientConfig clientConfig, ConnioCredentials credentials) {
+        CredentialsProvider credentialsProvider = getCredentialsProvider(clientConfig, credentials);
         ConnectionConfig connectionConfig = getConnectionConfig(clientConfig);
         SocketConfig socketConfig = getSocketConfig(clientConfig);
         RequestConfig requestConfig = getRequestConfig(clientConfig);
@@ -42,12 +44,23 @@ public class HttpClientFactory {
                 .setMaxConnTotal(clientConfig.getMaxConnections())
                 .setDefaultSocketConfig(socketConfig)
                 .setDefaultConnectionConfig(connectionConfig)
-                .setDefaultRequestConfig(requestConfig);
+                .setDefaultRequestConfig(requestConfig)
+                .setDefaultCredentialsProvider(credentialsProvider);
 
-        setProxy(httpClientBuilder, clientConfig);
+        setProxy(httpClientBuilder, clientConfig, credentialsProvider);
         setGzipSupport(httpClientBuilder, clientConfig);
 
         return httpClientBuilder.build();
+    }
+
+    private CredentialsProvider getCredentialsProvider(ClientConfig clientConfig, ConnioCredentials credentials) {
+        Credentials usernamePasswordCredentials = new UsernamePasswordCredentials(credentials.getAccessKey(), credentials.getSecretKey());
+        AuthScope authscope = new AuthScope(clientConfig.getHost(), clientConfig.getPort());
+
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(authscope, usernamePasswordCredentials);
+
+        return credentialsProvider;
     }
 
     private void setGzipSupport(HttpClientBuilder httpClientBuilder, ClientConfig clientConfig) {
@@ -81,37 +94,42 @@ public class HttpClientFactory {
     }
 
 
-    private void setProxy(HttpClientBuilder httpClientBuilder, ClientConfig clientConfig) {
-        String proxyProtocol = clientConfig.getProxyProtocol();
-        String proxyHost = clientConfig.getProxyHost();
-        int proxyPort = clientConfig.getProxyPort();
-
-        if (isNotEmpty(proxyHost) && proxyPort > -1) {
-            if (isNotEmpty(clientConfig.getProxyUsername()) && isNotEmpty(clientConfig.getProxyPassword())) {
-                CredentialsProvider credentialsProvider = createCredentialsProvider(clientConfig);
-                httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+    private void setProxy(HttpClientBuilder httpClientBuilder, ClientConfig clientConfig, CredentialsProvider credentialsProvider) {
+        if (hasProxyConfig(clientConfig)) {
+            if (hasProxyAuthConfig(clientConfig)) {
+                setProxyCredentials(clientConfig, credentialsProvider);
             }
-            HttpHost proxy = new HttpHost(proxyHost, proxyPort, proxyProtocol);
+            HttpHost proxy = new HttpHost(clientConfig.getProxyHost(), clientConfig.getProxyPort(), clientConfig.getProxyProtocol());
             httpClientBuilder.setProxy(proxy);
         }
     }
 
-    private CredentialsProvider createCredentialsProvider(ClientConfig clientConfig) {
-        AuthScope authscope = new AuthScope(clientConfig.getProxyHost(), clientConfig.getPort(), clientConfig.getProxyProtocol());
+    private boolean hasProxyConfig(ClientConfig clientConfig) {
+        return isNotEmpty(clientConfig.getProxyProtocol()) && isNotEmpty(clientConfig.getProxyHost()) && clientConfig.getProxyPort() > 0;
+    }
+
+    private boolean hasProxyAuthConfig(ClientConfig clientConfig) {
+        return isNotEmpty(clientConfig.getProxyUsername()) && isNotEmpty(clientConfig.getProxyPassword());
+    }
+
+    private void setProxyCredentials(ClientConfig clientConfig, CredentialsProvider credentialsProvider) {
+        AuthScope authscope = new AuthScope(clientConfig.getProxyHost(), clientConfig.getProxyPort());
         Credentials credentials = createCredentials(clientConfig);
-        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(authscope, credentials);
-        return credentialsProvider;
     }
 
     private Credentials createCredentials(ClientConfig clientConfig) {
         Credentials credentials;
 
-        if (isNotEmpty(clientConfig.getProxyDomain()) || isNotEmpty(clientConfig.getProxyWorkstation())) {
+        if (hasNTConfig(clientConfig)) {
             credentials = new NTCredentials(clientConfig.getProxyUsername(), clientConfig.getProxyPassword(), clientConfig.getProxyWorkstation(), clientConfig.getProxyDomain());
         } else {
             credentials = new UsernamePasswordCredentials(clientConfig.getProxyUsername(), clientConfig.getProxyPassword());
         }
         return credentials;
+    }
+
+    private boolean hasNTConfig(ClientConfig clientConfig) {
+        return isNotEmpty(clientConfig.getProxyDomain()) || isNotEmpty(clientConfig.getProxyWorkstation());
     }
 }

@@ -2,7 +2,7 @@ package com.connio.sdk.api.systemservices.datachannels;
 
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.exception.ConnioEndpointException;
+import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.systemservices.datachannels.model.*;
 
 /**
@@ -20,7 +20,7 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetDataChannelDetailsResponse getDataChannelDetails(GetDataChannelDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -28,7 +28,7 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetAllDataChannelDetailsResponse getAllDataChannelDetails(GetAllDataChannelDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -37,7 +37,7 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public CreateDataChannelResponse createDataChannel(CreateDataChannelRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -46,7 +46,7 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public UpdateDataChannelResponse updateDataChannel(UpdateDataChannelRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -55,5 +55,5 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public DeleteDataChannelResponse deleteDataChannel(DeleteDataChannelRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 }

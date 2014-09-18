@@ -18,8 +18,8 @@ public class UserAgentInfo {
 
     private static UserAgentInfo instance = new UserAgentInfo();
 
-    public static UserAgentInfo instance() {
-        return instance;
+    public static String getUserAgent() {
+        return instance.userAgent;
     }
 
     private String userAgent;
@@ -28,10 +28,6 @@ public class UserAgentInfo {
 
     private UserAgentInfo() {
         userAgent = buildUserAgent();
-    }
-
-    public String getUserAgent() {
-        return userAgent;
     }
 
     private String buildUserAgent() {

@@ -8,5 +8,5 @@ import com.connio.sdk.api.model.ConnioResponse;
  * @author bdirik
  * @since 10.09.2014
  */
-public abstract class AccountEndpointResponse implements ConnioResponse {
+public abstract class AccountEndpointResponse<T> implements ConnioResponse<T> {
 }

@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.users.model;
 
-import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.AbstractConnioRequest;
 
 /**
  * TODO: javadoc
@@ -8,5 +8,5 @@ import com.connio.sdk.api.model.ConnioRequest;
  * @author bdirik
  * @since 11.09.2014
  */
-public abstract class UserEndpointRequest extends ConnioRequest {
+public abstract class UserEndpointRequest extends AbstractConnioRequest {
 }

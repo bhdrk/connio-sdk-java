@@ -1,7 +1,6 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
-import com.connio.sdk.api.model.ConnioRequest;
-import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.model.AbstractConnioRequest;
 
 /**
  * TODO: javadoc
@@ -9,5 +8,5 @@ import com.connio.sdk.api.model.RequestMetaData;
  * @author bdirik
  * @since 12.09.2014
  */
-public abstract class DataChannelEndpointRequest extends ConnioRequest {
+public abstract class DataChannelEndpointRequest extends AbstractConnioRequest {
 }

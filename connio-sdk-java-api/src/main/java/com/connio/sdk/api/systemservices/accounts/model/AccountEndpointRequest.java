@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
-import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.AbstractConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
 
 /**
@@ -9,11 +9,10 @@ import com.connio.sdk.api.model.RequestMetaData;
  * @author bdirik
  * @since 10.09.2014
  */
-public abstract class AccountEndpointRequest extends ConnioRequest {
+public abstract class AccountEndpointRequest<T> extends AbstractConnioRequest<T> {
     @Override
-    public RequestMetaData getRequestMetaData() {
-        RequestMetaData data = super.getRequestMetaData();
-        data.setEndpoint("_accounts");
-        return data;
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+        metaData.setEndpoint("_accounts");
     }
 }

@@ -8,5 +8,26 @@ import java.io.Serializable;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface ConnioResponse extends Serializable {
+public interface ConnioResponse<T> extends Serializable {
+
+    /**
+     * TODO: javadoc
+     *
+     * @return
+     */
+    public Class<T> getResultType();
+
+    /**
+     * TODO: javadoc
+     *
+     * @return
+     */
+    public T getResult();
+
+    /**
+     * TODO: javadoc
+     *
+     * @param result
+     */
+    public void setResult(T result);
 }

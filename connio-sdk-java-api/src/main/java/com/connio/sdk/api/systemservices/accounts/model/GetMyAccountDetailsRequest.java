@@ -12,10 +12,10 @@ import static com.connio.sdk.api.model.Method.GET;
  */
 public class GetMyAccountDetailsRequest extends AccountEndpointRequest {
     @Override
-    public RequestMetaData getRequestMetaData() {
-        RequestMetaData data = super.getRequestMetaData();
-        data.setPath("/me");
-        data.setMethod(GET);
-        return data;
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+
+        metaData.setPath("/me");
+        metaData.setMethod(GET);
     }
 }

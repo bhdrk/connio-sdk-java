@@ -2,7 +2,7 @@ package com.connio.sdk.api.systemservices.accounts;
 
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.exception.ConnioEndpointException;
+import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.systemservices.accounts.model.*;
 
 /**
@@ -19,7 +19,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetMyAccountDetailsResponse getMyAccountDetails(GetMyAccountDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -28,7 +28,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetSubAccountDetailsResponse getSubAccountDetails(GetSubAccountDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -36,7 +36,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetAllSubAccountsDetailsResponse getAllSubAccountDetails(GetAllSubAccountsDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -45,7 +45,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public CreateSubAccountResponse createSubAccount(CreateSubAccountRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -54,7 +54,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public UpdateSubAccountResponse updateSubAccount(UpdateSubAccountRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -63,7 +63,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public DeleteSubAccountResponse deleteSubAccount(DeleteSubAccountRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -72,7 +72,7 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public CreateAuthenticationTokenResponse createAuthenticationToken(CreateAuthenticationTokenRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -81,5 +81,5 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetBillingInfoResponse getBillingInfo(GetBillingInfoRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 }

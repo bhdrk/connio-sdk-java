@@ -1,9 +1,10 @@
 package com.connio.sdk.api.systemservices.accounts;
 
+import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.core.ConnioEndpointClientContext;
 import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.exception.ConnioEndpointException;
+import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.systemservices.accounts.model.*;
 
 /**
@@ -17,54 +18,118 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     private ConnioEndpointClientContext context;
 
     public AccountEndpointClientImpl() {
-        context = ConnioEndpointClientContextProvider.get();
+        this.context = ConnioEndpointClientContextProvider.get();
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public GetMyAccountDetailsResponse getMyAccountDetails(GetMyAccountDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, GetMyAccountDetailsResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public GetSubAccountDetailsResponse getSubAccountDetails(GetSubAccountDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, GetSubAccountDetailsResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public GetAllSubAccountsDetailsResponse getAllSubAccountDetails(GetAllSubAccountsDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, GetAllSubAccountsDetailsResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public CreateSubAccountResponse createSubAccount(CreateSubAccountRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, CreateSubAccountResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public UpdateSubAccountResponse updateSubAccount(UpdateSubAccountRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, UpdateSubAccountResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public DeleteSubAccountResponse deleteSubAccount(DeleteSubAccountRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, DeleteSubAccountResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public CreateAuthenticationTokenResponse createAuthenticationToken(CreateAuthenticationTokenRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, CreateAuthenticationTokenResponse.class);
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param request
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
     public GetBillingInfoResponse getBillingInfo(GetBillingInfoRequest request)
-            throws ConnioEndpointException, ConnioClientException {
+            throws ConnioServiceException, ConnioClientException {
         return context.execute(request, GetBillingInfoResponse.class);
     }
 }

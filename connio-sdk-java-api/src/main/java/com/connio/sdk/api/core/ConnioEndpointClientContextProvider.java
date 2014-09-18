@@ -1,6 +1,7 @@
 package com.connio.sdk.api.core;
 
-import com.connio.sdk.api.UnsupportedRequestHandler;
+import com.connio.sdk.api.auth.ConnioCredentials;
+import com.connio.sdk.api.auth.ConnioCredentialsManager;
 import com.connio.sdk.api.exception.ConnioClientException;
 
 import java.util.ServiceLoader;
@@ -20,16 +21,20 @@ public class ConnioEndpointClientContextProvider {
     }
 
     private static ConnioEndpointClientContext load() {
+        ConnioCredentials credentials = getCredentials();
         ServiceLoader<ConnioEndpointClientContext> services = ServiceLoader.load(ConnioEndpointClientContext.class);
         for (ConnioEndpointClientContext service : services) {
-            doInternalLoad(service);
+            service.init(credentials);
             return service;
         }
         throw new ConnioClientException("Service not found for com.connio.sdk.api.core.ConnioEndpointClientContext");
     }
 
-    private static void doInternalLoad(ConnioEndpointClientContext context) {
-        context.addRequestHandler(new UnsupportedRequestHandler());
+    private static ConnioCredentials getCredentials() {
+        ConnioCredentials credentials = ConnioCredentialsManager.getCredentials();
+        if (credentials == null) {
+            throw new ConnioClientException("Credentials not provided!");
+        }
+        return credentials;
     }
-
 }

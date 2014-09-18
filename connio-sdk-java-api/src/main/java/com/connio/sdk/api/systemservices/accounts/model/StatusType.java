@@ -1,5 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
+import java.util.Locale;
+
 /**
  * TODO: javadoc
  *
@@ -8,5 +10,10 @@ package com.connio.sdk.api.systemservices.accounts.model;
  */
 public enum StatusType {
     CREATED, SUSPENDED, ACTIVE, CLOSED;
+
+    @Override
+    public String toString() {
+        return name().toLowerCase(Locale.ENGLISH);
+    }
 }
 

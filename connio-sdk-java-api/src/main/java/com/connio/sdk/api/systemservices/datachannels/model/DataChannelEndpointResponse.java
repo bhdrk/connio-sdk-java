@@ -8,5 +8,5 @@ import com.connio.sdk.api.model.ConnioResponse;
  * @author bdirik
  * @since 12.09.2014
  */
-public abstract class DataChannelEndpointResponse implements ConnioResponse {
+public abstract class DataChannelEndpointResponse  {
 }

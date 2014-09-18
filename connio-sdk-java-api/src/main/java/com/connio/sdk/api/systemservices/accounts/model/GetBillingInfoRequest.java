@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.utils.Asserts;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,31 +14,36 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetBillingInfoRequest extends AccountEndpointRequest {
+public class GetBillingInfoRequest extends AccountEndpointRequest<Sid> {
 
     @Override
-    public RequestMetaData getRequestMetaData() {
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+
+        Asserts.notNull(content, "Content");
+        Asserts.notEmpty(content.getSid(), "Sid");
+
         Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", getSid());
+        pathParams.put("account-sid", content.getSid());
 
-        RequestMetaData data = super.getRequestMetaData();
-        data.setMethod(GET);
-        data.setPath("{account-sid}/_billinginfo");
-        data.setPathParams(pathParams);
-
-        return data;
+        metaData.setMethod(GET);
+        metaData.setPath("{account-sid}/_billinginfo");
+        metaData.setPathParams(pathParams);
     }
 
-    /**
-     * TODO: javadoc
-     */
-    private String sid;
+    private Sid content;
 
-    public String getSid() {
-        return sid;
+    public GetBillingInfoRequest(Sid content) {
+        this.content = content;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    @Override
+    public Class<Sid> getContentType() {
+        return Sid.class;
+    }
+
+    @Override
+    public Sid getContent() {
+        return content;
     }
 }

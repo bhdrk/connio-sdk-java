@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.utils.Asserts;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,41 +14,46 @@ import static com.connio.sdk.api.model.Method.PUT;
  * @author bdirik
  * @since 10.09.2014
  */
-public class UpdateSubAccountRequest extends AccountEndpointRequest {
+public class UpdateSubAccountRequest extends AccountEndpointRequest<SubAccount> {
 
     @Override
-    public RequestMetaData getRequestMetaData() {
+    protected void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+
+        Asserts.notNull(content, "Content");
+        Asserts.notNull(sid, "Sid");
+        Asserts.notEmpty(sid.getSid(), "Sid");
+
         Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", getSid());
+        pathParams.put("account-sid", sid.getSid());
 
-        RequestMetaData data = super.getRequestMetaData();
-        data.setMethod(PUT);
-        data.setPath("{account-sid}");
-        data.setPathParams(pathParams);
-
-        return data;
+        metaData.setMethod(PUT);
+        metaData.setPath("{account-sid}");
+        metaData.setPathParams(pathParams);
     }
-
-    private String sid;
 
     /**
      * TODO: javadoc
      */
-    private SubAccount subAccount;
+    private Sid sid;
 
-    public SubAccount getSubAccount() {
-        return subAccount;
-    }
+    /**
+     * TODO: javadoc
+     */
+    private SubAccount content;
 
-    public void setSubAccount(SubAccount subAccount) {
-        this.subAccount = subAccount;
-    }
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
+    public UpdateSubAccountRequest(Sid sid, SubAccount content) {
         this.sid = sid;
+        this.content = content;
+    }
+
+    @Override
+    public Class<SubAccount> getContentType() {
+        return SubAccount.class;
+    }
+
+    @Override
+    public SubAccount getContent() {
+        return content;
     }
 }

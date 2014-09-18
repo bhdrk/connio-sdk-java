@@ -6,18 +6,25 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetAllSubAccountsDetailsResponse extends AccountEndpointResponse {
+public class GetAllSubAccountsDetailsResponse extends AccountEndpointResponse<SubAccountResultSet> {
 
     /**
      * TODO: javadoc
      */
-    private SubAccountResultSet subAccountResultSet;
+    private SubAccountResultSet result;
 
-    public SubAccountResultSet getSubAccountResultSet() {
-        return subAccountResultSet;
+    @Override
+    public Class<SubAccountResultSet> getResultType() {
+        return SubAccountResultSet.class;
     }
 
-    public void setSubAccountResultSet(SubAccountResultSet subAccountResultSet) {
-        this.subAccountResultSet = subAccountResultSet;
+    @Override
+    public SubAccountResultSet getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(SubAccountResultSet result) {
+        this.result = result;
     }
 }

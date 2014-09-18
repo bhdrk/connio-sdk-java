@@ -1,7 +1,7 @@
 package com.connio.sdk.http.factory;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.AbstractConnioRequest;
 import com.connio.sdk.api.utils.TypeUtils;
 import com.connio.sdk.http.utils.HttpEntityConverter;
 import com.connio.sdk.http.utils.JSONEntityConverter;
@@ -26,15 +26,15 @@ public class HttpEntityFactory {
         supportedContentTypes.put(ContentType.APPLICATION_JSON.getMimeType(), new JSONEntityConverter());
     }
 
-    public static HttpEntity create(ConnioRequest request) {
+    public static HttpEntity create(AbstractConnioRequest request) {
         return instance.doCreate(request);
     }
 
-    private HttpEntity doCreate(ConnioRequest request) {
+    private HttpEntity doCreate(AbstractConnioRequest request) {
         return getConverter(request).convert(request);
     }
 
-    private HttpEntityConverter getConverter(ConnioRequest request) {
+    private HttpEntityConverter getConverter(AbstractConnioRequest request) {
         String contentType = request.getRequestMetaData().getContentType();
         if (TypeUtils.isNotEmpty(contentType) && supportedContentTypes.containsKey(contentType)) {
             return supportedContentTypes.get(contentType);

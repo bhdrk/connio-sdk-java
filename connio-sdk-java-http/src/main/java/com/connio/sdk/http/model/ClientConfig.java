@@ -5,12 +5,14 @@ import com.connio.sdk.http.factory.ClientConfigFactory;
 
 import java.util.Map;
 
+import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
+
 /**
  * Client configuration
  */
 public class ClientConfig {
 
-    private static ClientConfig instance = ClientConfigFactory.create();
+    private static ClientConfig instance = new ClientConfig(ClientConfigFactory.create());
 
     public static ClientConfig instance() {
         return instance;
@@ -21,8 +23,6 @@ public class ClientConfig {
     private String host;
 
     private int port = -1;
-
-    private int maxErrorRetry = -1;
 
     private String proxyHost = null;
 
@@ -49,20 +49,19 @@ public class ClientConfig {
     private boolean useGzip;
 
     ClientConfig(Map<String, String> defaults) {
-        this.protocol = Protocol.fromValue(defaults.get("connio.http.protocol")).name();
+        this.protocol = defaults.get("connio.http.protocol");
         this.host = defaults.get("connio.http.host");
-        this.port = toInt(defaults, "connio.http.port");
+        this.port = toInt(defaults, "connio.http.port", -1);
 
-        this.connectionTimeout = toInt(defaults, "connio.http.connectionTimeout");
-        this.connectionRequestTimeout = toInt(defaults, "connio.http.connectionRequestTimeout");
-        this.socketTimeout = toInt(defaults, ("connio.http.socketTimeout"));
-        this.maxConnections = toInt(defaults, "connio.http.maxConnections");
-        this.maxErrorRetry = toInt(defaults, "connio.http.maxErrorRetry");
+        this.connectionTimeout = toInt(defaults, "connio.http.connectionTimeout", 0);
+        this.connectionRequestTimeout = toInt(defaults, "connio.http.connectionRequestTimeout", 0);
+        this.socketTimeout = toInt(defaults, ("connio.http.socketTimeout"), 0);
+        this.maxConnections = toInt(defaults, "connio.http.maxConnections", 0);
         this.useGzip = toBoolean(defaults, "connio.http.useGzip");
 
         this.proxyHost = defaults.get("connio.http.proxyHost");
-        this.proxyPort = toInt(defaults, "connio.http.proxyPort");
-        this.proxyProtocol = Protocol.fromValue(defaults.get("connio.http.proxyProtocol")).name();
+        this.proxyPort = toInt(defaults, "connio.http.proxyPort", -1);
+        this.proxyProtocol = defaults.get("connio.http.proxyProtocol");
         this.proxyUsername = defaults.get("connio.http.proxyUsername");
         this.proxyPassword = defaults.get("connio.http.proxyPassword");
         this.proxyDomain = defaults.get("connio.http.proxyDomain");
@@ -73,17 +72,16 @@ public class ClientConfig {
         return Boolean.valueOf(defaults.get(key));
     }
 
-    private int toInt(Map<String, String> defaults, String key) {
+    private int toInt(Map<String, String> defaults, String key, int defaultValue) {
         String str = defaults.get(key);
+
+        if (isEmpty(str)) return defaultValue;
+
         try {
             return Integer.valueOf(str);
         } catch (NumberFormatException e) {
             throw new ConnioClientException("Invalid number format for " + key);
         }
-    }
-
-    public int getMaxErrorRetry() {
-        return maxErrorRetry;
     }
 
     public String getProtocol() {

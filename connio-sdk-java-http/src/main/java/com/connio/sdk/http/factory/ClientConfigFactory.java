@@ -1,7 +1,6 @@
 package com.connio.sdk.http.factory;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.http.model.ClientConfig;
 import com.connio.sdk.http.internal.InternalConfig;
 
 import java.io.IOException;
@@ -27,18 +26,18 @@ public class ClientConfigFactory {
     private ClientConfigFactory() {
     }
 
-    public static ClientConfig create() {
+    public static Map<String, String> create() {
         return factory.doCreate();
     }
 
-    private ClientConfig doCreate() {
+    private Map<String, String> doCreate() {
         Map<String, String> configMap = getDefaultConfigs();
 
         overrideFromUserDefinedConfigs(configMap);
         overrideFromSystemProperties(configMap);
         overrideFromEnvProperties(configMap);
 
-        return new ClientConfig(configMap);
+        return configMap;
     }
 
     private void overrideFromUserDefinedConfigs(Map<String, String> configMap) {

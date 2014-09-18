@@ -2,7 +2,7 @@ package com.connio.sdk.api.systemservices.apps;
 
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.exception.ConnioEndpointException;
+import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.systemservices.apps.model.*;
 
 /**
@@ -20,7 +20,7 @@ public interface AppEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetAppDetailsResponse getAppDetails(GetAppDetailsRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -28,7 +28,7 @@ public interface AppEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public GetAllAppDetailsResponse getAllAppDetails()
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -37,7 +37,7 @@ public interface AppEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public CreateAppResponse createApp(CreateAppRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -46,7 +46,7 @@ public interface AppEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public UpdateAppResponse updateApp(UpdateAppRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -55,6 +55,6 @@ public interface AppEndpointClient extends ConnioEndpointClient {
      * @return
      */
     public DeleteAppResponse deleteApp(DeleteAppRequest request)
-            throws ConnioEndpointException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 
 }
