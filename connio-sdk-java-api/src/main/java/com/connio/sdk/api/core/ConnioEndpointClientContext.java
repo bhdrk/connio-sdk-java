@@ -1,7 +1,7 @@
 package com.connio.sdk.api.core;
 
 import com.connio.sdk.api.auth.ConnioCredentials;
-import com.connio.sdk.api.model.AbstractConnioRequest;
+import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
 
 /**
@@ -27,7 +27,7 @@ public interface ConnioEndpointClientContext {
      * @param <T>
      * @return
      */
-    public <T extends ConnioResponse> T execute(AbstractConnioRequest request, Class<T> responseType);
+    public <T extends ConnioResponse> T execute(ConnioRequest request, Class<T> responseType);
 
     /**
      * TODO: javadoc

@@ -20,30 +20,33 @@ public class GetBillingInfoRequest extends AccountEndpointRequest<Sid> {
     protected void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notNull(content, "Content");
-        Asserts.notEmpty(content.getSid(), "Sid");
+        Asserts.notEmpty(sid, "Sid");
 
         Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", content.getSid());
+        pathParams.put("account-sid", sid);
 
         metaData.setMethod(GET);
         metaData.setPath("{account-sid}/_billinginfo");
         metaData.setPathParams(pathParams);
     }
 
-    private Sid content;
+    /**
+     * TODO: javadoc
+     */
+    private String sid;
 
-    public GetBillingInfoRequest(Sid content) {
-        this.content = content;
+    public GetBillingInfoRequest() {
     }
 
-    @Override
-    public Class<Sid> getContentType() {
-        return Sid.class;
+    public GetBillingInfoRequest(String sid) {
+        this.sid = sid;
     }
 
-    @Override
-    public Sid getContent() {
-        return content;
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }

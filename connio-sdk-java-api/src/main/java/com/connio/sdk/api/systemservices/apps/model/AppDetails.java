@@ -2,6 +2,7 @@ package com.connio.sdk.api.systemservices.apps.model;
 
 import com.connio.sdk.api.systemservices.datachannels.model.DataChannelDetails;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * @author bdirik
  * @since 12.09.2014
  */
-public class AppDetails {
+public class AppDetails implements Serializable {
 
     /**
      * TODO: javadoc

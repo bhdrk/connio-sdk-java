@@ -18,4 +18,7 @@ public class GetMyAccountDetailsRequest extends AccountEndpointRequest {
         metaData.setPath("/me");
         metaData.setMethod(GET);
     }
+
+    public GetMyAccountDetailsRequest() {
+    }
 }

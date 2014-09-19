@@ -1,6 +1,6 @@
 package com.connio.sdk.http.utils;
 
-import com.connio.sdk.api.model.AbstractConnioRequest;
+import com.connio.sdk.api.model.ConnioRequest;
 import org.apache.http.HttpEntity;
 
 /**
@@ -17,5 +17,5 @@ public interface HttpEntityConverter {
      * @param request
      * @return
      */
-    public HttpEntity convert(AbstractConnioRequest request);
+    public HttpEntity convert(ConnioRequest request);
 }

@@ -20,30 +20,34 @@ public class CreateAuthenticationTokenRequest extends AccountEndpointRequest<Sid
     protected void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notNull(content, "Content");
-        Asserts.notEmpty(content.getSid(), "Sid");
+        Asserts.notEmpty(sid, "Sid");
 
         Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", content.getSid());
+        pathParams.put("account-sid", sid);
 
         metaData.setMethod(POST);
         metaData.setPath("{account-sid}/_authtoken");
         metaData.setPathParams(pathParams);
+        metaData.setRequestContent(new Sid(sid));
     }
 
-    private Sid content;
+    /**
+     * TODO: javadoc
+     */
+    private String sid;
 
-    public CreateAuthenticationTokenRequest(Sid content) {
-        this.content = content;
+    public CreateAuthenticationTokenRequest() {
     }
 
-    @Override
-    public Class<Sid> getContentType() {
-        return Sid.class;
+    public CreateAuthenticationTokenRequest(String sid) {
+        this.sid = sid;
     }
 
-    @Override
-    public Sid getContent() {
-        return content;
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }

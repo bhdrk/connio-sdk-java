@@ -10,6 +10,9 @@ public class GetMyAccountDetailsResponse extends AccountEndpointResponse<Account
 
     private AccountDetails result;
 
+    public GetMyAccountDetailsResponse() {
+    }
+
     @Override
     public Class<AccountDetails> getResultType() {
         return AccountDetails.class;

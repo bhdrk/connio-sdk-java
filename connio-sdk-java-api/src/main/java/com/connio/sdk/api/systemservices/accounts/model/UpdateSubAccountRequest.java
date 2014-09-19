@@ -20,40 +20,50 @@ public class UpdateSubAccountRequest extends AccountEndpointRequest<SubAccount> 
     protected void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notNull(content, "Content");
-        Asserts.notNull(sid, "Sid");
-        Asserts.notEmpty(sid.getSid(), "Sid");
+        Asserts.notNull(subAccount, "SubAccount");
+        Asserts.notEmpty(sid, "Sid");
 
         Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", sid.getSid());
+        pathParams.put("account-sid", sid);
 
         metaData.setMethod(PUT);
         metaData.setPath("{account-sid}");
         metaData.setPathParams(pathParams);
+
+        metaData.setRequestContent(subAccount);
     }
 
     /**
      * TODO: javadoc
      */
-    private Sid sid;
+    private String sid;
 
     /**
      * TODO: javadoc
      */
-    private SubAccount content;
+    private SubAccount subAccount;
 
-    public UpdateSubAccountRequest(Sid sid, SubAccount content) {
+    public UpdateSubAccountRequest() {
+    }
+
+    public UpdateSubAccountRequest(String sid, SubAccount subAccount) {
         this.sid = sid;
-        this.content = content;
+        this.subAccount = subAccount;
     }
 
-    @Override
-    public Class<SubAccount> getContentType() {
-        return SubAccount.class;
+    public SubAccount getSubAccount() {
+        return subAccount;
     }
 
-    @Override
-    public SubAccount getContent() {
-        return content;
+    public void setSubAccount(SubAccount subAccount) {
+        this.subAccount = subAccount;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }

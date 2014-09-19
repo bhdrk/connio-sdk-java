@@ -3,7 +3,7 @@ package com.connio.sdk.http;
 import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.core.AbstractEndpointClientContext;
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.AbstractConnioRequest;
+import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
 import com.connio.sdk.http.factory.HttpClientFactory;
 import com.connio.sdk.http.factory.HttpRequestFactory;
@@ -40,7 +40,7 @@ public class HttpEndpointClientContext extends AbstractEndpointClientContext imp
     }
 
     @Override
-    protected <T extends ConnioResponse> T doExecute(AbstractConnioRequest request, Class<T> responseType) {
+    protected <T extends ConnioResponse> T doExecute(ConnioRequest request, Class<T> responseType) {
         CloseableHttpResponse httpResponse = null;
         try {
             HttpRequestBase httpRequest = HttpRequestFactory.create(clientConfig, request);

@@ -1,7 +1,7 @@
 package com.connio.sdk.api.core;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.AbstractConnioRequest;
+import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
 
 import java.util.HashMap;
@@ -22,16 +22,16 @@ public abstract class AbstractEndpointClientContext implements ConnioEndpointCli
     private Map<String, ConnioResponseHandler> responseHandlers = new HashMap<String, ConnioResponseHandler>();
 
     @Override
-    public <T extends ConnioResponse> T execute(AbstractConnioRequest request, Class<T> responseType) {
+    public <T extends ConnioResponse> T execute(ConnioRequest request, Class<T> responseType) {
         request = handleRequest(request);
         T response = doExecute(request, responseType);
         response = responseType.cast(handleResponse(response));
         return response;
     }
 
-    protected abstract <T extends ConnioResponse> T doExecute(AbstractConnioRequest request, Class<T> responseType);
+    protected abstract <T extends ConnioResponse> T doExecute(ConnioRequest request, Class<T> responseType);
 
-    protected AbstractConnioRequest handleRequest(AbstractConnioRequest request) {
+    protected ConnioRequest handleRequest(ConnioRequest request) {
         if (isNotEmpty(requestHandlers)) {
             for (ConnioRequestHandler handler : requestHandlers.values()) {
                 if (handler.isHandlerFor(request)) {

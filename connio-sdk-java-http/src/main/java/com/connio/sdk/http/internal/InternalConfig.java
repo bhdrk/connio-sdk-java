@@ -8,7 +8,7 @@ package com.connio.sdk.http.internal;
  */
 public class InternalConfig {
 
-    public static final String USER_AGENT_TEMPLATE = "connio-sdk-{platform}/{version} {os.name}/{os.version} {java.vm.name}/{java.vm.version}/{java.version} {language}({region})";
+    public static final String USER_AGENT_TEMPLATE = "connio-sdk-{platform}/{version} _ {os.name}/{os.version} _ {java.vm.name}/{java.vm.version}/{java.version} _ {language}({region})";
 
     public static final String VERSION_INFO_FILE = "com/connio/sdk/version.properties";
 

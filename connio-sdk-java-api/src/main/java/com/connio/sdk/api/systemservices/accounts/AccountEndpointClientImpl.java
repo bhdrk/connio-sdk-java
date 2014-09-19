@@ -1,6 +1,5 @@
 package com.connio.sdk.api.systemservices.accounts;
 
-import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.core.ConnioEndpointClientContext;
 import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
 import com.connio.sdk.api.exception.ConnioClientException;

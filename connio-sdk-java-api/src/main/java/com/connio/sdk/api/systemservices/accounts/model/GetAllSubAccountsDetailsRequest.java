@@ -16,4 +16,7 @@ public class GetAllSubAccountsDetailsRequest extends AccountEndpointRequest {
         super.loadMetaData(metaData);
         metaData.setMethod(GET);
     }
+
+    public GetAllSubAccountsDetailsRequest() {
+    }
 }

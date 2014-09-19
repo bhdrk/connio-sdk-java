@@ -6,37 +6,25 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class CreateAuthenticationTokenResponse extends AccountEndpointResponse<CreateAuthenticationTokenResponse.Result> {
+public class CreateAuthenticationTokenResponse extends AccountEndpointResponse<AuthToken> {
 
-    public static class Result {
-        /**
-         * TODO: javadoc
-         */
-        private String authToken;
+    private AuthToken result;
 
-        public String getAuthToken() {
-            return authToken;
-        }
-
-        public void setAuthToken(String authToken) {
-            this.authToken = authToken;
-        }
-    }
-
-    private Result result;
-
-    @Override
-    public Class<Result> getResultType() {
-        return Result.class;
+    public CreateAuthenticationTokenResponse() {
     }
 
     @Override
-    public Result getResult() {
+    public Class<AuthToken> getResultType() {
+        return AuthToken.class;
+    }
+
+    @Override
+    public AuthToken getResult() {
         return result;
     }
 
     @Override
-    public void setResult(Result result) {
+    public void setResult(AuthToken result) {
         this.result = result;
     }
 }

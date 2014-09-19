@@ -50,6 +50,11 @@ public class RequestMetaData {
      */
     private Map<String, String> headers;
 
+    /**
+     * TODO: javadoc
+     */
+    private Object requestContent;
+
     public String getPath() {
         return path;
     }
@@ -144,5 +149,13 @@ public class RequestMetaData {
         result = 31 * result + (contentType != null ? contentType.hashCode() : 0);
         result = 31 * result + (headers != null ? headers.hashCode() : 0);
         return result;
+    }
+
+    public Object getRequestContent() {
+        return requestContent;
+    }
+
+    public void setRequestContent(Object requestContent) {
+        this.requestContent = requestContent;
     }
 }

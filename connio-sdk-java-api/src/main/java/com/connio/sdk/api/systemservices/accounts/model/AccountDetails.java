@@ -96,7 +96,7 @@ public class AccountDetails implements Serializable {
         return planType;
     }
 
-    public void PlanType(PlanType planType) {
+    public void setPlanType(PlanType planType) {
         this.planType = planType;
     }
 

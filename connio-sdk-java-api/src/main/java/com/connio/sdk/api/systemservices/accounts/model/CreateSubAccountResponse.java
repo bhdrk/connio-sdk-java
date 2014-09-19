@@ -12,6 +12,9 @@ public class CreateSubAccountResponse extends AccountEndpointResponse<SubAccount
      */
     private SubAccountDetails result;
 
+    public CreateSubAccountResponse() {
+    }
+
     @Override
     public Class<SubAccountDetails> getResultType() {
         return SubAccountDetails.class;

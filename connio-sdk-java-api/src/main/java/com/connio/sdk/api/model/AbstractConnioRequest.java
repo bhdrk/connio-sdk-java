@@ -8,14 +8,10 @@ package com.connio.sdk.api.model;
  */
 public abstract class AbstractConnioRequest<T> implements ConnioRequest<T> {
 
-    private RequestMetaData metaData;
-
     @Override
     public RequestMetaData getRequestMetaData() {
-        if (metaData == null) {
-            metaData = new RequestMetaData();
-            loadMetaData(metaData);
-        }
+        RequestMetaData metaData = new RequestMetaData();
+        loadMetaData(metaData);
         return metaData;
     }
 

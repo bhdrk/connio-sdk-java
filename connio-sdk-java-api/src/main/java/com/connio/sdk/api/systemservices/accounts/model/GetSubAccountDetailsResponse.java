@@ -13,6 +13,9 @@ public class GetSubAccountDetailsResponse extends AccountEndpointResponse<SubAcc
      */
     private SubAccountDetails result;
 
+    public GetSubAccountDetailsResponse() {
+    }
+
     @Override
     public Class<SubAccountDetails> getResultType() {
         return SubAccountDetails.class;

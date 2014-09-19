@@ -1,7 +1,7 @@
 package com.connio.sdk.http.factory;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.AbstractConnioRequest;
+import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.Method;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.TypeUtils;
@@ -29,11 +29,11 @@ public class HttpRequestFactory {
     private HttpRequestFactory() {
     }
 
-    public static HttpRequestBase create(ClientConfig clientConfig, AbstractConnioRequest request) {
+    public static HttpRequestBase create(ClientConfig clientConfig, ConnioRequest request) {
         return factory.doCreate(clientConfig, request);
     }
 
-    private HttpRequestBase doCreate(ClientConfig clientConfig, AbstractConnioRequest request) {
+    private HttpRequestBase doCreate(ClientConfig clientConfig, ConnioRequest request) {
         HttpRequestBase httpRequest;
 
         Method method = request.getRequestMetaData().getMethod();
@@ -56,13 +56,13 @@ public class HttpRequestFactory {
         return httpRequest;
     }
 
-    private HttpRequestBase httpGet(AbstractConnioRequest request, URI uri) {
+    private HttpRequestBase httpGet(ConnioRequest request, URI uri) {
         HttpRequestBase httpRequest;
         httpRequest = new HttpGet(uri);
         return httpRequest;
     }
 
-    private HttpRequestBase httpPost(AbstractConnioRequest request, URI uri) {
+    private HttpRequestBase httpPost(ConnioRequest request, URI uri) {
         HttpRequestBase httpRequest;
         HttpPost httpPost = new HttpPost(uri);
         httpPost.setEntity(HttpEntityFactory.create(request));
@@ -70,7 +70,7 @@ public class HttpRequestFactory {
         return httpRequest;
     }
 
-    private HttpRequestBase httpPut(AbstractConnioRequest request, URI uri) {
+    private HttpRequestBase httpPut(ConnioRequest request, URI uri) {
         HttpRequestBase httpRequest;
         HttpPut httpPut = new HttpPut(uri);
         httpPut.setEntity(HttpEntityFactory.create(request));
@@ -78,13 +78,13 @@ public class HttpRequestFactory {
         return httpRequest;
     }
 
-    private HttpRequestBase httpDelete(AbstractConnioRequest request, URI uri) {
+    private HttpRequestBase httpDelete(ConnioRequest request, URI uri) {
         HttpRequestBase httpRequest;
         httpRequest = new HttpDelete(uri);
         return httpRequest;
     }
 
-    private void addHeaders(HttpRequestBase httpRequest, AbstractConnioRequest connioRequest) {
+    private void addHeaders(HttpRequestBase httpRequest, ConnioRequest connioRequest) {
         RequestMetaData metaData = connioRequest.getRequestMetaData();
 
         httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, metaData.getContentType());

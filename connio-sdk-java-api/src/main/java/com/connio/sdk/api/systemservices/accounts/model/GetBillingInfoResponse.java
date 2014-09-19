@@ -1,44 +1,27 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
-import java.util.List;
-
 /**
  * TODO: javadoc
  *
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetBillingInfoResponse extends AccountEndpointResponse<GetBillingInfoResponse.Result> {
+public class GetBillingInfoResponse extends AccountEndpointResponse<BillingInfoList> {
 
-    public static class Result {
-        /**
-         * TODO: javadoc
-         */
-        private List<BillingInfo> billingInfo;
-
-        public List<BillingInfo> getBillingInfo() {
-            return billingInfo;
-        }
-
-        public void setBillingInfo(List<BillingInfo> billingInfo) {
-            this.billingInfo = billingInfo;
-        }
-    }
-
-    private Result result;
+    private BillingInfoList result;
 
     @Override
-    public Class<Result> getResultType() {
-        return Result.class;
+    public Class<BillingInfoList> getResultType() {
+        return BillingInfoList.class;
     }
 
     @Override
-    public Result getResult() {
+    public BillingInfoList getResult() {
         return result;
     }
 
     @Override
-    public void setResult(Result result) {
+    public void setResult(BillingInfoList result) {
         this.result = result;
     }
 }

@@ -4,10 +4,7 @@ import com.connio.sdk.api.auth.ConnioBasicCredentials;
 import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.exception.ConnioClientException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
@@ -23,26 +20,11 @@ public class ProfileCredentialsProvider implements ConnioCredentialsProvider {
 
     @Override
     public ConnioCredentials getCredentials() {
-        String userHome = System.getProperty("user.home");
+        File credentialsFile = getCredentialsFile();
+        if (credentialsFile == null) return null;
 
-        if (isEmpty(userHome)) {
-            throw new ConnioClientException("Cannot load Connio credentials file. 'user.home' system property is empty");
-        }
-
-        File userHomeDir = new File(userHome);
-        File credentialsFile = new File(userHomeDir, CREDENTIALS_FILE_NAME);
-
-        if (credentialsFile.exists() && credentialsFile.canRead()) {
-            return null;
-        }
-
-        FileReader reader;
-
-        try {
-            reader = new FileReader(credentialsFile);
-        } catch (FileNotFoundException ignored) {
-            return null;
-        }
+        FileReader reader = getFileReader(credentialsFile);
+        if (reader == null) return null;
 
         String accessKey, secretKey;
 
@@ -58,9 +40,45 @@ public class ProfileCredentialsProvider implements ConnioCredentialsProvider {
             }
         } catch (IOException e) {
             throw new ConnioClientException("Cannot load Connio credentials file.", e);
+        } finally {
+            closeSilently(reader);
         }
 
         return new ConnioBasicCredentials(accessKey, secretKey);
     }
 
+    private FileReader getFileReader(File credentialsFile) {
+        FileReader reader;
+        try {
+            reader = new FileReader(credentialsFile);
+        } catch (FileNotFoundException ignored) {
+            return null;
+        }
+        return reader;
+    }
+
+    private File getCredentialsFile() {
+        String userHome = System.getProperty("user.home");
+
+        if (isEmpty(userHome)) {
+            throw new ConnioClientException("Cannot load Connio credentials file. 'user.home' system property is empty");
+        }
+
+        File userHomeDir = new File(userHome);
+        File credentialsFile = new File(userHomeDir, CREDENTIALS_FILE_NAME);
+
+        if (credentialsFile.exists() && credentialsFile.canRead()) {
+            return null;
+        }
+        return credentialsFile;
+    }
+
+    private void closeSilently(Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException ignored) {
+            }
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.connio.sdk.api.core;
 
-import com.connio.sdk.api.model.AbstractConnioRequest;
+import com.connio.sdk.api.model.ConnioRequest;
 
 import java.io.Serializable;
 
@@ -18,7 +18,7 @@ public interface ConnioRequestHandler extends Serializable {
      * @param request
      * @return
      */
-    public boolean isHandlerFor(AbstractConnioRequest request);
+    public boolean isHandlerFor(ConnioRequest request);
 
     /**
      * TODO: javadoc
@@ -26,7 +26,7 @@ public interface ConnioRequestHandler extends Serializable {
      * @param request
      * @return
      */
-    public AbstractConnioRequest handleRequest(AbstractConnioRequest request);
+    public ConnioRequest handleRequest(ConnioRequest request);
 
     /**
      * TODO: javadoc
