@@ -5,7 +5,6 @@ import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.ConnioResponse;
 import com.connio.sdk.http.utils.IOUtils;
 import com.connio.sdk.http.utils.JSON;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -64,13 +63,8 @@ public class HttpResponseFactory {
     }
 
     private ConnioServiceException createExceptionIfJsonResponse(HttpResponse httpResponse, String errorContent) throws IOException {
-        JsonNode node;
-        try {
-            node = JSON.MAPPER.readTree(errorContent);
-        } catch (JsonParseException ignored) {
-            return null;
-        }
-        if (node.has("status") && "error".equalsIgnoreCase(node.get("status").asText())) {
+        JsonNode node = JSON.toNodeTree(errorContent, true);
+        if (isErrorJsonResponse(node)) {
             String status = node.get("status").asText();
             String cause = node.get("cause").asText();
             String responseStatus = httpResponse.getStatusLine().toString();
@@ -78,6 +72,10 @@ public class HttpResponseFactory {
             return new ConnioServiceException(status, cause, details, responseStatus);
         }
         return null;
+    }
+
+    private boolean isErrorJsonResponse(JsonNode node) {
+        return node != null && node.has("status") && "error".equalsIgnoreCase(node.get("status").asText());
     }
 
     private List<String> getDetailsFromNode(JsonNode node) {
@@ -103,7 +101,7 @@ public class HttpResponseFactory {
         InputStream contentStream = getContentStream(httpResponse);
         if (contentStream != null) {
             Class resultType = connioResponse.getResultType();
-            Object result = JSON.MAPPER.readValue(contentStream, resultType);
+            Object result = JSON.fromStream(contentStream, resultType);
             connioResponse.setResult(result);
         }
     }

@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
-import com.connio.sdk.api.model.ConnioResponse;
+import com.connio.sdk.api.model.AbstractConnioResponse;
 
 /**
  * TODO: javadoc
@@ -8,5 +8,5 @@ import com.connio.sdk.api.model.ConnioResponse;
  * @author bdirik
  * @since 10.09.2014
  */
-public abstract class AccountEndpointResponse<T> implements ConnioResponse<T> {
+public abstract class AccountEndpointResponse<T> extends AbstractConnioResponse<T> {
 }

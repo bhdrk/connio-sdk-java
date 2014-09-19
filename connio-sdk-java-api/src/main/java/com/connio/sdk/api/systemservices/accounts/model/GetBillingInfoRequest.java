@@ -14,10 +14,10 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetBillingInfoRequest extends AccountEndpointRequest<Sid> {
+public class GetBillingInfoRequest extends AccountEndpointRequest {
 
     @Override
-    protected void loadMetaData(RequestMetaData metaData) {
+    public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
         Asserts.notEmpty(sid, "Sid");

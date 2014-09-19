@@ -11,8 +11,9 @@ import static com.connio.sdk.api.model.Method.GET;
  * @since 15.09.2014
  */
 public class GetMyAccountDetailsRequest extends AccountEndpointRequest {
+
     @Override
-    protected void loadMetaData(RequestMetaData metaData) {
+    public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
         metaData.setPath("/me");

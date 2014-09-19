@@ -16,9 +16,8 @@ import org.apache.http.entity.StringEntity;
  */
 public class JSONEntityConverter implements HttpEntityConverter {
     @Override
-    public HttpEntity convert(ConnioRequest request) {
+    public HttpEntity convert(ConnioRequest request, RequestMetaData metaData) {
         try {
-            RequestMetaData metaData = request.getRequestMetaData();
             ContentType httpContentType = ContentType.create(metaData.getContentType(), Consts.UTF_8);
             return new StringEntity(JSON.toString(metaData.getRequestContent()), httpContentType);
         } catch (Exception e) {

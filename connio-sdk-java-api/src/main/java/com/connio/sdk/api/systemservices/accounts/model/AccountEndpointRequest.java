@@ -9,9 +9,9 @@ import com.connio.sdk.api.model.RequestMetaData;
  * @author bdirik
  * @since 10.09.2014
  */
-public abstract class AccountEndpointRequest<T> extends AbstractConnioRequest<T> {
+public abstract class AccountEndpointRequest extends AbstractConnioRequest {
     @Override
-    protected void loadMetaData(RequestMetaData metaData) {
+    public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
         metaData.setEndpoint("_accounts");
     }

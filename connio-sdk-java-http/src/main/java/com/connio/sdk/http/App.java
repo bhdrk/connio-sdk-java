@@ -15,18 +15,18 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  */
 public class App {
     public static void main(String[] args) {
-        ConnioCredentials credentials = new ConnioBasicCredentials("accesskey", "secretkey");
+        ConnioCredentials credentials = new ConnioBasicCredentials("AC739E3716D10E47A89C6C972FF97B5852", "f017ea800e884136b767e366749f8796");
         ConnioCredentialsManager.setCredentials(credentials);
 
         AccountEndpointClient client = new AccountEndpointClientImpl();
 
-        SubAccount subAccount = new SubAccount();
-        subAccount.setDisplayName("TEST");
-        subAccount.setPlanType(PlanType.ENTERPRISE);
-        subAccount.setStatus(StatusType.CREATED);
+        String subAccountSid = "AC332B14995A994D44944175953798B674";
 
-        CreateSubAccountRequest request = new CreateSubAccountRequest(subAccount);
-        CreateSubAccountResponse response = client.createSubAccount(request);
-        System.out.println(response.getResult().toString());
+        SubAccount subAccount = new SubAccount();
+        subAccount.setDisplayName("T111");
+
+        UpdateSubAccountRequest request = new UpdateSubAccountRequest(subAccountSid, subAccount);
+        UpdateSubAccountResponse response = client.updateSubAccount(request);
+        System.out.println(response.getResult());
     }
 }

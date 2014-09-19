@@ -11,7 +11,7 @@ import com.connio.sdk.api.model.RequestMetaData;
  */
 public abstract class AppEndpointRequest extends AbstractConnioRequest {
     @Override
-    protected void loadMetaData(RequestMetaData metaData) {
+    public void loadMetaData(RequestMetaData metaData) {
         metaData.setEndpoint("_apps");
     }
 }

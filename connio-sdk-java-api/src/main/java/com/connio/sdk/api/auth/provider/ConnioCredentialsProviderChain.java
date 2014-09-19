@@ -2,6 +2,9 @@ package com.connio.sdk.api.auth.provider;
 
 import com.connio.sdk.api.auth.ConnioCredentials;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TODO: javadoc
  *
@@ -12,17 +15,15 @@ public class ConnioCredentialsProviderChain implements ConnioCredentialsProvider
 
     private ConnioCredentials credentials;
 
-    private ConnioCredentialsProvider[] providers;
+    private List<ConnioCredentialsProvider> providers;
 
     public ConnioCredentialsProviderChain() {
-        /**
-         * TODO: Add more provider support
-         */
-        this(new ProfileCredentialsProvider());
-    }
+        providers = new ArrayList<ConnioCredentialsProvider>(3);
 
-    private ConnioCredentialsProviderChain(ConnioCredentialsProvider... providers) {
-        this.providers = providers;
+        providers.add(new EnvironmentVariablesCredentialsProvider());
+        providers.add(new SystemPropertyCredentialsProvider());
+        providers.add(new ProfileCredentialsProvider());
+
         load();
     }
 

@@ -1,7 +1,7 @@
 package com.connio.sdk.http.factory;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.http.internal.InternalConfig;
+import com.connio.sdk.http.model.InternalConfig;
 
 import java.io.IOException;
 import java.io.InputStream;

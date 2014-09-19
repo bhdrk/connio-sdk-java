@@ -1,6 +1,7 @@
 package com.connio.sdk.http.factory;
 
 import com.connio.sdk.api.auth.ConnioCredentials;
+import com.connio.sdk.api.utils.Asserts;
 import com.connio.sdk.http.gzip.GzipRequestInterceptor;
 import com.connio.sdk.http.gzip.GzipResponseInterceptor;
 import com.connio.sdk.http.model.ClientConfig;
@@ -54,6 +55,10 @@ public class HttpClientFactory {
     }
 
     private CredentialsProvider getCredentialsProvider(ClientConfig clientConfig, ConnioCredentials credentials) {
+        Asserts.notNull(credentials, "Credentials");
+        Asserts.notEmpty(credentials.getAccessKey(), "Credentials.accessKey");
+        Asserts.notEmpty(credentials.getSecretKey(), "Credentials.secretKey");
+
         Credentials usernamePasswordCredentials = new UsernamePasswordCredentials(credentials.getAccessKey(), credentials.getSecretKey());
         AuthScope authscope = new AuthScope(clientConfig.getHost(), clientConfig.getPort());
 
@@ -64,6 +69,7 @@ public class HttpClientFactory {
     }
 
     private void setGzipSupport(HttpClientBuilder httpClientBuilder, ClientConfig clientConfig) {
+        // Apache HttpClient adds gzip support by default if Accept-Encoding header is not added.
         if (clientConfig.isUseGzip()) {
             httpClientBuilder.addInterceptorLast(new GzipRequestInterceptor());
             httpClientBuilder.addInterceptorLast(new GzipResponseInterceptor());
@@ -92,7 +98,6 @@ public class HttpClientFactory {
                 .setTcpNoDelay(true)
                 .build();
     }
-
 
     private void setProxy(HttpClientBuilder httpClientBuilder, ClientConfig clientConfig, CredentialsProvider credentialsProvider) {
         if (hasProxyConfig(clientConfig)) {

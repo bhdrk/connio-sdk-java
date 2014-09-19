@@ -1,31 +1,18 @@
 package com.connio.sdk.api.model;
 
+import java.io.Serializable;
+
 /**
  * TODO: javadoc
  *
  * @author bdirik
  * @since 18.09.2014
  */
-public interface ConnioRequest<T> {
-
+public interface ConnioRequest extends Serializable {
     /**
      * TODO: javadoc
      *
-     * @return
+     * @param metaData
      */
-    public Class<T> getContentType();
-
-    /**
-     * TODO: javadoc
-     *
-     * @return
-     */
-    public T getContent();
-
-    /**
-     * TODO: javadoc
-     *
-     * @return
-     */
-    RequestMetaData getRequestMetaData();
+    void loadMetaData(RequestMetaData metaData);
 }

@@ -17,7 +17,7 @@ import static com.connio.sdk.api.model.Method.GET;
 public class GetSubAccountDetailsRequest extends AccountEndpointRequest {
 
     @Override
-    protected void loadMetaData(RequestMetaData metaData) {
+    public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
         Asserts.notEmpty(sid, "Sid");

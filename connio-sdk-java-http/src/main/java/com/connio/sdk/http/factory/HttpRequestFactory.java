@@ -12,9 +12,8 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.*;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
-
-import static com.connio.sdk.api.model.Method.*;
 
 /**
  * TODO: javadoc
@@ -26,7 +25,47 @@ public class HttpRequestFactory {
 
     private static HttpRequestFactory factory = new HttpRequestFactory();
 
+    private Map<Method, RequestHandler> requestHandlers;
+
     private HttpRequestFactory() {
+        requestHandlers = new HashMap<Method, RequestHandler>();
+        requestHandlers.put(Method.GET, new RequestHandler() {
+            @Override
+            public HttpRequestBase create(ConnioRequest connioRequest, RequestMetaData metaData, URI uri) {
+                HttpRequestBase httpRequest;
+                httpRequest = new HttpGet(uri);
+                return httpRequest;
+            }
+        });
+        requestHandlers.put(Method.POST, new RequestHandler() {
+            @Override
+            public HttpRequestBase create(ConnioRequest connioRequest, RequestMetaData metaData, URI uri) {
+                HttpRequestBase httpRequest;
+                HttpPost httpPost = new HttpPost(uri);
+                httpPost.setEntity(HttpEntityFactory.create(connioRequest, metaData));
+                httpRequest = httpPost;
+                return httpRequest;
+            }
+        });
+        requestHandlers.put(Method.PUT, new RequestHandler() {
+            @Override
+            public HttpRequestBase create(ConnioRequest connioRequest, RequestMetaData metaData, URI uri) {
+                HttpRequestBase httpRequest;
+                HttpPut httpPut = new HttpPut(uri);
+                httpPut.setEntity(HttpEntityFactory.create(connioRequest, metaData));
+                httpRequest = httpPut;
+                return httpRequest;
+            }
+        });
+        requestHandlers.put(Method.DELETE, new RequestHandler() {
+            @Override
+            public HttpRequestBase create(ConnioRequest connioRequest, RequestMetaData metaData, URI uri) {
+                HttpRequestBase httpRequest;
+                httpRequest = new HttpDelete(uri);
+                return httpRequest;
+            }
+        });
+
     }
 
     public static HttpRequestBase create(ClientConfig clientConfig, ConnioRequest request) {
@@ -34,62 +73,34 @@ public class HttpRequestFactory {
     }
 
     private HttpRequestBase doCreate(ClientConfig clientConfig, ConnioRequest request) {
+        RequestMetaData metaData = createRequestMetaData(request);
+        HttpRequestBase httpRequest = createHttpRequest(clientConfig, request, metaData);
+        addHeaders(httpRequest, metaData);
+        return httpRequest;
+    }
+
+    private HttpRequestBase createHttpRequest(ClientConfig clientConfig, ConnioRequest request, RequestMetaData metaData) {
         HttpRequestBase httpRequest;
+        Method method = metaData.getMethod();
+        URI uri = HttpUtils.buildURI(clientConfig, metaData);
 
-        Method method = request.getRequestMetaData().getMethod();
-        URI uri = HttpUtils.buildURI(clientConfig, request);
-
-        if (GET.equals(method)) {
-            httpRequest = httpGet(request, uri);
-        } else if (POST.equals(method)) {
-            httpRequest = httpPost(request, uri);
-        } else if (PUT.equals(method)) {
-            httpRequest = httpPut(request, uri);
-        } else if (DELETE.equals(method)) {
-            httpRequest = httpDelete(request, uri);
+        if (requestHandlers.containsKey(method)) {
+            RequestHandler requestHandler = requestHandlers.get(method);
+            httpRequest = requestHandler.create(request, metaData, uri);
         } else {
             throw new ConnioClientException("Unsupported HTTP method: " + method);
         }
-
-        addHeaders(httpRequest, request);
-
         return httpRequest;
     }
 
-    private HttpRequestBase httpGet(ConnioRequest request, URI uri) {
-        HttpRequestBase httpRequest;
-        httpRequest = new HttpGet(uri);
-        return httpRequest;
+    private RequestMetaData createRequestMetaData(ConnioRequest request) {
+        RequestMetaData metaData = new RequestMetaData();
+        request.loadMetaData(metaData);
+        return metaData;
     }
 
-    private HttpRequestBase httpPost(ConnioRequest request, URI uri) {
-        HttpRequestBase httpRequest;
-        HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(HttpEntityFactory.create(request));
-        httpRequest = httpPost;
-        return httpRequest;
-    }
 
-    private HttpRequestBase httpPut(ConnioRequest request, URI uri) {
-        HttpRequestBase httpRequest;
-        HttpPut httpPut = new HttpPut(uri);
-        httpPut.setEntity(HttpEntityFactory.create(request));
-        httpRequest = httpPut;
-        return httpRequest;
-    }
-
-    private HttpRequestBase httpDelete(ConnioRequest request, URI uri) {
-        HttpRequestBase httpRequest;
-        httpRequest = new HttpDelete(uri);
-        return httpRequest;
-    }
-
-    private void addHeaders(HttpRequestBase httpRequest, ConnioRequest connioRequest) {
-        RequestMetaData metaData = connioRequest.getRequestMetaData();
-
-        httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, metaData.getContentType());
-        httpRequest.addHeader(HttpHeaders.USER_AGENT, UserAgentInfo.getUserAgent());
-
+    private void addHeaders(HttpRequestBase httpRequest, RequestMetaData metaData) {
         Map<String, String> headers = metaData.getHeaders();
         if (TypeUtils.isNotEmpty(headers)) {
             for (Map.Entry<String, String> entry : headers.entrySet()) {
@@ -100,11 +111,18 @@ public class HttpRequestFactory {
                 httpRequest.addHeader(key, entry.getValue());
             }
         }
+        httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, metaData.getContentType());
+        httpRequest.addHeader(HttpHeaders.USER_AGENT, UserAgentInfo.getUserAgent());
     }
 
     private boolean isIgnoredHeader(String name) {
         return name.equalsIgnoreCase(HttpHeaders.CONTENT_TYPE) ||
+                name.equalsIgnoreCase(HttpHeaders.USER_AGENT) ||
                 name.equalsIgnoreCase(HttpHeaders.CONTENT_LENGTH) ||
                 name.equalsIgnoreCase(HttpHeaders.HOST);
+    }
+
+    private static interface RequestHandler {
+        public HttpRequestBase create(ConnioRequest connioRequest, RequestMetaData metaData, URI uri);
     }
 }

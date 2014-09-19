@@ -1,4 +1,4 @@
-package com.connio.sdk.http.internal;
+package com.connio.sdk.http.model;
 
 /**
  * TODO: javadoc

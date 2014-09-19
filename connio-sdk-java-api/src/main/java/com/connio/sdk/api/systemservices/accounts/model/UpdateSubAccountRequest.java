@@ -14,10 +14,10 @@ import static com.connio.sdk.api.model.Method.PUT;
  * @author bdirik
  * @since 10.09.2014
  */
-public class UpdateSubAccountRequest extends AccountEndpointRequest<SubAccount> {
+public class UpdateSubAccountRequest extends AccountEndpointRequest {
 
     @Override
-    protected void loadMetaData(RequestMetaData metaData) {
+    public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
         Asserts.notNull(subAccount, "SubAccount");

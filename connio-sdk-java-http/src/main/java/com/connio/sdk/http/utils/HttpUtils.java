@@ -1,7 +1,6 @@
 package com.connio.sdk.http.utils;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.http.model.ClientConfig;
 import org.apache.http.client.utils.URIBuilder;
@@ -25,15 +24,15 @@ public class HttpUtils {
      *
      * @return
      */
-    public static URI buildURI(ClientConfig clientConfig, ConnioRequest request) {
+    public static URI buildURI(ClientConfig clientConfig, RequestMetaData metaData) {
 
         URIBuilder uriBuilder = new URIBuilder()
                 .setScheme(clientConfig.getProtocol())
                 .setHost(clientConfig.getHost())
                 .setPort(clientConfig.getPort())
-                .setPath(buildPath(request));
+                .setPath(buildPath(metaData));
 
-        Map<String, String> queryParams = request.getRequestMetaData().getQueryParams();
+        Map<String, String> queryParams = metaData.getQueryParams();
 
         // append query params
         if (isNotEmpty(queryParams)) {
@@ -51,8 +50,7 @@ public class HttpUtils {
         }
     }
 
-    public static String buildPath(ConnioRequest request) {
-        RequestMetaData metaData = request.getRequestMetaData();
+    public static String buildPath(RequestMetaData metaData) {
         String version = metaData.getVersion();
         String endpoint = metaData.getEndpoint();
         String pathTemplate = metaData.getPath();
