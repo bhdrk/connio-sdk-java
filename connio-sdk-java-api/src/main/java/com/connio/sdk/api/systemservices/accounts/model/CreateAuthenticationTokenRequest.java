@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.model.Sid;
 import com.connio.sdk.api.utils.Asserts;
 
 import java.util.HashMap;

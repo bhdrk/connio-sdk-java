@@ -8,16 +8,47 @@
     <artifactId>connio-sdk-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <url>http://www.connio.com</url>
+    <description>Connio SDK for Java</description>
+
+    <organization>
+        <name>Connio</name>
+        <url>http://www.connio.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>connio</id>
+            <organization>Connio</organization>
+            <organizationUrl>http://www.connio.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/connio/connio-sdk-java.git</connection>
+        <developerConnection>scm:git:git@github.com:connio/connio-sdk-java.git</developerConnection>
+        <url>https://github.com/connio/connio-sdk-java</url>
+    </scm>
 
     <modules>
         <module>connio-sdk-java-api</module>
         <module>connio-sdk-java-http</module>
+        <module>connio-sdk-java-test</module>
     </modules>
 
     <properties>
         <project.java.version>1.6</project.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <httpclient.version>4.3</httpclient.version>
+        <jackson.version>2.3.3</jackson.version>
+        <junit.version>4.11</junit.version>
+        <mockito.version>1.9.5</mockito.version>
+        <fest-assert.version>2.0M10</fest-assert.version>
     </properties>
 
 </project>

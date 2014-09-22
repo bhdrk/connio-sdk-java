@@ -16,7 +16,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
  * @since 18.09.2014
  */
 public class ProfileCredentialsProvider implements ConnioCredentialsProvider {
-    private static final String CREDENTIALS_FILE_NAME = ".conniocds";
+    private static final String CREDENTIALS_FILE_NAME = ".connioauth";
 
     @Override
     public ConnioCredentials getCredentials() {
@@ -32,11 +32,11 @@ public class ProfileCredentialsProvider implements ConnioCredentialsProvider {
             Properties properties = new Properties();
             properties.load(reader);
 
-            accessKey = properties.getProperty("connio.accessKey");
-            secretKey = properties.getProperty("connio.secretKey");
+            accessKey = properties.getProperty("connio.auth.accessKey");
+            secretKey = properties.getProperty("connio.auth.secretKey");
 
             if (isEmpty(accessKey) || isEmpty(secretKey)) {
-                throw new ConnioClientException("Credentials are missing!");
+                throw new ConnioClientException("Credentials are missing in " + credentialsFile);
             }
         } catch (IOException e) {
             throw new ConnioClientException("Cannot load Connio credentials file.", e);
@@ -68,9 +68,9 @@ public class ProfileCredentialsProvider implements ConnioCredentialsProvider {
         File credentialsFile = new File(userHomeDir, CREDENTIALS_FILE_NAME);
 
         if (credentialsFile.exists() && credentialsFile.canRead()) {
-            return null;
+            return credentialsFile;
         }
-        return credentialsFile;
+        return null;
     }
 
     private void closeSilently(Closeable closeable) {

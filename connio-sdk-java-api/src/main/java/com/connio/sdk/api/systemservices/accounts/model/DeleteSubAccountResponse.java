@@ -1,5 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
+import com.connio.sdk.api.model.Deleted;
+
 /**
  * TODO: javadoc
  *

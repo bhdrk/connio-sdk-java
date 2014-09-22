@@ -14,14 +14,17 @@ public class ConnioServiceException extends ConnioException {
 
     private String message;
 
+    private String causeMessage;
+
     private List<String> details;
 
     private String responseStatus;
 
-    public ConnioServiceException(String status, String message, List<String> details, String responseStatus) {
-        super(status + ": " + message);
+    public ConnioServiceException(String status, String message, String causeMessage, List<String> details, String responseStatus) {
+        super(message);
         this.status = status;
         this.message = message;
+        this.causeMessage = causeMessage;
         this.details = details;
         this.responseStatus = responseStatus;
     }
@@ -40,5 +43,9 @@ public class ConnioServiceException extends ConnioException {
 
     public String getResponseStatus() {
         return responseStatus;
+    }
+
+    public String getCauseMessage() {
+        return causeMessage;
     }
 }

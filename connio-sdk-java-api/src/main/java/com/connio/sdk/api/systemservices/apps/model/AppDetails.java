@@ -51,7 +51,7 @@ public class AppDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private StatusType status;
+    private StateType state;
 
     /**
      * TODO: javadoc
@@ -91,6 +91,11 @@ public class AppDetails implements Serializable {
     /**
      * TODO: javadoc
      */
+    private String datafeedUri;
+
+    /**
+     * TODO: javadoc
+     */
     private String uri;
 
     /**
@@ -101,7 +106,7 @@ public class AppDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private List<DataChannelDetails> dataChannels;
+    private List<DataChannelDetails> datachannels;
 
     public String getName() {
         return name;
@@ -159,12 +164,12 @@ public class AppDetails implements Serializable {
         this.version = version;
     }
 
-    public StatusType getStatus() {
-        return status;
+    public StateType getState() {
+        return state;
     }
 
-    public void setStatus(StatusType status) {
-        this.status = status;
+    public void setState(StateType state) {
+        this.state = state;
     }
 
     public String getAccountSid() {
@@ -239,11 +244,19 @@ public class AppDetails implements Serializable {
         this.iconUrl = iconUrl;
     }
 
-    public List<DataChannelDetails> getDataChannels() {
-        return dataChannels;
+    public List<DataChannelDetails> getDatachannels() {
+        return datachannels;
     }
 
-    public void setDataChannels(List<DataChannelDetails> dataChannels) {
-        this.dataChannels = dataChannels;
+    public void setDatachannels(List<DataChannelDetails> datachannels) {
+        this.datachannels = datachannels;
+    }
+
+    public String getDatafeedUri() {
+        return datafeedUri;
+    }
+
+    public void setDatafeedUri(String datafeedUri) {
+        this.datafeedUri = datafeedUri;
     }
 }

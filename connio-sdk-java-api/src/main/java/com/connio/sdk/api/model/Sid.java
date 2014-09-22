@@ -1,4 +1,4 @@
-package com.connio.sdk.api.systemservices.accounts.model;
+package com.connio.sdk.api.model;
 
 /**
  * TODO: javadoc

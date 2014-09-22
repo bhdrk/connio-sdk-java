@@ -27,7 +27,7 @@ public interface AppEndpointClient extends ConnioEndpointClient {
      *
      * @return
      */
-    public GetAllAppDetailsResponse getAllAppDetails()
+    public GetAllAppDetailsResponse getAllAppDetails(GetAllAppDetailsRequest request)
             throws ConnioServiceException, ConnioClientException;
 
     /**

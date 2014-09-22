@@ -1,7 +1,5 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
-import com.connio.sdk.api.model.ConnioResponse;
-
 /**
  * TODO: javadoc
  *

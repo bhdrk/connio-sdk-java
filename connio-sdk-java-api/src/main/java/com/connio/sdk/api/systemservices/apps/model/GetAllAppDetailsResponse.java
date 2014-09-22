@@ -6,18 +6,25 @@ package com.connio.sdk.api.systemservices.apps.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class GetAllAppDetailsResponse extends AppEndpointResponse {
+public class GetAllAppDetailsResponse extends AppEndpointResponse<AppResultSet> {
 
     /**
      * TODO: javadoc
      */
-    private AppResultSet appResultSet;
+    private AppResultSet result;
 
-    public AppResultSet getAppResultSet() {
-        return appResultSet;
+    @Override
+    public Class<AppResultSet> getResultType() {
+        return AppResultSet.class;
     }
 
-    public void setAppResultSet(AppResultSet appResultSet) {
-        this.appResultSet = appResultSet;
+    @Override
+    public AppResultSet getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(AppResultSet result) {
+        this.result = result;
     }
 }

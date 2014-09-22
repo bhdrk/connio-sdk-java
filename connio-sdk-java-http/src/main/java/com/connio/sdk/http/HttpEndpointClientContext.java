@@ -5,7 +5,6 @@ import com.connio.sdk.api.core.AbstractEndpointClientContext;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
-import com.connio.sdk.api.utils.Asserts;
 import com.connio.sdk.http.factory.HttpClientFactory;
 import com.connio.sdk.http.factory.HttpRequestFactory;
 import com.connio.sdk.http.factory.HttpResponseFactory;

@@ -56,7 +56,7 @@ public class HttpResponseFactory {
         }
 
         if (exception == null) {
-            exception = new ConnioServiceException("error", errorContent, null, httpResponse.getStatusLine().toString());
+            exception = new ConnioServiceException("error", errorContent, errorContent, null, httpResponse.getStatusLine().toString());
         }
 
         return exception;
@@ -69,7 +69,8 @@ public class HttpResponseFactory {
             String cause = node.get("cause").asText();
             String responseStatus = httpResponse.getStatusLine().toString();
             List<String> details = getDetailsFromNode(node);
-            return new ConnioServiceException(status, cause, details, responseStatus);
+            String message = cause + (isNotEmpty(details) ? details : "");
+            return new ConnioServiceException(status, message, cause, details, responseStatus);
         }
         return null;
     }
