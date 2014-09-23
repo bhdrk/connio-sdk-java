@@ -30,6 +30,16 @@ public class App implements Serializable {
      */
     private Long appStorageCapacity;
 
+    /**
+     * TODO: javadoc
+     */
+    private String version;
+
+    /**
+     * TODO: javadoc
+     */
+    private StateType state;
+
     public String getName() {
         return name;
     }
@@ -60,5 +70,21 @@ public class App implements Serializable {
 
     public void setAppStorageCapacity(Long appStorageCapacity) {
         this.appStorageCapacity = appStorageCapacity;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public StateType getState() {
+        return state;
+    }
+
+    public void setState(StateType state) {
+        this.state = state;
     }
 }

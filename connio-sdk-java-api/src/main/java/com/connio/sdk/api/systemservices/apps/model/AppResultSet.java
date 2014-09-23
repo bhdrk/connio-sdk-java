@@ -1,7 +1,7 @@
 package com.connio.sdk.api.systemservices.apps.model;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * TODO: javadoc
@@ -34,7 +34,7 @@ public class AppResultSet implements Serializable {
     /**
      * TODO: javadoc
      */
-    private Set<AppDetails> resultSet;
+    private List<AppDetails> resultSet;
 
     public Integer getTotal() {
         return total;
@@ -68,11 +68,11 @@ public class AppResultSet implements Serializable {
         this.limit = limit;
     }
 
-    public Set<AppDetails> getResultSet() {
+    public List<AppDetails> getResultSet() {
         return resultSet;
     }
 
-    public void setResultSet(Set<AppDetails> resultSet) {
+    public void setResultSet(List<AppDetails> resultSet) {
         this.resultSet = resultSet;
     }
 }

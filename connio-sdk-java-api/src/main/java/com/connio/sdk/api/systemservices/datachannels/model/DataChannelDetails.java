@@ -5,7 +5,6 @@ import com.connio.sdk.api.systemservices.datachannels.model.measurement.Measurem
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * TODO: javadoc
@@ -28,7 +27,7 @@ public class DataChannelDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private List<Alarm> alarm;
+    private Alarm alarm;
 
     /**
      * TODO: javadoc
@@ -68,7 +67,7 @@ public class DataChannelDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private MeasurementUnit measurementUnit;
+    private String measurementUnit;
 
     /**
      * TODO: javadoc
@@ -93,7 +92,7 @@ public class DataChannelDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private List<Bound> bounds;
+    private Bounds bounds;
 
     public String getSid() {
         return sid;
@@ -111,11 +110,11 @@ public class DataChannelDetails implements Serializable {
         this.name = name;
     }
 
-    public List<Alarm> getAlarm() {
+    public Alarm getAlarm() {
         return alarm;
     }
 
-    public void setAlarm(List<Alarm> alarm) {
+    public void setAlarm(Alarm alarm) {
         this.alarm = alarm;
     }
 
@@ -175,11 +174,11 @@ public class DataChannelDetails implements Serializable {
         this.measurementType = measurementType;
     }
 
-    public MeasurementUnit getMeasurementUnit() {
+    public String getMeasurementUnit() {
         return measurementUnit;
     }
 
-    public void setMeasurementUnit(MeasurementUnit measurementUnit) {
+    public void setMeasurementUnit(String measurementUnit) {
         this.measurementUnit = measurementUnit;
     }
 
@@ -215,11 +214,11 @@ public class DataChannelDetails implements Serializable {
         this.baseType = baseType;
     }
 
-    public List<Bound> getBounds() {
+    public Bounds getBounds() {
         return bounds;
     }
 
-    public void setBounds(List<Bound> bounds) {
+    public void setBounds(Bounds bounds) {
         this.bounds = bounds;
     }
 }

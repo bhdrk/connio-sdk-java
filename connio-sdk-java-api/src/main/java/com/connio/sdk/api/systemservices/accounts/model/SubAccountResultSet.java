@@ -1,7 +1,7 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * TODO: javadoc
@@ -39,7 +39,7 @@ public class SubAccountResultSet implements Serializable {
     /**
      * TODO: javadoc
      */
-    private Set<SubAccountDetails> resultSet;
+    private List<SubAccountDetails> resultSet;
 
     public Integer getTotal() {
         return total;
@@ -81,11 +81,11 @@ public class SubAccountResultSet implements Serializable {
         this.bookmark = bookmark;
     }
 
-    public Set<SubAccountDetails> getResultSet() {
+    public List<SubAccountDetails> getResultSet() {
         return resultSet;
     }
 
-    public void setResultSet(Set<SubAccountDetails> resultSet) {
+    public void setResultSet(List<SubAccountDetails> resultSet) {
         this.resultSet = resultSet;
     }
 }

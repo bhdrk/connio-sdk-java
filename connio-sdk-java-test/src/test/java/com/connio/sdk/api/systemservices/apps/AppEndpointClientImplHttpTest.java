@@ -1,11 +1,12 @@
 package com.connio.sdk.api.systemservices.apps;
 
+import com.connio.sdk.api.model.Deleted;
+import com.connio.sdk.api.systemservices.TestUtils;
 import com.connio.sdk.api.systemservices.apps.model.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-import java.util.UUID;
-
+import static com.connio.sdk.api.systemservices.apps.model.StateType.STOPPED;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
@@ -18,24 +19,23 @@ public class AppEndpointClientImplHttpTest {
 
     private AppEndpointClientImpl client;
 
-    @Before
-    public void setUp() throws Exception {
+    private App testApp;
+
+    @BeforeClass
+    public void beforeClass() throws Exception {
         client = new AppEndpointClientImpl();
+
+        testApp = new App();
+        testApp.setName(TestUtils.createNewName("TEST-APP"));
+        testApp.setDisplayName("TEST APP");
+        testApp.setDescription("TEST APP DESC");
+        testApp.setVersion("v1.0");
+        testApp.setAppStorageCapacity(100000L);
     }
 
-    @Test
+    @Test(priority = 1)
     public void testCreateApp() throws Exception {
-        String appName = "testapp-" + UUID.randomUUID().toString();
-
-        App app = new App();
-        app.setName(appName);
-        app.setDisplayName("TEST APP");
-        app.setDescription("TEST APP DESC");
-        app.setAppStorageCapacity(100000L);
-
-        CreateAppRequest request = new CreateAppRequest();
-        request.setApp(app);
-
+        CreateAppRequest request = new CreateAppRequest(this.testApp);
         CreateAppResponse response = client.createApp(request);
 
         assertThat(response).isNotNull();
@@ -43,13 +43,33 @@ public class AppEndpointClientImplHttpTest {
 
         AppDetails result = response.getResult();
 
-        assertThat(result.getName()).isEqualTo(app.getName());
-        assertThat(result.getDisplayName()).isEqualTo(app.getDisplayName());
-        assertThat(result.getDescription()).isEqualTo(app.getDescription());
-        assertThat(result.getAppStorageCapacity()).isEqualTo(app.getAppStorageCapacity());
+        assertThat(result.getName()).isEqualTo(testApp.getName());
+        assertThat(result.getDisplayName()).isEqualTo(testApp.getDisplayName());
+        assertThat(result.getDescription()).isEqualTo(testApp.getDescription());
+        assertThat(result.getAppStorageCapacity()).isEqualTo(testApp.getAppStorageCapacity());
+        assertThat(result.getVersion()).isEqualTo(testApp.getVersion());
     }
 
-    @Test
+    @Test(priority = 2)
+    public void testGetAppDetails() throws Exception {
+        GetAppDetailsRequest request = new GetAppDetailsRequest();
+        request.setAppName(this.testApp.getName());
+
+        GetAppDetailsResponse response = client.getAppDetails(request);
+
+        assertThat(response).isNotNull();
+        assertThat(response.getResult()).isNotNull();
+
+        AppDetails result = response.getResult();
+
+        assertThat(result.getName()).isEqualTo(testApp.getName());
+        assertThat(result.getDisplayName()).isEqualTo(testApp.getDisplayName());
+        assertThat(result.getDescription()).isEqualTo(testApp.getDescription());
+        assertThat(result.getAppStorageCapacity()).isEqualTo(testApp.getAppStorageCapacity());
+        assertThat(result.getVersion()).isEqualTo(testApp.getVersion());
+    }
+
+    @Test(priority = 3)
     public void testGetAllAppDetails() throws Exception {
         GetAllAppDetailsRequest request = new GetAllAppDetailsRequest();
         GetAllAppDetailsResponse response = client.getAllAppDetails(request);
@@ -57,6 +77,54 @@ public class AppEndpointClientImplHttpTest {
         assertThat(response).isNotNull();
         assertThat(response.getResult()).isNotNull();
 
-        //AppResultSet result = response.getResult();
+        AppResultSet result = response.getResult();
+
+        assertThat(result.getTotal()).isGreaterThan(0);
+        assertThat(result.getItemCount()).isGreaterThan(0);
+        assertThat(result.getResultSet()).isNotEmpty();
+    }
+
+    @Test(priority = 4)
+    public void testUpdateApp() throws Exception {
+        String currentAppName = testApp.getName();
+        String newName = TestUtils.createNewName("TEST-APP");
+
+        testApp.setName(newName);
+        testApp.setDisplayName("UPDATED TEST APP");
+        testApp.setDescription("UPDATED TEST APP DESC");
+        testApp.setAppStorageCapacity(500000L);
+        testApp.setVersion("v2.0");
+        testApp.setState(STOPPED);
+
+        UpdateAppRequest request = new UpdateAppRequest();
+        request.setApp(testApp);
+        request.setAppName(currentAppName);
+
+        UpdateAppResponse response = client.updateApp(request);
+
+        assertThat(response).isNotNull();
+        assertThat(response.getResult()).isNotNull();
+
+        AppDetails result = response.getResult();
+
+        assertThat(result.getName()).isEqualTo(testApp.getName());
+        assertThat(result.getDisplayName()).isEqualTo(testApp.getDisplayName());
+        assertThat(result.getDescription()).isEqualTo(testApp.getDescription());
+        assertThat(result.getAppStorageCapacity()).isEqualTo(testApp.getAppStorageCapacity());
+    }
+
+    @Test(priority = 5)
+    public void testDeleteApp() throws Exception {
+        DeleteAppRequest request = new DeleteAppRequest();
+        request.setAppName(testApp.getName());
+
+        DeleteAppResponse response = client.deleteApp(request);
+
+        assertThat(response).isNotNull();
+        assertThat(response.getResult()).isNotNull();
+
+        Deleted result = response.getResult();
+
+        assertThat(result.isDeleted()).isTrue();
     }
 }

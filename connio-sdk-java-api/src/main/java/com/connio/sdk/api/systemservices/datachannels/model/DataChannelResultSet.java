@@ -1,7 +1,7 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * TODO: javadoc
@@ -34,7 +34,7 @@ public class DataChannelResultSet implements Serializable {
     /**
      * TODO: javadoc
      */
-    private Set<DataChannelDetails> resultSet;
+    private List<DataChannelDetails> resultSet;
 
     public Integer getTotal() {
         return total;
@@ -68,11 +68,11 @@ public class DataChannelResultSet implements Serializable {
         this.limit = limit;
     }
 
-    public Set<DataChannelDetails> getResultSet() {
+    public List<DataChannelDetails> getResultSet() {
         return resultSet;
     }
 
-    public void setResultSet(Set<DataChannelDetails> resultSet) {
+    public void setResultSet(List<DataChannelDetails> resultSet) {
         this.resultSet = resultSet;
     }
 }

@@ -1,9 +1,14 @@
 package com.connio.sdk.api.systemservices.apps.model;
 
+import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.Asserts;
 
-import static com.connio.sdk.api.model.Method.POST;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.connio.sdk.api.model.Method.PUT;
+import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
 
 /**
  * TODO: javadoc
@@ -19,8 +24,23 @@ public class UpdateAppRequest extends AppEndpointRequest {
 
         Asserts.notNull(app, "App");
 
-        metaData.setMethod(POST);
+        Map<String, String> pathParams = new HashMap<String, String>();
+        pathParams.put("appId", getAppId());
+
+        metaData.setMethod(PUT);
+        metaData.setPath("{appId}");
+        metaData.setPathParams(pathParams);
         metaData.setRequestContent(app);
+    }
+
+    private String getAppId() {
+        if (isNotEmpty(appName)) {
+            return appName;
+        } else if (isNotEmpty(appSid)) {
+            return appSid;
+        } else {
+            throw new ConnioClientException("appName or appSid is required.");
+        }
     }
 
     /**
@@ -28,11 +48,17 @@ public class UpdateAppRequest extends AppEndpointRequest {
      */
     private App app;
 
-    public UpdateAppRequest() {
-    }
+    /**
+     * TODO: javadoc
+     */
+    private String appName;
 
-    public UpdateAppRequest(App app) {
-        this.app = app;
+    /**
+     * TODO: javadoc
+     */
+    private String appSid;
+
+    public UpdateAppRequest() {
     }
 
     public App getApp() {
@@ -41,5 +67,21 @@ public class UpdateAppRequest extends AppEndpointRequest {
 
     public void setApp(App app) {
         this.app = app;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public String getAppSid() {
+        return appSid;
+    }
+
+    public void setAppSid(String appSid) {
+        this.appSid = appSid;
     }
 }

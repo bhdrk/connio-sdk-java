@@ -46,7 +46,7 @@
 
         <httpclient.version>4.3</httpclient.version>
         <jackson.version>2.3.3</jackson.version>
-        <junit.version>4.11</junit.version>
+        <testng.version>6.1.1</testng.version>
         <mockito.version>1.9.5</mockito.version>
         <fest-assert.version>2.0M10</fest-assert.version>
     </properties>

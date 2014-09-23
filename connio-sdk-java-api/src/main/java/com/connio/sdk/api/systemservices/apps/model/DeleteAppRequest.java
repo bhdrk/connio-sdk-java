@@ -21,22 +21,22 @@ public class DeleteAppRequest extends AppEndpointRequest {
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        String app;
-
-        if (isNotEmpty(appName)) {
-            app = appName;
-        } else if (isNotEmpty(appSid)) {
-            app = appSid;
-        } else {
-            throw new ConnioClientException("appName or appSid is required.");
-        }
-
         Map<String, String> pathParams = new HashMap<String, String>();
-        pathParams.put("app", app);
+        pathParams.put("app", getAppId());
 
         metaData.setMethod(DELETE);
         metaData.setPath("{app}");
         metaData.setPathParams(pathParams);
+    }
+
+    private String getAppId() {
+        if (isNotEmpty(appName)) {
+            return appName;
+        } else if (isNotEmpty(appSid)) {
+            return appSid;
+        } else {
+            throw new ConnioClientException("appName or appSid is required.");
+        }
     }
 
     private String appSid;

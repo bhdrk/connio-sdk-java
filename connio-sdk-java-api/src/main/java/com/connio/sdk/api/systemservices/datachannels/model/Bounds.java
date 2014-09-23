@@ -10,7 +10,7 @@ import java.util.Map;
  * @author bdirik
  * @since 12.09.2014
  */
-public class Bound implements Serializable {
+public class Bounds implements Serializable {
 
     /**
      * TODO: javadoc

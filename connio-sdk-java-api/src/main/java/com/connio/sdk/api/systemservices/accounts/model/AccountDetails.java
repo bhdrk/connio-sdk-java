@@ -74,6 +74,11 @@ public class AccountDetails implements Serializable {
     /**
      * TODO: javadoc
      */
+    private String usersUri;
+
+    /**
+     * TODO: javadoc
+     */
     private String billingInfoUri;
 
     public String getSid() {
@@ -241,5 +246,13 @@ public class AccountDetails implements Serializable {
                 ", appsUri='" + appsUri + '\'' +
                 ", billingInfoUri='" + billingInfoUri + '\'' +
                 '}';
+    }
+
+    public String getUsersUri() {
+        return usersUri;
+    }
+
+    public void setUsersUri(String usersUri) {
+        this.usersUri = usersUri;
     }
 }
