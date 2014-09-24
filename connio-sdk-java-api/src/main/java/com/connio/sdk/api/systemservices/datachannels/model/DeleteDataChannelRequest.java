@@ -6,5 +6,5 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class DeleteDataChannelRequest extends DataChannelEndpointRequest{
+public class DeleteDataChannelRequest extends DataChannelEndpointRequest<DeleteDataChannelResponse> {
 }

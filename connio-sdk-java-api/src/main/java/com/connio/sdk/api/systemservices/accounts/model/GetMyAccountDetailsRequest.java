@@ -10,7 +10,7 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 15.09.2014
  */
-public class GetMyAccountDetailsRequest extends AccountEndpointRequest {
+public class GetMyAccountDetailsRequest extends AccountEndpointRequest<GetMyAccountDetailsResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

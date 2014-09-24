@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author bdirik
  * @since 18.09.2014
  */
-public interface ConnioRequest extends Serializable {
+public interface ConnioRequest<RS extends ConnioResponse> extends Serializable {
     /**
      * TODO: javadoc
      *

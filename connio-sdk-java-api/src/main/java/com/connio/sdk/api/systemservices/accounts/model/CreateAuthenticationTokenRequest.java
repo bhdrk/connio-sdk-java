@@ -15,7 +15,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 10.09.2014
  */
-public class CreateAuthenticationTokenRequest extends AccountEndpointRequest {
+public class CreateAuthenticationTokenRequest extends AccountEndpointRequest<CreateAuthenticationTokenResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 10.09.2014
  */
-public class CreateSubAccountRequest extends AccountEndpointRequest {
+public class CreateSubAccountRequest extends AccountEndpointRequest<CreateSubAccountResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

@@ -31,7 +31,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public GetMyAccountDetailsResponse getMyAccountDetails(GetMyAccountDetailsRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, GetMyAccountDetailsResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -45,7 +45,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public GetSubAccountDetailsResponse getSubAccountDetails(GetSubAccountDetailsRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, GetSubAccountDetailsResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -59,7 +59,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public GetAllSubAccountsDetailsResponse getAllSubAccountDetails(GetAllSubAccountsDetailsRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, GetAllSubAccountsDetailsResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -73,7 +73,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public CreateSubAccountResponse createSubAccount(CreateSubAccountRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, CreateSubAccountResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -87,7 +87,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public UpdateSubAccountResponse updateSubAccount(UpdateSubAccountRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, UpdateSubAccountResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -101,7 +101,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public DeleteSubAccountResponse deleteSubAccount(DeleteSubAccountRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, DeleteSubAccountResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -115,7 +115,7 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public CreateAuthenticationTokenResponse createAuthenticationToken(CreateAuthenticationTokenRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, CreateAuthenticationTokenResponse.class);
+        return context.execute(request);
     }
 
     /**
@@ -129,6 +129,6 @@ public class AccountEndpointClientImpl implements AccountEndpointClient {
     @Override
     public GetBillingInfoResponse getBillingInfo(GetBillingInfoRequest request)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request, GetBillingInfoResponse.class);
+        return context.execute(request);
     }
 }

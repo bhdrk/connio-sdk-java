@@ -6,5 +6,5 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class CreateDataChannelRequest extends DataChannelEndpointRequest {
+public class CreateDataChannelRequest extends DataChannelEndpointRequest<CreateDataChannelResponse> {
 }

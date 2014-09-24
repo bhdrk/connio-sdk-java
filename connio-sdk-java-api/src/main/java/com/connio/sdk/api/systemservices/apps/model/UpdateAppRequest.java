@@ -16,7 +16,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @author bdirik
  * @since 12.09.2014
  */
-public class UpdateAppRequest extends AppEndpointRequest {
+public class UpdateAppRequest extends AppEndpointRequest<UpdateAppResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

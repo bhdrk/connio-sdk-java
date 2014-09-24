@@ -14,7 +14,7 @@ import static com.connio.sdk.api.model.Method.PUT;
  * @author bdirik
  * @since 10.09.2014
  */
-public class UpdateSubAccountRequest extends AccountEndpointRequest {
+public class UpdateSubAccountRequest extends AccountEndpointRequest<UpdateSubAccountResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

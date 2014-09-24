@@ -27,7 +27,7 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      *
      * @return
      */
-    public GetAllUserDetailsResponse getAllUserDetails()
+    public GetAllUserDetailsResponse getAllUserDetails(GetAllUserDetailsRequest request)
             throws ConnioServiceException, ConnioClientException;
 
     /**

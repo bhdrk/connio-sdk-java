@@ -1,22 +1,22 @@
-package com.connio.sdk.api.systemservices.apps;
+package com.connio.sdk.api.systemservices.datachannels;
 
 import com.connio.sdk.api.core.ConnioEndpointClientContext;
 import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
-import com.connio.sdk.api.systemservices.apps.model.*;
+import com.connio.sdk.api.systemservices.datachannels.model.*;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 22.09.2014
+ * @since 23.09.2014
  */
-public class AppEndpointClientImpl implements AppEndpointClient {
+public class DataChannelEndpointClientImpl implements DataChannelEndpointClient {
 
     private ConnioEndpointClientContext context;
 
-    public AppEndpointClientImpl() {
+    public DataChannelEndpointClientImpl() {
         context = ConnioEndpointClientContextProvider.get();
     }
 
@@ -29,7 +29,7 @@ public class AppEndpointClientImpl implements AppEndpointClient {
      * @throws ConnioClientException
      */
     @Override
-    public GetAppDetailsResponse getAppDetails(GetAppDetailsRequest request)
+    public GetDataChannelDetailsResponse getDataChannelDetails(GetDataChannelDetailsRequest request)
             throws ConnioServiceException, ConnioClientException {
         return context.execute(request);
     }
@@ -43,7 +43,7 @@ public class AppEndpointClientImpl implements AppEndpointClient {
      * @throws ConnioClientException
      */
     @Override
-    public GetAllAppDetailsResponse getAllAppDetails(GetAllAppDetailsRequest request)
+    public GetAllDataChannelDetailsResponse getAllDataChannelDetails(GetAllDataChannelDetailsRequest request)
             throws ConnioServiceException, ConnioClientException {
         return context.execute(request);
     }
@@ -57,7 +57,7 @@ public class AppEndpointClientImpl implements AppEndpointClient {
      * @throws ConnioClientException
      */
     @Override
-    public CreateAppResponse createApp(CreateAppRequest request)
+    public CreateDataChannelResponse createDataChannel(CreateDataChannelRequest request)
             throws ConnioServiceException, ConnioClientException {
         return context.execute(request);
     }
@@ -71,7 +71,7 @@ public class AppEndpointClientImpl implements AppEndpointClient {
      * @throws ConnioClientException
      */
     @Override
-    public UpdateAppResponse updateApp(UpdateAppRequest request)
+    public UpdateDataChannelResponse updateDataChannel(UpdateDataChannelRequest request)
             throws ConnioServiceException, ConnioClientException {
         return context.execute(request);
     }
@@ -85,7 +85,7 @@ public class AppEndpointClientImpl implements AppEndpointClient {
      * @throws ConnioClientException
      */
     @Override
-    public DeleteAppResponse deleteApp(DeleteAppRequest request)
+    public DeleteDataChannelResponse deleteDataChannel(DeleteDataChannelRequest request)
             throws ConnioServiceException, ConnioClientException {
         return context.execute(request);
     }

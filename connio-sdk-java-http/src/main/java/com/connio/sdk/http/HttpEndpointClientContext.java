@@ -9,6 +9,7 @@ import com.connio.sdk.http.factory.HttpClientFactory;
 import com.connio.sdk.http.factory.HttpRequestFactory;
 import com.connio.sdk.http.factory.HttpResponseFactory;
 import com.connio.sdk.http.model.ClientConfig;
+import com.connio.sdk.http.utils.TypeResolver;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -40,8 +41,9 @@ public class HttpEndpointClientContext extends AbstractEndpointClientContext imp
     }
 
     @Override
-    protected <T extends ConnioResponse> T doExecute(ConnioRequest request, Class<T> responseType) {
+    protected <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> request) {
         CloseableHttpResponse httpResponse = null;
+        Class<RS> responseType = resolveResponseType(request);
         try {
             HttpRequestBase httpRequest = HttpRequestFactory.create(clientConfig, request);
             httpResponse = httpClient.execute(httpRequest);
@@ -51,6 +53,11 @@ public class HttpEndpointClientContext extends AbstractEndpointClientContext imp
         } finally {
             closeSilently(httpResponse);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private <RS extends ConnioResponse> Class<RS> resolveResponseType(ConnioRequest<RS> request) {
+        return (Class<RS>) TypeResolver.resolveRawArgument(ConnioRequest.class, request.getClass());
     }
 
     @Override

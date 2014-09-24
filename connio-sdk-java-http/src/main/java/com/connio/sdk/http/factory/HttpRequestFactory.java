@@ -65,7 +65,6 @@ public class HttpRequestFactory {
                 return httpRequest;
             }
         });
-
     }
 
     public static HttpRequestBase create(ClientConfig clientConfig, ConnioRequest request) {
@@ -98,7 +97,6 @@ public class HttpRequestFactory {
         request.loadMetaData(metaData);
         return metaData;
     }
-
 
     private void addHeaders(HttpRequestBase httpRequest, RequestMetaData metaData) {
         Map<String, String> headers = metaData.getHeaders();

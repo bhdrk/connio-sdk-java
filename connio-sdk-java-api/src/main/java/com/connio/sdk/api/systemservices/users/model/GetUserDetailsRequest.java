@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.users.model;
  * @author bdirik
  * @since 11.09.2014
  */
-public class GetUserDetailsRequest extends UserEndpointRequest {
+public class GetUserDetailsRequest extends UserEndpointRequest<GetUserDetailsResponse> {
 
     /**
      * TODO: javadoc

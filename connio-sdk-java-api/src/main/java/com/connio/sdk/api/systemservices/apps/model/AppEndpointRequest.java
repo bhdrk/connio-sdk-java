@@ -9,7 +9,7 @@ import com.connio.sdk.api.model.RequestMetaData;
  * @author bdirik
  * @since 12.09.2014
  */
-public abstract class AppEndpointRequest extends AbstractConnioRequest {
+public abstract class AppEndpointRequest<RS extends AppEndpointResponse> extends AbstractConnioRequest<RS> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

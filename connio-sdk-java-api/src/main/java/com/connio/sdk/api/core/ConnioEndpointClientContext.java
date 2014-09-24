@@ -23,11 +23,10 @@ public interface ConnioEndpointClientContext {
      * TODO: javadoc
      *
      * @param request
-     * @param responseType
-     * @param <T>
+     * @param <RS>
      * @return
      */
-    public <T extends ConnioResponse> T execute(ConnioRequest request, Class<T> responseType);
+    public <RS extends ConnioResponse> RS execute(ConnioRequest<RS> request);
 
     /**
      * TODO: javadoc

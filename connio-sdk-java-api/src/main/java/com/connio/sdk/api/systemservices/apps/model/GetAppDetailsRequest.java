@@ -15,7 +15,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @author bdirik
  * @since 12.09.2014
  */
-public class GetAppDetailsRequest extends AppEndpointRequest {
+public class GetAppDetailsRequest extends AppEndpointRequest<GetAppDetailsResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

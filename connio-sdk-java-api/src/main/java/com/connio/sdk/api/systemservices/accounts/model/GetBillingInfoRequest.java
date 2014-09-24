@@ -14,7 +14,7 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetBillingInfoRequest extends AccountEndpointRequest {
+public class GetBillingInfoRequest extends AccountEndpointRequest<GetBillingInfoResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

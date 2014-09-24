@@ -22,16 +22,16 @@ public abstract class AbstractEndpointClientContext implements ConnioEndpointCli
     private Map<String, ConnioResponseHandler> responseHandlers = new HashMap<String, ConnioResponseHandler>();
 
     @Override
-    public <T extends ConnioResponse> T execute(ConnioRequest request, Class<T> responseType) {
+    public <T extends ConnioResponse> T execute(ConnioRequest<T> request) {
         request = handleRequest(request);
-        T response = doExecute(request, responseType);
-        response = responseType.cast(handleResponse(response));
+        T response = doExecute(request);
+        handleResponse(response);
         return response;
     }
 
-    protected abstract <T extends ConnioResponse> T doExecute(ConnioRequest request, Class<T> responseType);
+    protected abstract <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> request);
 
-    protected ConnioRequest handleRequest(ConnioRequest request) {
+    protected <RS extends ConnioResponse> ConnioRequest<RS> handleRequest(ConnioRequest<RS> request) {
         if (isNotEmpty(requestHandlers)) {
             for (ConnioRequestHandler handler : requestHandlers.values()) {
                 if (handler.isHandlerFor(request)) {
