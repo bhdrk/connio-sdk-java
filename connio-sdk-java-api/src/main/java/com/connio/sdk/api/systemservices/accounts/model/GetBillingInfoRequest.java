@@ -22,12 +22,9 @@ public class GetBillingInfoRequest extends AccountEndpointRequest<GetBillingInfo
 
         Asserts.notEmpty(sid, "Sid");
 
-        Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", sid);
-
         metaData.setMethod(GET);
-        metaData.setPath("{account-sid}/_billinginfo");
-        metaData.setPathParams(pathParams);
+        metaData.addPath("/{account-sid}/_billinginfo");
+        metaData.addPathParam("account-sid", sid);
     }
 
     /**

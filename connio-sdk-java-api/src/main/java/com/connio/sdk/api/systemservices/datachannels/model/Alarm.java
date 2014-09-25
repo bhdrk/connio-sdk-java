@@ -13,7 +13,7 @@ public class Alarm implements Serializable {
     /**
      * TODO: javadoc
      */
-    private String type;
+    private AlarmType type;
 
     /**
      * TODO: javadoc
@@ -23,18 +23,18 @@ public class Alarm implements Serializable {
     /**
      * TODO: javadoc
      */
-    private String duration;
+    private Duration duration;
 
     /**
      * TODO: javadoc
      */
-    private Action action;
+    private AlarmAction action;
 
-    public String getType() {
+    public AlarmType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(AlarmType type) {
         this.type = type;
     }
 
@@ -46,19 +46,43 @@ public class Alarm implements Serializable {
         this.value = value;
     }
 
-    public String getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
-    public Action getAction() {
+    public AlarmAction getAction() {
         return action;
     }
 
-    public void setAction(Action action) {
+    public void setAction(AlarmAction action) {
         this.action = action;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Alarm alarm = (Alarm) o;
+
+        if (action != null ? !action.equals(alarm.action) : alarm.action != null) return false;
+        if (duration != alarm.duration) return false;
+        if (type != alarm.type) return false;
+        if (value != null ? !value.equals(alarm.value) : alarm.value != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        result = 31 * result + (duration != null ? duration.hashCode() : 0);
+        result = 31 * result + (action != null ? action.hashCode() : 0);
+        return result;
     }
 }

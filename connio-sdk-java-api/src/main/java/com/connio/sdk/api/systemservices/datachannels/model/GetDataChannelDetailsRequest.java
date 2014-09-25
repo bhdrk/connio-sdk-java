@@ -1,5 +1,10 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
+import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.utils.Asserts;
+
+import static com.connio.sdk.api.model.Method.GET;
+
 /**
  * TODO: javadoc
  *
@@ -7,56 +12,33 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @since 12.09.2014
  */
 public class GetDataChannelDetailsRequest extends DataChannelEndpointRequest<GetDataChannelDetailsResponse> {
+    @Override
+    public void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
 
-    /**
-     * TODO: javadoc
-     */
-    private String appSid;
+        Asserts.notEmpty(channelId, "ChannelName or ChannelSid");
 
-    /**
-     * TODO: javadoc
-     */
-    private String channelSid;
-
-    /**
-     * TODO: javadoc
-     */
-    private String appName;
-
-    /**
-     * TODO: javadoc
-     */
-    private String channelName;
-
-    public String getAppSid() {
-        return appSid;
+        metaData.setMethod(GET);
+        metaData.addPath("/{channel-id}");
+        metaData.addPathParam("channel-id", channelId);
     }
 
-    public void setAppSid(String appSid) {
-        this.appSid = appSid;
+    private String channelId;
+
+    public GetDataChannelDetailsRequest() {
+        super();
     }
 
-    public String getChannelSid() {
-        return channelSid;
+    public GetDataChannelDetailsRequest(String appId, String channelId) {
+        super(appId);
+        this.channelId = channelId;
     }
 
-    public void setChannelSid(String channelSid) {
-        this.channelSid = channelSid;
+    public String getChannelId() {
+        return channelId;
     }
 
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-    public String getChannelName() {
-        return channelName;
-    }
-
-    public void setChannelName(String channelName) {
-        this.channelName = channelName;
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 }

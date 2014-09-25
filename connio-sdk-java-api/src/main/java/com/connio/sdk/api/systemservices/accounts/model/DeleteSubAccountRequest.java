@@ -22,12 +22,9 @@ public class DeleteSubAccountRequest extends AccountEndpointRequest<DeleteSubAcc
 
         Asserts.notEmpty(sid, "Sid");
 
-        Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", sid);
-
         metaData.setMethod(DELETE);
-        metaData.setPath("{account-sid}");
-        metaData.setPathParams(pathParams);
+        metaData.addPath("/{account-sid}");
+        metaData.addPathParam("account-sid", sid);
     }
 
     /**

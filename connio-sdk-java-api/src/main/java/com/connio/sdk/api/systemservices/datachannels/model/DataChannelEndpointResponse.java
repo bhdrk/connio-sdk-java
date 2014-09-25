@@ -8,19 +8,5 @@ import com.connio.sdk.api.model.AbstractConnioResponse;
  * @author bdirik
  * @since 12.09.2014
  */
-public abstract class DataChannelEndpointResponse extends AbstractConnioResponse {
-    @Override
-    public Class getResultType() {
-        return null;
-    }
-
-    @Override
-    public Object getResult() {
-        return null;
-    }
-
-    @Override
-    public void setResult(Object result) {
-
-    }
+public abstract class DataChannelEndpointResponse<T> extends AbstractConnioResponse<T> {
 }

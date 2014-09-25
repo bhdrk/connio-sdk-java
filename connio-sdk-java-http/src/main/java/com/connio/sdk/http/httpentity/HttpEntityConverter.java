@@ -1,4 +1,4 @@
-package com.connio.sdk.http.utils;
+package com.connio.sdk.http.httpentity;
 
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;

@@ -1,14 +1,9 @@
 package com.connio.sdk.api.systemservices.apps.model;
 
-import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.Asserts;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.connio.sdk.api.model.Method.PUT;
-import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
 
 /**
  * TODO: javadoc
@@ -23,24 +18,12 @@ public class UpdateAppRequest extends AppEndpointRequest<UpdateAppResponse> {
         super.loadMetaData(metaData);
 
         Asserts.notNull(app, "App");
-
-        Map<String, String> pathParams = new HashMap<String, String>();
-        pathParams.put("appId", getAppId());
+        Asserts.notNull(appId, "AppName or AppSid");
 
         metaData.setMethod(PUT);
-        metaData.setPath("{appId}");
-        metaData.setPathParams(pathParams);
+        metaData.addPath("/{app-id}");
+        metaData.addPathParam("app-id", getAppId());
         metaData.setRequestContent(app);
-    }
-
-    private String getAppId() {
-        if (isNotEmpty(appName)) {
-            return appName;
-        } else if (isNotEmpty(appSid)) {
-            return appSid;
-        } else {
-            throw new ConnioClientException("appName or appSid is required.");
-        }
     }
 
     /**
@@ -51,14 +34,14 @@ public class UpdateAppRequest extends AppEndpointRequest<UpdateAppResponse> {
     /**
      * TODO: javadoc
      */
-    private String appName;
-
-    /**
-     * TODO: javadoc
-     */
-    private String appSid;
+    private String appId;
 
     public UpdateAppRequest() {
+    }
+
+    public UpdateAppRequest(String appId, App app) {
+        this.appId = appId;
+        this.app = app;
     }
 
     public App getApp() {
@@ -69,19 +52,11 @@ public class UpdateAppRequest extends AppEndpointRequest<UpdateAppResponse> {
         this.app = app;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-    public String getAppSid() {
-        return appSid;
-    }
-
-    public void setAppSid(String appSid) {
-        this.appSid = appSid;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }

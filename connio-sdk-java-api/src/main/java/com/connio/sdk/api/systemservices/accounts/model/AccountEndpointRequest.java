@@ -13,6 +13,6 @@ public abstract class AccountEndpointRequest<RS extends AccountEndpointResponse>
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
-        metaData.setEndpoint("_accounts");
+        metaData.addPath("/_accounts");
     }
 }

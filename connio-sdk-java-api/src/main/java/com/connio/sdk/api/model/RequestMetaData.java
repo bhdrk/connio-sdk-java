@@ -1,5 +1,6 @@
 package com.connio.sdk.api.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,22 +19,17 @@ public class RequestMetaData {
     /**
      * TODO: javadoc
      */
-    private String endpoint;
+    private StringBuilder pathBuilder = new StringBuilder();
 
     /**
      * TODO: javadoc
      */
-    private String path;
+    private Map<String, String> pathParams = new HashMap<String, String>(3);
 
     /**
      * TODO: javadoc
      */
-    private Map<String, String> pathParams;
-
-    /**
-     * TODO: javadoc
-     */
-    private Map<String, String> queryParams;
+    private Map<String, String> queryParams = new HashMap<String, String>(0);
 
     /**
      * TODO: javadoc
@@ -56,27 +52,27 @@ public class RequestMetaData {
     private Object requestContent;
 
     public String getPath() {
-        return path;
+        return pathBuilder.toString();
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void addPath(String path) {
+        pathBuilder.append(path);
+    }
+
+    public void addPathParam(String name, String value) {
+        pathParams.put(name, value);
+    }
+
+    public void addQueryParam(String name, String value) {
+        queryParams.put(name, value);
     }
 
     public Map<String, String> getPathParams() {
         return pathParams;
     }
 
-    public void setPathParams(Map<String, String> pathParams) {
-        this.pathParams = pathParams;
-    }
-
     public Map<String, String> getQueryParams() {
         return queryParams;
-    }
-
-    public void setQueryParams(Map<String, String> queryParams) {
-        this.queryParams = queryParams;
     }
 
     public Method getMethod() {
@@ -85,14 +81,6 @@ public class RequestMetaData {
 
     public void setMethod(Method method) {
         this.method = method;
-    }
-
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
     }
 
     public String getVersion() {
@@ -119,6 +107,14 @@ public class RequestMetaData {
         this.headers = headers;
     }
 
+    public Object getRequestContent() {
+        return requestContent;
+    }
+
+    public void setRequestContent(Object requestContent) {
+        this.requestContent = requestContent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -127,12 +123,13 @@ public class RequestMetaData {
         RequestMetaData that = (RequestMetaData) o;
 
         if (contentType != null ? !contentType.equals(that.contentType) : that.contentType != null) return false;
-        if (endpoint != null ? !endpoint.equals(that.endpoint) : that.endpoint != null) return false;
         if (headers != null ? !headers.equals(that.headers) : that.headers != null) return false;
         if (method != that.method) return false;
-        if (path != null ? !path.equals(that.path) : that.path != null) return false;
+        if (pathBuilder != null ? !pathBuilder.equals(that.pathBuilder) : that.pathBuilder != null) return false;
         if (pathParams != null ? !pathParams.equals(that.pathParams) : that.pathParams != null) return false;
         if (queryParams != null ? !queryParams.equals(that.queryParams) : that.queryParams != null) return false;
+        if (requestContent != null ? !requestContent.equals(that.requestContent) : that.requestContent != null)
+            return false;
         if (version != null ? !version.equals(that.version) : that.version != null) return false;
 
         return true;
@@ -141,21 +138,13 @@ public class RequestMetaData {
     @Override
     public int hashCode() {
         int result = version != null ? version.hashCode() : 0;
-        result = 31 * result + (endpoint != null ? endpoint.hashCode() : 0);
-        result = 31 * result + (path != null ? path.hashCode() : 0);
+        result = 31 * result + (pathBuilder != null ? pathBuilder.hashCode() : 0);
         result = 31 * result + (pathParams != null ? pathParams.hashCode() : 0);
         result = 31 * result + (queryParams != null ? queryParams.hashCode() : 0);
         result = 31 * result + (method != null ? method.hashCode() : 0);
         result = 31 * result + (contentType != null ? contentType.hashCode() : 0);
         result = 31 * result + (headers != null ? headers.hashCode() : 0);
+        result = 31 * result + (requestContent != null ? requestContent.hashCode() : 0);
         return result;
-    }
-
-    public Object getRequestContent() {
-        return requestContent;
-    }
-
-    public void setRequestContent(Object requestContent) {
-        this.requestContent = requestContent;
     }
 }

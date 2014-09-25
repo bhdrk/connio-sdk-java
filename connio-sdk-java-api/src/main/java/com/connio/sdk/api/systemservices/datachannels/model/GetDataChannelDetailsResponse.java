@@ -6,18 +6,22 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class GetDataChannelDetailsResponse extends DataChannelEndpointResponse {
+public class GetDataChannelDetailsResponse extends DataChannelEndpointResponse<DataChannelDetails> {
 
-    /**
-     * TODO: javadoc
-     */
-    private DataChannelDetails dataChannelDetails;
+    private DataChannelDetails result;
 
-    public DataChannelDetails getDataChannelDetails() {
-        return dataChannelDetails;
+    @Override
+    public Class<DataChannelDetails> getResultType() {
+        return DataChannelDetails.class;
     }
 
-    public void setDataChannelDetails(DataChannelDetails dataChannelDetails) {
-        this.dataChannelDetails = dataChannelDetails;
+    @Override
+    public DataChannelDetails getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(DataChannelDetails result) {
+        this.result = result;
     }
 }

@@ -6,5 +6,22 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class CreateDataChannelResponse extends DataChannelEndpointResponse {
+public class CreateDataChannelResponse extends DataChannelEndpointResponse<DataChannelDetails> {
+
+    private DataChannelDetails result;
+
+    @Override
+    public Class<DataChannelDetails> getResultType() {
+        return DataChannelDetails.class;
+    }
+
+    @Override
+    public DataChannelDetails getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(DataChannelDetails result) {
+        this.result = result;
+    }
 }

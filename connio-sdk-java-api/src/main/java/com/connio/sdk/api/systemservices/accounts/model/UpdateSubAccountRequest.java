@@ -3,9 +3,6 @@ package com.connio.sdk.api.systemservices.accounts.model;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.Asserts;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.connio.sdk.api.model.Method.PUT;
 
 /**
@@ -23,13 +20,9 @@ public class UpdateSubAccountRequest extends AccountEndpointRequest<UpdateSubAcc
         Asserts.notNull(subAccount, "SubAccount");
         Asserts.notEmpty(sid, "Sid");
 
-        Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", sid);
-
         metaData.setMethod(PUT);
-        metaData.setPath("{account-sid}");
-        metaData.setPathParams(pathParams);
-
+        metaData.addPath("/{account-sid}");
+        metaData.addPathParam("account-sid", sid);
         metaData.setRequestContent(subAccount);
     }
 

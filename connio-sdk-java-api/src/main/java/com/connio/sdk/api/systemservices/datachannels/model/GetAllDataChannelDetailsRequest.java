@@ -1,5 +1,9 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
+import com.connio.sdk.api.model.RequestMetaData;
+
+import static com.connio.sdk.api.model.Method.GET;
+
 /**
  * TODO: javadoc
  *
@@ -7,30 +11,17 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @since 12.09.2014
  */
 public class GetAllDataChannelDetailsRequest extends DataChannelEndpointRequest<GetAllDataChannelDetailsResponse> {
-
-    /**
-     * TODO: javadoc
-     */
-    private String appSid;
-
-    /**
-     * TODO: javadoc
-     */
-    private String appName;
-
-    public String getAppSid() {
-        return appSid;
+    @Override
+    public void loadMetaData(RequestMetaData metaData) {
+        super.loadMetaData(metaData);
+        metaData.setMethod(GET);
     }
 
-    public void setAppSid(String appSid) {
-        this.appSid = appSid;
+    public GetAllDataChannelDetailsRequest() {
+        super();
     }
 
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public GetAllDataChannelDetailsRequest(String appId) {
+        super(appId);
     }
 }

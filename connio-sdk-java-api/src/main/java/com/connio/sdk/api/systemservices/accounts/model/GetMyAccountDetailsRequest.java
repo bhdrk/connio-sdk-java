@@ -16,7 +16,7 @@ public class GetMyAccountDetailsRequest extends AccountEndpointRequest<GetMyAcco
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        metaData.setPath("/me");
+        metaData.addPath("/me");
         metaData.setMethod(GET);
     }
 

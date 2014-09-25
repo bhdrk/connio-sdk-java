@@ -11,6 +11,7 @@ public abstract class AbstractConnioRequest<RS extends AbstractConnioResponse> i
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         metaData.setVersion("v1");
+        metaData.addPath("/v1");
         metaData.setContentType("application/json");
     }
 

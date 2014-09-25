@@ -4,7 +4,7 @@ import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.ConnioResponse;
 import com.connio.sdk.http.utils.IOUtils;
-import com.connio.sdk.http.utils.JSON;
+import com.connio.sdk.http.utils.json.JSON;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

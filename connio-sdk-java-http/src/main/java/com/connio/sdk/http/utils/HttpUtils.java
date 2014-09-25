@@ -51,37 +51,24 @@ public class HttpUtils {
     }
 
     public static String buildPath(RequestMetaData metaData) {
-        String version = metaData.getVersion();
-        String endpoint = metaData.getEndpoint();
-        String pathTemplate = metaData.getPath();
+        String path = metaData.getPath();
 
-        StringBuilder pathBuilder = new StringBuilder();
-
-        if (isNotEmpty(version)) {
-            pathBuilder.append('/').append(version);
-        }
-
-        if (isNotEmpty(endpoint)) {
-            pathBuilder.append('/').append(endpoint);
-        }
-
-        // append pathTemplate and pathTemplate params
-        if (isNotEmpty(pathTemplate)) {
+        // append path and path params
+        if (isNotEmpty(path)) {
             Map<String, String> pathParams = metaData.getPathParams();
             if (isNotEmpty(pathParams)) {
                 for (Map.Entry<String, String> pathParam : pathParams.entrySet()) {
                     if (isNotEmpty(pathParam.getKey()) && isNotEmpty(pathParam.getValue())) {
-                        pathTemplate = pathTemplate.replace("{" + pathParam.getKey() + "}", pathParam.getValue());
+                        path = path.replace("{" + pathParam.getKey() + "}", pathParam.getValue());
                     }
                 }
             }
-            if (pathTemplate.charAt(0) == '/') {
-                pathTemplate = pathTemplate.substring(1); // remove first char if it's slash (/)
+            if (path.charAt(0) != '/') {
+                path = '/' + path; // remove first char if it's slash (/)
             }
-            pathBuilder.append('/').append(pathTemplate);
         }
 
-        return pathBuilder.toString();
+        return path;
     }
 
 }

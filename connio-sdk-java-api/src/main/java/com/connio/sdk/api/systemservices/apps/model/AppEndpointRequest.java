@@ -13,6 +13,6 @@ public abstract class AppEndpointRequest<RS extends AppEndpointResponse> extends
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
-        metaData.setEndpoint("_apps");
+        metaData.addPath("/_apps");
     }
 }

@@ -1,13 +1,9 @@
 package com.connio.sdk.api.systemservices.apps.model;
 
-import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.RequestMetaData;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.connio.sdk.api.utils.Asserts;
 
 import static com.connio.sdk.api.model.Method.DELETE;
-import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
 
 /**
  * TODO: javadoc
@@ -21,44 +17,27 @@ public class DeleteAppRequest extends AppEndpointRequest<DeleteAppResponse> {
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Map<String, String> pathParams = new HashMap<String, String>();
-        pathParams.put("app", getAppId());
+        Asserts.notEmpty(appId, "AppName or AppSid");
 
         metaData.setMethod(DELETE);
-        metaData.setPath("{app}");
-        metaData.setPathParams(pathParams);
+        metaData.addPath("/{app-id}");
+        metaData.addPathParam("app-id", appId);
     }
 
-    private String getAppId() {
-        if (isNotEmpty(appName)) {
-            return appName;
-        } else if (isNotEmpty(appSid)) {
-            return appSid;
-        } else {
-            throw new ConnioClientException("appName or appSid is required.");
-        }
-    }
-
-    private String appSid;
-
-    private String appName;
+    private String appId;
 
     public DeleteAppRequest() {
     }
 
-    public String getAppSid() {
-        return appSid;
+    public DeleteAppRequest(String appId) {
+        this.appId = appId;
     }
 
-    public void setAppSid(String appSid) {
-        this.appSid = appSid;
+    public String getAppId() {
+        return appId;
     }
 
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }

@@ -23,12 +23,9 @@ public class CreateAuthenticationTokenRequest extends AccountEndpointRequest<Cre
 
         Asserts.notEmpty(sid, "Sid");
 
-        Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", sid);
-
         metaData.setMethod(POST);
-        metaData.setPath("{account-sid}/_authtoken");
-        metaData.setPathParams(pathParams);
+        metaData.addPath("/{account-sid}/_authtoken");
+        metaData.addPathParam("account-sid", sid);
         metaData.setRequestContent(new Sid(sid));
     }
 

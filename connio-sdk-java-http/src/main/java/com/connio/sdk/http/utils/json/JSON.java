@@ -1,10 +1,13 @@
-package com.connio.sdk.http.utils;
+package com.connio.sdk.http.utils.json;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,14 +19,16 @@ import java.io.InputStream;
  * @since 16.09.2014
  */
 public class JSON {
-    private static final ObjectMapper MAPPER;
+    private static final ObjectMapper MAPPER = createObjectMapper();
 
-    static {
-        MAPPER = new ObjectMapper()
-                .configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true)
-                .configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true)
+    private static ObjectMapper createObjectMapper() {
+        SimpleModule enumModule = new SimpleModule();
+        enumModule.setDeserializers(new CustomDeserializers());
+
+        return new ObjectMapper()
                 .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                .registerModule(enumModule);
     }
 
     public static String toString(Object obj) {

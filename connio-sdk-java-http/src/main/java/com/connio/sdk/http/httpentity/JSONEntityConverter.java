@@ -1,8 +1,9 @@
-package com.connio.sdk.http.utils;
+package com.connio.sdk.http.httpentity;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.http.utils.json.JSON;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;

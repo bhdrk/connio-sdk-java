@@ -4,8 +4,8 @@ import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.TypeUtils;
-import com.connio.sdk.http.utils.HttpEntityConverter;
-import com.connio.sdk.http.utils.JSONEntityConverter;
+import com.connio.sdk.http.httpentity.HttpEntityConverter;
+import com.connio.sdk.http.httpentity.JSONEntityConverter;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 

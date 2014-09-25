@@ -14,7 +14,6 @@ public class GetAllAppDetailsRequest extends AppEndpointRequest<GetAllAppDetails
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
-
         metaData.setMethod(GET);
     }
 }

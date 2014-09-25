@@ -15,6 +15,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 22.09.2014
  */
+@Test(groups = "httptest")
 public class AppEndpointClientImplHttpTest {
 
     private AppEndpointClientImpl client;
@@ -52,9 +53,7 @@ public class AppEndpointClientImplHttpTest {
 
     @Test(priority = 2)
     public void testGetAppDetails() throws Exception {
-        GetAppDetailsRequest request = new GetAppDetailsRequest();
-        request.setAppName(this.testApp.getName());
-
+        GetAppDetailsRequest request = new GetAppDetailsRequest(this.testApp.getName());
         GetAppDetailsResponse response = client.getAppDetails(request);
 
         assertThat(response).isNotNull();
@@ -96,10 +95,7 @@ public class AppEndpointClientImplHttpTest {
         testApp.setVersion("v2.0");
         testApp.setState(STOPPED);
 
-        UpdateAppRequest request = new UpdateAppRequest();
-        request.setApp(testApp);
-        request.setAppName(currentAppName);
-
+        UpdateAppRequest request = new UpdateAppRequest(currentAppName, testApp);
         UpdateAppResponse response = client.updateApp(request);
 
         assertThat(response).isNotNull();
@@ -115,9 +111,7 @@ public class AppEndpointClientImplHttpTest {
 
     @Test(priority = 5)
     public void testDeleteApp() throws Exception {
-        DeleteAppRequest request = new DeleteAppRequest();
-        request.setAppName(testApp.getName());
-
+        DeleteAppRequest request = new DeleteAppRequest(testApp.getName());
         DeleteAppResponse response = client.deleteApp(request);
 
         assertThat(response).isNotNull();

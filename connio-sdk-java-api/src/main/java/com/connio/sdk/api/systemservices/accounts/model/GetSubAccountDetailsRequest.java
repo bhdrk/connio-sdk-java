@@ -22,11 +22,8 @@ public class GetSubAccountDetailsRequest extends AccountEndpointRequest<GetSubAc
 
         Asserts.notEmpty(sid, "Sid");
 
-        Map<String, String> pathParams = new HashMap<String, String>(1);
-        pathParams.put("account-sid", sid);
-
-        metaData.setPath("/{account-sid}");
-        metaData.setPathParams(pathParams);
+        metaData.addPath("/{account-sid}");
+        metaData.addPathParam("account-sid", sid);
         metaData.setMethod(GET);
     }
 
