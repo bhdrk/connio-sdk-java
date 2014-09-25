@@ -15,27 +15,27 @@ public class Asserts {
 
     public static void notNull(final Object object, final String name) {
         if (object == null) {
-            throw new ConnioClientException(name + " is null");
+            throw new ConnioClientException(name + " is null.");
         }
     }
 
     public static void notEmpty(final String str, final String name) {
         if (TypeUtils.isEmpty(str)) {
-            throw new ConnioClientException(name + " is empty");
+            throw new ConnioClientException(name + " is empty.");
         }
     }
 
     public static void maxSize(String str, int maxLength, String name) {
         notEmpty(str, name);
         if (str.length() > maxLength) {
-            throw new ConnioClientException(name + " is more than " + maxLength);
+            throw new ConnioClientException(name + " is more than " + maxLength + ".");
         }
     }
 
     public static void maxSize(Collection<?> collection, int maxLength, String name) {
         notNull(collection, name);
         if (collection.size() > maxLength) {
-            throw new ConnioClientException(name + " is more than " + maxLength);
+            throw new ConnioClientException(name + " is more than " + maxLength + ".");
         }
     }
 

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class JSON {
         enumModule.setDeserializers(new CustomDeserializers());
 
         return new ObjectMapper()
-                .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES)
+                .setPropertyNamingStrategy(new CustomPropertyNamingStrategy())
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .registerModule(enumModule);
     }

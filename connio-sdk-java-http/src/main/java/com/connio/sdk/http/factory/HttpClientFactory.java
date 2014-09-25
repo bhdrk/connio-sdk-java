@@ -17,6 +17,7 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.TargetAuthenticationStrategy;
 
 import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
 
@@ -46,7 +47,8 @@ public class HttpClientFactory {
                 .setDefaultSocketConfig(socketConfig)
                 .setDefaultConnectionConfig(connectionConfig)
                 .setDefaultRequestConfig(requestConfig)
-                .setDefaultCredentialsProvider(credentialsProvider);
+                .setDefaultCredentialsProvider(credentialsProvider)
+                .setTargetAuthenticationStrategy(new TargetAuthenticationStrategy());
 
         setProxy(httpClientBuilder, clientConfig, credentialsProvider);
         setGzipSupport(httpClientBuilder, clientConfig);
@@ -82,6 +84,7 @@ public class HttpClientFactory {
                 .setConnectTimeout(clientConfig.getConnectionTimeout())
                 .setConnectionRequestTimeout(clientConfig.getConnectionRequestTimeout())
                 .setStaleConnectionCheckEnabled(true)
+                .setAuthenticationEnabled(true)
                 .build();
     }
 
