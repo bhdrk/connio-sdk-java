@@ -30,10 +30,10 @@ public class DeviceProfileEndpointClientImplTest {
     public void testCreateDeviceProfile() throws Exception {
         testDeviceProfile = new DeviceProfile();
         testDeviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
-        testDeviceProfile.setClazz("Sensor");
-        testDeviceProfile.setSubclass("Temperature");
-        testDeviceProfile.setVendor("Acme");
-        testDeviceProfile.setProduct("X1000");
+        testDeviceProfile.setClazz(TestUtils.createNewName("CLASS"));
+        testDeviceProfile.setSubclass(TestUtils.createNewName("SUBCLASS"));
+        testDeviceProfile.setVendor(TestUtils.createNewName("VENDOR"));
+        testDeviceProfile.setProduct(TestUtils.createNewName("PRODUCT"));
 
         CreateDeviceProfileRequest request = new CreateDeviceProfileRequest(testDeviceProfile);
         CreateDeviceProfileResponse response = client.createDeviceProfile(request);
@@ -87,10 +87,10 @@ public class DeviceProfileEndpointClientImplTest {
         String currentDeviceProfileName = testDeviceProfile.getName();
 
         testDeviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
-        testDeviceProfile.setClazz("ElectricMeter");
-        testDeviceProfile.setSubclass("Smart");
-        testDeviceProfile.setVendor("Acme NextGen");
-        testDeviceProfile.setProduct("X5500");
+        testDeviceProfile.setClazz(TestUtils.createNewName("CLASS"));
+        testDeviceProfile.setSubclass(TestUtils.createNewName("SUBCLASS"));
+        testDeviceProfile.setVendor(TestUtils.createNewName("VENDOR"));
+        testDeviceProfile.setProduct(TestUtils.createNewName("PRODUCT"));
 
         UpdateDeviceProfileRequest request = new UpdateDeviceProfileRequest(currentDeviceProfileName, testDeviceProfile);
         UpdateDeviceProfileResponse response = client.updateDeviceProfile(request);

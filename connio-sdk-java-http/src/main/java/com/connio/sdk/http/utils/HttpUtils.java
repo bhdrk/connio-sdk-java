@@ -1,6 +1,8 @@
 package com.connio.sdk.http.utils;
 
 import com.connio.sdk.api.exception.ConnioClientException;
+import com.connio.sdk.api.model.ConnioRequest;
+import com.connio.sdk.api.model.ConnioResponse;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.http.model.ClientConfig;
 import org.apache.http.client.utils.URIBuilder;
@@ -18,6 +20,11 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @since 16.09.2014
  */
 public class HttpUtils {
+
+    @SuppressWarnings("unchecked")
+    public static <RS extends ConnioResponse> Class<RS> resolveResponseType(ConnioRequest<RS> request) {
+        return (Class<RS>) TypeResolver.resolveRawArgument(ConnioRequest.class, request.getClass());
+    }
 
     /**
      * Build URI for related request.

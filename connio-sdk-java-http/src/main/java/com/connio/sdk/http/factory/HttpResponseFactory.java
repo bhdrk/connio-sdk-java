@@ -31,13 +31,13 @@ public class HttpResponseFactory {
     private HttpResponseFactory() {
     }
 
-    public static <T extends ConnioResponse> T create(HttpResponse httpResponse, Class<T> responseClass) throws IOException {
-        return instance.doCreate(httpResponse, responseClass);
+    public static <RS extends ConnioResponse> RS create(HttpResponse httpResponse, Class<RS> responseType) throws IOException {
+        return instance.doCreate(httpResponse, responseType);
     }
 
-    private <T extends ConnioResponse> T doCreate(HttpResponse httpResponse, Class<T> responseClass) throws IOException {
+    private <RS extends ConnioResponse> RS doCreate(HttpResponse httpResponse, Class<RS> responseType) throws IOException {
         if (isSuccessfulResponse(httpResponse)) {
-            T connioResponse = createConnioResponse(responseClass);
+            RS connioResponse = createConnioResponse(responseType);
             setResult(connioResponse, httpResponse);
             return connioResponse;
         }
@@ -116,9 +116,9 @@ public class HttpResponseFactory {
         }
     }
 
-    private <T extends ConnioResponse> T createConnioResponse(Class<T> responseClass) {
+    private <RS extends ConnioResponse> RS createConnioResponse(Class<RS> responseType) {
         try {
-            return responseClass.newInstance();
+            return responseType.newInstance();
         } catch (Exception e) {
             throw new ConnioClientException(e);
         }
