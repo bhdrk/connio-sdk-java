@@ -1,23 +1,32 @@
 package com.connio.sdk.api.systemservices.users.model;
 
+import com.connio.sdk.api.model.Deleted;
+
 /**
  * TODO: javadoc
  *
  * @author bdirik
  * @since 11.09.2014
  */
-public class DeleteUserResponse extends UserEndpointResponse {
+public class DeleteUserResponse extends UserEndpointResponse<Deleted> {
 
     /**
      * TODO: javadoc
      */
-    private boolean deleted;
+    private Deleted result;
 
-    public boolean isDeleted() {
-        return deleted;
+    @Override
+    public Class<Deleted> getResultType() {
+        return Deleted.class;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    @Override
+    public Deleted getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(Deleted result) {
+        this.result = result;
     }
 }

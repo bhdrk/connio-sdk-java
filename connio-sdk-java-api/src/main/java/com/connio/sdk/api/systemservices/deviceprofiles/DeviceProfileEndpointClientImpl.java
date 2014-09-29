@@ -1,7 +1,9 @@
 package com.connio.sdk.api.systemservices.deviceprofiles;
 
-import com.connio.sdk.api.core.ConnioEndpointClientContext;
-import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
+import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.exception.ConnioClientException;
+import com.connio.sdk.api.exception.ConnioServiceException;
+import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
 
 /**
@@ -10,36 +12,75 @@ import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
  * @author bdirik
  * @since 25.09.2014
  */
-public class DeviceProfileEndpointClientImpl implements DeviceProfileEndpointClient {
+public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient implements DeviceProfileEndpointClient {
 
-    private ConnioEndpointClientContext context;
-
-    public DeviceProfileEndpointClientImpl() {
-        context = ConnioEndpointClientContextProvider.get();
+    /**
+     * TODO: javadoc
+     *
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
+    @Override
+    public DeviceProfileResultSet getAllDeviceProfileDetails()
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetAllDeviceProfileDetailsRequest());
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param deviceProfileName
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
-    public GetAllDeviceProfileDetailsResponse getAllDeviceProfileDetails(GetAllDeviceProfileDetailsRequest request) {
-        return context.execute(request);
+    public DeviceProfileDetails getDeviceProfileDetails(String deviceProfileName)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetDeviceProfileDetailsRequest(deviceProfileName));
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param deviceProfile
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
-    public GetDeviceProfileDetailsResponse getDeviceProfileDetails(GetDeviceProfileDetailsRequest request) {
-        return context.execute(request);
+    public DeviceProfileDetails createDeviceProfile(DeviceProfile deviceProfile)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new CreateDeviceProfileRequest(deviceProfile));
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param deviceProfileName
+     * @param deviceProfile
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
-    public CreateDeviceProfileResponse createDeviceProfile(CreateDeviceProfileRequest request) {
-        return context.execute(request);
+    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile
+    ) throws ConnioServiceException, ConnioClientException {
+        return execute(new UpdateDeviceProfileRequest(deviceProfileName, deviceProfile));
     }
 
+    /**
+     * TODO: javadoc
+     *
+     * @param deviceProfileName
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
     @Override
-    public UpdateDeviceProfileResponse updateDeviceProfile(UpdateDeviceProfileRequest request) {
-        return context.execute(request);
-    }
-
-    @Override
-    public DeleteDeviceProfileResponse deleteDeviceProfile(DeleteDeviceProfileRequest request) {
-        return context.execute(request);
+    public Deleted deleteDeviceProfile(String deviceProfileName)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new DeleteDeviceProfileRequest(deviceProfileName));
     }
 }

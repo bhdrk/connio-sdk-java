@@ -2,7 +2,9 @@ package com.connio.sdk.api.systemservices.apps;
 
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
-import com.connio.sdk.api.systemservices.apps.model.*;
+import com.connio.sdk.api.systemservices.apps.model.App;
+import com.connio.sdk.api.systemservices.apps.model.AppDetails;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -16,7 +18,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @since 22.09.2014
  */
 @Test(groups = "httptest")
-public class AppEndpointClientImplHttpTest {
+public class AppEndpointClientHttpTest {
 
     private AppEndpointClientImpl client;
 
@@ -36,14 +38,9 @@ public class AppEndpointClientImplHttpTest {
 
     @Test(priority = 1)
     public void testCreateApp() throws Exception {
-        CreateAppRequest request = new CreateAppRequest(this.testApp);
-        CreateAppResponse response = client.createApp(request);
+        AppDetails result = client.createApp(testApp);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        AppDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testApp.getName());
         assertThat(result.getDisplayName()).isEqualTo(testApp.getDisplayName());
         assertThat(result.getDescription()).isEqualTo(testApp.getDescription());
@@ -53,14 +50,9 @@ public class AppEndpointClientImplHttpTest {
 
     @Test(priority = 2)
     public void testGetAppDetails() throws Exception {
-        GetAppDetailsRequest request = new GetAppDetailsRequest(this.testApp.getName());
-        GetAppDetailsResponse response = client.getAppDetails(request);
+        AppDetails result = client.getAppDetails(testApp.getName());
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        AppDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testApp.getName());
         assertThat(result.getDisplayName()).isEqualTo(testApp.getDisplayName());
         assertThat(result.getDescription()).isEqualTo(testApp.getDescription());
@@ -70,14 +62,9 @@ public class AppEndpointClientImplHttpTest {
 
     @Test(priority = 3)
     public void testGetAllAppDetails() throws Exception {
-        GetAllAppDetailsRequest request = new GetAllAppDetailsRequest();
-        GetAllAppDetailsResponse response = client.getAllAppDetails(request);
+        AppResultSet result = client.getAllAppDetails();
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        AppResultSet result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getTotal()).isGreaterThan(0);
         assertThat(result.getItemCount()).isGreaterThan(0);
         assertThat(result.getResultSet()).isNotEmpty();
@@ -95,14 +82,9 @@ public class AppEndpointClientImplHttpTest {
         testApp.setVersion("v2.0");
         testApp.setState(STOPPED);
 
-        UpdateAppRequest request = new UpdateAppRequest(currentAppName, testApp);
-        UpdateAppResponse response = client.updateApp(request);
+        AppDetails result = client.updateApp(currentAppName, testApp);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        AppDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testApp.getName());
         assertThat(result.getDisplayName()).isEqualTo(testApp.getDisplayName());
         assertThat(result.getDescription()).isEqualTo(testApp.getDescription());
@@ -111,14 +93,9 @@ public class AppEndpointClientImplHttpTest {
 
     @Test(priority = 5)
     public void testDeleteApp() throws Exception {
-        DeleteAppRequest request = new DeleteAppRequest(testApp.getName());
-        DeleteAppResponse response = client.deleteApp(request);
+        Deleted result = client.deleteApp(testApp.getName());
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        Deleted result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isTrue();
     }
 }

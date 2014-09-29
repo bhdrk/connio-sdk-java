@@ -3,6 +3,7 @@ package com.connio.sdk.api.systemservices.datachannels;
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
+import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.datachannels.model.*;
 
 /**
@@ -16,10 +17,11 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param appSidOrName
+     * @param channelSidOrName
      * @return
      */
-    public GetDataChannelDetailsResponse getDataChannelDetails(GetDataChannelDetailsRequest request)
+    public DataChannelDetails getDataChannelDetails(String appSidOrName, String channelSidOrName)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -27,33 +29,37 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      *
      * @return
      */
-    public GetAllDataChannelDetailsResponse getAllDataChannelDetails(GetAllDataChannelDetailsRequest request)
+    public DataChannelResultSet getAllDataChannelDetails(String appSidOrName)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param appSidOrName
+     * @param dataChannel
      * @return
      */
-    public CreateDataChannelResponse createDataChannel(CreateDataChannelRequest request)
+    public DataChannelDetails createDataChannel(String appSidOrName, DataChannel dataChannel)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param appSidOrName
+     * @param channelSidOrName
+     * @param dataChannelUpdate
      * @return
      */
-    public UpdateDataChannelResponse updateDataChannel(UpdateDataChannelRequest request)
+    public DataChannelDetails updateDataChannel(String appSidOrName, String channelSidOrName, DataChannelUpdate dataChannelUpdate)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param appSidOrName
+     * @param channelSidOrName
      * @return
      */
-    public DeleteDataChannelResponse deleteDataChannel(DeleteDataChannelRequest request)
+    public Deleted deleteDataChannel(String appSidOrName, String channelSidOrName)
             throws ConnioServiceException, ConnioClientException;
 }

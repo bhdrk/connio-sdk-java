@@ -3,7 +3,10 @@ package com.connio.sdk.api.systemservices.users;
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
-import com.connio.sdk.api.systemservices.users.model.*;
+import com.connio.sdk.api.model.Deleted;
+import com.connio.sdk.api.systemservices.users.model.User;
+import com.connio.sdk.api.systemservices.users.model.UserDetails;
+import com.connio.sdk.api.systemservices.users.model.UserResultSet;
 
 /**
  * TODO: javadoc
@@ -16,44 +19,55 @@ public interface UserEndpointClient extends ConnioEndpointClient {
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param userSid
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetUserDetailsResponse getUserDetails(GetUserDetailsRequest request)
+    public UserDetails getUserDetails(String userSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetAllUserDetailsResponse getAllUserDetails(GetAllUserDetailsRequest request)
+    public UserResultSet getAllUserDetails()
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param user
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public CreateUserResponse createUser(CreateUserRequest request)
+    public UserDetails createUser(User user)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param userSid
+     * @param user
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public UpdateUserResponse updateUser(UpdateUserRequest request)
+    public UserDetails updateUser(String userSid, User user)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param userSid
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public DeleteUserResponse deleteUser(DeleteUserRequest request)
+    public Deleted deleteUser(String userSid)
             throws ConnioServiceException, ConnioClientException;
 }

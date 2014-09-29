@@ -3,6 +3,7 @@ package com.connio.sdk.api.systemservices.apps;
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
+import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.apps.model.*;
 
 /**
@@ -16,45 +17,56 @@ public interface AppEndpointClient extends ConnioEndpointClient {
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sidOrName
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetAppDetailsResponse getAppDetails(GetAppDetailsRequest request)
+    public AppDetails getAppDetails(String sidOrName)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetAllAppDetailsResponse getAllAppDetails(GetAllAppDetailsRequest request)
+    public AppResultSet getAllAppDetails()
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param app
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public CreateAppResponse createApp(CreateAppRequest request)
+    public AppDetails createApp(App app)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sidOrName
+     * @param app
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public UpdateAppResponse updateApp(UpdateAppRequest request)
+    public AppDetails updateApp(String sidOrName, App app)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sidOrName
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public DeleteAppResponse deleteApp(DeleteAppRequest request)
+    public Deleted deleteApp(String sidOrName)
             throws ConnioServiceException, ConnioClientException;
 
 }

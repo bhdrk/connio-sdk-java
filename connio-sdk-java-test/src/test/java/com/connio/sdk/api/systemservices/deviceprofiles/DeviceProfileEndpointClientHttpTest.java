@@ -2,7 +2,9 @@ package com.connio.sdk.api.systemservices.deviceprofiles;
 
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
-import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -15,14 +17,14 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @since 25.09.2014
  */
 @Test(groups = "httptest")
-public class DeviceProfileEndpointClientImplTest {
+public class DeviceProfileEndpointClientHttpTest {
 
     private DeviceProfileEndpointClientImpl client;
 
     private DeviceProfile testDeviceProfile;
 
     @BeforeClass
-    public void setUp() throws Exception {
+    public void beforeClass() throws Exception {
         client = new DeviceProfileEndpointClientImpl();
     }
 
@@ -35,14 +37,9 @@ public class DeviceProfileEndpointClientImplTest {
         testDeviceProfile.setVendor(TestUtils.createNewName("VENDOR"));
         testDeviceProfile.setProduct(TestUtils.createNewName("PRODUCT"));
 
-        CreateDeviceProfileRequest request = new CreateDeviceProfileRequest(testDeviceProfile);
-        CreateDeviceProfileResponse response = client.createDeviceProfile(request);
+        DeviceProfileDetails result = client.createDeviceProfile(testDeviceProfile);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DeviceProfileDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testDeviceProfile.getName());
         assertThat(result.getClazz()).isEqualTo(testDeviceProfile.getClazz());
         assertThat(result.getSubclass()).isEqualTo(testDeviceProfile.getSubclass());
@@ -52,14 +49,9 @@ public class DeviceProfileEndpointClientImplTest {
 
     @Test(priority = 2)
     public void testGetDeviceProfileDetails() throws Exception {
-        GetDeviceProfileDetailsRequest request = new GetDeviceProfileDetailsRequest(testDeviceProfile.getName());
-        GetDeviceProfileDetailsResponse response = client.getDeviceProfileDetails(request);
+        DeviceProfileDetails result = client.getDeviceProfileDetails(testDeviceProfile.getName());
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DeviceProfileDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testDeviceProfile.getName());
         assertThat(result.getClazz()).isEqualTo(testDeviceProfile.getClazz());
         assertThat(result.getSubclass()).isEqualTo(testDeviceProfile.getSubclass());
@@ -69,14 +61,9 @@ public class DeviceProfileEndpointClientImplTest {
 
     @Test(priority = 3)
     public void testGetAllDeviceProfileDetails() throws Exception {
-        GetAllDeviceProfileDetailsRequest request = new GetAllDeviceProfileDetailsRequest();
-        GetAllDeviceProfileDetailsResponse response = client.getAllDeviceProfileDetails(request);
+        DeviceProfileResultSet result = client.getAllDeviceProfileDetails();
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DeviceProfileResultSet result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getTotal()).isGreaterThan(0);
         assertThat(result.getItemCount()).isGreaterThan(0);
         assertThat(result.getResultSet()).isNotEmpty();
@@ -92,14 +79,9 @@ public class DeviceProfileEndpointClientImplTest {
         testDeviceProfile.setVendor(TestUtils.createNewName("VENDOR"));
         testDeviceProfile.setProduct(TestUtils.createNewName("PRODUCT"));
 
-        UpdateDeviceProfileRequest request = new UpdateDeviceProfileRequest(currentDeviceProfileName, testDeviceProfile);
-        UpdateDeviceProfileResponse response = client.updateDeviceProfile(request);
+        DeviceProfileDetails result = client.updateDeviceProfile(currentDeviceProfileName, testDeviceProfile);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DeviceProfileDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testDeviceProfile.getName());
         assertThat(result.getClazz()).isEqualTo(testDeviceProfile.getClazz());
         assertThat(result.getSubclass()).isEqualTo(testDeviceProfile.getSubclass());
@@ -109,14 +91,9 @@ public class DeviceProfileEndpointClientImplTest {
 
     @Test(priority = 5)
     public void testDeleteDeviceProfile() throws Exception {
-        DeleteDeviceProfileRequest request = new DeleteDeviceProfileRequest(testDeviceProfile.getName());
-        DeleteDeviceProfileResponse response = client.deleteDeviceProfile(request);
+        Deleted result = client.deleteDeviceProfile(testDeviceProfile.getName());
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        Deleted result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isTrue();
     }
 }

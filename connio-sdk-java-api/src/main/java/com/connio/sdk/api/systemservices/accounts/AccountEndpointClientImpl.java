@@ -1,9 +1,9 @@
 package com.connio.sdk.api.systemservices.accounts;
 
-import com.connio.sdk.api.core.ConnioEndpointClientContext;
-import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
+import com.connio.sdk.api.core.AbstractEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
+import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.accounts.model.*;
 
 /**
@@ -12,123 +12,116 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  * @author bdirik
  * @since 15.09.2014
  */
-public class AccountEndpointClientImpl implements AccountEndpointClient {
-
-    private ConnioEndpointClientContext context;
-
-    public AccountEndpointClientImpl() {
-        this.context = ConnioEndpointClientContextProvider.get();
-    }
+public class AccountEndpointClientImpl extends AbstractEndpointClient implements AccountEndpointClient {
 
     /**
      * TODO: javadoc
      *
-     * @param request
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public GetMyAccountDetailsResponse getMyAccountDetails(GetMyAccountDetailsRequest request)
+    public AccountDetails getMyAccountDetails()
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new GetMyAccountDetailsRequest());
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public GetSubAccountDetailsResponse getSubAccountDetails(GetSubAccountDetailsRequest request)
+    public SubAccountDetails getSubAccountDetails(String sid)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new GetSubAccountDetailsRequest(sid));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public GetAllSubAccountsDetailsResponse getAllSubAccountDetails(GetAllSubAccountsDetailsRequest request)
+    public SubAccountResultSet getAllSubAccountDetails()
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new GetAllSubAccountsDetailsRequest());
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param subAccount
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public CreateSubAccountResponse createSubAccount(CreateSubAccountRequest request)
+    public SubAccountDetails createSubAccount(SubAccount subAccount)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new CreateSubAccountRequest(subAccount));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
+     * @param subAccount
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public UpdateSubAccountResponse updateSubAccount(UpdateSubAccountRequest request)
+    public SubAccountDetails updateSubAccount(String sid, SubAccount subAccount)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new UpdateSubAccountRequest(sid, subAccount));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public DeleteSubAccountResponse deleteSubAccount(DeleteSubAccountRequest request)
+    public Deleted deleteSubAccount(String sid)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new DeleteSubAccountRequest(sid));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public CreateAuthenticationTokenResponse createAuthenticationToken(CreateAuthenticationTokenRequest request)
+    public AuthToken createAuthenticationToken(String sid)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new CreateAuthenticationTokenRequest(sid));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public GetBillingInfoResponse getBillingInfo(GetBillingInfoRequest request)
+    public BillingInfoList getBillingInfo(String sid)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new GetBillingInfoRequest(sid));
     }
 }

@@ -1,9 +1,11 @@
 package com.connio.sdk.api.systemservices.users;
 
+import com.connio.sdk.api.core.AbstractEndpointClient;
 import com.connio.sdk.api.core.ConnioEndpointClientContext;
 import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
+import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.users.model.*;
 
 /**
@@ -12,26 +14,20 @@ import com.connio.sdk.api.systemservices.users.model.*;
  * @author bdirik
  * @since 18.09.2014
  */
-public class UserEndpointClientImpl implements UserEndpointClient {
-
-    private ConnioEndpointClientContext context;
-
-    public UserEndpointClientImpl() {
-        context = ConnioEndpointClientContextProvider.get();
-    }
+public class UserEndpointClientImpl extends AbstractEndpointClient implements UserEndpointClient {
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param userSid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public GetUserDetailsResponse getUserDetails(GetUserDetailsRequest request)
+    public UserDetails getUserDetails(String userSid)
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new GetUserDetailsRequest(userSid));
     }
 
     /**
@@ -42,21 +38,21 @@ public class UserEndpointClientImpl implements UserEndpointClient {
      * @throws ConnioClientException
      */
     @Override
-    public GetAllUserDetailsResponse getAllUserDetails(GetAllUserDetailsRequest request)
+    public UserResultSet getAllUserDetails()
             throws ConnioServiceException, ConnioClientException {
-        return context.execute(request);
+        return execute(new GetAllUserDetailsRequest());
     }
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param user
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public CreateUserResponse createUser(CreateUserRequest request)
+    public UserDetails createUser(User user)
             throws ConnioServiceException, ConnioClientException {
         throw new ConnioClientException("Unsupported Operation.");
     }
@@ -64,13 +60,14 @@ public class UserEndpointClientImpl implements UserEndpointClient {
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param userSid
+     * @param user
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public UpdateUserResponse updateUser(UpdateUserRequest request)
+    public UserDetails updateUser(String userSid, User user)
             throws ConnioServiceException, ConnioClientException {
         throw new ConnioClientException("Unsupported Operation.");
     }
@@ -78,13 +75,13 @@ public class UserEndpointClientImpl implements UserEndpointClient {
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param userSid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public DeleteUserResponse deleteUser(DeleteUserRequest request)
+    public Deleted deleteUser(String userSid)
             throws ConnioServiceException, ConnioClientException {
         throw new ConnioClientException("Unsupported Operation.");
     }

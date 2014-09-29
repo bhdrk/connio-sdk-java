@@ -3,7 +3,9 @@ package com.connio.sdk.api.systemservices.datachannel;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
 import com.connio.sdk.api.systemservices.apps.AppEndpointClientImpl;
-import com.connio.sdk.api.systemservices.apps.model.*;
+import com.connio.sdk.api.systemservices.apps.model.App;
+import com.connio.sdk.api.systemservices.apps.model.AppDetails;
+import com.connio.sdk.api.systemservices.apps.model.StateType;
 import com.connio.sdk.api.systemservices.datachannels.DataChannelEndpointClientImpl;
 import com.connio.sdk.api.systemservices.datachannels.model.*;
 import org.testng.annotations.BeforeClass;
@@ -34,7 +36,7 @@ public class DataChannelEndpointClientHttpTest {
     private DataChannel testDataChannel;
 
     @BeforeClass
-    public void setUp() throws Exception {
+    public void beforeClass() throws Exception {
         client = new DataChannelEndpointClientImpl();
         appClient = new AppEndpointClientImpl();
     }
@@ -48,14 +50,9 @@ public class DataChannelEndpointClientHttpTest {
         app.setDisplayName("TEST-APP");
         app.setAppStorageCapacity(100000L);
 
-        CreateAppRequest request = new CreateAppRequest(app);
-        CreateAppResponse response = appClient.createApp(request);
+        AppDetails result = appClient.createApp(app);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        AppDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(app.getName());
 
         testAppName = result.getName();
@@ -69,14 +66,9 @@ public class DataChannelEndpointClientHttpTest {
         testDataChannel.setMeasurementUnit("boolean");
         testDataChannel.setChannelType(INPUT);
 
-        CreateDataChannelRequest request = new CreateDataChannelRequest(testAppName, testDataChannel);
-        CreateDataChannelResponse response = client.createDataChannel(request);
+        DataChannelDetails result = client.createDataChannel(testAppName, testDataChannel);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DataChannelDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testDataChannel.getName());
         assertThat(result.getMeasurementType()).isEqualTo(testDataChannel.getMeasurementType());
         assertThat(result.getMeasurementUnit()).isEqualTo(testDataChannel.getMeasurementUnit());
@@ -85,14 +77,9 @@ public class DataChannelEndpointClientHttpTest {
 
     @Test(priority = 2)
     public void testGetDataChannelDetails() throws Exception {
-        GetDataChannelDetailsRequest request = new GetDataChannelDetailsRequest(testAppName, testDataChannel.getName());
-        GetDataChannelDetailsResponse response = client.getDataChannelDetails(request);
+        DataChannelDetails result = client.getDataChannelDetails(testAppName, testDataChannel.getName());
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DataChannelDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(testDataChannel.getName());
         assertThat(result.getMeasurementType()).isEqualTo(testDataChannel.getMeasurementType());
         assertThat(result.getMeasurementUnit()).isEqualTo(testDataChannel.getMeasurementUnit());
@@ -101,14 +88,9 @@ public class DataChannelEndpointClientHttpTest {
 
     @Test(priority = 3)
     public void testGetAllDataChannelDetails() throws Exception {
-        GetAllDataChannelDetailsRequest request = new GetAllDataChannelDetailsRequest(testAppName);
-        GetAllDataChannelDetailsResponse response = client.getAllDataChannelDetails(request);
+        DataChannelResultSet result = client.getAllDataChannelDetails(testAppName);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DataChannelResultSet result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getItemCount()).isGreaterThan(0);
         assertThat(result.getTotal()).isGreaterThan(0);
         assertThat(result.getResultSet()).isNotEmpty();
@@ -152,14 +134,9 @@ public class DataChannelEndpointClientHttpTest {
 
         testDataChannel.setName(dataChannelUpdate.getName());
 
-        UpdateDataChannelRequest request = new UpdateDataChannelRequest(testAppName, currentDataChannelName, dataChannelUpdate);
-        UpdateDataChannelResponse response = client.updateDataChannel(request);
+        DataChannelDetails result = client.updateDataChannel(testAppName, currentDataChannelName, dataChannelUpdate);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        DataChannelDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(dataChannelUpdate.getName());
         assertThat(result.getMeasurementUnit()).isEqualTo(dataChannelUpdate.getMeasurementUnit());
         assertThat(result.getAlarm()).isEqualTo(alarm);
@@ -168,27 +145,17 @@ public class DataChannelEndpointClientHttpTest {
 
     @Test(priority = 5)
     public void testDeleteDataChannel() throws Exception {
-        DeleteDataChannelRequest request = new DeleteDataChannelRequest(testAppName, testDataChannel.getName());
-        DeleteDataChannelResponse response = client.deleteDataChannel(request);
+        Deleted result = client.deleteDataChannel(testAppName, testDataChannel.getName());
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        Deleted result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isTrue();
     }
 
     @Test(priority = 6)
     public void deleteTestApp() throws Exception {
-        DeleteAppRequest request = new DeleteAppRequest(testAppName);
-        DeleteAppResponse response = appClient.deleteApp(request);
+        Deleted result = appClient.deleteApp(testAppName);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        Deleted result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isTrue();
     }
 }

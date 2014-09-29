@@ -17,7 +17,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @since 22.09.2014
  */
 @Test(groups = "httptest")
-public class AccountEndpointClientImplHttpTest {
+public class AccountEndpointClientHttpTest {
 
     private AccountEndpointClientImpl client;
 
@@ -37,14 +37,9 @@ public class AccountEndpointClientImplHttpTest {
 
     @Test(priority = 1)
     public void testCreateSubAccount() throws Exception {
-        CreateSubAccountRequest request = new CreateSubAccountRequest(testSubAccount);
-        CreateSubAccountResponse response = client.createSubAccount(request);
+        SubAccountDetails result = client.createSubAccount(testSubAccount);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        SubAccountDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getDisplayName()).isEqualTo(testSubAccount.getDisplayName());
         assertThat(result.getStatus()).isEqualTo(testSubAccount.getStatus());
         //assertThat(result.getPlanType()).isEqualTo(testSubAccount.getPlanType());
@@ -54,14 +49,9 @@ public class AccountEndpointClientImplHttpTest {
 
     @Test(priority = 2)
     public void testGetSubAccountDetails() throws Exception {
-        GetSubAccountDetailsRequest request = new GetSubAccountDetailsRequest(testSubAccountSid);
-        GetSubAccountDetailsResponse response = client.getSubAccountDetails(request);
+        SubAccountDetails result = client.getSubAccountDetails(testSubAccountSid);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        SubAccountDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getDisplayName()).isEqualTo(testSubAccount.getDisplayName());
         assertThat(result.getStatus()).isEqualTo(testSubAccount.getStatus());
         //assertThat(result.getPlanType()).isEqualTo(testSubAccount.getPlanType());
@@ -72,55 +62,37 @@ public class AccountEndpointClientImplHttpTest {
     public void tesCreateAuthenticationToken() throws Exception {
         String currentAuthToken;
         {
-            GetSubAccountDetailsRequest request = new GetSubAccountDetailsRequest(testSubAccountSid);
-            GetSubAccountDetailsResponse response = client.getSubAccountDetails(request);
+            SubAccountDetails result = client.getSubAccountDetails(testSubAccountSid);
 
-            assertThat(response).isNotNull();
-            assertThat(response.getResult()).isNotNull();
-
-            SubAccountDetails result = response.getResult();
+            assertThat(result).isNotNull();
             assertThat(result.getAuthToken()).isNotEmpty();
+            assertThat(result.getAuthToken()).hasSize(32);
 
             currentAuthToken = result.getAuthToken();
         }
         {
-            CreateAuthenticationTokenRequest request = new CreateAuthenticationTokenRequest(testSubAccountSid);
-            CreateAuthenticationTokenResponse response = client.createAuthenticationToken(request);
+            AuthToken result = client.createAuthenticationToken(testSubAccountSid);
 
-            assertThat(response).isNotNull();
-            assertThat(response.getResult()).isNotNull();
-
-            AuthToken result = response.getResult();
-            String authToken = result.getAuthToken();
-
-            assertThat(authToken).hasSize(32);
+            assertThat(result).isNotNull();
+            assertThat(result.getAuthToken()).isNotEmpty();
+            assertThat(result.getAuthToken()).hasSize(32);
             assertThat(result.getAuthToken()).isNotEqualTo(currentAuthToken);
         }
     }
 
     @Test(priority = 4)
     public void testGetBillingInfo() throws Exception {
-        GetBillingInfoRequest request = new GetBillingInfoRequest(testSubAccountSid);
-        GetBillingInfoResponse response = client.getBillingInfo(request);
+        BillingInfoList result = client.getBillingInfo(testSubAccountSid);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        BillingInfoList result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getBillingInfo()).isNotEmpty();
     }
 
     @Test(priority = 5)
     public void testGetAllSubAccountDetails() throws Exception {
-        GetAllSubAccountsDetailsRequest request = new GetAllSubAccountsDetailsRequest();
-        GetAllSubAccountsDetailsResponse response = client.getAllSubAccountDetails(request);
+        SubAccountResultSet result = client.getAllSubAccountDetails();
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        SubAccountResultSet result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getItemCount()).isGreaterThan(0);
         assertThat(result.getTotal()).isGreaterThan(0);
         assertThat(result.getResultSet()).isNotEmpty();
@@ -132,14 +104,9 @@ public class AccountEndpointClientImplHttpTest {
         testSubAccount.setStatus(StatusType.ACTIVE);
         //testSubAccount.setPlanType(PlanType.SYSINT);
 
-        UpdateSubAccountRequest request = new UpdateSubAccountRequest(testSubAccountSid, testSubAccount);
-        UpdateSubAccountResponse response = client.updateSubAccount(request);
+        SubAccountDetails result = client.updateSubAccount(testSubAccountSid, testSubAccount);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        SubAccountDetails result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.getDisplayName()).isEqualTo(testSubAccount.getDisplayName());
         assertThat(result.getStatus()).isEqualTo(testSubAccount.getStatus());
         //assertThat(result.getPlanType()).isEqualTo(testSubAccount.getPlanType());
@@ -147,23 +114,15 @@ public class AccountEndpointClientImplHttpTest {
 
     @Test(priority = 7)
     public void testDeleteSubAccount() throws Exception {
-        DeleteSubAccountRequest request = new DeleteSubAccountRequest(testSubAccountSid);
-        DeleteSubAccountResponse response = client.deleteSubAccount(request);
+        Deleted result = client.deleteSubAccount(testSubAccountSid);
 
-        assertThat(response).isNotNull();
-        assertThat(response.getResult()).isNotNull();
-
-        Deleted result = response.getResult();
-
+        assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isTrue();
     }
 
     @Test(priority = 8)
     public void testGetMyAccountDetails() throws Exception {
-        GetMyAccountDetailsRequest request = new GetMyAccountDetailsRequest();
-
-        GetMyAccountDetailsResponse response = client.getMyAccountDetails(request);
-        AccountDetails result = response.getResult();
+        AccountDetails result = client.getMyAccountDetails();
 
         String accountSid = result.getSid();
         String currentAccountSid = ConnioCredentialsManager.getCredentials().getAccessKey();

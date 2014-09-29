@@ -3,6 +3,7 @@ package com.connio.sdk.api.systemservices.accounts;
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
+import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.accounts.model.*;
 
 /**
@@ -17,69 +18,84 @@ public interface AccountEndpointClient extends ConnioEndpointClient {
      * TODO: javadoc
      *
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetMyAccountDetailsResponse getMyAccountDetails(GetMyAccountDetailsRequest request)
+    public AccountDetails getMyAccountDetails()
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * @param sid
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
+    public SubAccountDetails getSubAccountDetails(String sid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetSubAccountDetailsResponse getSubAccountDetails(GetSubAccountDetailsRequest request)
+    public SubAccountResultSet getAllSubAccountDetails()
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
+     * @param subAccount
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public GetAllSubAccountsDetailsResponse getAllSubAccountDetails(GetAllSubAccountsDetailsRequest request)
+    public SubAccountDetails createSubAccount(SubAccount subAccount)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
+     * @param subAccount
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public CreateSubAccountResponse createSubAccount(CreateSubAccountRequest request)
+    public SubAccountDetails updateSubAccount(String sid, SubAccount subAccount)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public UpdateSubAccountResponse updateSubAccount(UpdateSubAccountRequest request)
+    public Deleted deleteSubAccount(String sid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public DeleteSubAccountResponse deleteSubAccount(DeleteSubAccountRequest request)
+    public AuthToken createAuthenticationToken(String sid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param request
+     * @param sid
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
-    public CreateAuthenticationTokenResponse createAuthenticationToken(CreateAuthenticationTokenRequest request)
-            throws ConnioServiceException, ConnioClientException;
-
-    /**
-     * TODO: javadoc
-     *
-     * @param request
-     * @return
-     */
-    public GetBillingInfoResponse getBillingInfo(GetBillingInfoRequest request)
+    public BillingInfoList getBillingInfo(String sid)
             throws ConnioServiceException, ConnioClientException;
 }

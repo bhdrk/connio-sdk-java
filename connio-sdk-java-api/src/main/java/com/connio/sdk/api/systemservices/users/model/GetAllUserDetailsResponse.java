@@ -6,18 +6,25 @@ package com.connio.sdk.api.systemservices.users.model;
  * @author bdirik
  * @since 11.09.2014
  */
-public class GetAllUserDetailsResponse extends UserEndpointResponse {
+public class GetAllUserDetailsResponse extends UserEndpointResponse<UserResultSet> {
 
     /**
      * TODO: javadoc
      */
-    private UserResultSet userResultSet;
+    private UserResultSet result;
 
-    public UserResultSet getUserResultSet() {
-        return userResultSet;
+    @Override
+    public Class<UserResultSet> getResultType() {
+        return UserResultSet.class;
     }
 
-    public void setUserResultSet(UserResultSet userResultSet) {
-        this.userResultSet = userResultSet;
+    @Override
+    public UserResultSet getResult() {
+        return result;
+    }
+
+    @Override
+    public void setResult(UserResultSet result) {
+        this.result = result;
     }
 }
