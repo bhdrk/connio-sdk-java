@@ -52,7 +52,7 @@ public class HttpEndpointClientContext extends AbstractEndpointClientContext imp
         try {
             HttpRequestBase httpRequest = HttpRequestFactory.create(clientConfig, request);
             HttpClientContext httpClientContext = HttpClientContextFactory.create(clientConfig, credentials);
-            httpResponse = httpClient.execute(httpRequest);
+            httpResponse = httpClient.execute(httpRequest, httpClientContext);
             return HttpResponseFactory.create(httpResponse, responseType);
         } catch (IOException e) {
             throw new ConnioClientException("An error occurred while executing http request.", e);
