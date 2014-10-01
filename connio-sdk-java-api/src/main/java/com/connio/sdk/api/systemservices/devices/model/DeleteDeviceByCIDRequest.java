@@ -25,8 +25,8 @@ public class DeleteDeviceByCIDRequest extends DeviceEndpointRequest<DeleteDevice
         metaData.setMethod(DELETE);
         metaData.addPath("/{profile-name}/{cid-type}/{cid}");
         metaData.addPathParam("profile-name", cid.getProfileName());
-        metaData.addPathParam("cid-type", cid.getProfileName());
-        metaData.addPathParam("cid", cid.getProfileName());
+        metaData.addPathParam("cid-type", cid.getCidType().toString());
+        metaData.addPathParam("cid", cid.getCid());
     }
 
     private Cid cid;

@@ -18,7 +18,7 @@ public class GeoCoordinates implements Serializable {
     }
 
     public GeoCoordinates(Double lat, Double lon) {
-        this(lat, lon, 0.0D);
+        this(lat, lon, null);
     }
 
     public GeoCoordinates(Double lat, Double lon, Double radius) {

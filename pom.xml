@@ -21,6 +21,7 @@
             <id>connio</id>
             <organization>Connio</organization>
             <organizationUrl>http://www.connio.com</organizationUrl>
+            <url>https://github.com/connio</url>
             <roles>
                 <role>developer</role>
             </roles>
@@ -32,6 +33,11 @@
         <developerConnection>scm:git:git@github.com:connio/connio-sdk-java.git</developerConnection>
         <url>https://github.com/connio/connio-sdk-java</url>
     </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/connio/connio-sdk-java/issues</url>
+    </issueManagement>
 
     <modules>
         <module>connio-sdk-java-api</module>

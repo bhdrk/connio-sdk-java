@@ -25,8 +25,8 @@ public class GenerateAccessKeyByCIDRequest extends DeviceEndpointRequest<Generat
         metaData.setMethod(POST);
         metaData.addPath("/{profile-name}/{cid-type}/{cid}/_keys");
         metaData.addPathParam("profile-name", cid.getProfileName());
-        metaData.addPathParam("cid-type", cid.getProfileName());
-        metaData.addPathParam("cid", cid.getProfileName());
+        metaData.addPathParam("cid-type", cid.getCidType().toString());
+        metaData.addPathParam("cid", cid.getCid());
     }
 
     private Cid cid;
