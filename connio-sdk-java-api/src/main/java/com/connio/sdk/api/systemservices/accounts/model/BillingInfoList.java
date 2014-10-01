@@ -29,4 +29,28 @@ public class BillingInfoList implements Serializable {
     public void setBillingInfo(List<BillingInfo> billingInfo) {
         this.billingInfo = billingInfo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BillingInfoList that = (BillingInfoList) o;
+
+        if (billingInfo != null ? !billingInfo.equals(that.billingInfo) : that.billingInfo != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return billingInfo != null ? billingInfo.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "BillingInfoList{" +
+                "billingInfo=" + billingInfo +
+                '}';
+    }
 }

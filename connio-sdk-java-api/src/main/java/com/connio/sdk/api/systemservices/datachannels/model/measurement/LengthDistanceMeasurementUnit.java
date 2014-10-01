@@ -1,7 +1,5 @@
 package com.connio.sdk.api.systemservices.datachannels.model.measurement;
 
-import java.util.Locale;
-
 /**
  * TODO: javadoc
  *
@@ -22,8 +20,4 @@ public enum LengthDistanceMeasurementUnit implements MeasurementUnit {
         return symbol;
     }
 
-    @Override
-    public String toString() {
-        return name().toLowerCase(Locale.ENGLISH);
-    }
 }

@@ -1,7 +1,5 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
-import java.util.Locale;
-
 /**
  * TODO: javadoc
  *
@@ -9,10 +7,5 @@ import java.util.Locale;
  * @since 24.09.2014
  */
 public enum BoundsActionName {
-    EMAIL, WEBHOOK, SMS, LOG, DISCARD;
-
-    @Override
-    public String toString() {
-        return name().toLowerCase(Locale.ENGLISH);
-    }
+    EMAIL, WEBHOOK, SMS, LOG, DISCARD
 }

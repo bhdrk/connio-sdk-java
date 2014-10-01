@@ -4,7 +4,9 @@ import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
 
 /**
  * TODO: javadoc

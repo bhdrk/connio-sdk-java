@@ -1,8 +1,6 @@
 package com.connio.sdk.api.systemservices.users;
 
 import com.connio.sdk.api.core.AbstractEndpointClient;
-import com.connio.sdk.api.core.ConnioEndpointClientContext;
-import com.connio.sdk.api.core.ConnioEndpointClientContextProvider;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;

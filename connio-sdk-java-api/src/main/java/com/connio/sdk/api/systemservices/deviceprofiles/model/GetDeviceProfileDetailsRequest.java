@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 25.09.2014
  */
-public class GetDeviceProfileDetailsRequest extends DeviceProfileRequest<GetDeviceProfileDetailsResponse> {
+public class GetDeviceProfileDetailsRequest extends DeviceProfileEndpointRequest<GetDeviceProfileDetailsResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

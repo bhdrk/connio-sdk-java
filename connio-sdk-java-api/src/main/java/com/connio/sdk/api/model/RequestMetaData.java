@@ -147,4 +147,18 @@ public class RequestMetaData {
         result = 31 * result + (requestContent != null ? requestContent.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "RequestMetaData{" +
+                "version='" + version + '\'' +
+                ", pathBuilder=" + pathBuilder +
+                ", pathParams=" + pathParams +
+                ", queryParams=" + queryParams +
+                ", method=" + method +
+                ", contentType='" + contentType + '\'' +
+                ", headers=" + headers +
+                ", requestContent=" + requestContent +
+                '}';
+    }
 }

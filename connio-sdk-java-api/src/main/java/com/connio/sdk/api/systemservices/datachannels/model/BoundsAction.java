@@ -56,4 +56,12 @@ public class BoundsAction implements Serializable {
         result = 31 * result + (params != null ? params.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "BoundsAction{" +
+                "name=" + name +
+                ", params=" + params +
+                '}';
+    }
 }

@@ -1,7 +1,5 @@
 package com.connio.sdk.api.systemservices.datachannels.model.measurement;
 
-import java.util.Locale;
-
 /**
  * TODO: javadoc
  *
@@ -51,8 +49,4 @@ public enum MeasurementType {
         return measurementUnits;
     }
 
-    @Override
-    public String toString() {
-        return name().toLowerCase(Locale.ENGLISH);
-    }
 }

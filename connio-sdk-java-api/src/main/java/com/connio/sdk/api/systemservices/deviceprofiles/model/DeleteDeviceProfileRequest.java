@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.DELETE;
  * @author bdirik
  * @since 25.09.2014
  */
-public class DeleteDeviceProfileRequest extends DeviceProfileRequest<DeleteDeviceProfileResponse> {
+public class DeleteDeviceProfileRequest extends DeviceProfileEndpointRequest<DeleteDeviceProfileResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

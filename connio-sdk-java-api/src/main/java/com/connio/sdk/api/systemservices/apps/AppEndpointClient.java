@@ -4,7 +4,9 @@ import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.apps.model.*;
+import com.connio.sdk.api.systemservices.apps.model.App;
+import com.connio.sdk.api.systemservices.apps.model.AppDetails;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
 
 /**
  * TODO: javadoc

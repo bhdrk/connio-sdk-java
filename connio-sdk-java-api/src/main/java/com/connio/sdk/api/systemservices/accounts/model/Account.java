@@ -23,7 +23,7 @@ public class Account implements Serializable {
     /**
      * TODO: javadoc
      */
-    private StatusType status;
+    private AccountStatusType status;
 
     public String getDisplayName() {
         return displayName;
@@ -41,11 +41,11 @@ public class Account implements Serializable {
         this.planType = planType;
     }
 
-    public StatusType getStatus() {
+    public AccountStatusType getStatus() {
         return status;
     }
 
-    public void setStatus(StatusType status) {
+    public void setStatus(AccountStatusType status) {
         this.status = status;
     }
 

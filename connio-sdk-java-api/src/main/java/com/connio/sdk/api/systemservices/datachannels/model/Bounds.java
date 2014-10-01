@@ -101,4 +101,15 @@ public class Bounds implements Serializable {
         result = 31 * result + (predefs != null ? predefs.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Bounds{" +
+                "events=" + events +
+                ", action=" + action +
+                ", min=" + min +
+                ", max=" + max +
+                ", predefs=" + predefs +
+                '}';
+    }
 }

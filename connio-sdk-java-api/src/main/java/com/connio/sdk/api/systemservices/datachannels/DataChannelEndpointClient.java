@@ -4,7 +4,10 @@ import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.datachannels.model.*;
+import com.connio.sdk.api.systemservices.datachannels.model.DataChannel;
+import com.connio.sdk.api.systemservices.datachannels.model.DataChannelDetails;
+import com.connio.sdk.api.systemservices.datachannels.model.DataChannelResultSet;
+import com.connio.sdk.api.systemservices.datachannels.model.DataChannelUpdate;
 
 /**
  * TODO: javadoc

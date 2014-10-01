@@ -29,4 +29,28 @@ public class Deleted implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Deleted deleted1 = (Deleted) o;
+
+        if (deleted != deleted1.deleted) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (deleted ? 1 : 0);
+    }
+
+    @Override
+    public String toString() {
+        return "Deleted{" +
+                "deleted=" + deleted +
+                '}';
+    }
 }

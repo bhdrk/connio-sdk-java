@@ -87,4 +87,44 @@ public class DeviceProfile implements Serializable {
     public void setProduct(String product) {
         this.product = product;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DeviceProfile that = (DeviceProfile) o;
+
+        if (clazz != null ? !clazz.equals(that.clazz) : that.clazz != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+        if (subclass != null ? !subclass.equals(that.subclass) : that.subclass != null) return false;
+        if (vendor != null ? !vendor.equals(that.vendor) : that.vendor != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (clazz != null ? clazz.hashCode() : 0);
+        result = 31 * result + (subclass != null ? subclass.hashCode() : 0);
+        result = 31 * result + (vendor != null ? vendor.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "DeviceProfile{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", clazz='" + clazz + '\'' +
+                ", subclass='" + subclass + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", product='" + product + '\'' +
+                '}';
+    }
 }

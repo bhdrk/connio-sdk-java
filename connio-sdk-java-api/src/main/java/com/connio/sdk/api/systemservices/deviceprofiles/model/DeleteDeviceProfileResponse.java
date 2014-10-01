@@ -8,7 +8,7 @@ import com.connio.sdk.api.model.Deleted;
  * @author bdirik
  * @since 25.09.2014
  */
-public class DeleteDeviceProfileResponse extends DeviceProfileResponse<Deleted> {
+public class DeleteDeviceProfileResponse extends DeviceProfileEndpointResponse<Deleted> {
 
     private Deleted result;
 

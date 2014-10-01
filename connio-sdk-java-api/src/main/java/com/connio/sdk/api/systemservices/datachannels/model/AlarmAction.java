@@ -56,4 +56,12 @@ public class AlarmAction implements Serializable {
         result = 31 * result + (params != null ? params.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "AlarmAction{" +
+                "name=" + name +
+                ", params=" + params +
+                '}';
+    }
 }

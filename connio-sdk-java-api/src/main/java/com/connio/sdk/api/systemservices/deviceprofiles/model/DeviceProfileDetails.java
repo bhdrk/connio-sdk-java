@@ -152,4 +152,59 @@ public class DeviceProfileDetails implements Serializable {
     public void setSid(String sid) {
         this.sid = sid;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DeviceProfileDetails that = (DeviceProfileDetails) o;
+
+        if (accountSid != null ? !accountSid.equals(that.accountSid) : that.accountSid != null) return false;
+        if (clazz != null ? !clazz.equals(that.clazz) : that.clazz != null) return false;
+        if (dateCreated != null ? !dateCreated.equals(that.dateCreated) : that.dateCreated != null) return false;
+        if (dateModified != null ? !dateModified.equals(that.dateModified) : that.dateModified != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+        if (sid != null ? !sid.equals(that.sid) : that.sid != null) return false;
+        if (subclass != null ? !subclass.equals(that.subclass) : that.subclass != null) return false;
+        if (uri != null ? !uri.equals(that.uri) : that.uri != null) return false;
+        if (vendor != null ? !vendor.equals(that.vendor) : that.vendor != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (sid != null ? sid.hashCode() : 0);
+        result = 31 * result + (accountSid != null ? accountSid.hashCode() : 0);
+        result = 31 * result + (clazz != null ? clazz.hashCode() : 0);
+        result = 31 * result + (subclass != null ? subclass.hashCode() : 0);
+        result = 31 * result + (vendor != null ? vendor.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (uri != null ? uri.hashCode() : 0);
+        result = 31 * result + (dateCreated != null ? dateCreated.hashCode() : 0);
+        result = 31 * result + (dateModified != null ? dateModified.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "DeviceProfileDetails{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", sid='" + sid + '\'' +
+                ", accountSid='" + accountSid + '\'' +
+                ", clazz='" + clazz + '\'' +
+                ", subclass='" + subclass + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", product='" + product + '\'' +
+                ", uri='" + uri + '\'' +
+                ", dateCreated='" + dateCreated + '\'' +
+                ", dateModified='" + dateModified + '\'' +
+                '}';
+    }
 }

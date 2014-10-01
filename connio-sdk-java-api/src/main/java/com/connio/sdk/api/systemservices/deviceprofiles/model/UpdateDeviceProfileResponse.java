@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.deviceprofiles.model;
  * @author bdirik
  * @since 25.09.2014
  */
-public class UpdateDeviceProfileResponse extends DeviceProfileResponse<DeviceProfileDetails> {
+public class UpdateDeviceProfileResponse extends DeviceProfileEndpointResponse<DeviceProfileDetails> {
 
     private DeviceProfileDetails result;
 

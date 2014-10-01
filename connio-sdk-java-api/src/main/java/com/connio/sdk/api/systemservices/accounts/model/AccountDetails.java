@@ -29,7 +29,7 @@ public class AccountDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private StatusType status;
+    private AccountStatusType status;
 
     /**
      * TODO: javadoc
@@ -105,11 +105,11 @@ public class AccountDetails implements Serializable {
         this.planType = planType;
     }
 
-    public StatusType getStatus() {
+    public AccountStatusType getStatus() {
         return status;
     }
 
-    public void setStatus(StatusType status) {
+    public void setStatus(AccountStatusType status) {
         this.status = status;
     }
 

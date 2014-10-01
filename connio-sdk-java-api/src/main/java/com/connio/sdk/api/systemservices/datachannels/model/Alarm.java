@@ -85,4 +85,14 @@ public class Alarm implements Serializable {
         result = 31 * result + (action != null ? action.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Alarm{" +
+                "type=" + type +
+                ", value=" + value +
+                ", duration=" + duration +
+                ", action=" + action +
+                '}';
+    }
 }
