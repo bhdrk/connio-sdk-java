@@ -1,4 +1,4 @@
-package com.connio.sdk.api.systemservices.datachannel;
+package com.connio.sdk.api.systemservices.datachannels;
 
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
