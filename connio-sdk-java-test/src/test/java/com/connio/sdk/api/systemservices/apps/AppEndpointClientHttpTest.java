@@ -8,7 +8,7 @@ import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.connio.sdk.api.systemservices.apps.model.StateType.STOPPED;
+import static com.connio.sdk.api.systemservices.apps.model.AppStateType.STOPPED;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
@@ -17,10 +17,10 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 22.09.2014
  */
-@Test(groups = "httptest")
+@Test(suiteName = "HttpTests", testName = "AppEndpoint")
 public class AppEndpointClientHttpTest {
 
-    private AppEndpointClientImpl client;
+    private AppEndpointClient client;
 
     private App testApp;
 

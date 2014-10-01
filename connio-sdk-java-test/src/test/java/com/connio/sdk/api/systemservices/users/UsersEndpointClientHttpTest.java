@@ -15,7 +15,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 29.09.2014
  */
-@Test(groups = "httptest")
+@Test(suiteName = "HttpTests", testName = "UserEndpoint")
 public class UsersEndpointClientHttpTest {
 
     private UserEndpointClientImpl client;

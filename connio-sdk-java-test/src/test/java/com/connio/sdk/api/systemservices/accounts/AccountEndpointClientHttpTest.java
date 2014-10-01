@@ -16,10 +16,10 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 22.09.2014
  */
-@Test(groups = "httptest")
+@Test(suiteName = "HttpTests", testName = "AccountEndpoint")
 public class AccountEndpointClientHttpTest {
 
-    private AccountEndpointClientImpl client;
+    private AccountEndpointClient client;
 
     private String testSubAccountSid;
 
@@ -31,7 +31,7 @@ public class AccountEndpointClientHttpTest {
 
         testSubAccount = new SubAccount();
         testSubAccount.setDisplayName("TEST-ACCOUNT-" + UUID.randomUUID().toString());
-        testSubAccount.setStatus(StatusType.CREATED);
+        testSubAccount.setStatus(AccountStatusType.CREATED);
         //testSubAccount.setPlanType(PlanType.ENTERPRISE);
     }
 
@@ -101,7 +101,7 @@ public class AccountEndpointClientHttpTest {
     @Test(priority = 6)
     public void testUpdateSubAccount() throws Exception {
         testSubAccount.setDisplayName("TEST-ACCOUNT-" + UUID.randomUUID().toString());
-        testSubAccount.setStatus(StatusType.ACTIVE);
+        testSubAccount.setStatus(AccountStatusType.ACTIVE);
         //testSubAccount.setPlanType(PlanType.SYSINT);
 
         SubAccountDetails result = client.updateSubAccount(testSubAccountSid, testSubAccount);

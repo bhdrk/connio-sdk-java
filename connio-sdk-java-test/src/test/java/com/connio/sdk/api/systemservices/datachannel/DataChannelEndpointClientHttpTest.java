@@ -2,10 +2,12 @@ package com.connio.sdk.api.systemservices.datachannel;
 
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.systemservices.apps.AppEndpointClient;
 import com.connio.sdk.api.systemservices.apps.AppEndpointClientImpl;
 import com.connio.sdk.api.systemservices.apps.model.App;
 import com.connio.sdk.api.systemservices.apps.model.AppDetails;
-import com.connio.sdk.api.systemservices.apps.model.StateType;
+import com.connio.sdk.api.systemservices.apps.model.AppStateType;
+import com.connio.sdk.api.systemservices.datachannels.DataChannelEndpointClient;
 import com.connio.sdk.api.systemservices.datachannels.DataChannelEndpointClientImpl;
 import com.connio.sdk.api.systemservices.datachannels.model.*;
 import org.testng.annotations.BeforeClass;
@@ -24,12 +26,12 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 24.09.2014
  */
-@Test(groups = "httptest")
+@Test(suiteName = "HttpTests", testName = "DataChannelEndpoint")
 public class DataChannelEndpointClientHttpTest {
 
-    private DataChannelEndpointClientImpl client;
+    private DataChannelEndpointClient client;
 
-    private AppEndpointClientImpl appClient;
+    private AppEndpointClient appClient;
 
     private String testAppName;
 
@@ -45,7 +47,7 @@ public class DataChannelEndpointClientHttpTest {
     public void createTestApp() throws Exception {
         App app = new App();
         app.setName(TestUtils.createNewName("TEST-APP"));
-        app.setState(StateType.RUNNING);
+        app.setState(AppStateType.RUNNING);
         app.setVersion("v1.0");
         app.setDisplayName("TEST-APP");
         app.setAppStorageCapacity(100000L);
