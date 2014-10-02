@@ -66,7 +66,7 @@ public class DevicesEndpointClientHttpTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getProfileName()).isEqualToIgnoringCase(testDevice.getProfileName());
-        assertThat(result.getTags()).isEqualTo(testDevice.getTags());
+        assertThat(result.getTags()).containsAll(testDevice.getTags());
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
         assertThat(result.getStatus()).isEqualTo(testDevice.getStatus());
@@ -81,7 +81,7 @@ public class DevicesEndpointClientHttpTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getProfileName()).isEqualToIgnoringCase(testDevice.getProfileName());
-        assertThat(result.getTags()).isEqualTo(testDevice.getTags());
+        assertThat(result.getTags()).containsAll(testDevice.getTags());
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
         assertThat(result.getStatus()).isEqualTo(testDevice.getStatus());
@@ -96,7 +96,7 @@ public class DevicesEndpointClientHttpTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getProfileName()).isEqualToIgnoringCase(testDevice.getProfileName());
-        assertThat(result.getTags()).isEqualTo(testDevice.getTags());
+        assertThat(result.getTags()).containsAll(testDevice.getTags());
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
         assertThat(result.getStatus()).isEqualTo(testDevice.getStatus());
@@ -153,5 +153,14 @@ public class DevicesEndpointClientHttpTest {
 
         assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isFalse();
+    }
+
+    @Test(priority = 6)
+    public void deleteProfile() throws Exception {
+        Deleted result = profileClient.deleteDeviceProfile(testProfileName);
+
+        assertThat(result).isNotNull();
+        assertThat(result.isDeleted()).isTrue();
+
     }
 }
