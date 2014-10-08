@@ -18,13 +18,13 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test(suiteName = "HttpTests", testName = "UserEndpoint")
 public class UsersEndpointClientHttpTest {
 
-    private UserEndpointClient client;
+    private UserClient client;
 
     private String testUserSid = "US11C4C89AE45C404FB0A3E974C49D59E9";
 
     @BeforeMethod
     public void beforeClass() throws Exception {
-        client = new UserEndpointClient();
+        client = new UserClient();
     }
 
     @Test

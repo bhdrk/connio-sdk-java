@@ -1,12 +1,12 @@
-package com.connio.sdk.api.systemservices.deviceprofiles;
+package com.connio.sdk.api.systemservices.apps;
 
 import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
-import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
-import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
+import com.connio.sdk.api.systemservices.apps.model.App;
+import com.connio.sdk.api.systemservices.apps.model.AppDetails;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
 
 /**
  * TODO: javadoc
@@ -14,7 +14,18 @@ import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResul
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IDeviceProfileEndpointClient extends ConnioEndpointClient {
+public interface IAppClient extends ConnioEndpointClient {
+
+    /**
+     * TODO: javadoc
+     *
+     * @param sidOrName
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
+    public AppDetails getAppDetails(String sidOrName)
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -23,51 +34,41 @@ public interface IDeviceProfileEndpointClient extends ConnioEndpointClient {
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    public DeviceProfileResultSet getAllDeviceProfileDetails()
+    public AppResultSet getAllAppDetails()
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param app
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    public DeviceProfileDetails getDeviceProfileDetails(String deviceProfileName)
+    public AppDetails createApp(App app)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param deviceProfile
+     * @param sidOrName
+     * @param app
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    public DeviceProfileDetails createDeviceProfile(DeviceProfile deviceProfile)
+    public AppDetails updateApp(String sidOrName, App app)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
-     * @param deviceProfile
+     * @param sidOrName
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile)
+    public Deleted deleteApp(String sidOrName)
             throws ConnioServiceException, ConnioClientException;
 
-    /**
-     * TODO: javadoc
-     *
-     * @param deviceProfileName
-     * @return
-     * @throws ConnioServiceException
-     * @throws ConnioClientException
-     */
-    public Deleted deleteDeviceProfile(String deviceProfileName)
-            throws ConnioServiceException, ConnioClientException;
 }

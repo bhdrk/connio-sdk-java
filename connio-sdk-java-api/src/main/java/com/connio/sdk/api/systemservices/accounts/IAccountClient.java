@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IAccountEndpointClient extends ConnioEndpointClient {
+public interface IAccountClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc

@@ -2,8 +2,8 @@ package com.connio.sdk.api.systemservices.datachannels;
 
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
-import com.connio.sdk.api.systemservices.apps.IAppEndpointClient;
-import com.connio.sdk.api.systemservices.apps.AppEndpointClient;
+import com.connio.sdk.api.systemservices.apps.IAppClient;
+import com.connio.sdk.api.systemservices.apps.AppClient;
 import com.connio.sdk.api.systemservices.apps.model.App;
 import com.connio.sdk.api.systemservices.apps.model.AppDetails;
 import com.connio.sdk.api.systemservices.apps.model.AppStateType;
@@ -27,9 +27,9 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test(suiteName = "HttpTests", testName = "DataChannelEndpoint")
 public class DataChannelEndpointClientHttpTest {
 
-    private IDataChannelEndpointClient client;
+    private IDataChannelClient client;
 
-    private IAppEndpointClient appClient;
+    private IAppClient appClient;
 
     private String testAppName;
 
@@ -37,8 +37,8 @@ public class DataChannelEndpointClientHttpTest {
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        client = new DataChannelEndpointClient();
-        appClient = new AppEndpointClient();
+        client = new DataChannelClient();
+        appClient = new AppClient();
     }
 
     @Test

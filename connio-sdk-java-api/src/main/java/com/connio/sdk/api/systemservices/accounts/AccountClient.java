@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  * @author bdirik
  * @since 15.09.2014
  */
-public class AccountEndpointClient extends AbstractEndpointClient implements IAccountEndpointClient {
+public class AccountClient extends AbstractEndpointClient implements IAccountClient {
 
     /**
      * TODO: javadoc

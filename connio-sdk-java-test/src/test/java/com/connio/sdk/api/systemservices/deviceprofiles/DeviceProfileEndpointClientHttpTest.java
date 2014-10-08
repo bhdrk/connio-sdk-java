@@ -19,13 +19,13 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test(suiteName = "HttpTests", testName = "DeviceProfileEndpoint")
 public class DeviceProfileEndpointClientHttpTest {
 
-    private IDeviceProfileEndpointClient client;
+    private IDeviceProfileClient client;
 
     private DeviceProfile testDeviceProfile;
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        client = new DeviceProfileEndpointClient();
+        client = new DeviceProfileClient();
     }
 
     @Test

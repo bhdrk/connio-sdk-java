@@ -15,7 +15,7 @@ import com.connio.sdk.api.systemservices.datachannels.model.DataChannelUpdate;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IDataChannelEndpointClient extends ConnioEndpointClient {
+public interface IDataChannelClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc

@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.datachannels.model.*;
  * @author bdirik
  * @since 23.09.2014
  */
-public class DataChannelEndpointClient extends AbstractEndpointClient implements IDataChannelEndpointClient {
+public class DataChannelClient extends AbstractEndpointClient implements IDataChannelClient {
 
     /**
      * TODO: javadoc

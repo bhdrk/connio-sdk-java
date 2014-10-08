@@ -1,31 +1,31 @@
-package com.connio.sdk.api.systemservices.apps;
+package com.connio.sdk.api.systemservices.users;
 
 import com.connio.sdk.api.core.AbstractEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.apps.model.*;
+import com.connio.sdk.api.systemservices.users.model.*;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 22.09.2014
+ * @since 18.09.2014
  */
-public class AppEndpointClient extends AbstractEndpointClient implements IAppEndpointClient {
+public class UserClient extends AbstractEndpointClient implements IUserClient {
 
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param userSid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public AppDetails getAppDetails(String sidOrName)
+    public UserDetails getUserDetails(String userSid)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAppDetailsRequest(sidOrName));
+        return execute(new GetUserDetailsRequest(userSid));
     }
 
     /**
@@ -36,51 +36,51 @@ public class AppEndpointClient extends AbstractEndpointClient implements IAppEnd
      * @throws ConnioClientException
      */
     @Override
-    public AppResultSet getAllAppDetails()
+    public UserResultSet getAllUserDetails()
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAllAppDetailsRequest());
+        return execute(new GetAllUserDetailsRequest());
     }
 
     /**
      * TODO: javadoc
      *
-     * @param app
+     * @param user
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public AppDetails createApp(App app)
+    public UserDetails createUser(User user)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new CreateAppRequest(app));
+        throw new ConnioClientException("Unsupported Operation.");
     }
 
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
-     * @param app
+     * @param userSid
+     * @param user
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public AppDetails updateApp(String sidOrName, App app)
+    public UserDetails updateUser(String userSid, User user)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new UpdateAppRequest(sidOrName, app));
+        throw new ConnioClientException("Unsupported Operation.");
     }
 
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param userSid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public Deleted deleteApp(String sidOrName)
+    public Deleted deleteUser(String userSid)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new DeleteAppRequest(sidOrName));
+        throw new ConnioClientException("Unsupported Operation.");
     }
 }

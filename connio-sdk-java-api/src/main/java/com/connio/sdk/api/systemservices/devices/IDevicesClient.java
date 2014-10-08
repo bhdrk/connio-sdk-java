@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.devices.model.*;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IDevicesEndpointClient extends ConnioEndpointClient {
+public interface IDevicesClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc

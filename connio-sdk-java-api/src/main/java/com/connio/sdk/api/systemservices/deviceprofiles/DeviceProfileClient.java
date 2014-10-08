@@ -1,86 +1,86 @@
-package com.connio.sdk.api.systemservices.users;
+package com.connio.sdk.api.systemservices.deviceprofiles;
 
 import com.connio.sdk.api.core.AbstractEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.users.model.*;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 18.09.2014
+ * @since 25.09.2014
  */
-public class UserEndpointClient extends AbstractEndpointClient implements IUserEndpointClient {
+public class DeviceProfileClient extends AbstractEndpointClient implements IDeviceProfileClient {
 
     /**
      * TODO: javadoc
      *
-     * @param userSid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public UserDetails getUserDetails(String userSid)
+    public DeviceProfileResultSet getAllDeviceProfileDetails()
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetUserDetailsRequest(userSid));
+        return execute(new GetAllDeviceProfileDetailsRequest());
     }
 
     /**
      * TODO: javadoc
      *
+     * @param deviceProfileName
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public UserResultSet getAllUserDetails()
+    public DeviceProfileDetails getDeviceProfileDetails(String deviceProfileName)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAllUserDetailsRequest());
+        return execute(new GetDeviceProfileDetailsRequest(deviceProfileName));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param user
+     * @param deviceProfile
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public UserDetails createUser(User user)
+    public DeviceProfileDetails createDeviceProfile(DeviceProfile deviceProfile)
             throws ConnioServiceException, ConnioClientException {
-        throw new ConnioClientException("Unsupported Operation.");
+        return execute(new CreateDeviceProfileRequest(deviceProfile));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param userSid
-     * @param user
+     * @param deviceProfileName
+     * @param deviceProfile
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public UserDetails updateUser(String userSid, User user)
-            throws ConnioServiceException, ConnioClientException {
-        throw new ConnioClientException("Unsupported Operation.");
+    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile
+    ) throws ConnioServiceException, ConnioClientException {
+        return execute(new UpdateDeviceProfileRequest(deviceProfileName, deviceProfile));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param userSid
+     * @param deviceProfileName
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
     @Override
-    public Deleted deleteUser(String userSid)
+    public Deleted deleteDeviceProfile(String deviceProfileName)
             throws ConnioServiceException, ConnioClientException {
-        throw new ConnioClientException("Unsupported Operation.");
+        return execute(new DeleteDeviceProfileRequest(deviceProfileName));
     }
 }

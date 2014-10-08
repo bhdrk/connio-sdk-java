@@ -14,7 +14,7 @@ import com.connio.sdk.api.systemservices.users.model.UserResultSet;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IUserEndpointClient extends ConnioEndpointClient {
+public interface IUserClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc
