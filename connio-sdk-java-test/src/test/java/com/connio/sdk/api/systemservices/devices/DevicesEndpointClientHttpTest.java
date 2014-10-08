@@ -35,7 +35,7 @@ public class DevicesEndpointClientHttpTest {
         profileClient = new DeviceProfileEndpointClientImpl();
     }
 
-    @Test(priority = 0)
+    @Test
     public void createDeviceProfile() throws Exception {
         DeviceProfile profile = new DeviceProfile();
         profile.setName(TestUtils.createNewName("TEST-DVPRF"));
@@ -52,7 +52,7 @@ public class DevicesEndpointClientHttpTest {
         testProfileName = result.getName();
     }
 
-    @Test(priority = 1)
+    @Test(dependsOnMethods = "createDeviceProfile")
     public void testCreateDevice() throws Exception {
         testDevice = new Device();
         testDevice.setProfileName(testProfileName);
@@ -75,7 +75,7 @@ public class DevicesEndpointClientHttpTest {
         testDeviceSID = result.getSid();
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateDevice")
     public void testGetDeviceDetailsBySID() throws Exception {
         DeviceDetails result = client.getDeviceDetails(testDeviceSID);
 
@@ -88,7 +88,7 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateDevice")
     public void testGetDeviceDetailsByCID() throws Exception {
         String imei = testDevice.getCidMap().get(CidType._IMEI);
         Cid cid = new Cid(testProfileName, CidType._IMEI, imei);
@@ -103,7 +103,7 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateDevice")
     public void testGetAllDeviceDetails() throws Exception {
         DeviceResultSet result = client.getAllDeviceDetails();
 
@@ -113,7 +113,7 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.getResultSet()).isNotEmpty();
     }
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "testCreateDevice")
     public void testUpdateDeviceBySID() throws Exception {
         DeviceProfile deviceProfile = new DeviceProfile();
         deviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
@@ -137,7 +137,7 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "testUpdateDeviceBySID")
     public void testDeleteDeviceBySID() throws Exception {
         Deleted result = client.deleteDevice(testDeviceSID);
 
@@ -145,7 +145,7 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.isDeleted()).isTrue();
     }
 
-    @Test(priority = 5, enabled = false)
+    @Test(dependsOnMethods = "testDeleteDeviceBySID", enabled = false)
     public void testDeleteDeviceByCID() throws Exception {
         String imei = testDevice.getCidMap().get(CidType._IMEI);
         Cid cid = new Cid(testProfileName, CidType._IMEI, imei);
@@ -155,12 +155,11 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.isDeleted()).isFalse();
     }
 
-    @Test(priority = 6)
+    @Test(dependsOnMethods = "testDeleteDeviceBySID")
     public void deleteProfile() throws Exception {
         Deleted result = profileClient.deleteDeviceProfile(testProfileName);
 
         assertThat(result).isNotNull();
         assertThat(result.isDeleted()).isTrue();
-
     }
 }

@@ -35,7 +35,7 @@ public class AccountEndpointClientHttpTest {
         //testSubAccount.setPlanType(PlanType.ENTERPRISE);
     }
 
-    @Test(priority = 1)
+    @Test
     public void testCreateSubAccount() throws Exception {
         SubAccountDetails result = client.createSubAccount(testSubAccount);
 
@@ -47,7 +47,7 @@ public class AccountEndpointClientHttpTest {
         testSubAccountSid = result.getSid();
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateSubAccount")
     public void testGetSubAccountDetails() throws Exception {
         SubAccountDetails result = client.getSubAccountDetails(testSubAccountSid);
 
@@ -58,7 +58,7 @@ public class AccountEndpointClientHttpTest {
     }
 
     // You can only regenerate your own account's authentication token.
-    @Test(priority = 3, enabled = false)
+    @Test(dependsOnMethods = "testCreateSubAccount", enabled = false)
     public void tesCreateAuthenticationToken() throws Exception {
         String currentAuthToken;
         {
@@ -80,7 +80,7 @@ public class AccountEndpointClientHttpTest {
         }
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "testCreateSubAccount")
     public void testGetBillingInfo() throws Exception {
         BillingInfoList result = client.getBillingInfo(testSubAccountSid);
 
@@ -88,7 +88,7 @@ public class AccountEndpointClientHttpTest {
         assertThat(result.getBillingInfo()).isNotEmpty();
     }
 
-    @Test(priority = 5)
+    @Test(dependsOnMethods = "testCreateSubAccount")
     public void testGetAllSubAccountDetails() throws Exception {
         SubAccountResultSet result = client.getAllSubAccountDetails();
 
@@ -98,7 +98,7 @@ public class AccountEndpointClientHttpTest {
         assertThat(result.getResultSet()).isNotEmpty();
     }
 
-    @Test(priority = 6)
+    @Test(dependsOnMethods = "testCreateSubAccount")
     public void testUpdateSubAccount() throws Exception {
         testSubAccount.setDisplayName("TEST-ACCOUNT-" + UUID.randomUUID().toString());
         testSubAccount.setStatus(AccountStatusType.ACTIVE);
@@ -112,7 +112,7 @@ public class AccountEndpointClientHttpTest {
         //assertThat(result.getPlanType()).isEqualTo(testSubAccount.getPlanType());
     }
 
-    @Test(priority = 7)
+    @Test(dependsOnMethods = "testUpdateSubAccount")
     public void testDeleteSubAccount() throws Exception {
         Deleted result = client.deleteSubAccount(testSubAccountSid);
 
@@ -120,7 +120,7 @@ public class AccountEndpointClientHttpTest {
         assertThat(result.isDeleted()).isTrue();
     }
 
-    @Test(priority = 8)
+    @Test
     public void testGetMyAccountDetails() throws Exception {
         AccountDetails result = client.getMyAccountDetails();
 

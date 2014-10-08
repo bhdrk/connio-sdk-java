@@ -43,7 +43,7 @@ public class DataChannelEndpointClientHttpTest {
         appClient = new AppEndpointClientImpl();
     }
 
-    @Test(priority = 0)
+    @Test
     public void createTestApp() throws Exception {
         App app = new App();
         app.setName(TestUtils.createNewName("TEST-APP"));
@@ -60,7 +60,7 @@ public class DataChannelEndpointClientHttpTest {
         testAppName = result.getName();
     }
 
-    @Test(priority = 1)
+    @Test(dependsOnMethods = "createTestApp")
     public void testCreateDataChannel() throws Exception {
         testDataChannel = new DataChannel();
         testDataChannel.setName(TestUtils.createNewName("TEST-DCHNL"));
@@ -77,7 +77,7 @@ public class DataChannelEndpointClientHttpTest {
         assertThat(result.getChannelType()).isEqualTo(testDataChannel.getChannelType());
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateDataChannel")
     public void testGetDataChannelDetails() throws Exception {
         DataChannelDetails result = client.getDataChannelDetails(testAppName, testDataChannel.getName());
 
@@ -88,7 +88,7 @@ public class DataChannelEndpointClientHttpTest {
         assertThat(result.getChannelType()).isEqualTo(testDataChannel.getChannelType());
     }
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "testCreateDataChannel")
     public void testGetAllDataChannelDetails() throws Exception {
         DataChannelResultSet result = client.getAllDataChannelDetails(testAppName);
 
@@ -98,7 +98,7 @@ public class DataChannelEndpointClientHttpTest {
         assertThat(result.getResultSet()).isNotEmpty();
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "testCreateDataChannel")
     public void testUpdateDataChannel() throws Exception {
 
         Map<String, String> alarmActionParams = new HashMap<String, String>(2);
@@ -145,7 +145,7 @@ public class DataChannelEndpointClientHttpTest {
         assertThat(result.getBounds()).isEqualTo(bounds);
     }
 
-    @Test(priority = 5)
+    @Test(dependsOnMethods = "testUpdateDataChannel")
     public void testDeleteDataChannel() throws Exception {
         Deleted result = client.deleteDataChannel(testAppName, testDataChannel.getName());
 
@@ -153,7 +153,7 @@ public class DataChannelEndpointClientHttpTest {
         assertThat(result.isDeleted()).isTrue();
     }
 
-    @Test(priority = 6)
+    @Test(dependsOnMethods = "testDeleteDataChannel")
     public void deleteTestApp() throws Exception {
         Deleted result = appClient.deleteApp(testAppName);
 

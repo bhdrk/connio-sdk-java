@@ -28,7 +28,7 @@ public class DeviceProfileEndpointClientHttpTest {
         client = new DeviceProfileEndpointClientImpl();
     }
 
-    @Test(priority = 1)
+    @Test
     public void testCreateDeviceProfile() throws Exception {
         testDeviceProfile = new DeviceProfile();
         testDeviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
@@ -47,7 +47,7 @@ public class DeviceProfileEndpointClientHttpTest {
         assertThat(result.getProduct()).isEqualTo(testDeviceProfile.getProduct());
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateDeviceProfile")
     public void testGetDeviceProfileDetails() throws Exception {
         DeviceProfileDetails result = client.getDeviceProfileDetails(testDeviceProfile.getName());
 
@@ -59,7 +59,7 @@ public class DeviceProfileEndpointClientHttpTest {
         assertThat(result.getProduct()).isEqualTo(testDeviceProfile.getProduct());
     }
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "testCreateDeviceProfile")
     public void testGetAllDeviceProfileDetails() throws Exception {
         DeviceProfileResultSet result = client.getAllDeviceProfileDetails();
 
@@ -69,7 +69,7 @@ public class DeviceProfileEndpointClientHttpTest {
         assertThat(result.getResultSet()).isNotEmpty();
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "testCreateDeviceProfile")
     public void testUpdateDeviceProfile() throws Exception {
         String currentDeviceProfileName = testDeviceProfile.getName();
 
@@ -89,7 +89,7 @@ public class DeviceProfileEndpointClientHttpTest {
         assertThat(result.getProduct()).isEqualTo(testDeviceProfile.getProduct());
     }
 
-    @Test(priority = 5)
+    @Test(dependsOnMethods = "testUpdateDeviceProfile")
     public void testDeleteDeviceProfile() throws Exception {
         Deleted result = client.deleteDeviceProfile(testDeviceProfile.getName());
 

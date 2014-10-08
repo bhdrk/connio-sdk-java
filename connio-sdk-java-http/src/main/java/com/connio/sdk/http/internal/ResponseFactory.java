@@ -1,6 +1,7 @@
 package com.connio.sdk.http.internal;
 
 import com.connio.sdk.api.exception.ConnioClientException;
+import com.connio.sdk.api.exception.ConnioResourceNotFoundException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.ConnioResponse;
 import com.connio.sdk.http.converter.ConverterChain;
@@ -57,6 +58,16 @@ public class ResponseFactory {
 
         if (exception == null) {
             exception = new ConnioServiceException("error", errorContent, null, response.message(), response.code());
+        }
+
+        if (response.code() == 404) {
+            exception = new ConnioResourceNotFoundException(
+                    exception.getStatus(),
+                    exception.getCauseMessage(),
+                    exception.getDetails(),
+                    exception.getResponseStatus(),
+                    exception.getResponseCode()
+            );
         }
 
         return exception;

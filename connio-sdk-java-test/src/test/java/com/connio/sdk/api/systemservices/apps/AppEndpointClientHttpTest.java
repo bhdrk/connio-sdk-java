@@ -36,7 +36,7 @@ public class AppEndpointClientHttpTest {
         testApp.setAppStorageCapacity(100000L);
     }
 
-    @Test(priority = 1)
+    @Test
     public void testCreateApp() throws Exception {
         AppDetails result = client.createApp(testApp);
 
@@ -48,7 +48,7 @@ public class AppEndpointClientHttpTest {
         assertThat(result.getVersion()).isEqualTo(testApp.getVersion());
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "testCreateApp")
     public void testGetAppDetails() throws Exception {
         AppDetails result = client.getAppDetails(testApp.getName());
 
@@ -60,7 +60,7 @@ public class AppEndpointClientHttpTest {
         assertThat(result.getVersion()).isEqualTo(testApp.getVersion());
     }
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "testCreateApp")
     public void testGetAllAppDetails() throws Exception {
         AppResultSet result = client.getAllAppDetails();
 
@@ -70,7 +70,7 @@ public class AppEndpointClientHttpTest {
         assertThat(result.getResultSet()).isNotEmpty();
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "testCreateApp")
     public void testUpdateApp() throws Exception {
         String currentAppName = testApp.getName();
         String newName = TestUtils.createNewName("TEST-APP");
@@ -91,7 +91,7 @@ public class AppEndpointClientHttpTest {
         assertThat(result.getAppStorageCapacity()).isEqualTo(testApp.getAppStorageCapacity());
     }
 
-    @Test(priority = 5)
+    @Test(dependsOnMethods = "testUpdateApp")
     public void testDeleteApp() throws Exception {
         Deleted result = client.deleteApp(testApp.getName());
 
