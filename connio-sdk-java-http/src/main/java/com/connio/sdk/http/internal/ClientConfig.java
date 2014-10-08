@@ -31,15 +31,9 @@ public class ClientConfig {
 
     private String proxyWorkstation = null;
 
-    private int maxConnections;
-
-    private int socketTimeout;
-
     private int connectionTimeout;
 
     private int connectionRequestTimeout;
-
-    private boolean useGzip;
 
     public ClientConfig() {
     }
@@ -63,15 +57,6 @@ public class ClientConfig {
 
         if (map.containsKey("connio.http.connectionRequestTimeout"))
             this.connectionRequestTimeout = toInt(map, "connio.http.connectionRequestTimeout", 0);
-
-        if (map.containsKey("connio.http.socketTimeout"))
-            this.socketTimeout = toInt(map, ("connio.http.socketTimeout"), 0);
-
-        if (map.containsKey("connio.http.maxConnections"))
-            this.maxConnections = toInt(map, "connio.http.maxConnections", 0);
-
-        if (map.containsKey("connio.http.useGzip"))
-            this.useGzip = toBoolean(map, "connio.http.useGzip");
 
         if (map.containsKey("connio.http.proxyHost"))
             this.proxyHost = map.get("connio.http.proxyHost");
@@ -143,20 +128,8 @@ public class ClientConfig {
         return proxyWorkstation;
     }
 
-    public int getMaxConnections() {
-        return maxConnections;
-    }
-
-    public int getSocketTimeout() {
-        return socketTimeout;
-    }
-
     public int getConnectionTimeout() {
         return connectionTimeout;
-    }
-
-    public boolean isUseGzip() {
-        return useGzip;
     }
 
     public String getHost() {

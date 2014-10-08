@@ -2,6 +2,7 @@ package com.connio.sdk.http.internal;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
+import static com.connio.sdk.http.utils.IOUtils.closeSilently;
 
 /**
  * TODO: javadoc
@@ -69,53 +71,56 @@ public class ClientConfigFactory {
     }
 
     private Map<String, String> getDefaultConfigs() {
-        Map<String, String> map = new HashMap<String, String>();
         try {
-            URL resource = Thread.currentThread().getContextClassLoader().getResource(Constants.DEFAULT_CONFIG_FILE);
-            loadResource(map, resource);
+            URL resource = getLoader().getResource(Constants.DEFAULT_CONFIG_FILE);
+            return loadResource(resource);
         } catch (Exception e) {
             throw new ConnioClientException("Cannot load " + Constants.DEFAULT_CONFIG_FILE, e);
         }
-        return map;
     }
 
     private Map<String, String> getUserDefinedConfigs() {
-        Map<String, String> map = new HashMap<String, String>();
-
         try {
-            Enumeration<URL> resources = getConfigResources(Constants.USER_DEFINED_CONFIG_FILE);
+            String userHome = System.getProperty("user.home");
+            if (isNotEmpty(userHome)) {
+                File file = new File(userHome, Constants.USER_DEFINED_CONFIG_FILE);
+                if (file.exists() && file.canRead()) {
+                    return loadResource(file.toURI().toURL());
+                }
+            }
+
+            Map<String, String> propertiesMap = new HashMap<String, String>();
+            Enumeration<URL> resources = getLoader().getResources(Constants.USER_RESOURCE_CONFIG_FILE);
             while (resources.hasMoreElements()) {
                 URL resource = resources.nextElement();
-                loadResource(map, resource);
+                propertiesMap.putAll(loadResource(resource));
             }
+            return propertiesMap;
         } catch (Exception e) {
             throw new ConnioClientException("Cannot load " + Constants.USER_DEFINED_CONFIG_FILE, e);
         }
-
-        return map;
     }
 
-    private Enumeration<URL> getConfigResources(String name) throws IOException {
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        return loader.getResources(name);
+    private ClassLoader getLoader() {
+        return Thread.currentThread().getContextClassLoader();
     }
 
-    private void loadResource(Map<String, String> map, URL resource) throws IOException {
+    private Map<String, String> loadResource(URL resource) throws IOException {
         InputStream resourceStream = resource.openStream();
         try {
-            populateMap(map, resourceStream);
+            return populateMap(resourceStream);
         } finally {
-            if (resourceStream != null) {
-                resourceStream.close();
-            }
+            closeSilently(resourceStream);
         }
     }
 
-    private void populateMap(Map<String, String> map, InputStream resourceStream) throws IOException {
+    private Map<String, String> populateMap(InputStream resourceStream) throws IOException {
+        Map<String, String> propertiesMap = new HashMap<String, String>();
         Properties properties = new Properties();
         properties.load(resourceStream);
         for (String name : properties.stringPropertyNames()) {
-            map.put(name, properties.getProperty(name));
+            propertiesMap.put(name, properties.getProperty(name));
         }
+        return propertiesMap;
     }
 }
