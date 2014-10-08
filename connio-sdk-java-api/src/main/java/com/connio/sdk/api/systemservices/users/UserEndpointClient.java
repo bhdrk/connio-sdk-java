@@ -1,20 +1,18 @@
 package com.connio.sdk.api.systemservices.users;
 
-import com.connio.sdk.api.core.ConnioEndpointClient;
+import com.connio.sdk.api.core.AbstractEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.users.model.User;
-import com.connio.sdk.api.systemservices.users.model.UserDetails;
-import com.connio.sdk.api.systemservices.users.model.UserResultSet;
+import com.connio.sdk.api.systemservices.users.model.*;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 10.09.2014
+ * @since 18.09.2014
  */
-public interface UserEndpointClient extends ConnioEndpointClient {
+public class UserEndpointClient extends AbstractEndpointClient implements IUserEndpointClient {
 
     /**
      * TODO: javadoc
@@ -24,8 +22,11 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
+    @Override
     public UserDetails getUserDetails(String userSid)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetUserDetailsRequest(userSid));
+    }
 
     /**
      * TODO: javadoc
@@ -34,8 +35,11 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
+    @Override
     public UserResultSet getAllUserDetails()
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetAllUserDetailsRequest());
+    }
 
     /**
      * TODO: javadoc
@@ -45,8 +49,11 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
+    @Override
     public UserDetails createUser(User user)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        throw new ConnioClientException("Unsupported Operation.");
+    }
 
     /**
      * TODO: javadoc
@@ -57,8 +64,11 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
+    @Override
     public UserDetails updateUser(String userSid, User user)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        throw new ConnioClientException("Unsupported Operation.");
+    }
 
     /**
      * TODO: javadoc
@@ -68,6 +78,9 @@ public interface UserEndpointClient extends ConnioEndpointClient {
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
+    @Override
     public Deleted deleteUser(String userSid)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        throw new ConnioClientException("Unsupported Operation.");
+    }
 }

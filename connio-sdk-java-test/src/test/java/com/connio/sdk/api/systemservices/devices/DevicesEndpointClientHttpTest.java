@@ -2,8 +2,8 @@ package com.connio.sdk.api.systemservices.devices;
 
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.systemservices.deviceprofiles.IDeviceProfileEndpointClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.DeviceProfileEndpointClient;
-import com.connio.sdk.api.systemservices.deviceprofiles.DeviceProfileEndpointClientImpl;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
 import com.connio.sdk.api.systemservices.devices.model.*;
@@ -19,9 +19,9 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test(suiteName = "HttpTests", testName = "DeviceEndpoint")
 public class DevicesEndpointClientHttpTest {
 
-    private DevicesEndpointClient client;
+    private IDevicesEndpointClient client;
 
-    private DeviceProfileEndpointClient profileClient;
+    private IDeviceProfileEndpointClient profileClient;
 
     private String testProfileName;
 
@@ -31,8 +31,8 @@ public class DevicesEndpointClientHttpTest {
 
     @BeforeMethod
     public void beforeClass() throws Exception {
-        client = new DevicesEndpointClientImpl();
-        profileClient = new DeviceProfileEndpointClientImpl();
+        client = new DevicesEndpointClient();
+        profileClient = new DeviceProfileEndpointClient();
     }
 
     @Test

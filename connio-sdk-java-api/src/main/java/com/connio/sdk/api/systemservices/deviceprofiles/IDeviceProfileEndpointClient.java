@@ -1,18 +1,20 @@
 package com.connio.sdk.api.systemservices.deviceprofiles;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 25.09.2014
+ * @since 10.09.2014
  */
-public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient implements DeviceProfileEndpointClient {
+public interface IDeviceProfileEndpointClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc
@@ -21,11 +23,8 @@ public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient impl
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public DeviceProfileResultSet getAllDeviceProfileDetails()
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAllDeviceProfileDetailsRequest());
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -35,11 +34,8 @@ public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient impl
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public DeviceProfileDetails getDeviceProfileDetails(String deviceProfileName)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetDeviceProfileDetailsRequest(deviceProfileName));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -49,11 +45,8 @@ public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient impl
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public DeviceProfileDetails createDeviceProfile(DeviceProfile deviceProfile)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new CreateDeviceProfileRequest(deviceProfile));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -64,11 +57,8 @@ public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient impl
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
-    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile
-    ) throws ConnioServiceException, ConnioClientException {
-        return execute(new UpdateDeviceProfileRequest(deviceProfileName, deviceProfile));
-    }
+    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile)
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -78,9 +68,6 @@ public class DeviceProfileEndpointClientImpl extends AbstractEndpointClient impl
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public Deleted deleteDeviceProfile(String deviceProfileName)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new DeleteDeviceProfileRequest(deviceProfileName));
-    }
+            throws ConnioServiceException, ConnioClientException;
 }

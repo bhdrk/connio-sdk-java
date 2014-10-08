@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.accounts;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -10,9 +10,9 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  * TODO: javadoc
  *
  * @author bdirik
- * @since 15.09.2014
+ * @since 10.09.2014
  */
-public class AccountEndpointClientImpl extends AbstractEndpointClient implements AccountEndpointClient {
+public interface IAccountEndpointClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc
@@ -21,25 +21,17 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public AccountDetails getMyAccountDetails()
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetMyAccountDetailsRequest());
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
-     * TODO: javadoc
-     *
      * @param sid
      * @return
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public SubAccountDetails getSubAccountDetails(String sid)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetSubAccountDetailsRequest(sid));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -48,11 +40,8 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public SubAccountResultSet getAllSubAccountDetails()
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAllSubAccountsDetailsRequest());
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -62,11 +51,8 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public SubAccountDetails createSubAccount(SubAccount subAccount)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new CreateSubAccountRequest(subAccount));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -77,11 +63,8 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public SubAccountDetails updateSubAccount(String sid, SubAccount subAccount)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new UpdateSubAccountRequest(sid, subAccount));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -91,11 +74,8 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public Deleted deleteSubAccount(String sid)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new DeleteSubAccountRequest(sid));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -105,11 +85,8 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public AuthToken createAuthenticationToken(String sid)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new CreateAuthenticationTokenRequest(sid));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -119,9 +96,6 @@ public class AccountEndpointClientImpl extends AbstractEndpointClient implements
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public BillingInfoList getBillingInfo(String sid)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetBillingInfoRequest(sid));
-    }
+            throws ConnioServiceException, ConnioClientException;
 }

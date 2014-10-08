@@ -20,13 +20,13 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test(suiteName = "HttpTests", testName = "AppEndpoint")
 public class AppEndpointClientHttpTest {
 
-    private AppEndpointClient client;
+    private IAppEndpointClient client;
 
     private App testApp;
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        client = new AppEndpointClientImpl();
+        client = new AppEndpointClient();
 
         testApp = new App();
         testApp.setName(TestUtils.createNewName("TEST-APP"));

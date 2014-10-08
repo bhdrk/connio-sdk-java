@@ -1,21 +1,18 @@
 package com.connio.sdk.api.systemservices.datachannels;
 
-import com.connio.sdk.api.core.ConnioEndpointClient;
+import com.connio.sdk.api.core.AbstractEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.datachannels.model.DataChannel;
-import com.connio.sdk.api.systemservices.datachannels.model.DataChannelDetails;
-import com.connio.sdk.api.systemservices.datachannels.model.DataChannelResultSet;
-import com.connio.sdk.api.systemservices.datachannels.model.DataChannelUpdate;
+import com.connio.sdk.api.systemservices.datachannels.model.*;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 10.09.2014
+ * @since 23.09.2014
  */
-public interface DataChannelEndpointClient extends ConnioEndpointClient {
+public class DataChannelEndpointClient extends AbstractEndpointClient implements IDataChannelEndpointClient {
 
     /**
      * TODO: javadoc
@@ -23,17 +20,28 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @param appSidOrName
      * @param channelSidOrName
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
+    @Override
     public DataChannelDetails getDataChannelDetails(String appSidOrName, String channelSidOrName)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetDataChannelDetailsRequest(appSidOrName, channelSidOrName));
+    }
 
     /**
      * TODO: javadoc
      *
+     * @param appSidOrName
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
+    @Override
     public DataChannelResultSet getAllDataChannelDetails(String appSidOrName)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetAllDataChannelDetailsRequest(appSidOrName));
+    }
 
     /**
      * TODO: javadoc
@@ -41,9 +49,14 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @param appSidOrName
      * @param dataChannel
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
+    @Override
     public DataChannelDetails createDataChannel(String appSidOrName, DataChannel dataChannel)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new CreateDataChannelRequest(appSidOrName, dataChannel));
+    }
 
     /**
      * TODO: javadoc
@@ -52,9 +65,14 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @param channelSidOrName
      * @param dataChannelUpdate
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
+    @Override
     public DataChannelDetails updateDataChannel(String appSidOrName, String channelSidOrName, DataChannelUpdate dataChannelUpdate)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new UpdateDataChannelRequest(appSidOrName, channelSidOrName, dataChannelUpdate));
+    }
 
     /**
      * TODO: javadoc
@@ -62,7 +80,12 @@ public interface DataChannelEndpointClient extends ConnioEndpointClient {
      * @param appSidOrName
      * @param channelSidOrName
      * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
      */
+    @Override
     public Deleted deleteDataChannel(String appSidOrName, String channelSidOrName)
-            throws ConnioServiceException, ConnioClientException;
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new DeleteDataChannelRequest(appSidOrName, channelSidOrName));
+    }
 }

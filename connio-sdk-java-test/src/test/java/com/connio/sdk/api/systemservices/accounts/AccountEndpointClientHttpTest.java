@@ -19,7 +19,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test(suiteName = "HttpTests", testName = "AccountEndpoint")
 public class AccountEndpointClientHttpTest {
 
-    private AccountEndpointClient client;
+    private IAccountEndpointClient client;
 
     private String testSubAccountSid;
 
@@ -27,7 +27,7 @@ public class AccountEndpointClientHttpTest {
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        client = new AccountEndpointClientImpl();
+        client = new AccountEndpointClient();
 
         testSubAccount = new SubAccount();
         testSubAccount.setDisplayName("TEST-ACCOUNT-" + UUID.randomUUID().toString());

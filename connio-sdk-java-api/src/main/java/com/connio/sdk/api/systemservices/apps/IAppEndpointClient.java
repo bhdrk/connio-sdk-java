@@ -1,18 +1,20 @@
 package com.connio.sdk.api.systemservices.apps;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.ConnioEndpointClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.apps.model.*;
+import com.connio.sdk.api.systemservices.apps.model.App;
+import com.connio.sdk.api.systemservices.apps.model.AppDetails;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
 
 /**
  * TODO: javadoc
  *
  * @author bdirik
- * @since 22.09.2014
+ * @since 10.09.2014
  */
-public class AppEndpointClientImpl extends AbstractEndpointClient implements AppEndpointClient {
+public interface IAppEndpointClient extends ConnioEndpointClient {
 
     /**
      * TODO: javadoc
@@ -22,11 +24,8 @@ public class AppEndpointClientImpl extends AbstractEndpointClient implements App
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public AppDetails getAppDetails(String sidOrName)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAppDetailsRequest(sidOrName));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -35,11 +34,8 @@ public class AppEndpointClientImpl extends AbstractEndpointClient implements App
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public AppResultSet getAllAppDetails()
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAllAppDetailsRequest());
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -49,11 +45,8 @@ public class AppEndpointClientImpl extends AbstractEndpointClient implements App
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public AppDetails createApp(App app)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new CreateAppRequest(app));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -64,11 +57,8 @@ public class AppEndpointClientImpl extends AbstractEndpointClient implements App
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public AppDetails updateApp(String sidOrName, App app)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new UpdateAppRequest(sidOrName, app));
-    }
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -78,9 +68,7 @@ public class AppEndpointClientImpl extends AbstractEndpointClient implements App
      * @throws ConnioServiceException
      * @throws ConnioClientException
      */
-    @Override
     public Deleted deleteApp(String sidOrName)
-            throws ConnioServiceException, ConnioClientException {
-        return execute(new DeleteAppRequest(sidOrName));
-    }
+            throws ConnioServiceException, ConnioClientException;
+
 }
