@@ -1,7 +1,7 @@
 package com.connio.sdk.http;
 
 import com.connio.sdk.api.auth.ConnioCredentials;
-import com.connio.sdk.api.core.AbstractEndpointClientContext;
+import com.connio.sdk.api.core.AbstractClientTransformer;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
@@ -19,13 +19,13 @@ import java.io.IOException;
  * @author bdirik
  * @since 15.09.2014
  */
-public class HttpEndpointClientContext extends AbstractEndpointClientContext {
+public class HttpClientTransformer extends AbstractClientTransformer {
 
     private OkHttpClient client;
 
     private ClientConfig clientConfig;
 
-    public HttpEndpointClientContext() {
+    public HttpClientTransformer() {
     }
 
     @Override

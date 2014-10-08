@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.datachannels;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.AbstractClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.datachannels.model.*;
  * @author bdirik
  * @since 23.09.2014
  */
-public class DataChannelClient extends AbstractEndpointClient implements IDataChannelClient {
+public class DataChannelClient extends AbstractClient implements IDataChannelClient {
 
     /**
      * TODO: javadoc

@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.apps;
 
-import com.connio.sdk.api.core.ConnioEndpointClient;
+import com.connio.sdk.api.core.ConnioClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -14,7 +14,7 @@ import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IAppClient extends ConnioEndpointClient {
+public interface IAppClient extends ConnioClient {
 
     /**
      * TODO: javadoc

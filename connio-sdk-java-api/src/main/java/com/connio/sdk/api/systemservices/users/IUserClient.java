@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.users;
 
-import com.connio.sdk.api.core.ConnioEndpointClient;
+import com.connio.sdk.api.core.ConnioClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -14,7 +14,7 @@ import com.connio.sdk.api.systemservices.users.model.UserResultSet;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IUserClient extends ConnioEndpointClient {
+public interface IUserClient extends ConnioClient {
 
     /**
      * TODO: javadoc

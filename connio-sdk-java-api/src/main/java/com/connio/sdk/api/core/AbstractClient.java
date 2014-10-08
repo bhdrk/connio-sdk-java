@@ -11,11 +11,11 @@ import com.connio.sdk.api.model.ConnioResponse;
  * @author bdirik
  * @since 29.09.2014
  */
-public abstract class AbstractEndpointClient implements ConnioEndpointClient {
-    private ConnioEndpointClientContext context;
+public abstract class AbstractClient implements ConnioClient {
+    private ConnioClientTransformer context;
 
-    protected AbstractEndpointClient() {
-        context = ConnioEndpointClientContextProvider.get();
+    protected AbstractClient() {
+        context = ConnioClientTransformerProvider.get();
     }
 
     protected <RT, RS extends ConnioResponse<RT>> RT execute(ConnioRequest<RS> request)

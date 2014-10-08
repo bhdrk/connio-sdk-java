@@ -15,7 +15,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @author bdirik
  * @since 16.09.2014
  */
-public abstract class AbstractEndpointClientContext implements ConnioEndpointClientContext {
+public abstract class AbstractClientTransformer implements ConnioClientTransformer {
 
     private Map<String, ConnioRequestHandler> requestHandlers = new HashMap<String, ConnioRequestHandler>();
 

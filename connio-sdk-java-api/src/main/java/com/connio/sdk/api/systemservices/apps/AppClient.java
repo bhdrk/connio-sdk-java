@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.apps;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.AbstractClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.apps.model.*;
  * @author bdirik
  * @since 22.09.2014
  */
-public class AppClient extends AbstractEndpointClient implements IAppClient {
+public class AppClient extends AbstractClient implements IAppClient {
 
     /**
      * TODO: javadoc

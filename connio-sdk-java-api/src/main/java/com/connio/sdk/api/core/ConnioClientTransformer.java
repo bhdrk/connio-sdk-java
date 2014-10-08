@@ -10,7 +10,7 @@ import com.connio.sdk.api.model.ConnioResponse;
  * @author bdirik
  * @since 15.09.2014
  */
-public interface ConnioEndpointClientContext {
+public interface ConnioClientTransformer {
 
     /**
      * TODO: javadoc

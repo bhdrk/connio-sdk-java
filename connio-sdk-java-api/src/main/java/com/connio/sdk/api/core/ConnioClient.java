@@ -6,5 +6,5 @@ package com.connio.sdk.api.core;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface ConnioEndpointClient {
+public interface ConnioClient {
 }

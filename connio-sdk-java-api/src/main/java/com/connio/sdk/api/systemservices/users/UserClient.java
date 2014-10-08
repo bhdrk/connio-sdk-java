@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.users;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.AbstractClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.users.model.*;
  * @author bdirik
  * @since 18.09.2014
  */
-public class UserClient extends AbstractEndpointClient implements IUserClient {
+public class UserClient extends AbstractClient implements IUserClient {
 
     /**
      * TODO: javadoc

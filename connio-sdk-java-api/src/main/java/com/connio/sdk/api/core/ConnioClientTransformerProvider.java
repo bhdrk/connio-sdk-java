@@ -13,22 +13,22 @@ import java.util.ServiceLoader;
  * @author bdirik
  * @since 16.09.2014
  */
-public class ConnioEndpointClientContextProvider {
+public class ConnioClientTransformerProvider {
 
-    private static ConnioEndpointClientContext context = load();
+    private static ConnioClientTransformer context = load();
 
-    public static ConnioEndpointClientContext get() {
+    public static ConnioClientTransformer get() {
         return context;
     }
 
-    private static ConnioEndpointClientContext load() {
+    private static ConnioClientTransformer load() {
         ConnioCredentials credentials = getCredentials();
-        ServiceLoader<ConnioEndpointClientContext> services = ServiceLoader.load(ConnioEndpointClientContext.class);
-        for (ConnioEndpointClientContext service : services) {
+        ServiceLoader<ConnioClientTransformer> services = ServiceLoader.load(ConnioClientTransformer.class);
+        for (ConnioClientTransformer service : services) {
             service.init(credentials);
             return service;
         }
-        throw new ConnioClientException("Service not found for com.connio.sdk.api.core.ConnioEndpointClientContext");
+        throw new ConnioClientException("Service not found for com.connio.sdk.api.core.ConnioClientTransformer");
     }
 
     private static ConnioCredentials getCredentials() {

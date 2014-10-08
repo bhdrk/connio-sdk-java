@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.accounts;
 
-import com.connio.sdk.api.core.ConnioEndpointClient;
+import com.connio.sdk.api.core.ConnioClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  * @author bdirik
  * @since 10.09.2014
  */
-public interface IAccountClient extends ConnioEndpointClient {
+public interface IAccountClient extends ConnioClient {
 
     /**
      * TODO: javadoc

@@ -1,6 +1,6 @@
 package com.connio.sdk.api.systemservices.deviceprofiles;
 
-import com.connio.sdk.api.core.AbstractEndpointClient;
+import com.connio.sdk.api.core.AbstractClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -12,7 +12,7 @@ import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
  * @author bdirik
  * @since 25.09.2014
  */
-public class DeviceProfileClient extends AbstractEndpointClient implements IDeviceProfileClient {
+public class DeviceProfileClient extends AbstractClient implements IDeviceProfileClient {
 
     /**
      * TODO: javadoc
