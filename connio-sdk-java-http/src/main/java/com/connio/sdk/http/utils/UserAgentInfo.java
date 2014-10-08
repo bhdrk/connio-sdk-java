@@ -2,7 +2,7 @@ package com.connio.sdk.http.utils;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.utils.TypeUtils;
-import com.connio.sdk.http.model.InternalConfig;
+import com.connio.sdk.http.internal.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.util.Properties;
  */
 public class UserAgentInfo {
 
-    private static UserAgentInfo instance = new UserAgentInfo();
+    private static final UserAgentInfo instance = new UserAgentInfo();
 
     public static String getUserAgent() {
         return instance.userAgent;
@@ -32,7 +32,7 @@ public class UserAgentInfo {
 
     private String buildUserAgent() {
         loadVersionInfo();
-        String userAgentTemplate = InternalConfig.USER_AGENT_TEMPLATE;
+        String userAgentTemplate = Constants.USER_AGENT_TEMPLATE;
         return userAgentTemplate
                 .replace("{platform}", platform)
                 .replace("{version}", version)
@@ -52,7 +52,7 @@ public class UserAgentInfo {
 
     private void loadVersionInfo() {
         try {
-            InputStream resource = ClassResouceLoader.getResourceAsStream(InternalConfig.VERSION_INFO_FILE, UserAgentInfo.class);
+            InputStream resource = ClassResouceLoader.getResourceAsStream(Constants.VERSION_INFO_FILE, UserAgentInfo.class);
             if (resource != null) {
                 Properties properties = new Properties();
                 properties.load(resource);

@@ -14,11 +14,6 @@ public class GetMyAccountDetailsResponse extends AccountEndpointResponse<Account
     }
 
     @Override
-    public Class<AccountDetails> getResultType() {
-        return AccountDetails.class;
-    }
-
-    @Override
     public AccountDetails getResult() {
         return result;
     }

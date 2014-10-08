@@ -14,11 +14,6 @@ public class CreateAppResponse extends AppEndpointResponse<AppDetails> {
     private AppDetails result;
 
     @Override
-    public Class<AppDetails> getResultType() {
-        return AppDetails.class;
-    }
-
-    @Override
     public AppDetails getResult() {
         return result;
     }

@@ -14,11 +14,6 @@ public class CreateAuthenticationTokenResponse extends AccountEndpointResponse<A
     }
 
     @Override
-    public Class<AuthToken> getResultType() {
-        return AuthToken.class;
-    }
-
-    @Override
     public AuthToken getResult() {
         return result;
     }

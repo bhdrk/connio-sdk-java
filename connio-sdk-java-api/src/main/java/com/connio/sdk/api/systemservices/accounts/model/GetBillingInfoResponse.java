@@ -11,11 +11,6 @@ public class GetBillingInfoResponse extends AccountEndpointResponse<BillingInfoL
     private BillingInfoList result;
 
     @Override
-    public Class<BillingInfoList> getResultType() {
-        return BillingInfoList.class;
-    }
-
-    @Override
     public BillingInfoList getResult() {
         return result;
     }

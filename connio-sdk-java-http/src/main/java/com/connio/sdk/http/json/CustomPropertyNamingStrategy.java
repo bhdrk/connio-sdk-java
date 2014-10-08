@@ -1,4 +1,4 @@
-package com.connio.sdk.http.utils.json;
+package com.connio.sdk.http.json;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 

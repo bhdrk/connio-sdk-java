@@ -14,11 +14,6 @@ public class GetAllAppDetailsResponse extends AppEndpointResponse<AppResultSet> 
     private AppResultSet result;
 
     @Override
-    public Class<AppResultSet> getResultType() {
-        return AppResultSet.class;
-    }
-
-    @Override
     public AppResultSet getResult() {
         return result;
     }

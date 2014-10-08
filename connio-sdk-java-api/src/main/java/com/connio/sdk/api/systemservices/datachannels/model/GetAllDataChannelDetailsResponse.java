@@ -11,11 +11,6 @@ public class GetAllDataChannelDetailsResponse extends DataChannelEndpointRespons
     private DataChannelResultSet result;
 
     @Override
-    public Class<DataChannelResultSet> getResultType() {
-        return DataChannelResultSet.class;
-    }
-
-    @Override
     public DataChannelResultSet getResult() {
         return result;
     }

@@ -5,21 +5,13 @@ import com.connio.sdk.api.core.AbstractEndpointClientContext;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
-import com.connio.sdk.http.factory.HttpClientContextFactory;
-import com.connio.sdk.http.factory.HttpClientFactory;
-import com.connio.sdk.http.factory.HttpRequestFactory;
-import com.connio.sdk.http.factory.HttpResponseFactory;
-import com.connio.sdk.http.model.ClientConfig;
+import com.connio.sdk.http.internal.*;
 import com.connio.sdk.http.utils.HttpUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.impl.client.CloseableHttpClient;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
-import java.io.Closeable;
 import java.io.IOException;
-
-import static com.connio.sdk.http.utils.IOUtils.closeSilently;
 
 /**
  * TODO: javadoc
@@ -27,48 +19,30 @@ import static com.connio.sdk.http.utils.IOUtils.closeSilently;
  * @author bdirik
  * @since 15.09.2014
  */
-public class HttpEndpointClientContext extends AbstractEndpointClientContext implements Closeable {
+public class HttpEndpointClientContext extends AbstractEndpointClientContext {
 
-    private CloseableHttpClient httpClient;
+    private OkHttpClient client;
 
     private ClientConfig clientConfig;
 
-    private ConnioCredentials credentials;
-
     public HttpEndpointClientContext() {
-        this.clientConfig = ClientConfig.instance();
-        this.httpClient = HttpClientFactory.create(clientConfig);
     }
 
     @Override
     public void init(ConnioCredentials credentials) {
-        this.credentials = credentials;
+        this.clientConfig = ClientConfigFactory.create();
+        this.client = ClientFactory.create(credentials, clientConfig);
     }
 
     @Override
-    protected <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> request) {
-        CloseableHttpResponse httpResponse = null;
-        Class<RS> responseType = HttpUtils.resolveResponseType(request);
+    protected <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> connioRequest) {
+        Class<RS> responseType = HttpUtils.resolveResponseType(connioRequest);
         try {
-            HttpRequestBase httpRequest = HttpRequestFactory.create(clientConfig, request);
-            HttpClientContext httpClientContext = HttpClientContextFactory.create(clientConfig, credentials);
-            httpResponse = httpClient.execute(httpRequest, httpClientContext);
-            return HttpResponseFactory.create(httpResponse, responseType);
+            Request request = RequestFactory.create(clientConfig, connioRequest);
+            Response response = client.newCall(request).execute();
+            return ResponseFactory.create(response, responseType);
         } catch (IOException e) {
             throw new ConnioClientException("An error occurred while executing http request.", e);
-        } finally {
-            closeSilently(httpResponse);
         }
-    }
-
-    @Override
-    public void close() throws IOException {
-        httpClient.close();
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        closeSilently(this);
-        super.finalize();
     }
 }

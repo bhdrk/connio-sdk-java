@@ -3,6 +3,7 @@ package com.connio.sdk.api.core;
 import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.auth.ConnioCredentialsManager;
 import com.connio.sdk.api.exception.ConnioClientException;
+import com.connio.sdk.api.utils.Asserts;
 
 import java.util.ServiceLoader;
 
@@ -35,6 +36,8 @@ public class ConnioEndpointClientContextProvider {
         if (credentials == null) {
             throw new ConnioClientException("Credentials not provided!");
         }
+        Asserts.notEmpty(credentials.getAccessKey(), "Credentials.accessKey");
+        Asserts.notEmpty(credentials.getSecretKey(), "Credentials.secretKey");
         return credentials;
     }
 }

@@ -14,11 +14,6 @@ public class GetUserDetailsResponse extends UserEndpointResponse<UserDetails> {
     private UserDetails result;
 
     @Override
-    public Class<UserDetails> getResultType() {
-        return UserDetails.class;
-    }
-
-    @Override
     public void setResult(UserDetails result) {
         this.result = result;
     }

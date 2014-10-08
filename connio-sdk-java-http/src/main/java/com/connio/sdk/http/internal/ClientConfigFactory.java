@@ -1,7 +1,6 @@
-package com.connio.sdk.http.factory;
+package com.connio.sdk.http.internal;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.http.model.InternalConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,23 +20,23 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  */
 public class ClientConfigFactory {
 
-    private static ClientConfigFactory factory = new ClientConfigFactory();
+    private static final ClientConfigFactory factory = new ClientConfigFactory();
 
     private ClientConfigFactory() {
     }
 
-    public static Map<String, String> create() {
+    public static ClientConfig create() {
         return factory.doCreate();
     }
 
-    private Map<String, String> doCreate() {
+    private ClientConfig doCreate() {
         Map<String, String> configMap = getDefaultConfigs();
 
         overrideFromUserDefinedConfigs(configMap);
         overrideFromSystemProperties(configMap);
         overrideFromEnvProperties(configMap);
 
-        return configMap;
+        return new ClientConfig(configMap);
     }
 
     private void overrideFromUserDefinedConfigs(Map<String, String> configMap) {
@@ -72,10 +71,10 @@ public class ClientConfigFactory {
     private Map<String, String> getDefaultConfigs() {
         Map<String, String> map = new HashMap<String, String>();
         try {
-            URL resource = Thread.currentThread().getContextClassLoader().getResource(InternalConfig.DEFAULT_CONFIG_FILE);
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(Constants.DEFAULT_CONFIG_FILE);
             loadResource(map, resource);
         } catch (Exception e) {
-            throw new ConnioClientException("Cannot load " + InternalConfig.DEFAULT_CONFIG_FILE, e);
+            throw new ConnioClientException("Cannot load " + Constants.DEFAULT_CONFIG_FILE, e);
         }
         return map;
     }
@@ -84,13 +83,13 @@ public class ClientConfigFactory {
         Map<String, String> map = new HashMap<String, String>();
 
         try {
-            Enumeration<URL> resources = getConfigResources(InternalConfig.USER_DEFINED_CONFIG_FILE);
+            Enumeration<URL> resources = getConfigResources(Constants.USER_DEFINED_CONFIG_FILE);
             while (resources.hasMoreElements()) {
                 URL resource = resources.nextElement();
                 loadResource(map, resource);
             }
         } catch (Exception e) {
-            throw new ConnioClientException("Cannot load " + InternalConfig.USER_DEFINED_CONFIG_FILE, e);
+            throw new ConnioClientException("Cannot load " + Constants.USER_DEFINED_CONFIG_FILE, e);
         }
 
         return map;

@@ -1,7 +1,6 @@
-package com.connio.sdk.http.model;
+package com.connio.sdk.http.internal;
 
 import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.http.factory.ClientConfigFactory;
 
 import java.util.Map;
 
@@ -11,12 +10,6 @@ import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
  * Client configuration
  */
 public class ClientConfig {
-
-    private static ClientConfig instance = new ClientConfig(ClientConfigFactory.create());
-
-    public static ClientConfig instance() {
-        return instance;
-    }
 
     private String protocol;
 
@@ -48,24 +41,58 @@ public class ClientConfig {
 
     private boolean useGzip;
 
-    ClientConfig(Map<String, String> defaults) {
-        this.protocol = defaults.get("connio.http.protocol");
-        this.host = defaults.get("connio.http.host");
-        this.port = toInt(defaults, "connio.http.port", -1);
+    public ClientConfig() {
+    }
 
-        this.connectionTimeout = toInt(defaults, "connio.http.connectionTimeout", 0);
-        this.connectionRequestTimeout = toInt(defaults, "connio.http.connectionRequestTimeout", 0);
-        this.socketTimeout = toInt(defaults, ("connio.http.socketTimeout"), 0);
-        this.maxConnections = toInt(defaults, "connio.http.maxConnections", 0);
-        this.useGzip = toBoolean(defaults, "connio.http.useGzip");
+    public ClientConfig(Map<String, String> defaults) {
+        update(defaults);
+    }
 
-        this.proxyHost = defaults.get("connio.http.proxyHost");
-        this.proxyPort = toInt(defaults, "connio.http.proxyPort", -1);
-        this.proxyProtocol = defaults.get("connio.http.proxyProtocol");
-        this.proxyUsername = defaults.get("connio.http.proxyUsername");
-        this.proxyPassword = defaults.get("connio.http.proxyPassword");
-        this.proxyDomain = defaults.get("connio.http.proxyDomain");
-        this.proxyWorkstation = defaults.get("connio.http.proxyWorkstation");
+    public void update(Map<String, String> map) {
+        if (map.containsKey("connio.http.protocol"))
+            this.protocol = map.get("connio.http.protocol");
+
+        if (map.containsKey("connio.http.host"))
+            this.host = map.get("connio.http.host");
+
+        if (map.containsKey("connio.http.port"))
+            this.port = toInt(map, "connio.http.port", -1);
+
+        if (map.containsKey("connio.http.connectionTimeout"))
+            this.connectionTimeout = toInt(map, "connio.http.connectionTimeout", 0);
+
+        if (map.containsKey("connio.http.connectionRequestTimeout"))
+            this.connectionRequestTimeout = toInt(map, "connio.http.connectionRequestTimeout", 0);
+
+        if (map.containsKey("connio.http.socketTimeout"))
+            this.socketTimeout = toInt(map, ("connio.http.socketTimeout"), 0);
+
+        if (map.containsKey("connio.http.maxConnections"))
+            this.maxConnections = toInt(map, "connio.http.maxConnections", 0);
+
+        if (map.containsKey("connio.http.useGzip"))
+            this.useGzip = toBoolean(map, "connio.http.useGzip");
+
+        if (map.containsKey("connio.http.proxyHost"))
+            this.proxyHost = map.get("connio.http.proxyHost");
+
+        if (map.containsKey("connio.http.proxyPort"))
+            this.proxyPort = toInt(map, "connio.http.proxyPort", -1);
+
+        if (map.containsKey("connio.http.proxyProtocol"))
+            this.proxyProtocol = map.get("connio.http.proxyProtocol");
+
+        if (map.containsKey("connio.http.proxyUsername"))
+            this.proxyUsername = map.get("connio.http.proxyUsername");
+
+        if (map.containsKey("connio.http.proxyPassword"))
+            this.proxyPassword = map.get("connio.http.proxyPassword");
+
+        if (map.containsKey("connio.http.proxyDomain"))
+            this.proxyDomain = map.get("connio.http.proxyDomain");
+
+        if (map.containsKey("connio.http.proxyWorkstation"))
+            this.proxyWorkstation = map.get("connio.http.proxyWorkstation");
     }
 
     private Boolean toBoolean(Map<String, String> defaults, String key) {

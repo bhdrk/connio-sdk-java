@@ -11,11 +11,6 @@ public class GetDeviceDetailsResponse extends DeviceEndpointResponse<DeviceDetai
     private DeviceDetails result;
 
     @Override
-    public Class<DeviceDetails> getResultType() {
-        return DeviceDetails.class;
-    }
-
-    @Override
     public DeviceDetails getResult() {
         return result;
     }

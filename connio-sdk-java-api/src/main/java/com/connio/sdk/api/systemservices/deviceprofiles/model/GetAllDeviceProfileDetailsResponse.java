@@ -11,11 +11,6 @@ public class GetAllDeviceProfileDetailsResponse extends DeviceProfileEndpointRes
     private DeviceProfileResultSet result;
 
     @Override
-    public Class<DeviceProfileResultSet> getResultType() {
-        return DeviceProfileResultSet.class;
-    }
-
-    @Override
     public DeviceProfileResultSet getResult() {
         return result;
     }

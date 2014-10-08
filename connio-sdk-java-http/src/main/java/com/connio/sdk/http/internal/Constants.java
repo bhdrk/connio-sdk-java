@@ -1,4 +1,4 @@
-package com.connio.sdk.http.model;
+package com.connio.sdk.http.internal;
 
 /**
  * TODO: javadoc
@@ -6,7 +6,7 @@ package com.connio.sdk.http.model;
  * @author bdirik
  * @since 16.09.2014
  */
-public class InternalConfig {
+public class Constants {
 
     public static final String USER_AGENT_TEMPLATE = "connio-sdk-{platform}/{version} _ {os.name}/{os.version} _ {java.vm.name}/{java.vm.version}/{java.version} _ {language}({region})";
 

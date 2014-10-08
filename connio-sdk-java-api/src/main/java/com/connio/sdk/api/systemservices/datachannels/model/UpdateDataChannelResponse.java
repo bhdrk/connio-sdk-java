@@ -11,11 +11,6 @@ public class UpdateDataChannelResponse extends DataChannelEndpointResponse<DataC
     private DataChannelDetails result;
 
     @Override
-    public Class<DataChannelDetails> getResultType() {
-        return DataChannelDetails.class;
-    }
-
-    @Override
     public DataChannelDetails getResult() {
         return result;
     }

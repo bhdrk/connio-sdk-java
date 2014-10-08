@@ -13,11 +13,6 @@ public class DeleteAppResponse extends AppEndpointResponse<Deleted> {
     private Deleted result;
 
     @Override
-    public Class<Deleted> getResultType() {
-        return Deleted.class;
-    }
-
-    @Override
     public Deleted getResult() {
         return result;
     }

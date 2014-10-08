@@ -145,7 +145,7 @@ public class DevicesEndpointClientHttpTest {
         assertThat(result.isDeleted()).isTrue();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, enabled = false)
     public void testDeleteDeviceByCID() throws Exception {
         String imei = testDevice.getCidMap().get(CidType._IMEI);
         Cid cid = new Cid(testProfileName, CidType._IMEI, imei);

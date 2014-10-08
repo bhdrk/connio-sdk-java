@@ -1,4 +1,4 @@
-package com.connio.sdk.http.utils.json;
+package com.connio.sdk.http.json;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.fasterxml.jackson.annotation.JsonInclude;

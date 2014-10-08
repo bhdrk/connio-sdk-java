@@ -14,11 +14,6 @@ public class GetAllUserDetailsResponse extends UserEndpointResponse<UserResultSe
     private UserResultSet result;
 
     @Override
-    public Class<UserResultSet> getResultType() {
-        return UserResultSet.class;
-    }
-
-    @Override
     public UserResultSet getResult() {
         return result;
     }

@@ -11,11 +11,6 @@ public class UpdateDeviceProfileResponse extends DeviceProfileEndpointResponse<D
     private DeviceProfileDetails result;
 
     @Override
-    public Class<DeviceProfileDetails> getResultType() {
-        return DeviceProfileDetails.class;
-    }
-
-    @Override
     public DeviceProfileDetails getResult() {
         return result;
     }

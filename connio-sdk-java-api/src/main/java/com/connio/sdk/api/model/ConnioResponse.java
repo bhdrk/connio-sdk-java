@@ -15,13 +15,6 @@ public interface ConnioResponse<T> extends Serializable {
      *
      * @return
      */
-    public Class<T> getResultType();
-
-    /**
-     * TODO: javadoc
-     *
-     * @return
-     */
     public T getResult();
 
     /**

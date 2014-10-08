@@ -11,11 +11,6 @@ public class GenerateAccessKeyResponse extends DeviceEndpointResponse<DeviceAcce
     private DeviceAccessKey result;
 
     @Override
-    public Class<DeviceAccessKey> getResultType() {
-        return DeviceAccessKey.class;
-    }
-
-    @Override
     public DeviceAccessKey getResult() {
         return result;
     }

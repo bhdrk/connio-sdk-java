@@ -1,5 +1,7 @@
 package com.connio.sdk.api.model;
 
+import com.connio.sdk.api.utils.Asserts;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +41,7 @@ public class RequestMetaData {
     /**
      * TODO: javadoc
      */
-    private String contentType;
+    private ContentType contentType;
 
     /**
      * TODO: javadoc
@@ -50,6 +52,13 @@ public class RequestMetaData {
      * TODO: javadoc
      */
     private Object requestContent;
+
+    public void validate() {
+        Asserts.notNull(method, "Method");
+        Asserts.notNull(contentType, "ContentType");
+        Asserts.notEmpty(version, "Version");
+        Asserts.notEmpty(pathBuilder.toString(), "Path");
+    }
 
     public String getPath() {
         return pathBuilder.toString();
@@ -91,11 +100,11 @@ public class RequestMetaData {
         this.version = version;
     }
 
-    public String getContentType() {
+    public ContentType getContentType() {
         return contentType;
     }
 
-    public void setContentType(String contentType) {
+    public void setContentType(ContentType contentType) {
         this.contentType = contentType;
     }
 
