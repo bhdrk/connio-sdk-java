@@ -11,7 +11,6 @@ import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
-import org.apache.http.HttpHeaders;
 
 import java.net.URL;
 import java.util.Map;
@@ -58,8 +57,8 @@ public class RequestFactory {
             }
         }
 
-        builder.set(HttpHeaders.CONTENT_TYPE, metaData.getContentType().toString());
-        builder.set(HttpHeaders.USER_AGENT, UserAgentInfo.getUserAgent());
+        builder.set("Content-Type", metaData.getContentType().toString());
+        builder.set("User-Agent", UserAgentInfo.getUserAgent());
 
         return builder.build();
     }

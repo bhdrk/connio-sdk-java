@@ -37,7 +37,7 @@ public class ResponseFactory {
     }
 
     @SuppressWarnings("unchecked")
-    private <RS extends ConnioResponse> RS doCreate(Response response, Class<RS> responseType) throws IOException {
+    private <RS extends ConnioResponse> RS doCreate(Response response, Class<RS> responseType) {
         if (response.isSuccessful()) {
             RS connioResponse = createConnioResponse(responseType);
             setResult(connioResponse, response, responseType);
@@ -46,9 +46,8 @@ public class ResponseFactory {
         throw createException(response);
     }
 
-    private ConnioServiceException createException(Response response) throws IOException {
-        InputStream is = response.body().byteStream();
-        String errorContent = is != null ? IOUtils.toString(is) : "";
+    private ConnioServiceException createException(Response response) {
+        String errorContent = getResponseContent(response);
 
         ConnioServiceException exception = null;
 
@@ -73,13 +72,28 @@ public class ResponseFactory {
         return exception;
     }
 
-    private <RT, RS extends ConnioResponse<RT>> void setResult(RS connioResponse, Response response, Class<RS> responseType) throws IOException {
+    private String getResponseContent(Response response) {
+        InputStream is = response.body().byteStream();
+        String errorContent;
+        try {
+            errorContent = is != null ? IOUtils.toString(is) : "";
+        } catch (IOException e) {
+            throw new ConnioClientException(e);
+        }
+        return errorContent;
+    }
+
+    private <RT, RS extends ConnioResponse<RT>> void setResult(RS connioResponse, Response response, Class<RS> responseType) {
         ResponseBody body = response.body();
         InputStream is = body.byteStream();
         if (is != null) {
-            Class<RT> resultType = HttpUtils.resolveResultType(connioResponse);
-            RT result = ConverterChain.instance().to(body.contentType().toString(), is, resultType);
-            connioResponse.setResult(result);
+            try {
+                Class<RT> resultType = HttpUtils.resolveResultType(connioResponse);
+                RT result = ConverterChain.instance().to(body.contentType().toString(), is, resultType);
+                connioResponse.setResult(result);
+            } finally {
+                IOUtils.closeSilently(is);
+            }
         }
     }
 
@@ -91,7 +105,7 @@ public class ResponseFactory {
         }
     }
 
-    private ConnioServiceException createExceptionIfJsonResponse(Response response, String errorContent) throws IOException {
+    private ConnioServiceException createExceptionIfJsonResponse(Response response, String errorContent) {
         JsonNode node = JSON.toNodeTree(errorContent, true);
         if (isServerErrorResponse(node)) {
             String status = node.get("status").asText();
