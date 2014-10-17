@@ -40,9 +40,11 @@
     </issueManagement>
 
     <modules>
-        <module>connio-sdk-java-api</module>
-        <module>connio-sdk-java-http</module>
-        <module>connio-sdk-java-test</module>
+        <module>sdk-api-core</module>
+        <module>sdk-api-systemservices</module>
+        <module>sdk-api-dataservices</module>
+        <module>sdk-http</module>
+        <module>sdk-http-test</module>
     </modules>
 
     <properties>
