@@ -15,18 +15,11 @@ public interface ConnioClientTransformer {
     /**
      * TODO: javadoc
      *
-     * @param credentials
-     */
-    public void init(ConnioCredentials credentials);
-
-    /**
-     * TODO: javadoc
-     *
      * @param request
      * @param <RS>
      * @return
      */
-    public <RS extends ConnioResponse> RS execute(ConnioRequest<RS> request);
+    public <RS extends ConnioResponse> RS execute(ConnioRequest<RS> request, ConnioCredentials credentials);
 
     /**
      * TODO: javadoc

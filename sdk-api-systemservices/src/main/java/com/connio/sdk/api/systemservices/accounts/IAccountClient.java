@@ -25,6 +25,8 @@ public interface IAccountClient extends ConnioClient {
             throws ConnioServiceException, ConnioClientException;
 
     /**
+     * TODO: javadoc
+     *
      * @param sid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException

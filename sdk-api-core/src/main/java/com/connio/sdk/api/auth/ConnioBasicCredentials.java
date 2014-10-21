@@ -1,6 +1,10 @@
 package com.connio.sdk.api.auth;
 
 
+import com.connio.sdk.api.utils.Asserts;
+
+import java.util.Locale;
+
 /**
  * TODO: javadoc
  *
@@ -13,7 +17,14 @@ public class ConnioBasicCredentials implements ConnioCredentials {
 
     private String secretKey;
 
-    public ConnioBasicCredentials(String accessKey, String secretKey) {
+    private String profile;
+
+    public ConnioBasicCredentials(String profile, String accessKey, String secretKey) {
+        Asserts.notEmpty(profile, "Profile");
+        Asserts.notEmpty(accessKey, "AccessKey");
+        Asserts.notEmpty(secretKey, "SecretKey");
+
+        this.profile = profile.toLowerCase(Locale.ENGLISH);
         this.accessKey = accessKey;
         this.secretKey = secretKey;
     }
@@ -26,5 +37,10 @@ public class ConnioBasicCredentials implements ConnioCredentials {
     @Override
     public String getSecretKey() {
         return secretKey;
+    }
+
+    @Override
+    public String getProfile() {
+        return profile;
     }
 }

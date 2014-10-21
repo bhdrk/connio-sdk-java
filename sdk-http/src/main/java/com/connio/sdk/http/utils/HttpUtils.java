@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Map;
 
 import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
@@ -66,9 +67,16 @@ public class HttpUtils {
 
         StringBuilder sb = new StringBuilder();
 
-        for (Map.Entry<String, String> queryParam : queryParams.entrySet()) {
-            if (isNotEmpty(queryParam.getKey()) && isNotEmpty(queryParam.getValue())) {
-                sb.append(queryParam.getKey()).append("=").append(queryParam.getValue());
+        for (Iterator<Map.Entry<String, String>> iterator = queryParams.entrySet().iterator(); iterator.hasNext(); ) {
+            Map.Entry<String, String> queryParam = iterator.next();
+            if (isNotEmpty(queryParam.getKey())) {
+                sb.append(queryParam.getKey());
+                if (isNotEmpty(queryParam.getValue())) {
+                    sb.append("=").append(queryParam.getValue());
+                    if (iterator.hasNext()) {
+                        sb.append("&");
+                    }
+                }
             }
         }
 

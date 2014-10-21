@@ -1,6 +1,5 @@
 package com.connio.sdk.http.internal;
 
-import com.connio.sdk.api.auth.ConnioCredentials;
 import com.squareup.okhttp.Credentials;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -16,24 +15,17 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @author bdirik
  * @since 02.10.2014
  */
-public class Authenticator implements com.squareup.okhttp.Authenticator {
-
-    private ConnioCredentials credentials;
+public class ProxyAuthenticator implements com.squareup.okhttp.Authenticator {
 
     private ClientConfig clientConfig;
 
-    public Authenticator(ConnioCredentials credentials, ClientConfig clientConfig) {
-        this.credentials = credentials;
+    public ProxyAuthenticator(ClientConfig clientConfig) {
         this.clientConfig = clientConfig;
     }
 
     @Override
     public Request authenticate(Proxy proxy, Response response) throws IOException {
-        String basic = Credentials.basic(credentials.getAccessKey(), credentials.getSecretKey());
-        return response.request()
-                .newBuilder()
-                .header("Authorization", basic)
-                .build();
+        return null;
     }
 
     @Override

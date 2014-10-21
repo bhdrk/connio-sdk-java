@@ -21,14 +21,14 @@ public class ClientFactory {
     private ClientFactory() {
     }
 
-    public static OkHttpClient create(ConnioCredentials credentials, ClientConfig clientConfig) {
-        return factory.doCreate(credentials, clientConfig);
+    public static OkHttpClient create(ClientConfig clientConfig) {
+        return factory.doCreate(clientConfig);
     }
 
-    private OkHttpClient doCreate(ConnioCredentials credentials, ClientConfig clientConfig) {
+    private OkHttpClient doCreate(ClientConfig clientConfig) {
         OkHttpClient client = new OkHttpClient();
 
-        client.setAuthenticator(new Authenticator(credentials, clientConfig));
+        client.setAuthenticator(new ProxyAuthenticator(clientConfig));
         client.setConnectTimeout(clientConfig.getConnectionTimeout(), TimeUnit.MILLISECONDS);
         client.setReadTimeout(clientConfig.getConnectionRequestTimeout(), TimeUnit.MILLISECONDS);
 

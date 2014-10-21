@@ -1,5 +1,6 @@
 package com.connio.sdk.api.systemservices.accounts;
 
+import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.auth.ConnioCredentialsManager;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.accounts.model.*;
@@ -125,7 +126,7 @@ public class AccountEndpointClientHttpTest {
         AccountDetails result = client.getMyAccountDetails();
 
         String accountSid = result.getSid();
-        String currentAccountSid = ConnioCredentialsManager.getCredentials().getAccessKey();
+        String currentAccountSid = ConnioCredentialsManager.getCredentials(ConnioCredentials.DEFAULT_PROFILE).getAccessKey();
 
         assertThat(accountSid).isEqualTo(currentAccountSid);
     }

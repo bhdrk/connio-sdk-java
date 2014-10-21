@@ -1,9 +1,11 @@
 package com.connio.sdk.api.dataservices.model;
 
 /**
+ * TODO: javadoc
+ *
  * Created by bdirik on 17.10.2014.
  */
-public class SendResponse extends DataEndpointResponse<DataFeedDetails> {
+public class SendDataResponse extends DataEndpointResponse<DataFeedDetails> {
 
     private DataFeedDetails result;
 

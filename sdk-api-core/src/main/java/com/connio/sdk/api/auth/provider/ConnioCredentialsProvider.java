@@ -2,6 +2,8 @@ package com.connio.sdk.api.auth.provider;
 
 import com.connio.sdk.api.auth.ConnioCredentials;
 
+import java.util.Map;
+
 /**
  * TODO: javadoc
  *
@@ -15,5 +17,5 @@ public interface ConnioCredentialsProvider {
      *
      * @return
      */
-    public ConnioCredentials getCredentials();
+    public Map<String, ConnioCredentials> getCredentialsMap();
 }

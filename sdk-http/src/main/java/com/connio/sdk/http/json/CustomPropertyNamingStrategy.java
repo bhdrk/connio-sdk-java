@@ -16,7 +16,7 @@ public class CustomPropertyNamingStrategy extends PropertyNamingStrategy.LowerCa
         if ("clazz".equalsIgnoreCase(input)) {
             return "class";
         } else if (input.startsWith("_")) {
-            return "@" + input.substring(1);
+            return "@" + super.translate(input.substring(1));
         }
         return super.translate(input);
     }

@@ -1,5 +1,7 @@
 package com.connio.sdk.api.model;
 
+import com.connio.sdk.api.utils.Asserts;
+
 /**
  * TODO: javadoc
  *
@@ -10,9 +12,10 @@ public abstract class AbstractConnioRequest<RS extends AbstractConnioResponse> i
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
+        Asserts.notNull(metaData, "Metadata");
+
         metaData.setVersion("v1");
         metaData.addPath("/v1");
         metaData.setContentType(new ContentType("application/json", "utf-8"));
     }
-
 }

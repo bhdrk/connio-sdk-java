@@ -1,5 +1,6 @@
 package com.connio.sdk.api.core;
 
+import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.ConnioResponse;
@@ -22,14 +23,14 @@ public abstract class AbstractClientTransformer implements ConnioClientTransform
     private Map<String, ConnioResponseHandler> responseHandlers = new HashMap<String, ConnioResponseHandler>();
 
     @Override
-    public <T extends ConnioResponse> T execute(ConnioRequest<T> request) {
+    public <T extends ConnioResponse> T execute(ConnioRequest<T> request, ConnioCredentials credentials) {
         request = handleRequest(request);
-        T response = doExecute(request);
+        T response = doExecute(request, credentials);
         handleResponse(response);
         return response;
     }
 
-    protected abstract <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> request);
+    protected abstract <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> request, ConnioCredentials credentials);
 
     protected <RS extends ConnioResponse> ConnioRequest<RS> handleRequest(ConnioRequest<RS> request) {
         if (isNotEmpty(requestHandlers)) {

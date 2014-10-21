@@ -2,8 +2,7 @@ package com.connio.sdk.api.auth.provider;
 
 import com.connio.sdk.api.auth.ConnioCredentials;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO: javadoc
@@ -13,36 +12,38 @@ import java.util.List;
  */
 public class ConnioCredentialsProviderChain implements ConnioCredentialsProvider {
 
-    private ConnioCredentials credentials;
-
     private List<ConnioCredentialsProvider> providers;
+
+    private Map<String, ConnioCredentials> credentialsMap;
 
     public ConnioCredentialsProviderChain() {
         providers = new ArrayList<ConnioCredentialsProvider>(3);
-
         providers.add(new EnvironmentVariablesCredentialsProvider());
         providers.add(new SystemPropertyCredentialsProvider());
         providers.add(new ProfileCredentialsProvider());
 
-        load();
-    }
-
-    private void load() {
-        for (ConnioCredentialsProvider provider : providers) {
-            ConnioCredentials credentials = provider.getCredentials();
-            if (credentials != null) {
-                this.credentials = credentials;
-                break;
-            }
-        }
+        getCredentialsMap();
     }
 
     @Override
-    public ConnioCredentials getCredentials() {
-        return credentials;
+    public Map<String, ConnioCredentials> getCredentialsMap() {
+        if (credentialsMap == null) {
+            credentialsMap = new HashMap<String, ConnioCredentials>();
+            for (ConnioCredentialsProvider provider : providers) {
+                Map<String, ConnioCredentials> cmap = provider.getCredentialsMap();
+                if (cmap != null) {
+                    credentialsMap.putAll(cmap);
+                }
+            }
+        }
+        return credentialsMap;
     }
 
-    public void setCredentials(ConnioCredentials credentials) {
-        this.credentials = credentials;
+    public ConnioCredentials getCredentials(String profileName) {
+        return credentialsMap.get(profileName);
+    }
+
+    public void addCredentials(ConnioCredentials credentials) {
+        credentialsMap.put(credentials.getProfile().toLowerCase(Locale.ENGLISH), credentials);
     }
 }

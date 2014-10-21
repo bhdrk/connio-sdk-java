@@ -1,6 +1,10 @@
 package com.connio.sdk.api.auth;
 
 import com.connio.sdk.api.auth.provider.ConnioCredentialsProviderChain;
+import com.connio.sdk.api.exception.ConnioClientException;
+import com.connio.sdk.api.utils.Asserts;
+
+import java.util.Locale;
 
 /**
  * TODO: javadoc
@@ -17,8 +21,8 @@ public class ConnioCredentialsManager {
      *
      * @param credentials
      */
-    public static void setCredentials(ConnioCredentials credentials) {
-        providerChain.setCredentials(credentials);
+    public static void addCredentials(ConnioCredentials credentials) {
+        providerChain.addCredentials(credentials);
     }
 
     /**
@@ -26,7 +30,15 @@ public class ConnioCredentialsManager {
      *
      * @return
      */
-    public static ConnioCredentials getCredentials() {
-        return providerChain.getCredentials();
+    public static ConnioCredentials getCredentials(String profileName) {
+        Asserts.notEmpty(profileName, "ProfileName");
+
+        ConnioCredentials credentials = providerChain.getCredentials(profileName.toLowerCase(Locale.ENGLISH));
+
+        if (credentials == null) {
+            throw new ConnioClientException("Credentials does not exists for profile: " + profileName);
+        }
+
+        return credentials;
     }
 }

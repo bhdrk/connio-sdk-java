@@ -1,8 +1,8 @@
 package com.connio.sdk.api.auth.provider;
 
-import com.connio.sdk.api.auth.ConnioBasicCredentials;
 import com.connio.sdk.api.auth.ConnioCredentials;
-import com.connio.sdk.api.utils.TypeUtils;
+
+import java.util.Map;
 
 /**
  * TODO: javadoc
@@ -10,16 +10,19 @@ import com.connio.sdk.api.utils.TypeUtils;
  * @author bdirik
  * @since 19.09.2014
  */
-public class SystemPropertyCredentialsProvider implements ConnioCredentialsProvider {
+public class SystemPropertyCredentialsProvider extends AbstractConnioCredentialsProvider {
+
+    public static final String AUTH_PREFIX = "connio.auth.";
+    public static final String ACCESSKEY_SUFFIX = ".accessKey";
+    public static final String SECRETKEY_SUFFIX = ".secretKey";
+
+    protected SystemPropertyCredentialsProvider() {
+        super(AUTH_PREFIX, ACCESSKEY_SUFFIX, SECRETKEY_SUFFIX);
+    }
+
     @Override
-    public ConnioCredentials getCredentials() {
-        String accessKey = System.getProperty("connio.auth.accessKey");
-        String secretKey = System.getProperty("connio.auth.secretKey");
-
-        if (TypeUtils.isNotEmpty(accessKey) && TypeUtils.isNotEmpty(secretKey)) {
-            return new ConnioBasicCredentials(accessKey, secretKey);
-        }
-
-        return null;
+    public Map<String, ConnioCredentials> getCredentialsMap() {
+        Map<String, String> systemPropertyMap = toMap(System.getProperties());
+        return getCredentialsMap(systemPropertyMap);
     }
 }

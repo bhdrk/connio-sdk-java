@@ -7,6 +7,9 @@ package com.connio.sdk.api.auth;
  * @since 17.09.2014
  */
 public interface ConnioCredentials {
+
+    public static final String DEFAULT_PROFILE = "DEFAULT";
+
     /**
      * TODO: javadoc
      *
@@ -20,4 +23,11 @@ public interface ConnioCredentials {
      * @return
      */
     public String getSecretKey();
+
+    /**
+     * TODO: javadoc
+     *
+     * @return
+     */
+    public String getProfile();
 }
