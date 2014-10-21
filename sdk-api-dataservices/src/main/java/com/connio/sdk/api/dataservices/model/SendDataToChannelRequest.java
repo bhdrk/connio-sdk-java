@@ -10,7 +10,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * <p/>
  * Created by bdirik on 17.10.2014.
  */
-public class SendDataRequest extends DataEndpointRequest<SendDataResponse> {
+public class SendDataToChannelRequest extends DataEndpointRequest<SendDataToChannelResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
@@ -34,10 +34,10 @@ public class SendDataRequest extends DataEndpointRequest<SendDataResponse> {
 
     private DataFeed dataFeed;
 
-    public SendDataRequest() {
+    public SendDataToChannelRequest() {
     }
 
-    public SendDataRequest(String appNameOrSid, String channelNameOrSid, DataFeed dataFeed) {
+    public SendDataToChannelRequest(String appNameOrSid, String channelNameOrSid, DataFeed dataFeed) {
         this.appNameOrSid = appNameOrSid;
         this.channelNameOrSid = channelNameOrSid;
         this.dataFeed = dataFeed;

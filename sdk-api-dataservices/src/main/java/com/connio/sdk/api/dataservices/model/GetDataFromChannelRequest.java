@@ -11,7 +11,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * <p/>
  * Created by bdirik on 20.10.2014.
  */
-public class GetDataRequest extends DataEndpointRequest<GetDataResponse> {
+public class GetDataFromChannelRequest extends DataEndpointRequest<GetDataFromChannelResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
@@ -49,10 +49,10 @@ public class GetDataRequest extends DataEndpointRequest<GetDataResponse> {
 
     private DataQuery dataQuery;
 
-    public GetDataRequest() {
+    public GetDataFromChannelRequest() {
     }
 
-    public GetDataRequest(String appNameOrSid, String channelNameOrSid, DataQuery dataQuery) {
+    public GetDataFromChannelRequest(String appNameOrSid, String channelNameOrSid, DataQuery dataQuery) {
         this.appNameOrSid = appNameOrSid;
         this.channelNameOrSid = channelNameOrSid;
         this.dataQuery = dataQuery;

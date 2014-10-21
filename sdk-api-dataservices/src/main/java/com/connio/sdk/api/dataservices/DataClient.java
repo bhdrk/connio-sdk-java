@@ -1,7 +1,5 @@
 package com.connio.sdk.api.dataservices;
 
-import com.connio.sdk.api.auth.ConnioCredentials;
-import com.connio.sdk.api.auth.ConnioCredentialsManager;
 import com.connio.sdk.api.core.AbstractClient;
 import com.connio.sdk.api.dataservices.model.*;
 import com.connio.sdk.api.exception.ConnioClientException;
@@ -34,7 +32,21 @@ public class DataClient extends AbstractClient implements IDataClient {
     @Override
     public DataPointResultSet getData(String appNameOrSid, String channelNameOrSid, DataQuery dataQuery)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetDataRequest(appNameOrSid, channelNameOrSid, dataQuery));
+        return execute(new GetDataFromChannelRequest(appNameOrSid, channelNameOrSid, dataQuery));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appNameOrSid
+     * @param dataFeed
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
+    @Override
+    public DataFeedDetails sendData(String appNameOrSid, DataFeed dataFeed) throws ConnioServiceException, ConnioClientException {
+        return execute(new SendDataToAppRequest(appNameOrSid, dataFeed));
     }
 
     /**
@@ -50,6 +62,6 @@ public class DataClient extends AbstractClient implements IDataClient {
     @Override
     public DataFeedDetails sendData(String appNameOrSid, String channelNameOrSid, DataFeed dataFeed)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new SendDataRequest(appNameOrSid, channelNameOrSid, dataFeed));
+        return execute(new SendDataToChannelRequest(appNameOrSid, channelNameOrSid, dataFeed));
     }
 }

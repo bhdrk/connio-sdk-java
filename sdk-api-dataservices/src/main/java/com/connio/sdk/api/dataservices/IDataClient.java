@@ -10,10 +10,10 @@ import com.connio.sdk.api.exception.ConnioServiceException;
 
 /**
  * TODO: javadoc
- *
+ * <p/>
  * Created by bdirik on 16.10.2014.
  */
-public interface IDataClient extends ConnioClient{
+public interface IDataClient extends ConnioClient {
 
     /**
      * TODO: javadoc
@@ -26,7 +26,19 @@ public interface IDataClient extends ConnioClient{
      * @throws ConnioClientException
      */
     public DataPointResultSet getData(String appNameOrSid, String channelNameOrSid, DataQuery dataQuery)
-            throws ConnioServiceException , ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appNameOrSid
+     * @param dataFeed
+     * @return
+     * @throws ConnioServiceException
+     * @throws ConnioClientException
+     */
+    public DataFeedDetails sendData(String appNameOrSid, DataFeed dataFeed)
+            throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
@@ -39,5 +51,5 @@ public interface IDataClient extends ConnioClient{
      * @throws ConnioClientException
      */
     public DataFeedDetails sendData(String appNameOrSid, String channelNameOrSid, DataFeed dataFeed)
-            throws ConnioServiceException , ConnioClientException;
+            throws ConnioServiceException, ConnioClientException;
 }
