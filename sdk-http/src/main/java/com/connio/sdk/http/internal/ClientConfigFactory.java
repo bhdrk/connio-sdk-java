@@ -90,7 +90,7 @@ public class ClientConfigFactory {
             }
 
             Map<String, String> propertiesMap = new HashMap<String, String>();
-            Enumeration<URL> resources = getLoader().getResources(Constants.USER_RESOURCE_CONFIG_FILE);
+            Enumeration<URL> resources = getLoader().getResources(Constants.CLASSPATH_RESOURCE_CONFIG_FILE);
             while (resources.hasMoreElements()) {
                 URL resource = resources.nextElement();
                 propertiesMap.putAll(loadResource(resource));

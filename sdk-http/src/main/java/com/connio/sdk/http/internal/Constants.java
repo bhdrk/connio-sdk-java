@@ -16,6 +16,6 @@ public class Constants {
 
     public static final String USER_DEFINED_CONFIG_FILE = "connio.properties";
 
-    public static final String USER_RESOURCE_CONFIG_FILE = "com/connio/sdk/connio.properties";
+    public static final String CLASSPATH_RESOURCE_CONFIG_FILE = "com/connio/sdk/connio.properties";
 
 }
