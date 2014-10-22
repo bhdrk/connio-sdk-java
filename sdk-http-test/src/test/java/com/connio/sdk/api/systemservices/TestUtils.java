@@ -17,9 +17,9 @@ public class TestUtils {
 
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("-yy-MM-dd-HH-mm-ss-SSS");
 
-    private static final int MAX_LENGTH = 32;
+    private static final int MAX_LENGTH = 64;
 
-    public static String createNewName(String prefix) {
+    public static String randomName(String prefix) {
         String suffix = FORMATTER.format(new Date());
         int maxLength = MAX_LENGTH - suffix.length();
         Asserts.maxSize(prefix, maxLength, "Prefix");

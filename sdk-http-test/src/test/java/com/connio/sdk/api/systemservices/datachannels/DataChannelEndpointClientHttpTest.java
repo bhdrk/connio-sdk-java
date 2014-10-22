@@ -44,7 +44,7 @@ public class DataChannelEndpointClientHttpTest {
     @Test
     public void createTestApp() throws Exception {
         App app = new App();
-        app.setName(TestUtils.createNewName("TEST-APP"));
+        app.setName(TestUtils.randomName("TEST-APP"));
         app.setState(AppStateType.RUNNING);
         app.setVersion("v1.0");
         app.setDisplayName("TEST-APP");
@@ -61,7 +61,7 @@ public class DataChannelEndpointClientHttpTest {
     @Test(dependsOnMethods = "createTestApp")
     public void testCreateDataChannel() throws Exception {
         testDataChannel = new DataChannel();
-        testDataChannel.setName(TestUtils.createNewName("TEST-DCHNL"));
+        testDataChannel.setName(TestUtils.randomName("TEST-DCHNL"));
         testDataChannel.setMeasurementType(CUSTOM);
         testDataChannel.setMeasurementUnit("boolean");
         testDataChannel.setChannelType(INPUT);
@@ -127,7 +127,7 @@ public class DataChannelEndpointClientHttpTest {
         String currentDataChannelName = testDataChannel.getName();
 
         DataChannelUpdate dataChannelUpdate = new DataChannelUpdate();
-        dataChannelUpdate.setName(TestUtils.createNewName("TEST-DCHNL"));
+        dataChannelUpdate.setName(TestUtils.randomName("TEST-DCHNL"));
         dataChannelUpdate.setMeasurementUnit("numeric");
         dataChannelUpdate.setAlarm(alarm);
         dataChannelUpdate.setBounds(bounds);

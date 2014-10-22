@@ -38,11 +38,11 @@ public class DevicesEndpointClientHttpTest {
     @Test
     public void createDeviceProfile() throws Exception {
         DeviceProfile profile = new DeviceProfile();
-        profile.setName(TestUtils.createNewName("TEST-DVPRF"));
-        profile.setClazz(TestUtils.createNewName("CLASS"));
-        profile.setSubclass(TestUtils.createNewName("SUBCLASS"));
-        profile.setVendor(TestUtils.createNewName("VENDOR"));
-        profile.setProduct(TestUtils.createNewName("PRODUCT"));
+        profile.setName(TestUtils.randomName("TEST-DVPRF"));
+        profile.setClazz(TestUtils.randomName("CLASS"));
+        profile.setSubclass(TestUtils.randomName("SUBCLASS"));
+        profile.setVendor(TestUtils.randomName("VENDOR"));
+        profile.setProduct(TestUtils.randomName("PRODUCT"));
 
         DeviceProfileDetails result = profileClient.createDeviceProfile(profile);
 
@@ -116,7 +116,7 @@ public class DevicesEndpointClientHttpTest {
     @Test(dependsOnMethods = "testCreateDevice")
     public void testUpdateDeviceBySID() throws Exception {
         DeviceProfile deviceProfile = new DeviceProfile();
-        deviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
+        deviceProfile.setName(TestUtils.randomName("TEST-DVPRF"));
 
         DeviceProfileDetails profileResult = profileClient.updateDeviceProfile(testProfileName, deviceProfile);
         testProfileName = profileResult.getName();

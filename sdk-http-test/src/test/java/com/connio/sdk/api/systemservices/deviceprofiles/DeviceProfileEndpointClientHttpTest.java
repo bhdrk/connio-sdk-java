@@ -31,11 +31,11 @@ public class DeviceProfileEndpointClientHttpTest {
     @Test
     public void testCreateDeviceProfile() throws Exception {
         testDeviceProfile = new DeviceProfile();
-        testDeviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
-        testDeviceProfile.setClazz(TestUtils.createNewName("CLASS"));
-        testDeviceProfile.setSubclass(TestUtils.createNewName("SUBCLASS"));
-        testDeviceProfile.setVendor(TestUtils.createNewName("VENDOR"));
-        testDeviceProfile.setProduct(TestUtils.createNewName("PRODUCT"));
+        testDeviceProfile.setName(TestUtils.randomName("TEST-DVPRF"));
+        testDeviceProfile.setClazz(TestUtils.randomName("CLASS"));
+        testDeviceProfile.setSubclass(TestUtils.randomName("SUBCLASS"));
+        testDeviceProfile.setVendor(TestUtils.randomName("VENDOR"));
+        testDeviceProfile.setProduct(TestUtils.randomName("PRODUCT"));
 
         DeviceProfileDetails result = client.createDeviceProfile(testDeviceProfile);
 
@@ -73,11 +73,11 @@ public class DeviceProfileEndpointClientHttpTest {
     public void testUpdateDeviceProfile() throws Exception {
         String currentDeviceProfileName = testDeviceProfile.getName();
 
-        testDeviceProfile.setName(TestUtils.createNewName("TEST-DVPRF"));
-        testDeviceProfile.setClazz(TestUtils.createNewName("CLASS"));
-        testDeviceProfile.setSubclass(TestUtils.createNewName("SUBCLASS"));
-        testDeviceProfile.setVendor(TestUtils.createNewName("VENDOR"));
-        testDeviceProfile.setProduct(TestUtils.createNewName("PRODUCT"));
+        testDeviceProfile.setName(TestUtils.randomName("TEST-DVPRF"));
+        testDeviceProfile.setClazz(TestUtils.randomName("CLASS"));
+        testDeviceProfile.setSubclass(TestUtils.randomName("SUBCLASS"));
+        testDeviceProfile.setVendor(TestUtils.randomName("VENDOR"));
+        testDeviceProfile.setProduct(TestUtils.randomName("PRODUCT"));
 
         DeviceProfileDetails result = client.updateDeviceProfile(currentDeviceProfileName, testDeviceProfile);
 

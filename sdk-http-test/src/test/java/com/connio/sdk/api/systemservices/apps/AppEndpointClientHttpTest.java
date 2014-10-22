@@ -29,7 +29,7 @@ public class AppEndpointClientHttpTest {
         client = new AppClient();
 
         testApp = new App();
-        testApp.setName(TestUtils.createNewName("TEST-APP"));
+        testApp.setName(TestUtils.randomName("TEST-APP"));
         testApp.setDisplayName("TEST APP");
         testApp.setDescription("TEST APP DESC");
         testApp.setVersion("v1.0");
@@ -73,7 +73,7 @@ public class AppEndpointClientHttpTest {
     @Test(dependsOnMethods = "testCreateApp")
     public void testUpdateApp() throws Exception {
         String currentAppName = testApp.getName();
-        String newName = TestUtils.createNewName("TEST-APP");
+        String newName = TestUtils.randomName("TEST-APP");
 
         testApp.setName(newName);
         testApp.setDisplayName("UPDATED TEST APP");
