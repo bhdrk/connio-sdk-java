@@ -73,9 +73,9 @@ public class HttpUtils {
                 sb.append(queryParam.getKey());
                 if (isNotEmpty(queryParam.getValue())) {
                     sb.append("=").append(queryParam.getValue());
-                    if (iterator.hasNext()) {
-                        sb.append("&");
-                    }
+                }
+                if (iterator.hasNext()) {
+                    sb.append("&");
                 }
             }
         }
