@@ -1,9 +1,11 @@
 package com.connio.sdk.api.systemservices.devices;
 
 import com.connio.sdk.api.model.Deleted;
+import com.connio.sdk.api.model.GeoCoordinates;
+import com.connio.sdk.api.model.Location;
 import com.connio.sdk.api.systemservices.TestUtils;
-import com.connio.sdk.api.systemservices.deviceprofiles.IDeviceProfileClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.DeviceProfileClient;
+import com.connio.sdk.api.systemservices.deviceprofiles.IDeviceProfileClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
 import com.connio.sdk.api.systemservices.devices.model.*;

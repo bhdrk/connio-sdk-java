@@ -1,5 +1,7 @@
 package com.connio.sdk.api.systemservices.devices.model;
 
+import com.connio.sdk.api.model.GeoCoordinates;
+import com.connio.sdk.api.model.Location;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.Asserts;
 

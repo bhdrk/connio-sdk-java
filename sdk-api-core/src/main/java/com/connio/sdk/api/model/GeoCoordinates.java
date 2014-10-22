@@ -1,4 +1,4 @@
-package com.connio.sdk.api.systemservices.devices.model;
+package com.connio.sdk.api.model;
 
 import java.io.Serializable;
 

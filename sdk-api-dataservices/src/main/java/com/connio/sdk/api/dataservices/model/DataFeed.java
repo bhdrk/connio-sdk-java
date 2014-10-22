@@ -1,5 +1,6 @@
 package com.connio.sdk.api.dataservices.model;
 
+import com.connio.sdk.api.model.Location;
 import com.connio.sdk.api.utils.Asserts;
 
 import java.io.Serializable;

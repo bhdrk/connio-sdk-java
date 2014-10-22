@@ -1,5 +1,6 @@
 package com.connio.sdk.api.systemservices.devices.model;
 
+import com.connio.sdk.api.model.Location;
 
 import java.io.Serializable;
 import java.util.HashMap;
