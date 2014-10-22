@@ -14,6 +14,13 @@ import com.connio.sdk.api.systemservices.users.model.*;
  */
 public class UserClient extends AbstractClient implements IUserClient {
 
+    public UserClient() {
+    }
+
+    public UserClient(String credentialsProfile) {
+        super(credentialsProfile);
+    }
+
     /**
      * TODO: javadoc
      *

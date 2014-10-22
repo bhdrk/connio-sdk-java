@@ -19,6 +19,20 @@ public class DataPoint implements Serializable {
     private List<String> _tags;
     private String _chan;
 
+    public DataPoint() {
+    }
+
+    public DataPoint(Long time, Object value) {
+        this.time = time;
+        this.value = value;
+    }
+
+    public DataPoint(Long time, Object value, String _chan) {
+        this.time = time;
+        this.value = value;
+        this._chan = _chan;
+    }
+
     public Long getTime() {
         return time;
     }

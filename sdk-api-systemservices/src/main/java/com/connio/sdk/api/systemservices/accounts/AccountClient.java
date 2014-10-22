@@ -14,6 +14,13 @@ import com.connio.sdk.api.systemservices.accounts.model.*;
  */
 public class AccountClient extends AbstractClient implements IAccountClient {
 
+    public AccountClient() {
+    }
+
+    public AccountClient(String credentialsProfile) {
+        super(credentialsProfile);
+    }
+
     /**
      * TODO: javadoc
      *

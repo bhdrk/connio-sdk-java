@@ -12,6 +12,9 @@ import com.connio.sdk.api.exception.ConnioServiceException;
  */
 public class DataClient extends AbstractClient implements IDataClient {
 
+    public DataClient() {
+    }
+
     /**
      * TODO: javadoc
      */

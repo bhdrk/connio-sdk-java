@@ -14,6 +14,13 @@ import com.connio.sdk.api.systemservices.apps.model.*;
  */
 public class AppClient extends AbstractClient implements IAppClient {
 
+    public AppClient() {
+    }
+
+    public AppClient(String credentialsProfile) {
+        super(credentialsProfile);
+    }
+
     /**
      * TODO: javadoc
      *

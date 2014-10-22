@@ -14,6 +14,13 @@ import com.connio.sdk.api.systemservices.deviceprofiles.model.*;
  */
 public class DeviceProfileClient extends AbstractClient implements IDeviceProfileClient {
 
+    public DeviceProfileClient() {
+    }
+
+    public DeviceProfileClient(String credentialsProfile) {
+        super(credentialsProfile);
+    }
+
     /**
      * TODO: javadoc
      *

@@ -14,6 +14,13 @@ import com.connio.sdk.api.systemservices.datachannels.model.*;
  */
 public class DataChannelClient extends AbstractClient implements IDataChannelClient {
 
+    public DataChannelClient() {
+    }
+
+    public DataChannelClient(String credentialsProfile) {
+        super(credentialsProfile);
+    }
+
     /**
      * TODO: javadoc
      *
