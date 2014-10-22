@@ -22,6 +22,21 @@ public class DataFeed implements Serializable {
     private Location _loc;
     private List<String> _tags;
 
+    public DataFeed() {
+    }
+
+    public DataFeed(List<DataPoint> datapoints) {
+        this.datapoints = datapoints;
+    }
+
+    public DataFeed(DataPoint... datapoints) {
+        Asserts.notEmpty(datapoints, "DataPoints");
+
+        for (DataPoint datapoint : datapoints) {
+            addDataPoint(datapoint);
+        }
+    }
+
     public void addDataPoint(DataPoint dataPoint) {
         Asserts.notNull(dataPoint.getValue(), "Value");
         Asserts.notNull(dataPoint.getTime(), "Time");

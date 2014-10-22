@@ -23,6 +23,10 @@ public class TypeUtils {
         return map == null || map.size() == 0;
     }
 
+    public static boolean isEmpty(Object[] values) {
+        return values == null || values.length == 0;
+    }
+
     public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
     }
@@ -33,5 +37,9 @@ public class TypeUtils {
 
     public static boolean isNotEmpty(Map<?, ?> map) {
         return !isEmpty(map);
+    }
+
+    public static boolean isNotEmpty(Object[] values) {
+        return !isEmpty(values);
     }
 }

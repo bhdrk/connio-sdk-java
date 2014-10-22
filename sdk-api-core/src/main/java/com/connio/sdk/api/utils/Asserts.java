@@ -25,6 +25,12 @@ public class Asserts {
         }
     }
 
+    public static void notEmpty(final Object[] values, final String name) {
+        if (TypeUtils.isEmpty(values)) {
+            throw new ConnioClientException(name + " is empty.");
+        }
+    }
+
     public static void maxSize(String str, int maxLength, String name) {
         notEmpty(str, name);
         if (str.length() > maxLength) {
