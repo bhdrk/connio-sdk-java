@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
 import static com.connio.sdk.http.utils.IOUtils.closeSilently;
+import static com.connio.sdk.http.utils.StringUtils.startsWithIgnoreCase;
 
 /**
  * TODO: javadoc
@@ -21,6 +22,8 @@ import static com.connio.sdk.http.utils.IOUtils.closeSilently;
  * @since 15.09.2014
  */
 public class ClientConfigFactory {
+
+    private static final String CONFIG_KEY_PREFIX = "connio";
 
     private static final ClientConfigFactory factory = new ClientConfigFactory();
 
@@ -45,29 +48,44 @@ public class ClientConfigFactory {
         Map<String, String> userDefinedConfigs = getUserDefinedConfigs();
         if (isNotEmpty(userDefinedConfigs)) {
             for (Map.Entry<String, String> entry : userDefinedConfigs.entrySet()) {
-                addToConfigMap(configMap, entry.getKey(), entry.getValue());
+                if (isConfigKey(entry.getKey())) {
+                    addToConfigMap(configMap, entry.getKey(), entry.getValue());
+                }
             }
         }
     }
 
     private void overrideFromEnvProperties(Map<String, String> configMap) {
         Map<String, String> envMap = System.getenv();
-        for (Map.Entry<String, String> entity : envMap.entrySet()) {
-            addToConfigMap(configMap, entity.getKey(), entity.getValue());
+
+        for (Map.Entry<String, String> entry : envMap.entrySet()) {
+            if (isConfigKey(entry.getKey())) {
+                String dottedKey = entry.getKey().replace("_", ".");
+                addToConfigMap(configMap, dottedKey, entry.getValue());
+            }
         }
     }
 
     private void overrideFromSystemProperties(Map<String, String> configMap) {
         Properties systemProperties = System.getProperties();
         for (String name : systemProperties.stringPropertyNames()) {
-            addToConfigMap(configMap, name, systemProperties.getProperty(name));
+            if (isConfigKey(name)) {
+                addToConfigMap(configMap, name, systemProperties.getProperty(name));
+            }
         }
     }
 
     private void addToConfigMap(Map<String, String> configMap, String key, String value) {
-        if (configMap.containsKey(key)) {
-            configMap.put(key, value);
+        for (String mkey : configMap.keySet()) {
+            if (mkey.equalsIgnoreCase(key)) {
+                configMap.put(mkey, value);
+                return;
+            }
         }
+    }
+
+    private boolean isConfigKey(String key) {
+        return startsWithIgnoreCase(key, CONFIG_KEY_PREFIX);
     }
 
     private Map<String, String> getDefaultConfigs() {
@@ -75,7 +93,7 @@ public class ClientConfigFactory {
             URL resource = getLoader().getResource(Constants.DEFAULT_CONFIG_FILE);
             return loadResource(resource);
         } catch (Exception e) {
-            throw new ConnioClientException("Cannot load " + Constants.DEFAULT_CONFIG_FILE, e);
+            throw new ConnioClientException("Cannot load default configuration from " + Constants.DEFAULT_CONFIG_FILE, e);
         }
     }
 
@@ -91,13 +109,15 @@ public class ClientConfigFactory {
 
             Map<String, String> propertiesMap = new HashMap<String, String>();
             Enumeration<URL> resources = getLoader().getResources(Constants.CLASSPATH_RESOURCE_CONFIG_FILE);
+
             while (resources.hasMoreElements()) {
                 URL resource = resources.nextElement();
                 propertiesMap.putAll(loadResource(resource));
             }
+
             return propertiesMap;
         } catch (Exception e) {
-            throw new ConnioClientException("Cannot load " + Constants.USER_DEFINED_CONFIG_FILE, e);
+            throw new ConnioClientException("Cannot load user defined configuration from " + Constants.USER_DEFINED_CONFIG_FILE, e);
         }
     }
 
