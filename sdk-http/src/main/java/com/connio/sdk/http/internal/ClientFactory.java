@@ -1,7 +1,8 @@
 package com.connio.sdk.http.internal;
 
-import com.connio.sdk.api.auth.ConnioCredentials;
 import com.squareup.okhttp.OkHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -16,23 +17,22 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @since 02.10.2014
  */
 public class ClientFactory {
-    private static final ClientFactory factory = new ClientFactory();
 
-    private ClientFactory() {
+    private static final Logger LOG = LoggerFactory.getLogger(ClientFactory.class);
+
+    public ClientFactory() {
     }
 
-    public static OkHttpClient create(ClientConfig clientConfig) {
-        return factory.doCreate(clientConfig);
-    }
-
-    private OkHttpClient doCreate(ClientConfig clientConfig) {
+    public OkHttpClient create(ClientConfig clientConfig) {
         OkHttpClient client = new OkHttpClient();
 
-        client.setAuthenticator(new ProxyAuthenticator(clientConfig));
         client.setConnectTimeout(clientConfig.getConnectionTimeout(), TimeUnit.MILLISECONDS);
         client.setReadTimeout(clientConfig.getConnectionRequestTimeout(), TimeUnit.MILLISECONDS);
 
         if (hasProxyConfig(clientConfig)) {
+            if (LOG.isDebugEnabled())
+                LOG.debug("Setting up proxy for " + clientConfig.getProxyHost() + ":" + clientConfig.getProxyPort());
+
             setProxy(client, clientConfig);
         }
 
@@ -42,7 +42,9 @@ public class ClientFactory {
     private void setProxy(OkHttpClient client, ClientConfig clientConfig) {
         InetSocketAddress address = InetSocketAddress.createUnresolved(clientConfig.getProxyHost(), clientConfig.getProxyPort());
         Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
+
         client.setProxy(proxy);
+        client.setAuthenticator(new ProxyAuthenticator(clientConfig));
     }
 
     private boolean hasProxyConfig(ClientConfig clientConfig) {

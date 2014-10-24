@@ -16,24 +16,30 @@ import java.util.Properties;
  */
 public class UserAgentInfo {
 
-    private static final UserAgentInfo instance = new UserAgentInfo();
-
-    public static String getUserAgent() {
-        return instance.userAgent;
-    }
-
     private String userAgent;
     private String platform;
     private String version;
 
-    private UserAgentInfo() {
-        userAgent = buildUserAgent();
+    public UserAgentInfo() {
+        loadVersionInfo();
+        buildUserAgent();
     }
 
-    private String buildUserAgent() {
-        loadVersionInfo();
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    private void buildUserAgent() {
         String userAgentTemplate = Constants.USER_AGENT_TEMPLATE;
-        return userAgentTemplate
+        userAgent = userAgentTemplate
                 .replace("{platform}", platform)
                 .replace("{version}", version)
                 .replace("{os.name}", getSystemProperty("os.name"))
@@ -51,8 +57,9 @@ public class UserAgentInfo {
     }
 
     private void loadVersionInfo() {
+        InputStream resource = null;
         try {
-            InputStream resource = ClassResouceLoader.getResourceAsStream(Constants.VERSION_INFO_FILE, UserAgentInfo.class);
+            resource = ClassResouceLoader.getResourceAsStream(Constants.VERSION_INFO_FILE, UserAgentInfo.class);
             if (resource != null) {
                 Properties properties = new Properties();
                 properties.load(resource);
@@ -71,6 +78,8 @@ public class UserAgentInfo {
             }
         } catch (IOException e) {
             throw new ConnioClientException("An error occurred while loading version.properties file.", e);
+        } finally {
+            IOUtils.closeSilently(resource);
         }
     }
 }

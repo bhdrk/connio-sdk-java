@@ -16,19 +16,13 @@ import java.util.Set;
  */
 public class ConverterChain implements Converter {
 
-    private static final ConverterChain instance = new ConverterChain();
-
-    public static ConverterChain instance() {
-        return instance;
-    }
-
     private Map<String, Converter> map = new HashMap<>();
 
     public ConverterChain() {
         registerConverter(new JSONConverter());
     }
 
-    private void registerConverter(Converter converter) {
+    public void registerConverter(Converter converter) {
         for (String type : converter.getSupportedTypes()) {
             map.put(type.toLowerCase(Locale.ENGLISH), converter);
         }
@@ -50,7 +44,7 @@ public class ConverterChain implements Converter {
         return keys.toArray(new String[keys.size()]);
     }
 
-    private Converter getConverter(String contentType) {
+    public Converter getConverter(String contentType) {
         String type = transform(contentType);
         if (!map.containsKey(type)) {
             throw new ConnioClientException("Unsupported content type:" + contentType);

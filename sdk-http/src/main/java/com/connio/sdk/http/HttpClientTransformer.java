@@ -26,17 +26,17 @@ public class HttpClientTransformer extends AbstractClientTransformer {
     private ClientConfig clientConfig;
 
     public HttpClientTransformer() {
-        this.clientConfig = ClientConfigFactory.create();
-        this.client = ClientFactory.create(clientConfig);
+        this.clientConfig = InternalContext.clientConfigFactory().create();
+        this.client = InternalContext.clientFactory().create(clientConfig);
     }
 
     @Override
     protected <RS extends ConnioResponse> RS doExecute(ConnioRequest<RS> connioRequest, ConnioCredentials credentials) {
         Class<RS> responseType = HttpUtils.resolveResponseType(connioRequest);
         try {
-            Request request = RequestFactory.create(clientConfig, connioRequest, credentials);
+            Request request = InternalContext.requestFactory().create(clientConfig, connioRequest, credentials);
             Response response = client.newCall(request).execute();
-            return ResponseFactory.create(response, responseType);
+            return InternalContext.responseFactory().create(response, responseType);
         } catch (IOException e) {
             throw new ConnioClientException("An error occurred while executing http request.", e);
         }

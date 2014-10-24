@@ -5,11 +5,13 @@ import com.connio.sdk.api.model.ConnioRequest;
 import com.connio.sdk.api.model.Method;
 import com.connio.sdk.api.model.RequestMetaData;
 import com.connio.sdk.api.utils.TypeUtils;
-import com.connio.sdk.http.converter.ConverterChain;
 import com.connio.sdk.http.utils.HttpUtils;
-import com.connio.sdk.http.utils.UserAgentInfo;
 import com.squareup.okhttp.*;
+import okio.Buffer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
@@ -21,24 +23,51 @@ import java.util.Map;
  */
 public class RequestFactory {
 
-    private static final RequestFactory factory = new RequestFactory();
+    private static final Logger LOG = LoggerFactory.getLogger(RequestFactory.class);
 
-    private RequestFactory() {
+    public RequestFactory() {
     }
 
-    public static Request create(ClientConfig clientConfig, ConnioRequest request, ConnioCredentials credentials) {
-        return factory.doCreate(clientConfig, request, credentials);
-    }
-
-    private Request doCreate(ClientConfig clientConfig, ConnioRequest request, ConnioCredentials credentials) {
+    public Request create(ClientConfig clientConfig, ConnioRequest request, ConnioCredentials credentials) {
         RequestMetaData metaData = getMetaData(request);
+
         URL url = HttpUtils.buildURL(clientConfig, metaData);
+        String method = getMethod(metaData);
+        RequestBody body = getBody(metaData);
+        Headers headers = getHeaders(metaData, credentials);
+
+        logRequest(request, url, method, body, headers);
 
         return new Request.Builder()
                 .url(url)
-                .method(getMethod(metaData), getBody(metaData))
-                .headers(getHeaders(metaData, credentials))
+                .method(method, body)
+                .headers(headers)
                 .build();
+    }
+
+    private void logRequest(ConnioRequest request, URL url, String method, RequestBody body, Headers headers) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Request Type: " + request.getClass().getName());
+            LOG.debug("Request URL: " + method + " " + url.toString());
+
+            for (String name : headers.names()) {
+                for (String value : headers.values(name)) {
+                    LOG.debug("Request Header: " + name + " -> " + value);
+                }
+            }
+        }
+
+        if (LOG.isTraceEnabled() && body != null) {
+            LOG.trace("Request Content-Type: " + body.contentType());
+            try {
+                Buffer buffer = new Buffer();
+                body.writeTo(buffer);
+                String content = buffer.readString(body.contentType().charset());
+                LOG.trace("Request Body: " + content);
+            } catch (IOException e) {
+                LOG.error("An error occurred when trying to log request body.", e);
+            }
+        }
     }
 
     protected String getMethod(RequestMetaData metaData) {
@@ -56,7 +85,7 @@ public class RequestFactory {
         }
 
         builder.set("Content-Type", metaData.getContentType().toString());
-        builder.set("User-Agent", UserAgentInfo.getUserAgent());
+        builder.set("User-Agent", InternalContext.userAgentInfo().getUserAgent());
         builder.set("Authorization", Credentials.basic(credentials.getAccessKey(), credentials.getSecretKey()));
 
         return builder.build();
@@ -66,7 +95,7 @@ public class RequestFactory {
         RequestBody requestBody = null;
         MediaType mediaType = MediaType.parse(metaData.getContentType().toString());
         if (metaData.getRequestContent() != null) {
-            String content = ConverterChain.instance().from(metaData.getContentType().getType(), metaData.getRequestContent());
+            String content = InternalContext.converterChain().from(metaData.getContentType().getType(), metaData.getRequestContent());
             requestBody = RequestBody.create(mediaType, content);
         } else if (Method.DELETE.equals(metaData.getMethod())) {
             // required empty body for DELETE method

@@ -4,16 +4,21 @@ import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioResourceNotFoundException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.ConnioResponse;
-import com.connio.sdk.http.converter.ConverterChain;
 import com.connio.sdk.http.json.JSON;
 import com.connio.sdk.http.utils.HttpUtils;
 import com.connio.sdk.http.utils.IOUtils;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,17 +32,16 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @since 02.10.2014
  */
 public class ResponseFactory {
-    private static final ResponseFactory instance = new ResponseFactory();
 
-    private ResponseFactory() {
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(ResponseFactory.class);
 
-    public static <RS extends ConnioResponse> RS create(Response response, Class<RS> responseType) throws IOException {
-        return instance.doCreate(response, responseType);
+    public ResponseFactory() {
     }
 
     @SuppressWarnings("unchecked")
-    private <RS extends ConnioResponse> RS doCreate(Response response, Class<RS> responseType) {
+    public <RS extends ConnioResponse> RS create(Response response, Class<RS> responseType) {
+        logResponse(response);
+
         if (response.isSuccessful()) {
             RS connioResponse = createConnioResponse(responseType);
             setResult(connioResponse, response, responseType);
@@ -46,8 +50,13 @@ public class ResponseFactory {
         throw createException(response);
     }
 
+
     private ConnioServiceException createException(Response response) {
         String errorContent = getResponseContent(response);
+
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("Response Error Body: " + errorContent);
+        }
 
         ConnioServiceException exception = null;
 
@@ -85,11 +94,13 @@ public class ResponseFactory {
 
     private <RT, RS extends ConnioResponse<RT>> void setResult(RS connioResponse, Response response, Class<RS> responseType) {
         ResponseBody body = response.body();
-        InputStream is = body.byteStream();
-        if (is != null) {
+        if (body != null) {
+            Class<RT> resultType = HttpUtils.resolveResultType(connioResponse);
+            InputStream is = body.byteStream();
+
             try {
-                Class<RT> resultType = HttpUtils.resolveResultType(connioResponse);
-                RT result = ConverterChain.instance().to(body.contentType().toString(), is, resultType);
+                is = logResponseResult(body, is, responseType, resultType);
+                RT result = InternalContext.converterChain().to(body.contentType().toString(), is, resultType);
                 connioResponse.setResult(result);
             } finally {
                 IOUtils.closeSilently(is);
@@ -136,5 +147,46 @@ public class ResponseFactory {
             }
         }
         return details;
+    }
+
+    private void logResponse(Response response) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Response Code: " + response.code());
+            LOG.debug("Response Status: " + response.message());
+            LOG.trace("Response Content-Type: " + response.body().contentType());
+
+            Headers headers = response.headers();
+            for (String name : headers.names()) {
+                for (String value : headers.values(name)) {
+                    LOG.debug("Response Header: " + name + " -> " + value);
+                }
+            }
+        }
+    }
+
+    private InputStream logResponseResult(ResponseBody body, InputStream is, Class<?> responseType, Class<?> resultType) {
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Response Type: " + responseType.getName());
+            LOG.debug("Response Result Type: " + resultType.getName());
+        }
+
+        if (LOG.isTraceEnabled() && is != null) {
+            try {
+                // copy response body
+                byte[] bytes = IOUtils.toByteArray(is);
+                LOG.trace("Response Body: " + new String(bytes, getResponseCharset(body)));
+                return new ByteArrayInputStream(bytes);
+            } catch (IOException e) {
+                LOG.error("An error occurred when trying to log response body.", e);
+            }
+        }
+
+        return is;
+    }
+
+    private Charset getResponseCharset(ResponseBody body) {
+        MediaType contentType = body.contentType();
+        return contentType.charset() != null ? contentType.charset() : Charset.forName("UTF-8");
     }
 }

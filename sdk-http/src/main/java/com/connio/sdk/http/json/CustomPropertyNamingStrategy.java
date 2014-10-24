@@ -15,6 +15,7 @@ public class CustomPropertyNamingStrategy extends PropertyNamingStrategy.LowerCa
         // java keyword fix
         if ("clazz".equalsIgnoreCase(input)) {
             return "class";
+        // replace underscore(_) char with at(@)
         } else if (input.startsWith("_")) {
             return "@" + super.translate(input.substring(1));
         }

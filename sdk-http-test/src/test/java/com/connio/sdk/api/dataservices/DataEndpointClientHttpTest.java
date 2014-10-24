@@ -49,7 +49,7 @@ import static org.fest.assertions.api.Assertions.extractProperty;
 @Test(suiteName = "HttpTests", testName = "DataEndpoint")
 public class DataEndpointClientHttpTest {
 
-    private static final String _TEST_CREDENTIAL_PROFILE = TestUtils.randomName("DEVICE");
+    private String _testCredentialProfile = TestUtils.randomName("DEVICE");
 
     private IDataClient dataClient;
     private IAppClient appClient;
@@ -67,7 +67,7 @@ public class DataEndpointClientHttpTest {
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        dataClient = new DataClient(_TEST_CREDENTIAL_PROFILE);
+        dataClient = new DataClient(_testCredentialProfile);
         appClient = new AppClient();
         dataChannelClient = new DataChannelClient();
         deviceProfileClient = new DeviceProfileClient();
@@ -154,7 +154,7 @@ public class DataEndpointClientHttpTest {
             _atmDeviceSid = atmDeviceDetails.getSid();
 
             DeviceAccessKey accessKey = devicesClient.getAccessKey(_atmDeviceSid);
-            ConnioCredentials credentials = new ConnioBasicCredentials(_TEST_CREDENTIAL_PROFILE, accessKey.getSid(), accessKey.getAuthToken());
+            ConnioCredentials credentials = new ConnioBasicCredentials(_testCredentialProfile, accessKey.getSid(), accessKey.getAuthToken());
             ConnioCredentialsManager.addCredentials(credentials);
         }
     }

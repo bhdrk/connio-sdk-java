@@ -1,16 +1,20 @@
 package com.connio.sdk.http.internal;
 
 import com.connio.sdk.api.exception.ConnioClientException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
 import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
 import static com.connio.sdk.http.utils.IOUtils.closeSilently;
 import static com.connio.sdk.http.utils.StringUtils.startsWithIgnoreCase;
@@ -23,19 +27,22 @@ import static com.connio.sdk.http.utils.StringUtils.startsWithIgnoreCase;
  */
 public class ClientConfigFactory {
 
-    private static final String CONFIG_KEY_PREFIX = "connio";
+    private static final Logger LOG = LoggerFactory.getLogger(ClientConfigFactory.class);
 
-    private static final ClientConfigFactory factory = new ClientConfigFactory();
-
-    private ClientConfigFactory() {
+    public ClientConfigFactory() {
     }
 
-    public static ClientConfig create() {
-        return factory.doCreate();
-    }
+    public ClientConfig create() {
+        if (LOG.isDebugEnabled())
+            LOG.debug("Initializing client config.");
 
-    private ClientConfig doCreate() {
         Map<String, String> configMap = getDefaultConfigs();
+
+        if (LOG.isDebugEnabled()) {
+            for (Map.Entry<String, String> config : configMap.entrySet()) {
+                LOG.debug("Default: " + config.getKey() + " = " + config.getValue());
+            }
+        }
 
         overrideFromUserDefinedConfigs(configMap);
         overrideFromSystemProperties(configMap);
@@ -45,33 +52,72 @@ public class ClientConfigFactory {
     }
 
     private void overrideFromUserDefinedConfigs(Map<String, String> configMap) {
+        if (LOG.isDebugEnabled())
+            LOG.debug("Searching for user defined configurations.");
+
         Map<String, String> userDefinedConfigs = getUserDefinedConfigs();
         if (isNotEmpty(userDefinedConfigs)) {
-            for (Map.Entry<String, String> entry : userDefinedConfigs.entrySet()) {
-                if (isConfigKey(entry.getKey())) {
-                    addToConfigMap(configMap, entry.getKey(), entry.getValue());
+            for (Map.Entry<String, String> cnf : userDefinedConfigs.entrySet()) {
+                if (isConfigKey(cnf.getKey())) {
+                    if (LOG.isDebugEnabled())
+                        LOG.debug("Updating config from user definition: " + cnf.getKey() + " = " + cnf.getValue());
+
+                    addToConfigMap(configMap, cnf.getKey(), cnf.getValue());
                 }
             }
+        } else {
+            if (LOG.isDebugEnabled())
+                LOG.debug("User defined configuration not found.");
         }
     }
 
     private void overrideFromEnvProperties(Map<String, String> configMap) {
-        Map<String, String> envMap = System.getenv();
+        if (LOG.isDebugEnabled())
+            LOG.debug("Searching for environment variable configurations.");
 
-        for (Map.Entry<String, String> entry : envMap.entrySet()) {
-            if (isConfigKey(entry.getKey())) {
-                String dottedKey = entry.getKey().replace("_", ".");
-                addToConfigMap(configMap, dottedKey, entry.getValue());
+        Map<String, String> envMap = System.getenv();
+        boolean found = false;
+
+        for (Map.Entry<String, String> env : envMap.entrySet()) {
+            if (isConfigKey(env.getKey())) {
+                if (LOG.isDebugEnabled())
+                    LOG.debug("Updating config from environment variable: " + env.getKey() + " = " + env.getValue());
+
+                String dottedKey = env.getKey().replace("_", ".");
+                addToConfigMap(configMap, dottedKey, env.getValue());
+                found = true;
             }
+        }
+
+        if (!found) {
+            if (LOG.isDebugEnabled())
+                LOG.debug("Configuration not found in environment variable.");
         }
     }
 
     private void overrideFromSystemProperties(Map<String, String> configMap) {
+        if (LOG.isDebugEnabled())
+            LOG.debug("Searching for system property configurations.");
+
         Properties systemProperties = System.getProperties();
+        boolean found = false;
+
         for (String name : systemProperties.stringPropertyNames()) {
             if (isConfigKey(name)) {
-                addToConfigMap(configMap, name, systemProperties.getProperty(name));
+                String property = systemProperties.getProperty(name);
+
+                if (LOG.isDebugEnabled())
+                    LOG.debug("Updating config from system property: " + name + " = " + property);
+
+                addToConfigMap(configMap, name, property);
+                found = true;
             }
+        }
+
+        if (!found) {
+            if (LOG.isDebugEnabled())
+
+                LOG.debug("Configuration not found in system properties.");
         }
     }
 
@@ -85,50 +131,102 @@ public class ClientConfigFactory {
     }
 
     private boolean isConfigKey(String key) {
-        return startsWithIgnoreCase(key, CONFIG_KEY_PREFIX);
+        return startsWithIgnoreCase(key, Constants.CONFIG_KEY_PREFIX);
     }
 
     private Map<String, String> getDefaultConfigs() {
-        try {
-            URL resource = getLoader().getResource(Constants.DEFAULT_CONFIG_FILE);
-            return loadResource(resource);
-        } catch (Exception e) {
-            throw new ConnioClientException("Cannot load default configuration from " + Constants.DEFAULT_CONFIG_FILE, e);
-        }
+        if (LOG.isDebugEnabled())
+            LOG.debug("Loading default configuration...");
+
+        URL resource = getLoader().getResource(Constants.DEFAULT_CONFIG_FILE);
+
+        return loadResource(resource);
     }
 
     private Map<String, String> getUserDefinedConfigs() {
-        try {
-            String userHome = System.getProperty("user.home");
-            if (isNotEmpty(userHome)) {
-                File file = new File(userHome, Constants.USER_DEFINED_CONFIG_FILE);
-                if (file.exists() && file.canRead()) {
-                    return loadResource(file.toURI().toURL());
-                }
-            }
+        Map<String, String> configMap;
 
-            Map<String, String> propertiesMap = new HashMap<String, String>();
-            Enumeration<URL> resources = getLoader().getResources(Constants.CLASSPATH_RESOURCE_CONFIG_FILE);
+        configMap = getFromFile();
 
-            while (resources.hasMoreElements()) {
-                URL resource = resources.nextElement();
-                propertiesMap.putAll(loadResource(resource));
-            }
+        if (configMap == null)
+            configMap = getFromClassPath();
 
-            return propertiesMap;
-        } catch (Exception e) {
-            throw new ConnioClientException("Cannot load user defined configuration from " + Constants.USER_DEFINED_CONFIG_FILE, e);
+        return configMap;
+    }
+
+    private Map<String, String> getFromFile() {
+        String userHome = System.getProperty("user.home");
+
+        if (isEmpty(userHome)) {
+            if (LOG.isDebugEnabled())
+                LOG.debug("user.home not defined!");
+
+            return null;
         }
+
+        File file = new File(userHome, Constants.USER_DEFINED_CONFIG_FILE);
+
+        if (file.exists()) {
+            if (LOG.isDebugEnabled())
+                LOG.debug("User defined config file found on path " + file.getPath());
+        } else {
+            return null;
+        }
+
+        if (!file.canRead()) {
+            if (LOG.isDebugEnabled())
+                LOG.debug(file.getPath() + " is not accessible!");
+
+            return null;
+        }
+
+        try {
+            URL resource = file.toURI().toURL();
+            return loadResource(resource);
+        } catch (MalformedURLException e) {
+            throw new ConnioClientException(e);
+        }
+    }
+
+    private Map<String, String> getFromClassPath() {
+        Enumeration<URL> resources;
+
+        try {
+            resources = getLoader().getResources(Constants.CLASSPATH_RESOURCE_CONFIG_FILE);
+        } catch (IOException e) {
+            throw new ConnioClientException("Cannot load user defined configuration on classpath.", e);
+        }
+
+        Map<String, String> propertiesMap = new HashMap<String, String>();
+
+        while (resources.hasMoreElements()) {
+            URL resource = resources.nextElement();
+
+            if (LOG.isDebugEnabled())
+                LOG.debug("User defined config file found on classpath: " + resource.toString());
+
+            propertiesMap.putAll(loadResource(resource));
+        }
+
+        return propertiesMap;
     }
 
     private ClassLoader getLoader() {
         return Thread.currentThread().getContextClassLoader();
     }
 
-    private Map<String, String> loadResource(URL resource) throws IOException {
-        InputStream resourceStream = resource.openStream();
+    private Map<String, String> loadResource(URL resource) {
+        InputStream resourceStream = null;
+
         try {
+            resourceStream = resource.openStream();
+
+            if (LOG.isDebugEnabled())
+                LOG.debug("Loading resource: " + resource.toString());
+
             return populateMap(resourceStream);
+        } catch (IOException e) {
+            throw new ConnioClientException("Cannot load resource for " + resource.toString(), e);
         } finally {
             closeSilently(resourceStream);
         }
@@ -136,11 +234,14 @@ public class ClientConfigFactory {
 
     private Map<String, String> populateMap(InputStream resourceStream) throws IOException {
         Map<String, String> propertiesMap = new HashMap<String, String>();
+
         Properties properties = new Properties();
         properties.load(resourceStream);
+
         for (String name : properties.stringPropertyNames()) {
             propertiesMap.put(name, properties.getProperty(name));
         }
+
         return propertiesMap;
     }
 }
