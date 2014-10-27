@@ -152,7 +152,6 @@ public class ResponseFactory {
     private void logResponse(Response response) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Response Status: " + response.code() + " " + response.message());
-            LOG.trace("Response Content-Type: " + response.body().contentType());
 
             Headers headers = response.headers();
             for (String name : headers.names()) {
@@ -171,6 +170,7 @@ public class ResponseFactory {
         }
 
         if (LOG.isTraceEnabled() && is != null) {
+            LOG.trace("Response Content-Type: " + body.contentType());
             try {
                 // copy response body
                 byte[] bytes = IOUtils.toByteArray(is);
