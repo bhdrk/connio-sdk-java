@@ -151,8 +151,7 @@ public class ResponseFactory {
 
     private void logResponse(Response response) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Response Code: " + response.code());
-            LOG.debug("Response Status: " + response.message());
+            LOG.debug("Response Status: " + response.code() + " " + response.message());
             LOG.trace("Response Content-Type: " + response.body().contentType());
 
             Headers headers = response.headers();
