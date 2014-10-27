@@ -59,7 +59,7 @@ public class UserAgentInfo {
     private void loadVersionInfo() {
         InputStream resource = null;
         try {
-            resource = ClassResouceLoader.getResourceAsStream(Constants.VERSION_INFO_FILE, UserAgentInfo.class);
+            resource = ClassResourceLoader.getResourceAsStream(Constants.VERSION_INFO_FILE, UserAgentInfo.class);
             if (resource != null) {
                 Properties properties = new Properties();
                 properties.load(resource);

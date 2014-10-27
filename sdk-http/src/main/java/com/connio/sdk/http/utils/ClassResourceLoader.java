@@ -10,7 +10,7 @@ import java.net.URL;
  * @author bdirik
  * @since 16.09.2014
  */
-public class ClassResouceLoader {
+public class ClassResourceLoader {
 
     public static InputStream getResourceAsStream(String resourceName, Class<?>... classes) {
         URL url = getResource(resourceName, classes);
@@ -39,6 +39,11 @@ public class ClassResouceLoader {
                     return url;
                 }
             }
+        }
+
+        URL url = ClassResourceLoader.class.getResource(resourceName);
+        if (url != null) {
+            return url;
         }
 
         return null;
