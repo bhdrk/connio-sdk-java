@@ -116,7 +116,6 @@ public class ClientConfigFactory {
 
         if (!found) {
             if (LOG.isDebugEnabled())
-
                 LOG.debug("Configuration not found in system properties.");
         }
     }
