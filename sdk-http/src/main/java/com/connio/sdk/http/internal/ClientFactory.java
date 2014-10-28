@@ -41,14 +41,15 @@ public class ClientFactory {
 
     private void setProxy(OkHttpClient client, ClientConfig clientConfig) {
         InetSocketAddress address = InetSocketAddress.createUnresolved(clientConfig.getProxyHost(), clientConfig.getProxyPort());
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
+        Proxy.Type proxyType = clientConfig.getProxyType() == null ? Proxy.Type.HTTP : Proxy.Type.valueOf(clientConfig.getProxyType());
+        Proxy proxy = new Proxy(proxyType, address);
 
         client.setProxy(proxy);
         client.setAuthenticator(new ProxyAuthenticator(clientConfig));
     }
 
     private boolean hasProxyConfig(ClientConfig clientConfig) {
-        return isNotEmpty(clientConfig.getProxyProtocol()) && isNotEmpty(clientConfig.getProxyHost()) && clientConfig.getProxyPort() > 0;
+        return isNotEmpty(clientConfig.getProxyHost()) && clientConfig.getProxyPort() > 0;
     }
 
 }
