@@ -43,11 +43,11 @@ public class HttpUtils {
 
         try {
             URI uri = new URI(
-                    clientConfig.getProtocol(),
-                    null,
-                    clientConfig.getHost(),
-                    clientConfig.getPort(),
-                    buildPath(metaData),
+                    clientConfig.getServiceURI().getScheme(),
+                    clientConfig.getServiceURI().getUserInfo(),
+                    clientConfig.getServiceURI().getHost(),
+                    clientConfig.getServiceURI().getPort(),
+                    clientConfig.getServiceURI().getPath() + buildPath(metaData),
                     buildQuery(metaData),
                     null
             );

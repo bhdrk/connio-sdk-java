@@ -2,6 +2,8 @@ package com.connio.sdk.http.internal;
 
 import com.connio.sdk.api.exception.ConnioClientException;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
@@ -11,17 +13,13 @@ import static com.connio.sdk.api.utils.TypeUtils.isEmpty;
  */
 public class ClientConfig {
 
-    private String protocol;
-
-    private String host;
-
-    private int port = -1;
+    private URI serviceURI;
 
     private String proxyHost = null;
 
     private int proxyPort = -1;
 
-    private String proxyProtocol = null;
+    private String proxyType = null;
 
     private String proxyUsername = null;
 
@@ -43,14 +41,13 @@ public class ClientConfig {
     }
 
     public void update(Map<String, String> map) {
-        if (map.containsKey("connio.http.protocol"))
-            this.protocol = map.get("connio.http.protocol");
-
-        if (map.containsKey("connio.http.host"))
-            this.host = map.get("connio.http.host");
-
-        if (map.containsKey("connio.http.port"))
-            this.port = toInt(map, "connio.http.port", -1);
+        if (map.containsKey("connio.http.serviceUrl")) {
+            try {
+                this.serviceURI = new URI(map.get("connio.http.serviceUrl"));
+            } catch (URISyntaxException e) {
+                throw new ConnioClientException("ServiceUrl syntax exception", e);
+            }
+        }
 
         if (map.containsKey("connio.http.connectionTimeout"))
             this.connectionTimeout = toInt(map, "connio.http.connectionTimeout", 0);
@@ -64,8 +61,8 @@ public class ClientConfig {
         if (map.containsKey("connio.http.proxyPort"))
             this.proxyPort = toInt(map, "connio.http.proxyPort", -1);
 
-        if (map.containsKey("connio.http.proxyProtocol"))
-            this.proxyProtocol = map.get("connio.http.proxyProtocol");
+        if (map.containsKey("connio.http.proxyType"))
+            this.proxyType = map.get("connio.http.proxyType");
 
         if (map.containsKey("connio.http.proxyUsername"))
             this.proxyUsername = map.get("connio.http.proxyUsername");
@@ -96,10 +93,6 @@ public class ClientConfig {
         }
     }
 
-    public String getProtocol() {
-        return protocol;
-    }
-
     public String getProxyHost() {
         return proxyHost;
     }
@@ -108,8 +101,8 @@ public class ClientConfig {
         return proxyPort;
     }
 
-    public String getProxyProtocol() {
-        return proxyProtocol;
+    public String getProxyType() {
+        return proxyType;
     }
 
     public String getProxyUsername() {
@@ -132,15 +125,11 @@ public class ClientConfig {
         return connectionTimeout;
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
     public int getConnectionRequestTimeout() {
         return connectionRequestTimeout;
+    }
+
+    public URI getServiceURI() {
+        return serviceURI;
     }
 }
