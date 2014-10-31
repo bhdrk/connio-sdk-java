@@ -1,0 +1,15 @@
+{
+    "sid": "AC71111111111111111111111111111111",
+    "status": "active",
+    "uri": "/v1/_accounts/me",
+    "devices_uri": "/v1/_accounts/me/_devices",
+    "deviceprofiles_uri": "/v1/_accounts/me/_deviceprofiles",
+    "apps_uri": "/v1/_accounts/me/_apps",
+    "users_uri": "/v1/_accounts/me/_users",
+    "billing_info_uri": "/v1/_accounts/me/_billinginfo",
+    "auth_token": "f1111111111111111111111111111111",
+    "display_name": "Test Account",
+    "plan_type": "trial",
+    "date_modified": "2014-09-11T13:23:09.010Z",
+    "date_created": "2014-09-11T11:03:23.295Z"
+}

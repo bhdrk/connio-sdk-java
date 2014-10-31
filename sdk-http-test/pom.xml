@@ -56,20 +56,6 @@
             <artifactId>powermock-module-testng</artifactId>
             <version>${powermock.version}</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.testng</groupId>
-                    <artifactId>testng</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.powermock</groupId>
-                    <artifactId>powermock-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.powermock</groupId>
-                    <artifactId>powermock-reflect</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
