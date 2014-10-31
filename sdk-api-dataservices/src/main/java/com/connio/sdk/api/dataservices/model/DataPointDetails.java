@@ -20,7 +20,7 @@ public class DataPointDetails implements Serializable {
     private List<String> _tags;
     private String _chan;
     private String _remIp;
-    private Date _srvTime;
+    private Long _srvTime;
 
     public Object getValue() {
         return value;
@@ -86,11 +86,11 @@ public class DataPointDetails implements Serializable {
         this._remIp = _remIp;
     }
 
-    public Date get_srvTime() {
+    public Long get_srvTime() {
         return _srvTime;
     }
 
-    public void set_srvTime(Date _srvTime) {
+    public void set_srvTime(Long _srvTime) {
         this._srvTime = _srvTime;
     }
 
