@@ -1,5 +1,8 @@
 package com.connio.sdk.http.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -11,6 +14,20 @@ import java.net.URL;
  * @since 16.09.2014
  */
 public class ClassResourceLoader {
+    private static final Logger LOG = LoggerFactory.getLogger(ClassResourceLoader.class);
+
+    public static String getResourceAsString(String resourceName, Class<?>... classes) {
+        InputStream is = getResourceAsStream(resourceName, classes);
+        if (is != null) {
+            try {
+                return IOUtils.toString(is);
+            } catch (IOException e) {
+                if (LOG.isDebugEnabled())
+                    LOG.debug(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
 
     public static InputStream getResourceAsStream(String resourceName, Class<?>... classes) {
         URL url = getResource(resourceName, classes);

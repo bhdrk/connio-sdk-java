@@ -2,6 +2,7 @@ package com.connio.sdk.api.systemservices;
 
 
 import com.connio.sdk.api.utils.Asserts;
+import com.connio.sdk.http.utils.ClassResourceLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -86,5 +87,9 @@ public class TestUtils {
         }
 
         return output.substring(0, len);
+    }
+
+    public static String resource(String name) {
+        return ClassResourceLoader.getResourceAsString(name, TestUtils.class);
     }
 }

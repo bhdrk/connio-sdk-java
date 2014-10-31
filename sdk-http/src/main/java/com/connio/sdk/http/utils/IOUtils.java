@@ -33,7 +33,7 @@ public class IOUtils {
             }
             return output.toByteArray();
         } finally {
-            output.close();
+            closeSilently(output);
         }
     }
 
