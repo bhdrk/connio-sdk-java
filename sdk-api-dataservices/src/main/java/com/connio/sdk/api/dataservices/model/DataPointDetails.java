@@ -3,7 +3,6 @@ package com.connio.sdk.api.dataservices.model;
 import com.connio.sdk.api.model.Location;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
