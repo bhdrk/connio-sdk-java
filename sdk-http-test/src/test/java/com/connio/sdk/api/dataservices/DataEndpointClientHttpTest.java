@@ -267,7 +267,7 @@ public class DataEndpointClientHttpTest {
         }
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, dependsOnMethods = {"testGetData", "testSendDataToMultipleChannel", "testSendDataToSingleChannel", "testSendDataWithFeedId"})
     public void deleteTestData() throws Exception {
         {
             Deleted result = appClient.deleteApp(_bankAppName);
