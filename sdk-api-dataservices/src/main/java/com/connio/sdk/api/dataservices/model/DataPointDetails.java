@@ -12,7 +12,7 @@ import java.util.List;
 public class DataPointDetails implements Serializable {
 
     private Long time;
-    private String value;
+    private Object value;
 
     private String _feedId;
     private Location _loc;
@@ -22,20 +22,20 @@ public class DataPointDetails implements Serializable {
     private String _remIp;
     private Date _srvTime;
 
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
     public Long getTime() {
         return time;
     }
 
     public void setTime(Long time) {
         this.time = time;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public String get_feedId() {
