@@ -59,6 +59,7 @@
         <fest-assert.version>2.0M10</fest-assert.version>
         <slf4j.version>1.7.7</slf4j.version>
         <powermock.version>1.5.5</powermock.version>
+        <okhttp.mockwebserver.version>2.0.0</okhttp.mockwebserver.version>
     </properties>
 
 </project>

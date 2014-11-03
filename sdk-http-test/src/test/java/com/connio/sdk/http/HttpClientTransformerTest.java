@@ -2,107 +2,92 @@ package com.connio.sdk.http;
 
 import com.connio.sdk.api.auth.ConnioBasicCredentials;
 import com.connio.sdk.api.auth.ConnioCredentials;
+import com.connio.sdk.api.exception.ConnioResourceNotFoundException;
+import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.systemservices.accounts.model.AccountDetails;
 import com.connio.sdk.api.systemservices.accounts.model.GetMyAccountDetailsRequest;
 import com.connio.sdk.api.systemservices.accounts.model.GetMyAccountDetailsResponse;
-import com.connio.sdk.http.internal.ClientConfig;
-import com.connio.sdk.http.internal.ClientFactory;
-import com.connio.sdk.http.internal.InternalContext;
 import com.connio.sdk.http.json.JSON;
-import com.squareup.okhttp.*;
-import okio.BufferedSource;
-import okio.Okio;
+import com.squareup.okhttp.mockwebserver.MockResponse;
+import com.squareup.okhttp.mockwebserver.MockWebServer;
 import org.fest.assertions.api.Assertions;
-import org.mockito.Matchers;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareEverythingForTest;
-import org.powermock.modules.testng.PowerMockTestCase;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
 import static com.connio.sdk.api.systemservices.TestUtils.resource;
-import static org.powermock.api.mockito.PowerMockito.*;
 
-@PrepareEverythingForTest
-public class HttpClientTransformerTest extends PowerMockTestCase {
+public class HttpClientTransformerTest {
 
     private HttpClientTransformer transformer;
 
-    private OkHttpClient mockClient;
+    private MockWebServer mockServer;
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
-        mockStatic(InternalContext.class);
+        mockServer = new MockWebServer();
+        mockServer.play();
 
-        mockClient = PowerMockito.mock(OkHttpClient.class);
-
-        ClientFactory mockClientFactory = mock(ClientFactory.class);
-
-        when(InternalContext.clientFactory()).thenReturn(mockClientFactory);
-        when(mockClientFactory.create(Matchers.any(ClientConfig.class))).thenReturn(mockClient);
+        System.setProperty("connio.http.serviceUrl", mockServer.getUrl("").toString());
 
         transformer = new HttpClientTransformer();
     }
 
+    @AfterMethod
+    public void afterMethod() throws Exception {
+        mockServer.shutdown();
+    }
+
     @Test
     public void testDoExecuteForSuccessfulResponse() throws Exception {
+        String json = resource("json/accounts/me.json");
+
+        MockResponse mockResponse = new MockResponse()
+                .setBody(json)
+                .addHeader("Content-Type", "application/json");
+
+        mockServer.enqueue(mockResponse);
+
         ConnioCredentials credentials = new ConnioBasicCredentials("DEFAULT", "D0123456789123456789123456789123", "8ec9e53488dc4e7894f89f32d0595c36");
 
         GetMyAccountDetailsRequest request = new GetMyAccountDetailsRequest();
-
-        Call mockCall = mock(Call.class);
-        Request mockRequest = mock(Request.class);
-        Response mockResponse = mock(Response.class);
-
-        String json = resource("json/accounts/me.json");
-        AccountDetails expected = JSON.fromString(json, AccountDetails.class);
-
-        when(mockClient.newCall(mockRequest)).thenReturn(mockCall);
-        when(mockCall.execute()).thenReturn(mockResponse);
-        when(mockResponse.isSuccessful()).thenReturn(true);
-        when(mockResponse.body()).thenReturn(new JSONResponseBody(json));
-
         GetMyAccountDetailsResponse response = transformer.doExecute(request, credentials);
 
         AccountDetails result = response.getResult();
+        AccountDetails expected = JSON.fromString(json, AccountDetails.class);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
-    public static class JSONResponseBody extends ResponseBody {
+    @Test(expectedExceptions = ConnioServiceException.class)
+    public void testDoExecuteFor500() throws Exception {
+        MockResponse mockResponse = new MockResponse()
+                .setBody("Internal Server Error")
+                .setResponseCode(500)
+                .addHeader("Content-Type", "text/plain");
 
-        private MediaType mediaType;
+        mockServer.enqueue(mockResponse);
 
-        private BufferedSource source;
+        ConnioCredentials credentials = new ConnioBasicCredentials("DEFAULT", "D0123456789123456789123456789123", "8ec9e53488dc4e7894f89f32d0595c36");
 
-        private long length;
+        GetMyAccountDetailsRequest request = new GetMyAccountDetailsRequest();
 
-        public JSONResponseBody(String json) {
-            byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
-            InputStream in = new ByteArrayInputStream(bytes);
+        transformer.doExecute(request, credentials);
+    }
 
-            this.mediaType = MediaType.parse("application/json");
-            this.length = bytes.length;
-            this.source = Okio.buffer(Okio.source(in));
-        }
+    @Test(expectedExceptions = ConnioResourceNotFoundException.class)
+    public void testDoExecuteFor404() throws Exception {
+        MockResponse mockResponse = new MockResponse()
+                .setBody("Not Found")
+                .setResponseCode(404)
+                .addHeader("Content-Type", "text/plain");
 
-        @Override
-        public MediaType contentType() {
-            return mediaType;
-        }
+        mockServer.enqueue(mockResponse);
 
-        @Override
-        public long contentLength() {
-            return length;
-        }
+        ConnioCredentials credentials = new ConnioBasicCredentials("DEFAULT", "D0123456789123456789123456789123", "8ec9e53488dc4e7894f89f32d0595c36");
 
-        @Override
-        public BufferedSource source() {
-            return source;
-        }
+        GetMyAccountDetailsRequest request = new GetMyAccountDetailsRequest();
+
+        transformer.doExecute(request, credentials);
     }
 }
