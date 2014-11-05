@@ -186,6 +186,6 @@ public class ResponseFactory {
 
     private Charset getResponseCharset(ResponseBody body) {
         MediaType contentType = body.contentType();
-        return contentType.charset() != null ? contentType.charset() : Charset.forName("UTF-8");
+        return (contentType != null && contentType.charset() != null) ? contentType.charset() : Charset.forName("UTF-8");
     }
 }
