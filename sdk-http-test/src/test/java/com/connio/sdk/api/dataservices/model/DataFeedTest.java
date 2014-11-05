@@ -13,6 +13,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 /**
  * Created by bdirik on 30.10.2014.
  */
+@Test(suiteName = "EntityTest", testName = "DataFeedTest")
 public class DataFeedTest {
 
     @Test
@@ -21,7 +22,7 @@ public class DataFeedTest {
         dataFeed.addDataPoint(new DataPoint(1414407520L, 1));
 
         String actual = JSON.toString(dataFeed);
-        String expected = resource("json/dataFeed/oneDataPoint.json");
+        String expected = resource("json/dataservices/model/dataFeed/oneDataPoint.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -42,7 +43,7 @@ public class DataFeedTest {
         dataFeed.addDataPoint(new DataPoint(1414681101L, 2));
 
         String actual = JSON.toString(dataFeed);
-        String expected = resource("json/dataFeed/allProperties.json");
+        String expected = resource("json/dataservices/model/dataFeed/allProperties.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -96,7 +97,7 @@ public class DataFeedTest {
         }
 
         String actual = JSON.toString(dataFeed);
-        String expected = resource("json/dataFeed/multipleDataPoint.json");
+        String expected = resource("json/dataservices/model/dataFeed/multipleDataPoint.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -106,7 +107,7 @@ public class DataFeedTest {
         DataFeed expected = new DataFeed();
         expected.addDataPoint(new DataPoint(1414407520L, 1));
 
-        DataFeed actual = JSON.fromString(resource("json/dataFeed/oneDataPoint.json"), DataFeed.class);
+        DataFeed actual = JSON.fromString(resource("json/dataservices/model/dataFeed/oneDataPoint.json"), DataFeed.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -126,7 +127,7 @@ public class DataFeedTest {
         expected.addDataPoint(new DataPoint(1414681100L, 1));
         expected.addDataPoint(new DataPoint(1414681101L, 2));
 
-        DataFeed actual = JSON.fromString(resource("json/dataFeed/allProperties.json"), DataFeed.class);
+        DataFeed actual = JSON.fromString(resource("json/dataservices/model/dataFeed/allProperties.json"), DataFeed.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -179,7 +180,7 @@ public class DataFeedTest {
             expected.addDataPoint(dataPoint);
         }
 
-        DataFeed actual = JSON.fromString(resource("json/dataFeed/multipleDataPoint.json"), DataFeed.class);
+        DataFeed actual = JSON.fromString(resource("json/dataservices/model/dataFeed/multipleDataPoint.json"), DataFeed.class);
 
         assertThat(actual).isEqualTo(expected);
     }

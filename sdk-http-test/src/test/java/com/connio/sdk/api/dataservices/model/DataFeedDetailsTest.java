@@ -9,6 +9,7 @@ import static com.connio.sdk.api.systemservices.TestUtils.resource;
 /**
  * Created by bdirik on 31.10.2014.
  */
+@Test(suiteName = "EntityTest", testName = "DataFeedDetailsTest")
 public class DataFeedDetailsTest {
 
     @Test
@@ -19,7 +20,7 @@ public class DataFeedDetailsTest {
             dataFeedDetails.setRejected(0);
 
             String actual = JSON.toString(dataFeedDetails);
-            String expected = resource("json/dataFeedDetails/accepted.json");
+            String expected = resource("json/dataservices/model/dataFeedDetails/accepted.json");
 
             Assertions.assertThat(actual).isEqualTo(expected);
         }
@@ -29,7 +30,7 @@ public class DataFeedDetailsTest {
             dataFeedDetails.setRejected(1);
 
             String actual = JSON.toString(dataFeedDetails);
-            String expected = resource("json/dataFeedDetails/rejected.json");
+            String expected = resource("json/dataservices/model/dataFeedDetails/rejected.json");
 
             Assertions.assertThat(actual).isEqualTo(expected);
         }
@@ -42,7 +43,7 @@ public class DataFeedDetailsTest {
             actual.setAccepted(5);
             actual.setRejected(0);
 
-            DataFeedDetails expected = JSON.fromString(resource("json/dataFeedDetails/accepted.json"), DataFeedDetails.class);
+            DataFeedDetails expected = JSON.fromString(resource("json/dataservices/model/dataFeedDetails/accepted.json"), DataFeedDetails.class);
 
             Assertions.assertThat(actual).isEqualTo(expected);
         }
@@ -51,7 +52,7 @@ public class DataFeedDetailsTest {
             actual.setAccepted(0);
             actual.setRejected(1);
 
-            DataFeedDetails expected = JSON.fromString(resource("json/dataFeedDetails/rejected.json"), DataFeedDetails.class);
+            DataFeedDetails expected = JSON.fromString(resource("json/dataservices/model/dataFeedDetails/rejected.json"), DataFeedDetails.class);
 
             Assertions.assertThat(actual).isEqualTo(expected);
         }

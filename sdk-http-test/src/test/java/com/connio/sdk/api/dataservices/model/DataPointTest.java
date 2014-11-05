@@ -13,6 +13,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 /**
  * Created by bdirik on 27.10.2014.
  */
+@Test(suiteName = "EntityTest", testName = "DataPointTest")
 public class DataPointTest {
 
     @Test
@@ -20,7 +21,7 @@ public class DataPointTest {
         DataPoint dataPoint = new DataPoint(1414407520L, 1);
 
         String actual = JSON.toString(dataPoint);
-        String expected = resource("json/dataPoint/numberValue.json");
+        String expected = resource("json/dataservices/model/dataPoint/numberValue.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -30,7 +31,7 @@ public class DataPointTest {
         DataPoint dataPoint = new DataPoint(1414407520L, "MSG");
 
         String actual = JSON.toString(dataPoint);
-        String expected = resource("json/dataPoint/stringValue.json");
+        String expected = resource("json/dataservices/model/dataPoint/stringValue.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -40,7 +41,7 @@ public class DataPointTest {
         DataPoint dataPoint = new DataPoint(1414407520L, 1, "DATA");
 
         String actual = JSON.toString(dataPoint);
-        String expected = resource("json/dataPoint/channel.json");
+        String expected = resource("json/dataservices/model/dataPoint/channel.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -54,7 +55,7 @@ public class DataPointTest {
         dataPoint.set_loc(location);
 
         String actual = JSON.toString(dataPoint);
-        String expected = resource("json/dataPoint/location.json");
+        String expected = resource("json/dataservices/model/dataPoint/location.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -71,7 +72,7 @@ public class DataPointTest {
         dataPoint.set_tags(Arrays.asList("TAG1", "TAG2"));
 
         String actual = JSON.toString(dataPoint);
-        String expected = resource("json/dataPoint/allProperties.json");
+        String expected = resource("json/dataservices/model/dataPoint/allProperties.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -90,7 +91,7 @@ public class DataPointTest {
         dataPoint.set_tags(Arrays.asList("TAG1", "TAG2"));
 
         String actual = JSON.toString(dataPoint);
-        String expected = resource("json/dataPoint/longStringValue.json");
+        String expected = resource("json/dataservices/model/dataPoint/longStringValue.json");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -98,7 +99,7 @@ public class DataPointTest {
     @Test
     public void testDeserializesFromJSONForNumberValue() throws Exception {
         DataPoint expected = new DataPoint(1414407520L, 1);
-        DataPoint actual = JSON.fromString(resource("json/dataPoint/numberValue.json"), DataPoint.class);
+        DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/numberValue.json"), DataPoint.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -106,7 +107,7 @@ public class DataPointTest {
     @Test
     public void testDeserializesFromJSONStringValue() throws Exception {
         DataPoint expected = new DataPoint(1414407520L, "MSG");
-        DataPoint actual = JSON.fromString(resource("json/dataPoint/stringValue.json"), DataPoint.class);
+        DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/stringValue.json"), DataPoint.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -114,7 +115,7 @@ public class DataPointTest {
     @Test
     public void testDeserializesFromJSONForChannel() throws Exception {
         DataPoint expected = new DataPoint(1414407520L, 1, "DATA");
-        DataPoint actual = JSON.fromString(resource("json/dataPoint/channel.json"), DataPoint.class);
+        DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/channel.json"), DataPoint.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -127,7 +128,7 @@ public class DataPointTest {
         DataPoint expected = new DataPoint(1414407520L, 1, "DATA");
         expected.set_loc(location);
 
-        DataPoint actual = JSON.fromString(resource("json/dataPoint/location.json"), DataPoint.class);
+        DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/location.json"), DataPoint.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -143,7 +144,7 @@ public class DataPointTest {
         expected.set_srcUri("_devices/_id/1101");
         expected.set_tags(Arrays.asList("TAG1", "TAG2"));
 
-        DataPoint actual = JSON.fromString(resource("json/dataPoint/allProperties.json"), DataPoint.class);
+        DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/allProperties.json"), DataPoint.class);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -161,7 +162,7 @@ public class DataPointTest {
         expected.set_srcUri("_devices/_id/1101");
         expected.set_tags(Arrays.asList("TAG1", "TAG2"));
 
-        DataPoint actual = JSON.fromString(resource("json/dataPoint/longStringValue.json"), DataPoint.class);
+        DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/longStringValue.json"), DataPoint.class);
 
         assertThat(actual).isEqualTo(expected);
     }
