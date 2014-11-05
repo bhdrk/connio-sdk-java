@@ -31,8 +31,16 @@ public class HttpClientTransformer extends AbstractClientTransformer {
     private ClientConfig clientConfig;
 
     public HttpClientTransformer() {
-        this.clientConfig = InternalContext.clientConfigFactory().create();
-        this.client = InternalContext.clientFactory().create(clientConfig);
+        this(InternalContext.clientConfigFactory().create());
+    }
+
+    public HttpClientTransformer(ClientConfig clientConfig) {
+        this(clientConfig, InternalContext.clientFactory().create(clientConfig));
+    }
+
+    public HttpClientTransformer(ClientConfig clientConfig, OkHttpClient client) {
+        this.client = client;
+        this.clientConfig = clientConfig;
     }
 
     @Override

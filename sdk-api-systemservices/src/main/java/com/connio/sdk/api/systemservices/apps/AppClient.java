@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.apps;
 
 import com.connio.sdk.api.core.AbstractClient;
+import com.connio.sdk.api.core.ConnioClientTransformer;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
@@ -19,6 +20,10 @@ public class AppClient extends AbstractClient implements IAppClient {
 
     public AppClient(String credentialsProfile) {
         super(credentialsProfile);
+    }
+
+    public AppClient(String credentialsProfile, ConnioClientTransformer context) {
+        super(credentialsProfile, context);
     }
 
     /**

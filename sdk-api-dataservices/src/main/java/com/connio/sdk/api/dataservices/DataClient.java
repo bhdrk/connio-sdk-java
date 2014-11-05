@@ -1,6 +1,7 @@
 package com.connio.sdk.api.dataservices;
 
 import com.connio.sdk.api.core.AbstractClient;
+import com.connio.sdk.api.core.ConnioClientTransformer;
 import com.connio.sdk.api.dataservices.model.*;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
@@ -20,6 +21,10 @@ public class DataClient extends AbstractClient implements IDataClient {
      */
     public DataClient(String credentialsProfile) {
         super(credentialsProfile);
+    }
+
+    public DataClient(String credentialsProfile, ConnioClientTransformer context) {
+        super(credentialsProfile, context);
     }
 
     /**

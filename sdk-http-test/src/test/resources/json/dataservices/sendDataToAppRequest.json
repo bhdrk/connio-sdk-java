@@ -1,0 +1,1 @@
+{"datapoints":[{"time":1415190143712,"value":25,"@chan":"ACHAN"},{"time":1415190143712,"value":"Lorem","@chan":"BCHAN"},{"time":1415190143712,"value":950.5,"@chan":"CCHAN"}],"@id":"10029","@src_uri":"_devices/_id/900056","@loc":{"name":"Istanbul","geo_coord":{"lat":41.00527,"lon":28.976959999999963}},"@tags":["TAG1","TAG2"]}

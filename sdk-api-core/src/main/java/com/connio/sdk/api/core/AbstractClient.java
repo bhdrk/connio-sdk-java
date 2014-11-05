@@ -16,7 +16,6 @@ import com.connio.sdk.api.utils.Asserts;
  */
 public abstract class AbstractClient implements ConnioClient {
     private ConnioClientTransformer context;
-
     private String credentialsProfile;
 
     protected AbstractClient() {
@@ -24,10 +23,15 @@ public abstract class AbstractClient implements ConnioClient {
     }
 
     protected AbstractClient(String credentialsProfile) {
-        Asserts.notEmpty(credentialsProfile, "Credentials Profile");
+        this(credentialsProfile, ConnioClientTransformerProvider.get());
+    }
 
+    protected AbstractClient(String credentialsProfile, ConnioClientTransformer context) {
+        Asserts.notEmpty(credentialsProfile, "Credentials Profile");
+        Asserts.notNull(context, "ConnioClientTransformer");
+
+        this.context = context;
         this.credentialsProfile = credentialsProfile;
-        this.context = ConnioClientTransformerProvider.get();
     }
 
     protected <RT, RS extends ConnioResponse<RT>> RT execute(ConnioRequest<RS> request)
