@@ -31,8 +31,8 @@ public class DataEndpointClientTest extends AbstractClientMockServerTestCase {
 
     @Test
     public void testSendDataToApp() throws Exception {
-        final String expectedRequestJson = resource("json/dataservices/sendDataToAppRequest.json");
-        final String mockResponseJson = resource("json/dataservices/sendDataToAppResponse.json");
+        final String expectedRequestJson = resource("json/dataservices/sendData/toAppRequest.json");
+        final String mockResponseJson = resource("json/dataservices/sendData/toAppResponse.json");
 
         pushResponse(mockResponseJson);
 
@@ -62,8 +62,8 @@ public class DataEndpointClientTest extends AbstractClientMockServerTestCase {
 
     @Test
     public void testSendDataToChannel() throws Exception {
-        final String expectedRequestJson = resource("json/dataservices/sendDataToChannelRequest.json");
-        final String mockResponseJson = resource("json/dataservices/sendDataToChannelResponse.json");
+        final String expectedRequestJson = resource("json/dataservices/sendData/toChannelRequest.json");
+        final String mockResponseJson = resource("json/dataservices/sendData/toChannelResponse.json");
 
         pushResponse(mockResponseJson);
 
@@ -94,7 +94,7 @@ public class DataEndpointClientTest extends AbstractClientMockServerTestCase {
 
     @Test
     public void testGetData() throws Exception {
-        final String mockResponseJson = resource("json/dataservices/getDataResponse.json");
+        final String mockResponseJson = resource("json/dataservices/getData/response.json");
 
         pushResponse(mockResponseJson);
 
