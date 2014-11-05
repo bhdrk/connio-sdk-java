@@ -74,7 +74,7 @@ public class DataEndpointClientHttpTest {
         devicesClient = new DevicesClient();
     }
 
-    @Test(priority = 0)
+    @Test
     public void createAppAndDataChannelTestData() throws Exception {
 
         App bankApp = new App();
@@ -124,7 +124,7 @@ public class DataEndpointClientHttpTest {
         }
     }
 
-    @Test(priority = 0)
+    @Test
     public void createDeviceAndProfileTestData() throws Exception {
         {
             DeviceProfile atmDeviceProfile = new DeviceProfile();
@@ -173,7 +173,7 @@ public class DataEndpointClientHttpTest {
         assertThat(dataFeedDetails.getRejected()).isEqualTo(0);
     }
 
-    @Test(priority = 1, dependsOnMethods = {"createAppAndDataChannelTestData", "createDeviceAndProfileTestData"})
+    @Test( dependsOnMethods = {"createAppAndDataChannelTestData", "createDeviceAndProfileTestData"})
     public void testSendDataToSingleChannel() throws Exception {
         String feed1 = UUID.randomUUID().toString();
         String feed2 = UUID.randomUUID().toString();
@@ -204,7 +204,7 @@ public class DataEndpointClientHttpTest {
         }
     }
 
-    @Test(priority = 1, dependsOnMethods = {"createAppAndDataChannelTestData", "createDeviceAndProfileTestData"})
+    @Test( dependsOnMethods = {"createAppAndDataChannelTestData", "createDeviceAndProfileTestData"})
     public void testSendDataWithFeedId() throws Exception {
         String feedId = UUID.randomUUID().toString();
 
@@ -236,7 +236,7 @@ public class DataEndpointClientHttpTest {
         assertThat(dataPointDetails.get_loc()).isEqualTo(location);
     }
 
-    @Test(priority = 1, dependsOnMethods = "testSendDataToMultipleChannel")
+    @Test(dependsOnMethods = "testSendDataToMultipleChannel")
     public void testGetData() throws Exception {
         {
             DataQuery dataQuery = new DataQuery();
@@ -267,7 +267,7 @@ public class DataEndpointClientHttpTest {
         }
     }
 
-    @Test(priority = 2, dependsOnMethods = {"testGetData", "testSendDataToMultipleChannel", "testSendDataToSingleChannel", "testSendDataWithFeedId"})
+    @Test(dependsOnMethods = {"testGetData", "testSendDataToMultipleChannel", "testSendDataToSingleChannel", "testSendDataWithFeedId"})
     public void deleteTestData() throws Exception {
         {
             Deleted result = appClient.deleteApp(_bankAppName);
