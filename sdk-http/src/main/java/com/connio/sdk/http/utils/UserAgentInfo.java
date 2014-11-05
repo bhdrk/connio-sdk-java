@@ -1,12 +1,6 @@
 package com.connio.sdk.http.utils;
 
-import com.connio.sdk.api.exception.ConnioClientException;
-import com.connio.sdk.api.utils.TypeUtils;
 import com.connio.sdk.http.internal.Constants;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * TODO: javadoc
@@ -17,11 +11,8 @@ import java.util.Properties;
 public class UserAgentInfo {
 
     private String userAgent;
-    private String platform;
-    private String version;
 
     public UserAgentInfo() {
-        loadVersionInfo();
         buildUserAgent();
     }
 
@@ -29,19 +20,11 @@ public class UserAgentInfo {
         return userAgent;
     }
 
-    public String getPlatform() {
-        return platform;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
     private void buildUserAgent() {
         String userAgentTemplate = Constants.USER_AGENT_TEMPLATE;
         userAgent = userAgentTemplate
-                .replace("{platform}", platform)
-                .replace("{version}", version)
+                .replace("{platform}", "java")
+                .replace("{version}", UserAgentInfo.class.getPackage().getImplementationVersion()) // should be filled when manifest is built by maven-jar-plugin
                 .replace("{os.name}", getSystemProperty("os.name"))
                 .replace("{os.version}", getSystemProperty("os.version"))
                 .replace("{java.vm.name}", getSystemProperty("java.vm.name"))
@@ -54,32 +37,5 @@ public class UserAgentInfo {
     private String getSystemProperty(String name) {
         String property = System.getProperty(name);
         return property != null ? property : "";
-    }
-
-    private void loadVersionInfo() {
-        InputStream resource = null;
-        try {
-            resource = ClassResourceLoader.getResourceAsStream(Constants.VERSION_INFO_FILE, UserAgentInfo.class);
-            if (resource != null) {
-                Properties properties = new Properties();
-                properties.load(resource);
-
-                version = properties.getProperty("version");
-                platform = properties.getProperty("platform");
-
-                if (TypeUtils.isEmpty(version)) {
-                    throw new ConnioClientException("'version' not found in version.properties file.");
-                }
-                if (TypeUtils.isEmpty(platform)) {
-                    throw new ConnioClientException("'platform' not found in version.properties file.");
-                }
-            } else {
-                throw new ConnioClientException("version.properties not found.");
-            }
-        } catch (IOException e) {
-            throw new ConnioClientException("An error occurred while loading version.properties file.", e);
-        } finally {
-            IOUtils.closeSilently(resource);
-        }
     }
 }
