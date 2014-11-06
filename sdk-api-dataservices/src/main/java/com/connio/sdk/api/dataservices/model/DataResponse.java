@@ -7,5 +7,5 @@ import com.connio.sdk.api.model.AbstractConnioResponse;
  *
  * Created by bdirik on 17.10.2014.
  */
-public abstract class DataEndpointResponse<RT> extends AbstractConnioResponse<RT> {
+public abstract class DataResponse<RT> extends AbstractConnioResponse<RT> {
 }

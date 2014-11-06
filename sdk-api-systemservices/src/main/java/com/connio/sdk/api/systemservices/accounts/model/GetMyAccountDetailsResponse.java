@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetMyAccountDetailsResponse extends AccountEndpointResponse<AccountDetails> {
+public class GetMyAccountDetailsResponse extends AccountResponse<AccountDetails> {
 
     private AccountDetails result;
 

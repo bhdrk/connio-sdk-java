@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class CreateAuthenticationTokenResponse extends AccountEndpointResponse<AuthToken> {
+public class CreateAuthenticationTokenResponse extends AccountResponse<AuthToken> {
 
     private AuthToken result;
 

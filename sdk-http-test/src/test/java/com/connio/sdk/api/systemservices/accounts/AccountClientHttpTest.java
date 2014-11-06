@@ -17,8 +17,8 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 22.09.2014
  */
-@Test(suiteName = "HttpTests", testName = "AccountEndpoint")
-public class AccountEndpointClientHttpTest {
+@Test(suiteName = "HttpTests")
+public class AccountClientHttpTest {
 
     private IAccountClient client;
 

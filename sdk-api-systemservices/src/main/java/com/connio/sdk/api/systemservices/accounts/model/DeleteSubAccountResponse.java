@@ -8,7 +8,7 @@ import com.connio.sdk.api.model.Deleted;
  * @author bdirik
  * @since 10.09.2014
  */
-public class DeleteSubAccountResponse extends AccountEndpointResponse<Deleted> {
+public class DeleteSubAccountResponse extends AccountResponse<Deleted> {
 
     private Deleted result;
 

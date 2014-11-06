@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 29.09.2014
  */
-public class GenerateAccessKeyByCIDRequest extends DeviceEndpointRequest<GenerateAccessKeyResponse> {
+public class GenerateAccessKeyByCIDRequest extends DeviceRequest<GenerateAccessKeyResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

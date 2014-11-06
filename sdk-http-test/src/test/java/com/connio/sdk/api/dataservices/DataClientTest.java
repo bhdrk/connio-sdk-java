@@ -19,8 +19,8 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * <p/>
  * Created by bdirik on 20.10.2014.
  */
-@Test(suiteName = "ClientTest", testName = "DataEndpoint")
-public class DataEndpointClientTest extends AbstractClientMockServerTestCase {
+@Test(suiteName = "ClientTest")
+public class DataClientTest extends AbstractClientMockServerTestCase {
 
     private IDataClient dataClient;
 

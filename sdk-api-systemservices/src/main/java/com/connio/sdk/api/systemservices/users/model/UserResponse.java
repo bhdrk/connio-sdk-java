@@ -8,5 +8,5 @@ import com.connio.sdk.api.model.AbstractConnioResponse;
  * @author bdirik
  * @since 11.09.2014
  */
-public abstract class UserEndpointResponse<T> extends AbstractConnioResponse<T> {
+public abstract class UserResponse<T> extends AbstractConnioResponse<T> {
 }

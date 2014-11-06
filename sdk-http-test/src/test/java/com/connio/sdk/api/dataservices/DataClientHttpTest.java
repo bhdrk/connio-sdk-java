@@ -46,8 +46,8 @@ import static org.fest.assertions.api.Assertions.extractProperty;
  * <p/>
  * Created by bdirik on 20.10.2014.
  */
-@Test(suiteName = "HttpTests", testName = "DataEndpoint")
-public class DataEndpointClientHttpTest {
+@Test(suiteName = "HttpTests")
+public class DataClientHttpTest {
 
     private String _testCredentialProfile = TestUtils.randomName("DEVICE");
 

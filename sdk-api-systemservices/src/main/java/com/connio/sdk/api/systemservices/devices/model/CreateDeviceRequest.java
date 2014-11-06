@@ -10,7 +10,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 29.09.2014
  */
-public class CreateDeviceRequest extends DeviceEndpointRequest<CreateDeviceResponse> {
+public class CreateDeviceRequest extends DeviceRequest<CreateDeviceResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

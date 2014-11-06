@@ -5,7 +5,7 @@ package com.connio.sdk.api.dataservices.model;
  * <p/>
  * Created by bdirik on 20.10.2014.
  */
-public class GetDataFromChannelResponse extends DataEndpointResponse<DataPointResultSet> {
+public class GetDataFromChannelResponse extends DataResponse<DataPointResultSet> {
 
     private DataPointResultSet result;
 

@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 25.09.2014
  */
-public class CreateDeviceProfileRequest extends DeviceProfileEndpointRequest<CreateDeviceProfileResponse> {
+public class CreateDeviceProfileRequest extends DeviceProfileRequest<CreateDeviceProfileResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

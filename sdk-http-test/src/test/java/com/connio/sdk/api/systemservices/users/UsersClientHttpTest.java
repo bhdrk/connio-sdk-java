@@ -15,19 +15,19 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 29.09.2014
  */
-@Test(suiteName = "HttpTests", testName = "UserEndpoint")
-public class UsersEndpointClientHttpTest {
+@Test(suiteName = "HttpTests")
+public class UsersClientHttpTest {
 
     private UserClient client;
 
-    private String testUserSid = "US11C4C89AE45C404FB0A3E974C49D59E9";
+    private String testUserSid = "";
 
     @BeforeMethod
     public void beforeClass() throws Exception {
         client = new UserClient();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testGetUserDetails() throws Exception {
         UserDetails result = client.getUserDetails(testUserSid);
 
@@ -35,7 +35,7 @@ public class UsersEndpointClientHttpTest {
         assertThat(result.getSid()).isEqualTo(testUserSid);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testGetAllUserDetails() throws Exception {
         UserResultSet result = client.getAllUserDetails();
 

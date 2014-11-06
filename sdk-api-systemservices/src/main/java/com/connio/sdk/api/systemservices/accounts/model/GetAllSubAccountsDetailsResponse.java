@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetAllSubAccountsDetailsResponse extends AccountEndpointResponse<SubAccountResultSet> {
+public class GetAllSubAccountsDetailsResponse extends AccountResponse<SubAccountResultSet> {
 
     /**
      * TODO: javadoc

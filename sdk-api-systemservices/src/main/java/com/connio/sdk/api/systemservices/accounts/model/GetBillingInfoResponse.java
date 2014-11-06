@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.accounts.model;
  * @author bdirik
  * @since 10.09.2014
  */
-public class GetBillingInfoResponse extends AccountEndpointResponse<BillingInfoList> {
+public class GetBillingInfoResponse extends AccountResponse<BillingInfoList> {
 
     private BillingInfoList result;
 

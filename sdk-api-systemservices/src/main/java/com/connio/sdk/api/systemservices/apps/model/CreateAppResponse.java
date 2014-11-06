@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.apps.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class CreateAppResponse extends AppEndpointResponse<AppDetails> {
+public class CreateAppResponse extends AppResponse<AppDetails> {
 
     /**
      * TODO: javadoc

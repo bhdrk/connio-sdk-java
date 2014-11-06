@@ -11,7 +11,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * <p/>
  * Created by bdirik on 20.10.2014.
  */
-public class GetDataFromChannelRequest extends DataEndpointRequest<GetDataFromChannelResponse> {
+public class GetDataFromChannelRequest extends DataRequest<GetDataFromChannelResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

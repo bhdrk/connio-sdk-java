@@ -1,4 +1,4 @@
-package com.connio.sdk.api.systemservices.accounts.model;
+package com.connio.sdk.api.systemservices.devices.model;
 
 import com.connio.sdk.api.model.AbstractConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
@@ -7,12 +7,12 @@ import com.connio.sdk.api.model.RequestMetaData;
  * TODO: javadoc
  *
  * @author bdirik
- * @since 10.09.2014
+ * @since 29.09.2014
  */
-public abstract class AccountEndpointRequest<RS extends AccountEndpointResponse> extends AbstractConnioRequest<RS> {
+public abstract class DeviceRequest<RS extends DeviceResponse> extends AbstractConnioRequest<RS> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
-        metaData.addPath("/_accounts");
+        metaData.addPath("/_devices");
     }
 }

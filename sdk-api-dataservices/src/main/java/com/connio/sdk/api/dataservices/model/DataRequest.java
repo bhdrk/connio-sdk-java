@@ -4,8 +4,8 @@ import com.connio.sdk.api.model.AbstractConnioRequest;
 
 /**
  * TODO: javadoc
- *
+ * <p/>
  * Created by bdirik on 17.10.2014.
  */
-public class DataEndpointRequest<RS extends DataEndpointResponse> extends AbstractConnioRequest<RS> {
+public abstract class DataRequest<RS extends DataResponse> extends AbstractConnioRequest<RS> {
 }

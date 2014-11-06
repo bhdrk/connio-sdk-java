@@ -5,7 +5,7 @@ package com.connio.sdk.api.dataservices.model;
  *
  * Created by bdirik on 17.10.2014.
  */
-public class SendDataToChannelResponse extends DataEndpointResponse<DataFeedDetails> {
+public class SendDataToChannelResponse extends DataResponse<DataFeedDetails> {
 
     private DataFeedDetails result;
 

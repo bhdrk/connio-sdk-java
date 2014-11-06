@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 12.09.2014
  */
-public class CreateDataChannelRequest extends DataChannelEndpointRequest<CreateDataChannelResponse> {
+public class CreateDataChannelRequest extends DataChannelRequest<CreateDataChannelResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

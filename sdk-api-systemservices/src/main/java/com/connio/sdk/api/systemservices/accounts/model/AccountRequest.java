@@ -1,4 +1,4 @@
-package com.connio.sdk.api.systemservices.users.model;
+package com.connio.sdk.api.systemservices.accounts.model;
 
 import com.connio.sdk.api.model.AbstractConnioRequest;
 import com.connio.sdk.api.model.RequestMetaData;
@@ -7,12 +7,12 @@ import com.connio.sdk.api.model.RequestMetaData;
  * TODO: javadoc
  *
  * @author bdirik
- * @since 11.09.2014
+ * @since 10.09.2014
  */
-public abstract class UserEndpointRequest<RS extends UserEndpointResponse> extends AbstractConnioRequest<RS> {
+public abstract class AccountRequest<RS extends AccountResponse> extends AbstractConnioRequest<RS> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
-        metaData.addPath("/_users");
+        metaData.addPath("/_accounts");
     }
 }

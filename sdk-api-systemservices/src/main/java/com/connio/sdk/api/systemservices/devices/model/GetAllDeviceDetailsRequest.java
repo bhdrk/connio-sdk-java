@@ -16,7 +16,7 @@ import static com.connio.sdk.api.utils.TypeUtils.isNotEmpty;
  * @author bdirik
  * @since 29.09.2014
  */
-public class GetAllDeviceDetailsRequest extends DeviceEndpointRequest<GetAllDeviceDetailsResponse> {
+public class GetAllDeviceDetailsRequest extends DeviceRequest<GetAllDeviceDetailsResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

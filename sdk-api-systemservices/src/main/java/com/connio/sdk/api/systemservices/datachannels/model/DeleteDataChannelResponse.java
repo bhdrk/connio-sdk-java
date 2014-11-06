@@ -8,7 +8,7 @@ import com.connio.sdk.api.model.Deleted;
  * @author bdirik
  * @since 12.09.2014
  */
-public class DeleteDataChannelResponse extends DataChannelEndpointResponse<Deleted> {
+public class DeleteDataChannelResponse extends DataChannelResponse<Deleted> {
 
     private Deleted result;
 

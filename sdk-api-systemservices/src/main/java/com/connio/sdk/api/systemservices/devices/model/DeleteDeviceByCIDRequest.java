@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.DELETE;
  * @author bdirik
  * @since 29.09.2014
  */
-public class DeleteDeviceByCIDRequest extends DeviceEndpointRequest<DeleteDeviceResponse> {
+public class DeleteDeviceByCIDRequest extends DeviceRequest<DeleteDeviceResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

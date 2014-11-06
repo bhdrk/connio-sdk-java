@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.devices.model;
  * @author bdirik
  * @since 29.09.2014
  */
-public class UpdateDeviceResponse extends DeviceEndpointResponse<DeviceDetails> {
+public class UpdateDeviceResponse extends DeviceResponse<DeviceDetails> {
 
     private DeviceDetails result;
 

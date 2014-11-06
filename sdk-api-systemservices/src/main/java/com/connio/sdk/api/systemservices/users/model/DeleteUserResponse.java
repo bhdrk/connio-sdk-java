@@ -8,7 +8,7 @@ import com.connio.sdk.api.model.Deleted;
  * @author bdirik
  * @since 11.09.2014
  */
-public class DeleteUserResponse extends UserEndpointResponse<Deleted> {
+public class DeleteUserResponse extends UserResponse<Deleted> {
 
     /**
      * TODO: javadoc

@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.DELETE;
  * @author bdirik
  * @since 12.09.2014
  */
-public class DeleteAppRequest extends AppEndpointRequest<DeleteAppResponse> {
+public class DeleteAppRequest extends AppRequest<DeleteAppResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

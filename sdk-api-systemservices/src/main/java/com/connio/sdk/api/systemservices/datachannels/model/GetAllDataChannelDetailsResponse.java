@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @author bdirik
  * @since 12.09.2014
  */
-public class GetAllDataChannelDetailsResponse extends DataChannelEndpointResponse<DataChannelResultSet> {
+public class GetAllDataChannelDetailsResponse extends DataChannelResponse<DataChannelResultSet> {
 
     private DataChannelResultSet result;
 

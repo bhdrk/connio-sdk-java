@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.PUT;
  * @author bdirik
  * @since 25.09.2014
  */
-public class UpdateDeviceProfileRequest extends DeviceProfileEndpointRequest<UpdateDeviceProfileResponse> {
+public class UpdateDeviceProfileRequest extends DeviceProfileRequest<UpdateDeviceProfileResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 12.09.2014
  */
-public class GetDataChannelDetailsRequest extends DataChannelEndpointRequest<GetDataChannelDetailsResponse> {
+public class GetDataChannelDetailsRequest extends DataChannelRequest<GetDataChannelDetailsResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

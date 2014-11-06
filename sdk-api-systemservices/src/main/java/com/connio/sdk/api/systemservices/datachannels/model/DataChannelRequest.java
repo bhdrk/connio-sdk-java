@@ -10,7 +10,7 @@ import com.connio.sdk.api.utils.Asserts;
  * @author bdirik
  * @since 12.09.2014
  */
-public abstract class DataChannelEndpointRequest<RS extends DataChannelEndpointResponse> extends AbstractConnioRequest<RS> {
+public abstract class DataChannelRequest<RS extends DataChannelResponse> extends AbstractConnioRequest<RS> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
@@ -27,10 +27,10 @@ public abstract class DataChannelEndpointRequest<RS extends DataChannelEndpointR
      */
     private String appId;
 
-    protected DataChannelEndpointRequest() {
+    protected DataChannelRequest() {
     }
 
-    protected DataChannelEndpointRequest(String appId) {
+    protected DataChannelRequest(String appId) {
         this.appId = appId;
     }
 

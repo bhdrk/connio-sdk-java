@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.PUT;
  * @author bdirik
  * @since 29.09.2014
  */
-public class UpdateDeviceBySIDRequest extends DeviceEndpointRequest<UpdateDeviceResponse> {
+public class UpdateDeviceBySIDRequest extends DeviceRequest<UpdateDeviceResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

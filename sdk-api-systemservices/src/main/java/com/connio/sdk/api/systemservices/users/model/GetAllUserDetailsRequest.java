@@ -10,7 +10,7 @@ import static com.connio.sdk.api.model.Method.GET;
  * @author bdirik
  * @since 23.09.2014
  */
-public class GetAllUserDetailsRequest extends UserEndpointRequest<GetAllUserDetailsResponse> {
+public class GetAllUserDetailsRequest extends UserRequest<GetAllUserDetailsResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);

@@ -8,5 +8,5 @@ import com.connio.sdk.api.model.AbstractConnioResponse;
  * @author bdirik
  * @since 29.09.2014
  */
-public abstract class DeviceEndpointResponse<T> extends AbstractConnioResponse<T> {
+public abstract class DeviceResponse<T> extends AbstractConnioResponse<T> {
 }

@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.PUT;
  * @author bdirik
  * @since 12.09.2014
  */
-public class UpdateDataChannelRequest extends DataChannelEndpointRequest<UpdateDataChannelResponse> {
+public class UpdateDataChannelRequest extends DataChannelRequest<UpdateDataChannelResponse> {
 
     private String channelId;
 

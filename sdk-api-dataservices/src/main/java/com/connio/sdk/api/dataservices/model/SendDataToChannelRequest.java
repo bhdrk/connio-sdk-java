@@ -10,7 +10,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * <p/>
  * Created by bdirik on 17.10.2014.
  */
-public class SendDataToChannelRequest extends DataEndpointRequest<SendDataToChannelResponse> {
+public class SendDataToChannelRequest extends DataRequest<SendDataToChannelResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

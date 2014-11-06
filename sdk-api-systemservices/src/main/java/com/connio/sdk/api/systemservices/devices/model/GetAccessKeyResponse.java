@@ -6,7 +6,7 @@ package com.connio.sdk.api.systemservices.devices.model;
  * @author bdirik
  * @since 29.09.2014
  */
-public class GetAccessKeyResponse extends DeviceEndpointResponse<DeviceAccessKey> {
+public class GetAccessKeyResponse extends DeviceResponse<DeviceAccessKey> {
 
     private DeviceAccessKey result;
 

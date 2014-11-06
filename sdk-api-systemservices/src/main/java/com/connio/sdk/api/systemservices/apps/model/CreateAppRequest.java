@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 12.09.2014
  */
-public class CreateAppRequest extends AppEndpointRequest<CreateAppResponse> {
+public class CreateAppRequest extends AppRequest<CreateAppResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {

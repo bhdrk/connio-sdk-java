@@ -24,8 +24,8 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 24.09.2014
  */
-@Test(suiteName = "HttpTests", testName = "DataChannelEndpoint")
-public class DataChannelEndpointClientHttpTest {
+@Test(suiteName = "HttpTests")
+public class DataChannelClientHttpTest {
 
     private IDataChannelClient client;
 

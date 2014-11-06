@@ -10,7 +10,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * <p/>
  * Created by bdirik on 17.10.2014.
  */
-public class SendDataToAppRequest extends DataEndpointRequest<SendDataToAppResponse> {
+public class SendDataToAppRequest extends DataRequest<SendDataToAppResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
