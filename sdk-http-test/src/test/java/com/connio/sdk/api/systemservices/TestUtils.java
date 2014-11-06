@@ -90,6 +90,10 @@ public class TestUtils {
     }
 
     public static String resource(String name) {
-        return ClassResourceLoader.getResourceAsString(name, TestUtils.class);
+        String resource = ClassResourceLoader.getResourceAsString(name, TestUtils.class);
+        if (resource == null) {
+            throw new RuntimeException("Test resource not found!");
+        }
+        return resource;
     }
 }

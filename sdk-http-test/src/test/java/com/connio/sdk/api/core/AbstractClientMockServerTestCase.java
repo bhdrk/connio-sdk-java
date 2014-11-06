@@ -30,8 +30,9 @@ public class AbstractClientMockServerTestCase {
     }
 
     public HttpClientTransformer mockTransformer() {
+        String mockServerUrl = mockServer.getUrl("").toString();
         Map<String, String> configMap = new HashMap<String, String>();
-        configMap.put("connio.http.serviceUrl", mockServer.getUrl("").toString());
+        configMap.put("connio.http.serviceUrl", mockServerUrl);
         ClientConfig clientConfig = new ClientConfig(configMap);
         return new HttpClientTransformer(clientConfig); // create new transformer with mock server url
     }
