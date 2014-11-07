@@ -29,13 +29,15 @@ public class ProfileCredentialsProvider extends AbstractConnioCredentialsProvide
 
     @Override
     public Map<String, ConnioCredentials> getCredentialsMap() {
-        File credentialsFile = getCredentialsFile();
-        if (credentialsFile == null) return null;
-
-        FileReader reader = getFileReader(credentialsFile);
-        if (reader == null) return null;
+        Reader reader = null;
 
         try {
+            File credentialsFile = getCredentialsFile();
+            if (credentialsFile == null) return null;
+
+            reader = getFileReader(credentialsFile);
+            if (reader == null) return null;
+
             Properties properties = new Properties();
             properties.load(reader);
 
@@ -53,14 +55,10 @@ public class ProfileCredentialsProvider extends AbstractConnioCredentialsProvide
         }
     }
 
-    private FileReader getFileReader(File credentialsFile) {
-        FileReader reader;
-        try {
-            reader = new FileReader(credentialsFile);
-        } catch (FileNotFoundException ignored) {
-            return null;
-        }
-        return reader;
+    private Reader getFileReader(File credentialsFile) throws IOException {
+        FileInputStream in = new FileInputStream(credentialsFile);
+        InputStreamReader inr = new InputStreamReader(in, "UTF-8");
+        return new BufferedReader(inr);
     }
 
     private File getCredentialsFile() {
