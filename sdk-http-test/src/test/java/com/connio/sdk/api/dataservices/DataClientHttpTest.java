@@ -179,10 +179,10 @@ public class DataClientHttpTest {
         String feed2 = UUID.randomUUID().toString();
 
         DataPoint dataPoint1 = new DataPoint(System.currentTimeMillis(), 26, _atmTempChanName);
-        dataPoint1.set_feedId(feed1);
+        dataPoint1.setFeedId_(feed1);
 
         DataPoint dataPoint2 = new DataPoint(System.currentTimeMillis(), 27, _atmHumidityChanName);
-        dataPoint2.set_feedId(feed2);
+        dataPoint2.setFeedId_(feed2);
 
         DataFeedDetails dataFeedDetails = dataClient.sendData(_bankAppName, _atmTempChanName, new DataFeed(dataPoint1, dataPoint2));
 
@@ -196,11 +196,11 @@ public class DataClientHttpTest {
 
         {
             DataPointResultSet result = dataClient.getData(_bankAppName, _atmTempChanName, dataQuery);
-            assertThat(extractProperty("_feedId").from(result.getResultSet())).contains(feed1, feed2);
+            assertThat(extractProperty("feedId_").from(result.getResultSet())).contains(feed1, feed2);
         }
         {
             DataPointResultSet result = dataClient.getData(_bankAppName, _atmHumidityChanName, dataQuery);
-            assertThat(extractProperty("_feedId").from(result.getResultSet())).doesNotContain(feed1, feed2);
+            assertThat(extractProperty("feedId_").from(result.getResultSet())).doesNotContain(feed1, feed2);
         }
     }
 
@@ -211,8 +211,8 @@ public class DataClientHttpTest {
         Location location = new Location("Izmir", new GeoCoordinates(38.41885D, 27.12871999999993D));
 
         DataPoint dataPoint = new DataPoint(System.currentTimeMillis(), 900);
-        dataPoint.set_feedId(feedId);
-        dataPoint.set_loc(location);
+        dataPoint.setFeedId_(feedId);
+        dataPoint.setLoc_(location);
 
         DataFeedDetails dataFeedDetails = dataClient.sendData(_bankAppName, _atmLightChanName, new DataFeed(dataPoint));
 
@@ -232,8 +232,8 @@ public class DataClientHttpTest {
 
         DataPointDetails dataPointDetails = result.getResultSet().get(0);
 
-        assertThat(dataPointDetails.get_feedId()).isEqualToIgnoringCase(feedId);
-        assertThat(dataPointDetails.get_loc()).isEqualTo(location);
+        assertThat(dataPointDetails.getFeedId_()).isEqualToIgnoringCase(feedId);
+        assertThat(dataPointDetails.getLoc_()).isEqualTo(location);
     }
 
     @Test(dependsOnMethods = "testSendDataToMultipleChannel")

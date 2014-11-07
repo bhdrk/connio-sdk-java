@@ -52,7 +52,7 @@ public class DataPointTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataPoint dataPoint = new DataPoint(1414407520L, 1, "DATA");
-        dataPoint.set_loc(location);
+        dataPoint.setLoc_(location);
 
         String actual = JSON.toString(dataPoint);
         String expected = resource("json/dataservices/model/dataPoint/location.json");
@@ -66,10 +66,10 @@ public class DataPointTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataPoint dataPoint = new DataPoint(1414407520L, 1, "DATA");
-        dataPoint.set_feedId("1009");
-        dataPoint.set_loc(location);
-        dataPoint.set_srcUri("_devices/_id/1101");
-        dataPoint.set_tags(Arrays.asList("TAG1", "TAG2"));
+        dataPoint.setFeedId_("1009");
+        dataPoint.setLoc_(location);
+        dataPoint.setSrcUri_("_devices/_id/1101");
+        dataPoint.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         String actual = JSON.toString(dataPoint);
         String expected = resource("json/dataservices/model/dataPoint/allProperties.json");
@@ -85,10 +85,10 @@ public class DataPointTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataPoint dataPoint = new DataPoint(1414407520L, value, "DATA");
-        dataPoint.set_feedId("1009");
-        dataPoint.set_loc(location);
-        dataPoint.set_srcUri("_devices/_id/1101");
-        dataPoint.set_tags(Arrays.asList("TAG1", "TAG2"));
+        dataPoint.setFeedId_("1009");
+        dataPoint.setLoc_(location);
+        dataPoint.setSrcUri_("_devices/_id/1101");
+        dataPoint.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         String actual = JSON.toString(dataPoint);
         String expected = resource("json/dataservices/model/dataPoint/longStringValue.json");
@@ -126,7 +126,7 @@ public class DataPointTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataPoint expected = new DataPoint(1414407520L, 1, "DATA");
-        expected.set_loc(location);
+        expected.setLoc_(location);
 
         DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/location.json"), DataPoint.class);
 
@@ -139,10 +139,10 @@ public class DataPointTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataPoint expected = new DataPoint(1414407520L, 1, "DATA");
-        expected.set_feedId("1009");
-        expected.set_loc(location);
-        expected.set_srcUri("_devices/_id/1101");
-        expected.set_tags(Arrays.asList("TAG1", "TAG2"));
+        expected.setFeedId_("1009");
+        expected.setLoc_(location);
+        expected.setSrcUri_("_devices/_id/1101");
+        expected.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/allProperties.json"), DataPoint.class);
 
@@ -157,10 +157,10 @@ public class DataPointTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataPoint expected = new DataPoint(1414407520L, value, "DATA");
-        expected.set_feedId("1009");
-        expected.set_loc(location);
-        expected.set_srcUri("_devices/_id/1101");
-        expected.set_tags(Arrays.asList("TAG1", "TAG2"));
+        expected.setFeedId_("1009");
+        expected.setLoc_(location);
+        expected.setSrcUri_("_devices/_id/1101");
+        expected.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         DataPoint actual = JSON.fromString(resource("json/dataservices/model/dataPoint/longStringValue.json"), DataPoint.class);
 

@@ -13,13 +13,13 @@ public class DataPointDetails implements Serializable {
     private Long time;
     private Object value;
 
-    private String _feedId;
-    private Location _loc;
-    private String _srcUri;
-    private List<String> _tags;
-    private String _chan;
-    private String _remIp;
-    private Long _srvTime;
+    private String feedId_;
+    private Location loc_;
+    private String srcUri_;
+    private List<String> tags_;
+    private String chan_;
+    private String remIp_;
+    private Long srvTime_;
 
     public Object getValue() {
         return value;
@@ -37,60 +37,60 @@ public class DataPointDetails implements Serializable {
         this.time = time;
     }
 
-    public String get_feedId() {
-        return _feedId;
+    public String getFeedId_() {
+        return feedId_;
     }
 
-    public void set_feedId(String _feedId) {
-        this._feedId = _feedId;
+    public void setFeedId_(String feedId_) {
+        this.feedId_ = feedId_;
     }
 
-    public Location get_loc() {
-        return _loc;
+    public Location getLoc_() {
+        return loc_;
     }
 
-    public void set_loc(Location _loc) {
-        this._loc = _loc;
+    public void setLoc_(Location loc_) {
+        this.loc_ = loc_;
     }
 
-    public String get_srcUri() {
-        return _srcUri;
+    public String getSrcUri_() {
+        return srcUri_;
     }
 
-    public void set_srcUri(String _srcUri) {
-        this._srcUri = _srcUri;
+    public void setSrcUri_(String srcUri_) {
+        this.srcUri_ = srcUri_;
     }
 
-    public List<String> get_tags() {
-        return _tags;
+    public List<String> getTags_() {
+        return tags_;
     }
 
-    public void set_tags(List<String> _tags) {
-        this._tags = _tags;
+    public void setTags_(List<String> tags_) {
+        this.tags_ = tags_;
     }
 
-    public String get_chan() {
-        return _chan;
+    public String getChan_() {
+        return chan_;
     }
 
-    public void set_chan(String _chan) {
-        this._chan = _chan;
+    public void setChan_(String chan_) {
+        this.chan_ = chan_;
     }
 
-    public String get_remIp() {
-        return _remIp;
+    public String getRemIp_() {
+        return remIp_;
     }
 
-    public void set_remIp(String _remIp) {
-        this._remIp = _remIp;
+    public void setRemIp_(String remIp_) {
+        this.remIp_ = remIp_;
     }
 
-    public Long get_srvTime() {
-        return _srvTime;
+    public Long getSrvTime_() {
+        return srvTime_;
     }
 
-    public void set_srvTime(Long _srvTime) {
-        this._srvTime = _srvTime;
+    public void setSrvTime_(Long srvTime_) {
+        this.srvTime_ = srvTime_;
     }
 
     @Override
@@ -100,13 +100,13 @@ public class DataPointDetails implements Serializable {
 
         DataPointDetails that = (DataPointDetails) o;
 
-        if (_chan != null ? !_chan.equals(that._chan) : that._chan != null) return false;
-        if (_feedId != null ? !_feedId.equals(that._feedId) : that._feedId != null) return false;
-        if (_loc != null ? !_loc.equals(that._loc) : that._loc != null) return false;
-        if (_remIp != null ? !_remIp.equals(that._remIp) : that._remIp != null) return false;
-        if (_srcUri != null ? !_srcUri.equals(that._srcUri) : that._srcUri != null) return false;
-        if (_srvTime != null ? !_srvTime.equals(that._srvTime) : that._srvTime != null) return false;
-        if (_tags != null ? !_tags.equals(that._tags) : that._tags != null) return false;
+        if (chan_ != null ? !chan_.equals(that.chan_) : that.chan_ != null) return false;
+        if (feedId_ != null ? !feedId_.equals(that.feedId_) : that.feedId_ != null) return false;
+        if (loc_ != null ? !loc_.equals(that.loc_) : that.loc_ != null) return false;
+        if (remIp_ != null ? !remIp_.equals(that.remIp_) : that.remIp_ != null) return false;
+        if (srcUri_ != null ? !srcUri_.equals(that.srcUri_) : that.srcUri_ != null) return false;
+        if (srvTime_ != null ? !srvTime_.equals(that.srvTime_) : that.srvTime_ != null) return false;
+        if (tags_ != null ? !tags_.equals(that.tags_) : that.tags_ != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
         if (value != null ? !value.equals(that.value) : that.value != null) return false;
 
@@ -117,13 +117,13 @@ public class DataPointDetails implements Serializable {
     public int hashCode() {
         int result = time != null ? time.hashCode() : 0;
         result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (_feedId != null ? _feedId.hashCode() : 0);
-        result = 31 * result + (_loc != null ? _loc.hashCode() : 0);
-        result = 31 * result + (_srcUri != null ? _srcUri.hashCode() : 0);
-        result = 31 * result + (_tags != null ? _tags.hashCode() : 0);
-        result = 31 * result + (_chan != null ? _chan.hashCode() : 0);
-        result = 31 * result + (_remIp != null ? _remIp.hashCode() : 0);
-        result = 31 * result + (_srvTime != null ? _srvTime.hashCode() : 0);
+        result = 31 * result + (feedId_ != null ? feedId_.hashCode() : 0);
+        result = 31 * result + (loc_ != null ? loc_.hashCode() : 0);
+        result = 31 * result + (srcUri_ != null ? srcUri_.hashCode() : 0);
+        result = 31 * result + (tags_ != null ? tags_.hashCode() : 0);
+        result = 31 * result + (chan_ != null ? chan_.hashCode() : 0);
+        result = 31 * result + (remIp_ != null ? remIp_.hashCode() : 0);
+        result = 31 * result + (srvTime_ != null ? srvTime_.hashCode() : 0);
         return result;
     }
 
@@ -132,13 +132,13 @@ public class DataPointDetails implements Serializable {
         return "DataPointDetails{" +
                 "time=" + time +
                 ", value='" + value + '\'' +
-                ", _feedId='" + _feedId + '\'' +
-                ", _loc=" + _loc +
-                ", _srcUri='" + _srcUri + '\'' +
-                ", _tags=" + _tags +
-                ", _chan='" + _chan + '\'' +
-                ", _remIp='" + _remIp + '\'' +
-                ", _srvTime=" + _srvTime +
+                ", feedId_='" + feedId_ + '\'' +
+                ", loc_=" + loc_ +
+                ", srcUri_='" + srcUri_ + '\'' +
+                ", tags_=" + tags_ +
+                ", chan_='" + chan_ + '\'' +
+                ", remIp_='" + remIp_ + '\'' +
+                ", srvTime_=" + srvTime_ +
                 '}';
     }
 }

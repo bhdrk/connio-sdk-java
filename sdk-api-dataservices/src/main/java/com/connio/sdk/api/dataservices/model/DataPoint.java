@@ -15,11 +15,11 @@ public class DataPoint implements Serializable {
     private Long time;
     private Object value;
 
-    private String _feedId;
-    private Location _loc;
-    private String _srcUri;
-    private List<String> _tags;
-    private String _chan;
+    private String feedId_;
+    private Location loc_;
+    private String srcUri_;
+    private List<String> tags_;
+    private String chan_;
 
     public DataPoint() {
     }
@@ -29,10 +29,10 @@ public class DataPoint implements Serializable {
         this.value = value;
     }
 
-    public DataPoint(Long time, Object value, String _chan) {
+    public DataPoint(Long time, Object value, String chan_) {
         this.time = time;
         this.value = value;
-        this._chan = _chan;
+        this.chan_ = chan_;
     }
 
     public Long getTime() {
@@ -51,44 +51,44 @@ public class DataPoint implements Serializable {
         this.value = value;
     }
 
-    public String get_feedId() {
-        return _feedId;
+    public String getFeedId_() {
+        return feedId_;
     }
 
-    public void set_feedId(String _feedId) {
-        this._feedId = _feedId;
+    public void setFeedId_(String feedId_) {
+        this.feedId_ = feedId_;
     }
 
-    public Location get_loc() {
-        return _loc;
+    public Location getLoc_() {
+        return loc_;
     }
 
-    public void set_loc(Location _loc) {
-        this._loc = _loc;
+    public void setLoc_(Location loc_) {
+        this.loc_ = loc_;
     }
 
-    public String get_srcUri() {
-        return _srcUri;
+    public String getSrcUri_() {
+        return srcUri_;
     }
 
-    public void set_srcUri(String _srcUri) {
-        this._srcUri = _srcUri;
+    public void setSrcUri_(String srcUri_) {
+        this.srcUri_ = srcUri_;
     }
 
-    public List<String> get_tags() {
-        return _tags;
+    public List<String> getTags_() {
+        return tags_;
     }
 
-    public void set_tags(List<String> _tags) {
-        this._tags = _tags;
+    public void setTags_(List<String> tags_) {
+        this.tags_ = tags_;
     }
 
-    public String get_chan() {
-        return _chan;
+    public String getChan_() {
+        return chan_;
     }
 
-    public void set_chan(String _chan) {
-        this._chan = _chan;
+    public void setChan_(String chan_) {
+        this.chan_ = chan_;
     }
 
     @Override
@@ -98,11 +98,11 @@ public class DataPoint implements Serializable {
 
         DataPoint dataPoint = (DataPoint) o;
 
-        if (_chan != null ? !_chan.equals(dataPoint._chan) : dataPoint._chan != null) return false;
-        if (_feedId != null ? !_feedId.equals(dataPoint._feedId) : dataPoint._feedId != null) return false;
-        if (_loc != null ? !_loc.equals(dataPoint._loc) : dataPoint._loc != null) return false;
-        if (_srcUri != null ? !_srcUri.equals(dataPoint._srcUri) : dataPoint._srcUri != null) return false;
-        if (_tags != null ? !_tags.equals(dataPoint._tags) : dataPoint._tags != null) return false;
+        if (chan_ != null ? !chan_.equals(dataPoint.chan_) : dataPoint.chan_ != null) return false;
+        if (feedId_ != null ? !feedId_.equals(dataPoint.feedId_) : dataPoint.feedId_ != null) return false;
+        if (loc_ != null ? !loc_.equals(dataPoint.loc_) : dataPoint.loc_ != null) return false;
+        if (srcUri_ != null ? !srcUri_.equals(dataPoint.srcUri_) : dataPoint.srcUri_ != null) return false;
+        if (tags_ != null ? !tags_.equals(dataPoint.tags_) : dataPoint.tags_ != null) return false;
         if (time != null ? !time.equals(dataPoint.time) : dataPoint.time != null) return false;
         if (value != null ? !value.equals(dataPoint.value) : dataPoint.value != null) return false;
 
@@ -113,11 +113,11 @@ public class DataPoint implements Serializable {
     public int hashCode() {
         int result = time != null ? time.hashCode() : 0;
         result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (_feedId != null ? _feedId.hashCode() : 0);
-        result = 31 * result + (_loc != null ? _loc.hashCode() : 0);
-        result = 31 * result + (_srcUri != null ? _srcUri.hashCode() : 0);
-        result = 31 * result + (_tags != null ? _tags.hashCode() : 0);
-        result = 31 * result + (_chan != null ? _chan.hashCode() : 0);
+        result = 31 * result + (feedId_ != null ? feedId_.hashCode() : 0);
+        result = 31 * result + (loc_ != null ? loc_.hashCode() : 0);
+        result = 31 * result + (srcUri_ != null ? srcUri_.hashCode() : 0);
+        result = 31 * result + (tags_ != null ? tags_.hashCode() : 0);
+        result = 31 * result + (chan_ != null ? chan_.hashCode() : 0);
         return result;
     }
 
@@ -126,11 +126,11 @@ public class DataPoint implements Serializable {
         return "DataPoint{" +
                 "time=" + time +
                 ", value='" + value + '\'' +
-                ", _feedId='" + _feedId + '\'' +
-                ", _loc=" + _loc +
-                ", _srcUri='" + _srcUri + '\'' +
-                ", _tags=" + _tags +
-                ", _chan='" + _chan + '\'' +
+                ", feedId_='" + feedId_ + '\'' +
+                ", loc_=" + loc_ +
+                ", srcUri_='" + srcUri_ + '\'' +
+                ", tags_=" + tags_ +
+                ", chan_='" + chan_ + '\'' +
                 '}';
     }
 }

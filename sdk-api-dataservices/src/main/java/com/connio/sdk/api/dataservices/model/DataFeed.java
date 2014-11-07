@@ -16,11 +16,11 @@ public class DataFeed implements Serializable {
 
     private List<DataPoint> datapoints = new ArrayList<DataPoint>();
 
-    private String _id;
-    private String _srcUri;
-    private String _chan;
-    private Location _loc;
-    private List<String> _tags;
+    private String id_;
+    private String srcUri_;
+    private String chan_;
+    private Location loc_;
+    private List<String> tags_;
 
     public DataFeed() {
     }
@@ -52,44 +52,44 @@ public class DataFeed implements Serializable {
         this.datapoints = datapoints;
     }
 
-    public String get_id() {
-        return _id;
+    public String getId_() {
+        return id_;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId_(String id_) {
+        this.id_ = id_;
     }
 
-    public String get_srcUri() {
-        return _srcUri;
+    public String getSrcUri_() {
+        return srcUri_;
     }
 
-    public void set_srcUri(String _srcUri) {
-        this._srcUri = _srcUri;
+    public void setSrcUri_(String srcUri_) {
+        this.srcUri_ = srcUri_;
     }
 
-    public String get_chan() {
-        return _chan;
+    public String getChan_() {
+        return chan_;
     }
 
-    public void set_chan(String _chan) {
-        this._chan = _chan;
+    public void setChan_(String chan_) {
+        this.chan_ = chan_;
     }
 
-    public Location get_loc() {
-        return _loc;
+    public Location getLoc_() {
+        return loc_;
     }
 
-    public void set_loc(Location _loc) {
-        this._loc = _loc;
+    public void setLoc_(Location loc_) {
+        this.loc_ = loc_;
     }
 
-    public List<String> get_tags() {
-        return _tags;
+    public List<String> getTags_() {
+        return tags_;
     }
 
-    public void set_tags(List<String> _tags) {
-        this._tags = _tags;
+    public void setTags_(List<String> tags_) {
+        this.tags_ = tags_;
     }
 
     @Override
@@ -99,11 +99,11 @@ public class DataFeed implements Serializable {
 
         DataFeed dataFeed = (DataFeed) o;
 
-        if (_chan != null ? !_chan.equals(dataFeed._chan) : dataFeed._chan != null) return false;
-        if (_id != null ? !_id.equals(dataFeed._id) : dataFeed._id != null) return false;
-        if (_loc != null ? !_loc.equals(dataFeed._loc) : dataFeed._loc != null) return false;
-        if (_srcUri != null ? !_srcUri.equals(dataFeed._srcUri) : dataFeed._srcUri != null) return false;
-        if (_tags != null ? !_tags.equals(dataFeed._tags) : dataFeed._tags != null) return false;
+        if (chan_ != null ? !chan_.equals(dataFeed.chan_) : dataFeed.chan_ != null) return false;
+        if (id_ != null ? !id_.equals(dataFeed.id_) : dataFeed.id_ != null) return false;
+        if (loc_ != null ? !loc_.equals(dataFeed.loc_) : dataFeed.loc_ != null) return false;
+        if (srcUri_ != null ? !srcUri_.equals(dataFeed.srcUri_) : dataFeed.srcUri_ != null) return false;
+        if (tags_ != null ? !tags_.equals(dataFeed.tags_) : dataFeed.tags_ != null) return false;
         if (datapoints != null ? !datapoints.equals(dataFeed.datapoints) : dataFeed.datapoints != null) return false;
 
         return true;
@@ -112,11 +112,11 @@ public class DataFeed implements Serializable {
     @Override
     public int hashCode() {
         int result = datapoints != null ? datapoints.hashCode() : 0;
-        result = 31 * result + (_id != null ? _id.hashCode() : 0);
-        result = 31 * result + (_srcUri != null ? _srcUri.hashCode() : 0);
-        result = 31 * result + (_chan != null ? _chan.hashCode() : 0);
-        result = 31 * result + (_loc != null ? _loc.hashCode() : 0);
-        result = 31 * result + (_tags != null ? _tags.hashCode() : 0);
+        result = 31 * result + (id_ != null ? id_.hashCode() : 0);
+        result = 31 * result + (srcUri_ != null ? srcUri_.hashCode() : 0);
+        result = 31 * result + (chan_ != null ? chan_.hashCode() : 0);
+        result = 31 * result + (loc_ != null ? loc_.hashCode() : 0);
+        result = 31 * result + (tags_ != null ? tags_.hashCode() : 0);
         return result;
     }
 
@@ -124,11 +124,11 @@ public class DataFeed implements Serializable {
     public String toString() {
         return "DataFeed{" +
                 "datapoints=" + datapoints +
-                ", _id='" + _id + '\'' +
-                ", _srcUri='" + _srcUri + '\'' +
-                ", _chan='" + _chan + '\'' +
-                ", _loc=" + _loc +
-                ", _tags=" + _tags +
+                ", id_='" + id_ + '\'' +
+                ", srcUri_='" + srcUri_ + '\'' +
+                ", chan_='" + chan_ + '\'' +
+                ", loc_=" + loc_ +
+                ", tags_=" + tags_ +
                 '}';
     }
 }

@@ -33,11 +33,11 @@ public class DataFeedTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataFeed dataFeed = new DataFeed();
-        dataFeed.set_id("1021");
-        dataFeed.set_srcUri("_devices/_id/100029");
-        dataFeed.set_chan("DATA");
-        dataFeed.set_loc(location);
-        dataFeed.set_tags(Arrays.asList("TAG1", "TAG2"));
+        dataFeed.setId_("1021");
+        dataFeed.setSrcUri_("_devices/_id/100029");
+        dataFeed.setChan_("DATA");
+        dataFeed.setLoc_(location);
+        dataFeed.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         dataFeed.addDataPoint(new DataPoint(1414681100L, 1));
         dataFeed.addDataPoint(new DataPoint(1414681101L, 2));
@@ -80,7 +80,7 @@ public class DataFeedTest {
             Location location = new Location("Izmir", geoCoord);
 
             DataPoint dataPoint = new DataPoint(1414681106L, 1, "DATA");
-            dataPoint.set_loc(location);
+            dataPoint.setLoc_(location);
             dataFeed.addDataPoint(dataPoint);
         }
         {
@@ -88,10 +88,10 @@ public class DataFeedTest {
             Location location = new Location("Izmir", geoCoord);
 
             DataPoint dataPoint = new DataPoint(1414681107L, 1, "DATA");
-            dataPoint.set_feedId("1009");
-            dataPoint.set_loc(location);
-            dataPoint.set_srcUri("_devices/_id/1101");
-            dataPoint.set_tags(Arrays.asList("TAG1", "TAG2", "TAG3"));
+            dataPoint.setFeedId_("1009");
+            dataPoint.setLoc_(location);
+            dataPoint.setSrcUri_("_devices/_id/1101");
+            dataPoint.setTags_(Arrays.asList("TAG1", "TAG2", "TAG3"));
 
             dataFeed.addDataPoint(dataPoint);
         }
@@ -118,11 +118,11 @@ public class DataFeedTest {
         Location location = new Location("Izmir", geoCoord);
 
         DataFeed expected = new DataFeed();
-        expected.set_id("1021");
-        expected.set_srcUri("_devices/_id/100029");
-        expected.set_chan("DATA");
-        expected.set_loc(location);
-        expected.set_tags(Arrays.asList("TAG1", "TAG2"));
+        expected.setId_("1021");
+        expected.setSrcUri_("_devices/_id/100029");
+        expected.setChan_("DATA");
+        expected.setLoc_(location);
+        expected.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         expected.addDataPoint(new DataPoint(1414681100L, 1));
         expected.addDataPoint(new DataPoint(1414681101L, 2));
@@ -164,7 +164,7 @@ public class DataFeedTest {
             Location location = new Location("Izmir", geoCoord);
 
             DataPoint dataPoint = new DataPoint(1414681106L, 1, "DATA");
-            dataPoint.set_loc(location);
+            dataPoint.setLoc_(location);
             expected.addDataPoint(dataPoint);
         }
         {
@@ -172,10 +172,10 @@ public class DataFeedTest {
             Location location = new Location("Izmir", geoCoord);
 
             DataPoint dataPoint = new DataPoint(1414681107L, 1, "DATA");
-            dataPoint.set_feedId("1009");
-            dataPoint.set_loc(location);
-            dataPoint.set_srcUri("_devices/_id/1101");
-            dataPoint.set_tags(Arrays.asList("TAG1", "TAG2", "TAG3"));
+            dataPoint.setFeedId_("1009");
+            dataPoint.setLoc_(location);
+            dataPoint.setSrcUri_("_devices/_id/1101");
+            dataPoint.setTags_(Arrays.asList("TAG1", "TAG2", "TAG3"));
 
             expected.addDataPoint(dataPoint);
         }

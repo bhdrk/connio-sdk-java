@@ -45,7 +45,7 @@ public class DataPointDetailsTest {
         DataPointDetails dataPointDetails = new DataPointDetails();
         dataPointDetails.setTime(1414407520L);
         dataPointDetails.setValue(1);
-        dataPointDetails.set_chan("DATA");
+        dataPointDetails.setChan_("DATA");
 
         String actual = JSON.toString(dataPointDetails);
         String expected = resource("json/dataservices/model/dataPointDetails/channel.json");
@@ -61,8 +61,8 @@ public class DataPointDetailsTest {
         DataPointDetails dataPointDetails = new DataPointDetails();
         dataPointDetails.setTime(1414407520L);
         dataPointDetails.setValue(1);
-        dataPointDetails.set_chan("DATA");
-        dataPointDetails.set_loc(location);
+        dataPointDetails.setChan_("DATA");
+        dataPointDetails.setLoc_(location);
 
         String actual = JSON.toString(dataPointDetails);
         String expected = resource("json/dataservices/model/dataPointDetails/location.json");
@@ -75,9 +75,9 @@ public class DataPointDetailsTest {
         DataPointDetails dataPointDetails = new DataPointDetails();
         dataPointDetails.setTime(1414407520L);
         dataPointDetails.setValue(1);
-        dataPointDetails.set_chan("DATA");
-        dataPointDetails.set_remIp("127.0.0.1");
-        dataPointDetails.set_srvTime(1414407521L);
+        dataPointDetails.setChan_("DATA");
+        dataPointDetails.setRemIp_("127.0.0.1");
+        dataPointDetails.setSrvTime_(1414407521L);
 
         String actual = JSON.toString(dataPointDetails);
         String expected = resource("json/dataservices/model/dataPointDetails/remIpAndSrvTime.json");
@@ -93,13 +93,13 @@ public class DataPointDetailsTest {
         DataPointDetails dataPointDetails = new DataPointDetails();
         dataPointDetails.setTime(1414407520L);
         dataPointDetails.setValue(1);
-        dataPointDetails.set_chan("DATA");
-        dataPointDetails.set_feedId("1009");
-        dataPointDetails.set_loc(location);
-        dataPointDetails.set_srcUri("_devices/_id/1101");
-        dataPointDetails.set_tags(Arrays.asList("TAG1", "TAG2"));
-        dataPointDetails.set_remIp("127.0.0.1");
-        dataPointDetails.set_srvTime(1414407521L);
+        dataPointDetails.setChan_("DATA");
+        dataPointDetails.setFeedId_("1009");
+        dataPointDetails.setLoc_(location);
+        dataPointDetails.setSrcUri_("_devices/_id/1101");
+        dataPointDetails.setTags_(Arrays.asList("TAG1", "TAG2"));
+        dataPointDetails.setRemIp_("127.0.0.1");
+        dataPointDetails.setSrvTime_(1414407521L);
 
         String actual = JSON.toString(dataPointDetails);
         String expected = resource("json/dataservices/model/dataPointDetails/allProperties.json");
@@ -117,11 +117,11 @@ public class DataPointDetailsTest {
         DataPointDetails dataPointDetails = new DataPointDetails();
         dataPointDetails.setTime(1414407520L);
         dataPointDetails.setValue(value);
-        dataPointDetails.set_chan("DATA");
-        dataPointDetails.set_feedId("1009");
-        dataPointDetails.set_loc(location);
-        dataPointDetails.set_srcUri("_devices/_id/1101");
-        dataPointDetails.set_tags(Arrays.asList("TAG1", "TAG2"));
+        dataPointDetails.setChan_("DATA");
+        dataPointDetails.setFeedId_("1009");
+        dataPointDetails.setLoc_(location);
+        dataPointDetails.setSrcUri_("_devices/_id/1101");
+        dataPointDetails.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         String actual = JSON.toString(dataPointDetails);
         String expected = resource("json/dataservices/model/dataPointDetails/longStringValue.json");
@@ -156,7 +156,7 @@ public class DataPointDetailsTest {
         DataPointDetails expected = new DataPointDetails();
         expected.setTime(1414407520L);
         expected.setValue(1);
-        expected.set_chan("DATA");
+        expected.setChan_("DATA");
         DataPointDetails actual = JSON.fromString(resource("json/dataservices/model/dataPoint/channel.json"), DataPointDetails.class);
 
         assertThat(actual).isEqualTo(expected);
@@ -170,8 +170,8 @@ public class DataPointDetailsTest {
         DataPointDetails expected = new DataPointDetails();
         expected.setTime(1414407520L);
         expected.setValue(1);
-        expected.set_chan("DATA");
-        expected.set_loc(location);
+        expected.setChan_("DATA");
+        expected.setLoc_(location);
 
         DataPointDetails actual = JSON.fromString(resource("json/dataservices/model/dataPointDetails/location.json"), DataPointDetails.class);
 
@@ -183,9 +183,9 @@ public class DataPointDetailsTest {
         DataPointDetails expected = new DataPointDetails();
         expected.setTime(1414407520L);
         expected.setValue(1);
-        expected.set_chan("DATA");
-        expected.set_remIp("127.0.0.1");
-        expected.set_srvTime(1414407521L);
+        expected.setChan_("DATA");
+        expected.setRemIp_("127.0.0.1");
+        expected.setSrvTime_(1414407521L);
 
         DataPointDetails actual= JSON.fromString(resource("json/dataservices/model/dataPointDetails/remIpAndSrvTime.json"), DataPointDetails.class);
 
@@ -200,13 +200,13 @@ public class DataPointDetailsTest {
         DataPointDetails expected = new DataPointDetails();
         expected.setTime(1414407520L);
         expected.setValue(1);
-        expected.set_chan("DATA");
-        expected.set_feedId("1009");
-        expected.set_loc(location);
-        expected.set_srcUri("_devices/_id/1101");
-        expected.set_tags(Arrays.asList("TAG1", "TAG2"));
-        expected.set_remIp("127.0.0.1");
-        expected.set_srvTime(1414407521L);
+        expected.setChan_("DATA");
+        expected.setFeedId_("1009");
+        expected.setLoc_(location);
+        expected.setSrcUri_("_devices/_id/1101");
+        expected.setTags_(Arrays.asList("TAG1", "TAG2"));
+        expected.setRemIp_("127.0.0.1");
+        expected.setSrvTime_(1414407521L);
 
         DataPointDetails actual = JSON.fromString(resource("json/dataservices/model/dataPointDetails/allProperties.json"), DataPointDetails.class);
 
@@ -223,12 +223,12 @@ public class DataPointDetailsTest {
         DataPointDetails expected = new DataPointDetails();
         expected.setTime(1414407520L);
         expected.setValue(value);
-        expected.set_chan("DATA");
+        expected.setChan_("DATA");
 
-        expected.set_feedId("1009");
-        expected.set_loc(location);
-        expected.set_srcUri("_devices/_id/1101");
-        expected.set_tags(Arrays.asList("TAG1", "TAG2"));
+        expected.setFeedId_("1009");
+        expected.setLoc_(location);
+        expected.setSrcUri_("_devices/_id/1101");
+        expected.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         DataPointDetails actual = JSON.fromString(resource("json/dataservices/model/dataPointDetails/longStringValue.json"), DataPointDetails.class);
 

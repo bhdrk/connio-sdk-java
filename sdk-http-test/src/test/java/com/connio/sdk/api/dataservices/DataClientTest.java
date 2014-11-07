@@ -37,10 +37,10 @@ public class DataClientTest extends AbstractClientMockServerTestCase {
         pushResponse(mockResponseJson);
 
         DataFeed dataFeed = new DataFeed();
-        dataFeed.set_id("10029");
-        dataFeed.set_loc(new Location("Istanbul", new GeoCoordinates(41.00527D, 28.976959999999963D)));
-        dataFeed.set_srcUri("_devices/_id/900056");
-        dataFeed.set_tags(Arrays.asList("TAG1", "TAG2"));
+        dataFeed.setId_("10029");
+        dataFeed.setLoc_(new Location("Istanbul", new GeoCoordinates(41.00527D, 28.976959999999963D)));
+        dataFeed.setSrcUri_("_devices/_id/900056");
+        dataFeed.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         dataFeed.addDataPoint(new DataPoint(1415190143712L, 25, "ACHAN"));
         dataFeed.addDataPoint(new DataPoint(1415190143712L, "Lorem", "BCHAN"));
@@ -68,10 +68,10 @@ public class DataClientTest extends AbstractClientMockServerTestCase {
         pushResponse(mockResponseJson);
 
         DataFeed dataFeed = new DataFeed();
-        dataFeed.set_id("10029");
-        dataFeed.set_loc(new Location("Istanbul", new GeoCoordinates(41.00527D, 28.976959999999963D)));
-        dataFeed.set_srcUri("_devices/_id/900056");
-        dataFeed.set_tags(Arrays.asList("TAG1", "TAG2"));
+        dataFeed.setId_("10029");
+        dataFeed.setLoc_(new Location("Istanbul", new GeoCoordinates(41.00527D, 28.976959999999963D)));
+        dataFeed.setSrcUri_("_devices/_id/900056");
+        dataFeed.setTags_(Arrays.asList("TAG1", "TAG2"));
 
         dataFeed.addDataPoint(new DataPoint(1415190143712L, 25));
         dataFeed.addDataPoint(new DataPoint(1415190143712L, "Lorem"));
