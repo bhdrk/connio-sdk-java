@@ -3,6 +3,7 @@ package com.connio.sdk.api.systemservices.apps.model;
 import com.connio.sdk.api.systemservices.datachannels.model.DataChannelDetails;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,12 +37,12 @@ public class AppDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private String dateCreated;
+    private Date dateCreated;
 
     /**
      * TODO: javadoc
      */
-    private String dateModified;
+    private Date dateModified;
 
     /**
      * TODO: javadoc
@@ -140,19 +141,19 @@ public class AppDetails implements Serializable {
         this.description = description;
     }
 
-    public String getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public String getDateModified() {
+    public Date getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(String dateModified) {
+    public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
     }
 

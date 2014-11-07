@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.deviceprofiles.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * TODO: javadoc
@@ -58,12 +59,12 @@ public class DeviceProfileDetails implements Serializable {
     /**
      * TODO: javadoc
      */
-    private String dateCreated;
+    private Date dateCreated;
 
     /**
      * TODO: javadoc
      */
-    private String dateModified;
+    private Date dateModified;
 
     public String getName() {
         return name;
@@ -129,19 +130,19 @@ public class DeviceProfileDetails implements Serializable {
         this.uri = uri;
     }
 
-    public String getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public String getDateModified() {
+    public Date getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(String dateModified) {
+    public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
     }
 
