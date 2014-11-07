@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum TemperatureMeasurementUnit implements MeasurementUnit {
-    C("C"), F("F");
+    C("c"), F("f");
 
     private String symbol;
 

@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum WeightMeasurementUnit implements MeasurementUnit {
-    GR("Gr"), KG("Kg"), LB("Lb"), OZ("Oz");
+    GR("gr"), KG("kg"), LB("lb"), OZ("oz");
 
     private final String symbol;
 

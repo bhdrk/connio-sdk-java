@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum AccelerationMeasurementUnit implements MeasurementUnit {
-    G("G");
+    G("g");
 
     private final String symbol;
 

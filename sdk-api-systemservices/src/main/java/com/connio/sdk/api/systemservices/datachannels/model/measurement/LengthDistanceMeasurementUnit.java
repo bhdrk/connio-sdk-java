@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum LengthDistanceMeasurementUnit implements MeasurementUnit {
-    MM("Mm"), DM("Dm"), CM("Cm"), M("m"), KM("Km"), IN("In"), FT("Ft"), YD("Yd"), MI("Mi");
+    MM("mm"), DM("dm"), CM("cm"), M("m"), KM("km"), IN("in"), FT("ft"), YD("yd"), MI("mi");
 
     private final String symbol;
 

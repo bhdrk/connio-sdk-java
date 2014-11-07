@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum EnergyFitnessMeasurementUnit implements MeasurementUnit {
-    CAL("Cal"), KCAL("KCal"), J("J");
+    CAL("cal"), KCAL("kcal"), J("j");
 
     private final String symbol;
 

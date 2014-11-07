@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum CustomMeasurementUnit implements MeasurementUnit {
-    NUMERIC("Numeric"), BOOLEAN("Boolean"), EVENT("Event"), PREDEFINED("Predefined");
+    NUMERIC("numeric"), BOOLEAN("boolean"), EVENT("event"), PREDEFINED("predefined");
 
     private String symbol;
 

@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum TimerMeasurementUnit implements MeasurementUnit {
-    MILLIS("Millis"), SEC("Sec"), MIN("Min"), HOUR("Hour");
+    MILLIS("millis"), SEC("sec"), MIN("min"), HOUR("hour");
 
     private final String symbol;
 

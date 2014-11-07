@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum PercentageMeasurementUnit implements MeasurementUnit {
-    PERCENTAGE("%");
+    PERCENTAGE("_");
 
     private String symbol;
 

@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum ElectricityMeasurementUnit implements MeasurementUnit {
-    KWH("KWh"), W("W"), V("V"), A("A");
+    KWH("kwh"), W("w"), V("v"), A("a");
 
     private final String symbol;
 

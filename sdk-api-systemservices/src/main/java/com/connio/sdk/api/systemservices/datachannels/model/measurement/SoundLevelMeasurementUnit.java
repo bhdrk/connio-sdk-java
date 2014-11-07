@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum SoundLevelMeasurementUnit implements MeasurementUnit {
-    DB("dB");
+    DB("db");
 
     private final String symbol;
 

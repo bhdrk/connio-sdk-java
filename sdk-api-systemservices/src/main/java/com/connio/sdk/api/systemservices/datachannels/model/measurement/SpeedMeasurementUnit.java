@@ -7,7 +7,7 @@ package com.connio.sdk.api.systemservices.datachannels.model.measurement;
  * @since 12.09.2014
  */
 public enum SpeedMeasurementUnit implements MeasurementUnit {
-    KMH("KMh"), MIH("Mih");
+    KMH("kmh"), MIH("mih");
 
     private final String symbol;
 
