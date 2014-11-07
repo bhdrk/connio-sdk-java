@@ -43,21 +43,20 @@ public class GetAllDeviceDetailsRequest extends DeviceRequest<GetAllDeviceDetail
         if (loc != null) {
             Asserts.notNull(loc.getName(), "Location.name");
             metaData.addQueryParam("locname", loc.getName());
-        }
 
-        if (loc != null && loc.getGeoCoord() != null) {
-            GeoCoordinates geoCoord = loc.getGeoCoord();
-            Asserts.notNull(geoCoord, "Location.geoCoord");
-            Asserts.notNull(geoCoord.getLat(), "Location.geoCoord.lat");
-            Asserts.notNull(geoCoord.getLon(), "Location.geoCoord.lon");
-            Asserts.notNull(geoCoord.getRadius(), "Location.geoCoord.radius");
-            metaData.addQueryParam("coord", "lat:" + geoCoord.getLat() + "+" + "lon:" + geoCoord.getLon() + "+" + "rad:" + geoCoord.getRadius());
+            if (loc.getGeoCoord() != null) {
+                GeoCoordinates geoCoord = loc.getGeoCoord();
+                Asserts.notNull(geoCoord.getLat(), "Location.geoCoord.lat");
+                Asserts.notNull(geoCoord.getLon(), "Location.geoCoord.lon");
+                Asserts.notNull(geoCoord.getRadius(), "Location.geoCoord.radius");
+                metaData.addQueryParam("coord", "lat:" + geoCoord.getLat() + "+" + "lon:" + geoCoord.getLon() + "+" + "rad:" + geoCoord.getRadius());
+            }
         }
 
         if (isNotEmpty(tags)) {
-            String t = "";
-            for (String tag : tags) t += tag;
-            metaData.addQueryParam("tags", t);
+            StringBuilder sb = new StringBuilder();
+            for (String tag : tags) sb.append(",").append(tag);
+            metaData.addQueryParam("tags", sb.toString().substring(1));
         }
 
         if (skip != null) {
