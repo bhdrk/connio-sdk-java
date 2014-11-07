@@ -16,13 +16,12 @@ import java.util.Random;
  */
 public class TestUtils {
 
-    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("-yy-MM-dd-HH-mm-ss-SSS");
-
-    private static final int MAX_LENGTH = 64;
+    private static final SimpleDateFormat RANDOM_NAME_SUFFIX_FORMAT = new SimpleDateFormat("yyMMddHHmmssSSS");
+    private static final int RANDOM_NAME_MAX_LENGTH = 64;
 
     public static String randomName(String prefix) {
-        String suffix = FORMATTER.format(new Date());
-        int maxLength = MAX_LENGTH - suffix.length();
+        String suffix = RANDOM_NAME_SUFFIX_FORMAT.format(new Date());
+        int maxLength = RANDOM_NAME_MAX_LENGTH - suffix.length();
         Asserts.maxSize(prefix, maxLength, "Prefix");
         return prefix + suffix;
     }
@@ -36,11 +35,8 @@ public class TestUtils {
         int len_offset = 0;
         int len = 15;
 
-        //
         // Fill in the first two values of the string based with the specified prefix.
         // Reporting Body Identifier list: http://en.wikipedia.org/wiki/Reporting_Body_Identifier
-        //
-
         Random random = new Random();
         String[] rbi = new String[]{"01", "10", "30", "33", "35", "44", "45", "49", "50", "51", "52", "53", "54", "86", "91", "98", "99"};
         String str = rbi[random.nextInt(rbi.length)];
@@ -48,18 +44,12 @@ public class TestUtils {
         array[1] = new Integer("" + str.charAt(1));
         pos = 2;
 
-        //
         // Fill all the remaining numbers except for the last one with random values.
-        //
-
         while (pos < len - 1) {
             array[pos++] = random.nextInt(10);
         }
 
-        //
         // Calculate the Luhn checksum of the values thus far.
-        //
-
         len_offset = (len + 1) % 2;
         for (pos = 0; pos < len - 1; pos++) {
             if (((pos + len_offset) % 2) > 0) {
@@ -73,10 +63,7 @@ public class TestUtils {
             }
         }
 
-        //
         // Choose the last digit so that it causes the entire string to pass the checksum.
-        //
-
         final_digit = (10 - (sum % 10)) % 10;
         array[len - 1] = final_digit;
 
