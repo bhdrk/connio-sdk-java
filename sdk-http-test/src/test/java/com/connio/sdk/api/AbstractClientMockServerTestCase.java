@@ -1,5 +1,9 @@
-package com.connio.sdk.api.core;
+package com.connio.sdk.api;
 
+import com.connio.sdk.api.auth.ConnioBasicCredentials;
+import com.connio.sdk.api.auth.ConnioCredentials;
+import com.connio.sdk.api.auth.ConnioCredentialsManager;
+import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.utils.TypeUtils;
 import com.connio.sdk.http.HttpClientTransformer;
 import com.connio.sdk.http.internal.ClientConfig;
@@ -22,6 +26,13 @@ public class AbstractClientMockServerTestCase {
     public void startMockServer() throws Exception {
         mockServer = new MockWebServer();
         mockServer.play();
+
+        try {
+            ConnioCredentialsManager.getCredentials(ConnioCredentials.DEFAULT_PROFILE);
+        } catch (ConnioClientException e) {
+            ConnioCredentials credentials = new ConnioBasicCredentials(ConnioCredentials.DEFAULT_PROFILE, "ACCESSKEY", "SECRETKEY");
+            ConnioCredentialsManager.addCredentials(credentials);
+        }
     }
 
     @AfterClass

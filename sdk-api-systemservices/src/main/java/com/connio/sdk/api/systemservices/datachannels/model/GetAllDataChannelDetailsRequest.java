@@ -21,7 +21,7 @@ public class GetAllDataChannelDetailsRequest extends DataChannelRequest<GetAllDa
         super();
     }
 
-    public GetAllDataChannelDetailsRequest(String appId) {
-        super(appId);
+    public GetAllDataChannelDetailsRequest(String appSidOrName) {
+        super(appSidOrName);
     }
 }

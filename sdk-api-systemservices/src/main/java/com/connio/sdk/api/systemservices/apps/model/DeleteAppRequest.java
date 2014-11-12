@@ -17,27 +17,27 @@ public class DeleteAppRequest extends AppRequest<DeleteAppResponse> {
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(appId, "AppName or AppSid");
+        Asserts.notEmpty(appSidOrName, "AppName or AppSid");
 
         metaData.setMethod(DELETE);
-        metaData.addPath("/{app-id}");
-        metaData.addPathParam("app-id", appId);
+        metaData.addPath("/{app}");
+        metaData.addPathParam("app", appSidOrName);
     }
 
-    private String appId;
+    private String appSidOrName;
 
     public DeleteAppRequest() {
     }
 
-    public DeleteAppRequest(String appId) {
-        this.appId = appId;
+    public DeleteAppRequest(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getAppSidOrName() {
+        return appSidOrName;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setAppSidOrName(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 }

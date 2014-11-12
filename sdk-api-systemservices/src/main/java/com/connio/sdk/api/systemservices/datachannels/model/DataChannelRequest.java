@@ -16,29 +16,29 @@ public abstract class DataChannelRequest<RS extends DataChannelResponse> extends
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(appId, "AppName or AppSid");
+        Asserts.notEmpty(appSidOrName, "AppName or AppSid");
 
-        metaData.addPath("/_apps/{app-id}/_channels");
-        metaData.addPathParam("app-id", appId);
+        metaData.addPath("/_apps/{app}/_channels");
+        metaData.addPathParam("app", appSidOrName);
     }
 
     /**
      * TODO: javadoc
      */
-    private String appId;
+    private String appSidOrName;
 
     protected DataChannelRequest() {
     }
 
-    protected DataChannelRequest(String appId) {
-        this.appId = appId;
+    protected DataChannelRequest(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getAppSidOrName() {
+        return appSidOrName;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setAppSidOrName(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 }

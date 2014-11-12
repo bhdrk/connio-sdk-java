@@ -18,18 +18,18 @@ public class UpdateSubAccountRequest extends AccountRequest<UpdateSubAccountResp
         super.loadMetaData(metaData);
 
         Asserts.notNull(subAccount, "SubAccount");
-        Asserts.notEmpty(sid, "Sid");
+        Asserts.notEmpty(accountSid, "AccountSid");
 
         metaData.setMethod(PUT);
         metaData.addPath("/{account-sid}");
-        metaData.addPathParam("account-sid", sid);
+        metaData.addPathParam("account-sid", accountSid);
         metaData.setRequestContent(subAccount);
     }
 
     /**
      * TODO: javadoc
      */
-    private String sid;
+    private String accountSid;
 
     /**
      * TODO: javadoc
@@ -39,8 +39,8 @@ public class UpdateSubAccountRequest extends AccountRequest<UpdateSubAccountResp
     public UpdateSubAccountRequest() {
     }
 
-    public UpdateSubAccountRequest(String sid, SubAccount subAccount) {
-        this.sid = sid;
+    public UpdateSubAccountRequest(String accountSid, SubAccount subAccount) {
+        this.accountSid = accountSid;
         this.subAccount = subAccount;
     }
 
@@ -52,11 +52,11 @@ public class UpdateSubAccountRequest extends AccountRequest<UpdateSubAccountResp
         this.subAccount = subAccount;
     }
 
-    public String getSid() {
-        return sid;
+    public String getAccountSid() {
+        return accountSid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setAccountSid(String accountSid) {
+        this.accountSid = accountSid;
     }
 }

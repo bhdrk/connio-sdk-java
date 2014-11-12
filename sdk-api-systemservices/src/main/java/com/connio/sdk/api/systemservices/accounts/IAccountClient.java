@@ -27,12 +27,12 @@ public interface IAccountClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param accountSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public SubAccountDetails getSubAccountDetails(String sid)
+    public SubAccountDetails getSubAccountDetails(String accountSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -59,45 +59,45 @@ public interface IAccountClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param accountSid
      * @param subAccount
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public SubAccountDetails updateSubAccount(String sid, SubAccount subAccount)
+    public SubAccountDetails updateSubAccount(String accountSid, SubAccount subAccount)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param accountSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public Deleted deleteSubAccount(String sid)
+    public Deleted deleteSubAccount(String accountSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param accountSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public AuthToken createAuthenticationToken(String sid)
+    public AuthToken createAuthenticationToken(String accountSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param accountSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public BillingInfoList getBillingInfo(String sid)
+    public BillingInfoList getBillingInfo(String accountSid)
             throws ConnioServiceException, ConnioClientException;
 }

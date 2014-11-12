@@ -13,18 +13,18 @@ import static com.connio.sdk.api.model.Method.PUT;
  */
 public class UpdateDataChannelRequest extends DataChannelRequest<UpdateDataChannelResponse> {
 
-    private String channelId;
+    private String channelSidOrName;
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(channelId, "ChannelName or ChannelSid");
+        Asserts.notEmpty(channelSidOrName, "ChannelName or ChannelSid");
         Asserts.notNull(dataChannelUpdate, "DataChannel");
 
         metaData.setMethod(PUT);
-        metaData.addPath("/{channel-id}");
-        metaData.addPathParam("channel-id", channelId);
+        metaData.addPath("/{channel}");
+        metaData.addPathParam("channel", channelSidOrName);
         metaData.setRequestContent(dataChannelUpdate);
     }
 
@@ -34,9 +34,9 @@ public class UpdateDataChannelRequest extends DataChannelRequest<UpdateDataChann
         super();
     }
 
-    public UpdateDataChannelRequest(String appId, String channelId, DataChannelUpdate dataChannelUpdate) {
-        super(appId);
-        this.channelId = channelId;
+    public UpdateDataChannelRequest(String appSidOrName, String channelSidOrName, DataChannelUpdate dataChannelUpdate) {
+        super(appSidOrName);
+        this.channelSidOrName = channelSidOrName;
         this.dataChannelUpdate = dataChannelUpdate;
     }
 
@@ -48,11 +48,11 @@ public class UpdateDataChannelRequest extends DataChannelRequest<UpdateDataChann
         this.dataChannelUpdate = dataChannelUpdate;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public String getChannelSidOrName() {
+        return channelSidOrName;
     }
 
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
+    public void setChannelSidOrName(String channelSidOrName) {
+        this.channelSidOrName = channelSidOrName;
     }
 }

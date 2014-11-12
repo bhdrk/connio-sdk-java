@@ -19,12 +19,12 @@ public interface IAppClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param appSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public AppDetails getAppDetails(String sidOrName)
+    public AppDetails getAppDetails(String appSidOrName)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -51,24 +51,24 @@ public interface IAppClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param appSidOrName
      * @param app
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public AppDetails updateApp(String sidOrName, App app)
+    public AppDetails updateApp(String appSidOrName, App app)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param appSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public Deleted deleteApp(String sidOrName)
+    public Deleted deleteApp(String appSidOrName)
             throws ConnioServiceException, ConnioClientException;
 
 }

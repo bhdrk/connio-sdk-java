@@ -29,15 +29,15 @@ public class AppClient extends AbstractClient implements IAppClient {
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param appSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public AppDetails getAppDetails(String sidOrName)
+    public AppDetails getAppDetails(String appSidOrName)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetAppDetailsRequest(sidOrName));
+        return execute(new GetAppDetailsRequest(appSidOrName));
     }
 
     /**
@@ -70,29 +70,29 @@ public class AppClient extends AbstractClient implements IAppClient {
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param appSidOrName
      * @param app
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public AppDetails updateApp(String sidOrName, App app)
+    public AppDetails updateApp(String appSidOrName, App app)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new UpdateAppRequest(sidOrName, app));
+        return execute(new UpdateAppRequest(appSidOrName, app));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param sidOrName
+     * @param appSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public Deleted deleteApp(String sidOrName)
+    public Deleted deleteApp(String appSidOrName)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new DeleteAppRequest(sidOrName));
+        return execute(new DeleteAppRequest(appSidOrName));
     }
 }

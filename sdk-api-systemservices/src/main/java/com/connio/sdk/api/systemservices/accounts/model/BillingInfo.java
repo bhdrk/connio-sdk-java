@@ -1,7 +1,6 @@
 package com.connio.sdk.api.systemservices.accounts.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * TODO: javadoc
@@ -14,18 +13,18 @@ public class BillingInfo implements Serializable {
     /**
      * TODO: javadoc
      */
-    private Date date;
+    private Long date;
 
     /**
      * TODO: javadoc
      */
     private Long amount;
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 

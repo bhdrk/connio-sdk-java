@@ -17,30 +17,30 @@ public class DeleteSubAccountRequest extends AccountRequest<DeleteSubAccountResp
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(sid, "Sid");
+        Asserts.notEmpty(accountSid, "AccountSid");
 
         metaData.setMethod(DELETE);
         metaData.addPath("/{account-sid}");
-        metaData.addPathParam("account-sid", sid);
+        metaData.addPathParam("account-sid", accountSid);
     }
 
     /**
      * TODO: javadoc
      */
-    private String sid;
+    private String accountSid;
 
     public DeleteSubAccountRequest() {
     }
 
-    public DeleteSubAccountRequest(String sid) {
-        this.sid = sid;
+    public DeleteSubAccountRequest(String accountSid) {
+        this.accountSid = accountSid;
     }
 
-    public String getSid() {
-        return sid;
+    public String getAccountSid() {
+        return accountSid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setAccountSid(String accountSid) {
+        this.accountSid = accountSid;
     }
 }

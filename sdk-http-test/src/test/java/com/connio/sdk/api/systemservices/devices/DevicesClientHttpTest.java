@@ -3,7 +3,7 @@ package com.connio.sdk.api.systemservices.devices;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.model.GeoCoordinates;
 import com.connio.sdk.api.model.Location;
-import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.deviceprofiles.DeviceProfileClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.IDeviceProfileClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.connio.sdk.api.TestUtils.randomName;
 import static com.connio.sdk.api.systemservices.devices.model.DeviceStatusType.CREATED;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -40,11 +41,11 @@ public class DevicesClientHttpTest {
     @Test
     public void createDeviceProfile() throws Exception {
         DeviceProfile profile = new DeviceProfile();
-        profile.setName(TestUtils.randomName("TEST-DVPRF"));
-        profile.setClazz(TestUtils.randomName("CLASS"));
-        profile.setSubclass(TestUtils.randomName("SUBCLASS"));
-        profile.setVendor(TestUtils.randomName("VENDOR"));
-        profile.setProduct(TestUtils.randomName("PRODUCT"));
+        profile.setName(randomName("TEST-DVPRF"));
+        profile.setClazz(randomName("CLASS"));
+        profile.setSubclass(randomName("SUBCLASS"));
+        profile.setVendor(randomName("VENDOR"));
+        profile.setProduct(randomName("PRODUCT"));
 
         DeviceProfileDetails result = profileClient.createDeviceProfile(profile);
 
@@ -118,7 +119,7 @@ public class DevicesClientHttpTest {
     @Test(dependsOnMethods = "testCreateDevice")
     public void testUpdateDeviceBySID() throws Exception {
         DeviceProfile deviceProfile = new DeviceProfile();
-        deviceProfile.setName(TestUtils.randomName("TEST-DVPRF"));
+        deviceProfile.setName(randomName("TEST-DVPRF"));
 
         DeviceProfileDetails profileResult = profileClient.updateDeviceProfile(testProfileName, deviceProfile);
         testProfileName = profileResult.getName();

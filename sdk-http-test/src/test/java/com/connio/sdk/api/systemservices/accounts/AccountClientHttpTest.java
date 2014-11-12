@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.UUID;
 
+import static com.connio.sdk.api.TestUtils.randomName;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
@@ -31,7 +32,7 @@ public class AccountClientHttpTest {
         client = new AccountClient();
 
         testSubAccount = new SubAccount();
-        testSubAccount.setDisplayName("TEST-ACCOUNT-" + UUID.randomUUID().toString());
+        testSubAccount.setDisplayName(randomName("TEST-ACCOUNT"));
         testSubAccount.setStatus(AccountStatusType.CREATED);
         //testSubAccount.setPlanType(PlanType.ENTERPRISE);
     }

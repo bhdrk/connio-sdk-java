@@ -1,0 +1,1 @@
+{"name":"TEST-DCHNL","alarm":{"type":"PASSIVE","value":10,"duration":"MIN","action":{"name":"EMAIL","params":{"email":"test@test.com"}}},"bounds":{"action":{"name":"SMS","params":{"phone_number":"+905554442233"}},"min":1,"max":5},"measurement_unit":"numeric"}

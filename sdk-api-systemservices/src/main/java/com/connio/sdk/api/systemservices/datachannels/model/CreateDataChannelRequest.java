@@ -29,8 +29,8 @@ public class CreateDataChannelRequest extends DataChannelRequest<CreateDataChann
         super();
     }
 
-    public CreateDataChannelRequest(String appId, DataChannel dataChannel) {
-        super(appId);
+    public CreateDataChannelRequest(String appSidOrName, DataChannel dataChannel) {
+        super(appSidOrName);
         this.dataChannel = dataChannel;
     }
 

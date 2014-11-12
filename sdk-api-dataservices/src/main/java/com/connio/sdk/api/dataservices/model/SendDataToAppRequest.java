@@ -16,33 +16,33 @@ public class SendDataToAppRequest extends DataRequest<SendDataToAppResponse> {
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(appNameOrSid, "App Name Or App Sid");
+        Asserts.notEmpty(appSidOrName, "AppName Or AppSid");
         Asserts.notNull(dataFeed, "Data Feed");
 
         metaData.setMethod(POST);
         metaData.addPath("/_apps/{app}/_data");
-        metaData.addPathParam("app", appNameOrSid);
+        metaData.addPathParam("app", appSidOrName);
         metaData.setRequestContent(dataFeed);
     }
 
-    private String appNameOrSid;
+    private String appSidOrName;
 
     private DataFeed dataFeed;
 
     public SendDataToAppRequest() {
     }
 
-    public SendDataToAppRequest(String appNameOrSid, DataFeed dataFeed) {
-        this.appNameOrSid = appNameOrSid;
+    public SendDataToAppRequest(String appSidOrName, DataFeed dataFeed) {
+        this.appSidOrName = appSidOrName;
         this.dataFeed = dataFeed;
     }
 
-    public String getAppNameOrSid() {
-        return appNameOrSid;
+    public String getAppSidOrName() {
+        return appSidOrName;
     }
 
-    public void setAppNameOrSid(String appNameOrSid) {
-        this.appNameOrSid = appNameOrSid;
+    public void setAppSidOrName(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 
     public DataFeed getDataFeed() {

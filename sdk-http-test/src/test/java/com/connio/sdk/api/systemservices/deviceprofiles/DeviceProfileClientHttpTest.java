@@ -1,13 +1,14 @@
 package com.connio.sdk.api.systemservices.deviceprofiles;
 
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.connio.sdk.api.TestUtils.randomName;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
@@ -31,11 +32,11 @@ public class DeviceProfileClientHttpTest {
     @Test
     public void testCreateDeviceProfile() throws Exception {
         testDeviceProfile = new DeviceProfile();
-        testDeviceProfile.setName(TestUtils.randomName("TEST-DVPRF"));
-        testDeviceProfile.setClazz(TestUtils.randomName("CLASS"));
-        testDeviceProfile.setSubclass(TestUtils.randomName("SUBCLASS"));
-        testDeviceProfile.setVendor(TestUtils.randomName("VENDOR"));
-        testDeviceProfile.setProduct(TestUtils.randomName("PRODUCT"));
+        testDeviceProfile.setName(randomName("TEST-DVPRF"));
+        testDeviceProfile.setClazz(randomName("CLASS"));
+        testDeviceProfile.setSubclass(randomName("SUBCLASS"));
+        testDeviceProfile.setVendor(randomName("VENDOR"));
+        testDeviceProfile.setProduct(randomName("PRODUCT"));
 
         DeviceProfileDetails result = client.createDeviceProfile(testDeviceProfile);
 
@@ -73,11 +74,11 @@ public class DeviceProfileClientHttpTest {
     public void testUpdateDeviceProfile() throws Exception {
         String currentDeviceProfileName = testDeviceProfile.getName();
 
-        testDeviceProfile.setName(TestUtils.randomName("TEST-DVPRF"));
-        testDeviceProfile.setClazz(TestUtils.randomName("CLASS"));
-        testDeviceProfile.setSubclass(TestUtils.randomName("SUBCLASS"));
-        testDeviceProfile.setVendor(TestUtils.randomName("VENDOR"));
-        testDeviceProfile.setProduct(TestUtils.randomName("PRODUCT"));
+        testDeviceProfile.setName(randomName("TEST-DVPRF"));
+        testDeviceProfile.setClazz(randomName("CLASS"));
+        testDeviceProfile.setSubclass(randomName("SUBCLASS"));
+        testDeviceProfile.setVendor(randomName("VENDOR"));
+        testDeviceProfile.setProduct(randomName("PRODUCT"));
 
         DeviceProfileDetails result = client.updateDeviceProfile(currentDeviceProfileName, testDeviceProfile);
 

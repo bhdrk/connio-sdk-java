@@ -17,13 +17,13 @@ public class GetDataFromChannelRequest extends DataRequest<GetDataFromChannelRes
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(appNameOrSid, "App Name Or App Sid");
-        Asserts.notEmpty(channelNameOrSid, "Channel Name Or Channel Sid");
+        Asserts.notEmpty(appSidOrName, "AppName Or AppSid");
+        Asserts.notEmpty(channelSidOrName, "ChannelName Or ChannelSid");
 
         metaData.setMethod(GET);
         metaData.addPath("/_apps/{app}/_data/{channel}");
-        metaData.addPathParam("app", appNameOrSid);
-        metaData.addPathParam("channel", channelNameOrSid);
+        metaData.addPathParam("app", appSidOrName);
+        metaData.addPathParam("channel", channelSidOrName);
         metaData.addQueryParam("query", isNotEmpty(dataQuery.getQuery()) ? dataQuery.getQuery() : "");
 
         if (dataQuery.getSkip() != null) {
@@ -43,34 +43,34 @@ public class GetDataFromChannelRequest extends DataRequest<GetDataFromChannelRes
         }
     }
 
-    private String appNameOrSid;
+    private String appSidOrName;
 
-    private String channelNameOrSid;
+    private String channelSidOrName;
 
     private DataQuery dataQuery;
 
     public GetDataFromChannelRequest() {
     }
 
-    public GetDataFromChannelRequest(String appNameOrSid, String channelNameOrSid, DataQuery dataQuery) {
-        this.appNameOrSid = appNameOrSid;
-        this.channelNameOrSid = channelNameOrSid;
+    public GetDataFromChannelRequest(String appSidOrName, String channelSidOrName, DataQuery dataQuery) {
+        this.appSidOrName = appSidOrName;
+        this.channelSidOrName = channelSidOrName;
         this.dataQuery = dataQuery;
     }
 
-    public String getAppNameOrSid() {
-        return appNameOrSid;
+    public String getAppSidOrName() {
+        return appSidOrName;
     }
 
-    public void setAppNameOrSid(String appNameOrSid) {
-        this.appNameOrSid = appNameOrSid;
+    public void setAppSidOrName(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 
-    public String getChannelNameOrSid() {
-        return channelNameOrSid;
+    public String getChannelSidOrName() {
+        return channelSidOrName;
     }
 
-    public void setChannelNameOrSid(String channelNameOrSid) {
-        this.channelNameOrSid = channelNameOrSid;
+    public void setChannelSidOrName(String channelSidOrName) {
+        this.channelSidOrName = channelSidOrName;
     }
 }

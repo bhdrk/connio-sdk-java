@@ -16,33 +16,33 @@ public class UpdateDeviceBySIDRequest extends DeviceRequest<UpdateDeviceResponse
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(sid, "Sid");
+        Asserts.notEmpty(deviceSid, "DeviceSid");
         Asserts.notNull(device, "Device");
 
         metaData.setMethod(PUT);
-        metaData.addPath("/{sid}");
-        metaData.addPathParam("sid", sid);
+        metaData.addPath("/{device-sid}");
+        metaData.addPathParam("device-sid", deviceSid);
         metaData.setRequestContent(device);
     }
 
-    private String sid;
+    private String deviceSid;
 
     private Device device;
 
     public UpdateDeviceBySIDRequest() {
     }
 
-    public UpdateDeviceBySIDRequest(String sid, Device device) {
-        this.sid = sid;
+    public UpdateDeviceBySIDRequest(String deviceSid, Device device) {
+        this.deviceSid = deviceSid;
         this.device = device;
     }
 
-    public String getSid() {
-        return sid;
+    public String getDeviceSid() {
+        return deviceSid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setDeviceSid(String deviceSid) {
+        this.deviceSid = deviceSid;
     }
 
     public Device getDevice() {

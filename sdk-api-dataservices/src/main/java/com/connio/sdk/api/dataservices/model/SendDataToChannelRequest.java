@@ -16,19 +16,19 @@ public class SendDataToChannelRequest extends DataRequest<SendDataToChannelRespo
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(appNameOrSid, "App Name Or App Sid");
-        Asserts.notEmpty(channelNameOrSid, "Channel Name Or Channel Sid");
+        Asserts.notEmpty(appSidOrName, "AppName Or AppSid");
+        Asserts.notEmpty(channelNameOrSid, "ChannelName Or ChannelSid");
         Asserts.notNull(dataFeed, "Data Feed");
 
         metaData.setMethod(POST);
         metaData.addPath("/_apps/{app}/_data/{channel}");
-        metaData.addPathParam("app", appNameOrSid);
+        metaData.addPathParam("app", appSidOrName);
         metaData.addPathParam("channel", channelNameOrSid);
         metaData.setRequestContent(dataFeed);
 
     }
 
-    private String appNameOrSid;
+    private String appSidOrName;
 
     private String channelNameOrSid;
 
@@ -37,18 +37,18 @@ public class SendDataToChannelRequest extends DataRequest<SendDataToChannelRespo
     public SendDataToChannelRequest() {
     }
 
-    public SendDataToChannelRequest(String appNameOrSid, String channelNameOrSid, DataFeed dataFeed) {
-        this.appNameOrSid = appNameOrSid;
+    public SendDataToChannelRequest(String appSidOrName, String channelNameOrSid, DataFeed dataFeed) {
+        this.appSidOrName = appSidOrName;
         this.channelNameOrSid = channelNameOrSid;
         this.dataFeed = dataFeed;
     }
 
-    public String getAppNameOrSid() {
-        return appNameOrSid;
+    public String getAppSidOrName() {
+        return appSidOrName;
     }
 
-    public void setAppNameOrSid(String appNameOrSid) {
-        this.appNameOrSid = appNameOrSid;
+    public void setAppSidOrName(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 
     public String getChannelNameOrSid() {

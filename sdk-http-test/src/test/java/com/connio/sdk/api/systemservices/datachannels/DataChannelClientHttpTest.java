@@ -1,7 +1,7 @@
 package com.connio.sdk.api.systemservices.datachannels;
 
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.apps.IAppClient;
 import com.connio.sdk.api.systemservices.apps.AppClient;
 import com.connio.sdk.api.systemservices.apps.model.App;
@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.connio.sdk.api.TestUtils.randomName;
 import static com.connio.sdk.api.systemservices.datachannels.model.ChannelType.INPUT;
 import static com.connio.sdk.api.systemservices.datachannels.model.measurement.MeasurementType.CUSTOM;
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -44,7 +45,7 @@ public class DataChannelClientHttpTest {
     @Test
     public void createTestApp() throws Exception {
         App app = new App();
-        app.setName(TestUtils.randomName("TEST-APP"));
+        app.setName(randomName("TEST-APP"));
         app.setState(AppStateType.RUNNING);
         app.setVersion("v1.0");
         app.setDisplayName("TEST-APP");
@@ -61,7 +62,7 @@ public class DataChannelClientHttpTest {
     @Test(dependsOnMethods = "createTestApp")
     public void testCreateDataChannel() throws Exception {
         testDataChannel = new DataChannel();
-        testDataChannel.setName(TestUtils.randomName("TEST-DCHNL"));
+        testDataChannel.setName(randomName("TEST-DCHNL"));
         testDataChannel.setMeasurementType(CUSTOM);
         testDataChannel.setMeasurementUnit("boolean");
         testDataChannel.setChannelType(INPUT);
@@ -113,7 +114,7 @@ public class DataChannelClientHttpTest {
         alarm.setAction(alarmAction);
 
         Map<String, String> boundsActionParams = new HashMap<String, String>(1);
-        boundsActionParams.put("phone_number", "05554442233");
+        boundsActionParams.put("phone_number", "+905554442233");
 
         BoundsAction boundsAction = new BoundsAction();
         boundsAction.setName(BoundsActionName.SMS);
@@ -127,7 +128,7 @@ public class DataChannelClientHttpTest {
         String currentDataChannelName = testDataChannel.getName();
 
         DataChannelUpdate dataChannelUpdate = new DataChannelUpdate();
-        dataChannelUpdate.setName(TestUtils.randomName("TEST-DCHNL"));
+        dataChannelUpdate.setName(randomName("TEST-DCHNL"));
         dataChannelUpdate.setMeasurementUnit("numeric");
         dataChannelUpdate.setAlarm(alarm);
         dataChannelUpdate.setBounds(bounds);

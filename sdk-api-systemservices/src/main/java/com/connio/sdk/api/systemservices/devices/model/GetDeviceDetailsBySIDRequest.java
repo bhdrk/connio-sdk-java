@@ -17,27 +17,27 @@ public class GetDeviceDetailsBySIDRequest extends DeviceRequest<GetDeviceDetails
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(sid, "Sid");
+        Asserts.notEmpty(deviceSid, "DeviceSid");
 
         metaData.setMethod(GET);
-        metaData.addPath("/{sid}");
-        metaData.addPathParam("sid", sid);
+        metaData.addPath("/{device-sid}");
+        metaData.addPathParam("device-sid", deviceSid);
     }
 
-    private String sid;
+    private String deviceSid;
 
     public GetDeviceDetailsBySIDRequest() {
     }
 
-    public GetDeviceDetailsBySIDRequest(String sid) {
-        this.sid = sid;
+    public GetDeviceDetailsBySIDRequest(String deviceSid) {
+        this.deviceSid = deviceSid;
     }
 
-    public String getSid() {
-        return sid;
+    public String getDeviceSid() {
+        return deviceSid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setDeviceSid(String deviceSid) {
+        this.deviceSid = deviceSid;
     }
 }

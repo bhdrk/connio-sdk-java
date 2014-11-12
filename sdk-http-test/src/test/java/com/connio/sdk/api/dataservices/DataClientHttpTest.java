@@ -7,7 +7,7 @@ import com.connio.sdk.api.dataservices.model.*;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.model.GeoCoordinates;
 import com.connio.sdk.api.model.Location;
-import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.apps.AppClient;
 import com.connio.sdk.api.systemservices.apps.IAppClient;
 import com.connio.sdk.api.systemservices.apps.model.App;

@@ -17,30 +17,30 @@ public class GetSubAccountDetailsRequest extends AccountRequest<GetSubAccountDet
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(sid, "Sid");
+        Asserts.notEmpty(accountSid, "AccountSid");
 
         metaData.addPath("/{account-sid}");
-        metaData.addPathParam("account-sid", sid);
+        metaData.addPathParam("account-sid", accountSid);
         metaData.setMethod(GET);
     }
 
     /**
      * TODO: javadoc
      */
-    private String sid;
+    private String accountSid;
 
     public GetSubAccountDetailsRequest() {
     }
 
-    public GetSubAccountDetailsRequest(String sid) {
-        this.sid = sid;
+    public GetSubAccountDetailsRequest(String accountSid) {
+        this.accountSid = accountSid;
     }
 
-    public String getSid() {
-        return sid;
+    public String getAccountSid() {
+        return accountSid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setAccountSid(String accountSid) {
+        this.accountSid = accountSid;
     }
 }

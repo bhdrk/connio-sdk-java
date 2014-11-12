@@ -4,12 +4,12 @@ import com.connio.sdk.http.json.JSON;
 import org.fest.assertions.api.Assertions;
 import org.testng.annotations.Test;
 
-import static com.connio.sdk.api.systemservices.TestUtils.resource;
+import static com.connio.sdk.api.TestUtils.resource;
 
 /**
  * Created by bdirik on 31.10.2014.
  */
-@Test(suiteName = "EntityTest", testName = "DataFeedDetailsTest")
+@Test(suiteName = "EntityTests")
 public class DataFeedDetailsTest {
 
     @Test

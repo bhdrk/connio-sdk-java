@@ -17,10 +17,10 @@ public class DataFeed implements Serializable {
     private List<DataPoint> datapoints = new ArrayList<DataPoint>();
 
     private String id_;
-    private String srcUri_;
-    private String chan_;
     private Location loc_;
+    private String srcUri_;
     private List<String> tags_;
+    private String chan_;
 
     public DataFeed() {
     }

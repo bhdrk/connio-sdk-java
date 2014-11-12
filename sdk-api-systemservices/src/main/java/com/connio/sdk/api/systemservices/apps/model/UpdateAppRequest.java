@@ -18,11 +18,11 @@ public class UpdateAppRequest extends AppRequest<UpdateAppResponse> {
         super.loadMetaData(metaData);
 
         Asserts.notNull(app, "App");
-        Asserts.notNull(appId, "AppName or AppSid");
+        Asserts.notEmpty(appSidOrName, "AppName or AppSid");
 
         metaData.setMethod(PUT);
-        metaData.addPath("/{app-id}");
-        metaData.addPathParam("app-id", getAppId());
+        metaData.addPath("/{app}");
+        metaData.addPathParam("app", appSidOrName);
         metaData.setRequestContent(app);
     }
 
@@ -34,13 +34,13 @@ public class UpdateAppRequest extends AppRequest<UpdateAppResponse> {
     /**
      * TODO: javadoc
      */
-    private String appId;
+    private String appSidOrName;
 
     public UpdateAppRequest() {
     }
 
-    public UpdateAppRequest(String appId, App app) {
-        this.appId = appId;
+    public UpdateAppRequest(String appSidOrName, App app) {
+        this.appSidOrName = appSidOrName;
         this.app = app;
     }
 
@@ -52,11 +52,11 @@ public class UpdateAppRequest extends AppRequest<UpdateAppResponse> {
         this.app = app;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getAppSidOrName() {
+        return appSidOrName;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setAppSidOrName(String appSidOrName) {
+        this.appSidOrName = appSidOrName;
     }
 }

@@ -1,13 +1,14 @@
 package com.connio.sdk.api.systemservices.apps;
 
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.TestUtils;
+import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.apps.model.App;
 import com.connio.sdk.api.systemservices.apps.model.AppDetails;
 import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.connio.sdk.api.TestUtils.randomName;
 import static com.connio.sdk.api.systemservices.apps.model.AppStateType.STOPPED;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -29,7 +30,7 @@ public class AppClientHttpTest {
         client = new AppClient();
 
         testApp = new App();
-        testApp.setName(TestUtils.randomName("TEST-APP"));
+        testApp.setName(randomName("TEST-APP"));
         testApp.setDisplayName("TEST APP");
         testApp.setDescription("TEST APP DESC");
         testApp.setVersion("v1.0");
@@ -73,7 +74,7 @@ public class AppClientHttpTest {
     @Test(dependsOnMethods = "testCreateApp")
     public void testUpdateApp() throws Exception {
         String currentAppName = testApp.getName();
-        String newName = TestUtils.randomName("TEST-APP");
+        String newName = randomName("TEST-APP");
 
         testApp.setName(newName);
         testApp.setDisplayName("UPDATED TEST APP");

@@ -17,23 +17,23 @@ public interface IDevicesClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param deviceSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceDetails getDeviceDetails(String sid)
+    public DeviceDetails getDeviceDetails(String deviceSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param cid
+     * @param deviceCid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceDetails getDeviceDetails(Cid cid)
+    public DeviceDetails getDeviceDetails(Cid deviceCid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -60,90 +60,90 @@ public interface IDevicesClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param deviceSid
      * @param device
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceDetails updateDevice(String sid, Device device)
+    public DeviceDetails updateDevice(String deviceSid, Device device)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param cid
+     * @param deviceCid
      * @param device
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceDetails updateDevice(Cid cid, Device device)
+    public DeviceDetails updateDevice(Cid deviceCid, Device device)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param deviceSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public Deleted deleteDevice(String sid)
+    public Deleted deleteDevice(String deviceSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param cid
+     * @param deviceCid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public Deleted deleteDevice(Cid cid)
+    public Deleted deleteDevice(Cid deviceCid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param deviceSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceAccessKey generateAccessKey(String sid)
+    public DeviceAccessKey generateAccessKey(String deviceSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param cid
+     * @param deviceCid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceAccessKey generateAccessKey(Cid cid)
+    public DeviceAccessKey generateAccessKey(Cid deviceCid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param sid
+     * @param deviceSid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceAccessKey getAccessKey(String sid)
+    public DeviceAccessKey getAccessKey(String deviceSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param cid
+     * @param deviceCid
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceAccessKey getAccessKey(Cid cid)
+    public DeviceAccessKey getAccessKey(Cid deviceCid)
             throws ConnioServiceException, ConnioClientException;
 }

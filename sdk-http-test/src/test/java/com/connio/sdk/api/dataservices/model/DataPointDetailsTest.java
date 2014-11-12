@@ -7,13 +7,13 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static com.connio.sdk.api.systemservices.TestUtils.resource;
+import static com.connio.sdk.api.TestUtils.resource;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
  * Created by bdirik on 31.10.2014.
  */
-@Test(suiteName = "EntityTest", testName = "DataPointDetailsTest")
+@Test(suiteName = "EntityTests")
 public class DataPointDetailsTest {
 
     @Test

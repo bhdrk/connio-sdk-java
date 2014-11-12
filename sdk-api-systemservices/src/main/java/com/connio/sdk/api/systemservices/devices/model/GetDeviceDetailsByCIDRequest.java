@@ -17,32 +17,32 @@ public class GetDeviceDetailsByCIDRequest extends DeviceRequest<GetDeviceDetails
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notNull(cid, "Cid");
-        Asserts.notEmpty(cid.getCid(), "Cid");
-        Asserts.notEmpty(cid.getProfileName(), "ProfileName");
-        Asserts.notNull(cid.getCidType(), "CidType");
+        Asserts.notNull(deviceCid, "DeviceCid");
+        Asserts.notEmpty(deviceCid.getCid(), "Cid");
+        Asserts.notEmpty(deviceCid.getProfileName(), "ProfileName");
+        Asserts.notNull(deviceCid.getCidType(), "CidType");
 
         metaData.setMethod(GET);
         metaData.addPath("/{profile-name}/{cid-type}/{cid}");
-        metaData.addPathParam("profile-name", cid.getProfileName());
-        metaData.addPathParam("cid-type", cid.getCidType().toString());
-        metaData.addPathParam("cid", cid.getCid());
+        metaData.addPathParam("profile-name", deviceCid.getProfileName());
+        metaData.addPathParam("cid-type", deviceCid.getCidType().toString());
+        metaData.addPathParam("cid", deviceCid.getCid());
     }
 
-    private Cid cid;
+    private Cid deviceCid;
 
     public GetDeviceDetailsByCIDRequest() {
     }
 
-    public GetDeviceDetailsByCIDRequest(Cid cid) {
-        this.cid = cid;
+    public GetDeviceDetailsByCIDRequest(Cid deviceCid) {
+        this.deviceCid = deviceCid;
     }
 
-    public Cid getCid() {
-        return cid;
+    public Cid getDeviceCid() {
+        return deviceCid;
     }
 
-    public void setCid(Cid cid) {
-        this.cid = cid;
+    public void setDeviceCid(Cid deviceCid) {
+        this.deviceCid = deviceCid;
     }
 }

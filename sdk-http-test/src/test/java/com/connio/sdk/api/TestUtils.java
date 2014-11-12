@@ -1,4 +1,4 @@
-package com.connio.sdk.api.systemservices;
+package com.connio.sdk.api;
 
 
 import com.connio.sdk.api.utils.Asserts;
@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class TestUtils {
 
-    private static final SimpleDateFormat RANDOM_NAME_SUFFIX_FORMAT = new SimpleDateFormat("yyMMddHHmmssSSS");
+    private static final SimpleDateFormat RANDOM_NAME_SUFFIX_FORMAT = new SimpleDateFormat("-yyMMddHHmmssSSS");
     private static final int RANDOM_NAME_MAX_LENGTH = 64;
 
     public static String randomName(String prefix) {

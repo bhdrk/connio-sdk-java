@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.datachannels.model;
 
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.utils.Asserts;
 
 import static com.connio.sdk.api.model.Method.DELETE;
 
@@ -12,31 +13,33 @@ import static com.connio.sdk.api.model.Method.DELETE;
  */
 public class DeleteDataChannelRequest extends DataChannelRequest<DeleteDataChannelResponse> {
 
-    private String channelId;
+    private String channelSidOrName;
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
+        Asserts.notEmpty(channelSidOrName, "ChannelName or ChannelSid");
+
         metaData.setMethod(DELETE);
-        metaData.addPath("/{channel-id}");
-        metaData.addPathParam("channel-id", channelId);
+        metaData.addPath("/{channel}");
+        metaData.addPathParam("channel", channelSidOrName);
     }
 
     public DeleteDataChannelRequest() {
         super();
     }
 
-    public DeleteDataChannelRequest(String appId, String channelId) {
+    public DeleteDataChannelRequest(String appId, String channelSidOrName) {
         super(appId);
-        this.channelId = channelId;
+        this.channelSidOrName = channelSidOrName;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public String getChannelSidOrName() {
+        return channelSidOrName;
     }
 
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
+    public void setChannelSidOrName(String channelSidOrName) {
+        this.channelSidOrName = channelSidOrName;
     }
 }

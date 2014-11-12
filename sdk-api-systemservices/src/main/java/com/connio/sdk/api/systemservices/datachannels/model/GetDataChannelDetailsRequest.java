@@ -16,29 +16,29 @@ public class GetDataChannelDetailsRequest extends DataChannelRequest<GetDataChan
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(channelId, "ChannelName or ChannelSid");
+        Asserts.notEmpty(channelSidOrName, "ChannelName or ChannelSid");
 
         metaData.setMethod(GET);
-        metaData.addPath("/{channel-id}");
-        metaData.addPathParam("channel-id", channelId);
+        metaData.addPath("/{channel}");
+        metaData.addPathParam("channel", channelSidOrName);
     }
 
-    private String channelId;
+    private String channelSidOrName;
 
     public GetDataChannelDetailsRequest() {
         super();
     }
 
-    public GetDataChannelDetailsRequest(String appId, String channelId) {
-        super(appId);
-        this.channelId = channelId;
+    public GetDataChannelDetailsRequest(String appSidOrName, String channelSidOrName) {
+        super(appSidOrName);
+        this.channelSidOrName = channelSidOrName;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public String getChannelSidOrName() {
+        return channelSidOrName;
     }
 
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
+    public void setChannelSidOrName(String channelSidOrName) {
+        this.channelSidOrName = channelSidOrName;
     }
 }

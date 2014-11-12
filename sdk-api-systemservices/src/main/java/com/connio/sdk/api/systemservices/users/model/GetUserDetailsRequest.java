@@ -1,6 +1,7 @@
 package com.connio.sdk.api.systemservices.users.model;
 
 import com.connio.sdk.api.model.RequestMetaData;
+import com.connio.sdk.api.utils.Asserts;
 
 import static com.connio.sdk.api.model.Method.GET;
 
@@ -14,6 +15,8 @@ public class GetUserDetailsRequest extends UserRequest<GetUserDetailsResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
+
+        Asserts.notEmpty(userSid, "UserSid");
 
         metaData.setMethod(GET);
         metaData.addPath("/{user-sid}");
