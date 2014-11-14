@@ -70,7 +70,7 @@ public final class TypeResolver {
      *
      * @param type    to resolve argument for
      * @param subType to extract type variable information from
-     * @return type argument for {@code type} else {@link com.connio.sdk.http.utils.TypeResolver.Unknown.class} if no type arguments are
+     * @return type argument for {@code type} else {@link Unknown} if no type arguments are
      * declared
      * @throws IllegalArgumentException if more or less than one type argument is resolved for the
      *                                  {@code type}
@@ -87,7 +87,7 @@ public final class TypeResolver {
      *
      * @param genericType to resolve argument for
      * @param subType     to extract type variable information from
-     * @return type argument for {@code genericType} else {@link com.connio.sdk.http.utils.TypeResolver.Unknown.class} if no type arguments
+     * @return type argument for {@code genericType} else {@link Unknown} if no type arguments
      * are declared
      * @throws IllegalArgumentException if more or less than one type argument is resolved for the
      *                                  {@code genericType}

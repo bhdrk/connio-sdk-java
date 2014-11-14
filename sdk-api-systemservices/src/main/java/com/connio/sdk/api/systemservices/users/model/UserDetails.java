@@ -141,4 +141,52 @@ public class UserDetails implements Serializable {
     public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserDetails that = (UserDetails) o;
+
+        if (accountSid != null ? !accountSid.equals(that.accountSid) : that.accountSid != null) return false;
+        if (displayName != null ? !displayName.equals(that.displayName) : that.displayName != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (fullName != null ? !fullName.equals(that.fullName) : that.fullName != null) return false;
+        if (prefs != null ? !prefs.equals(that.prefs) : that.prefs != null) return false;
+        if (roles != null ? !roles.equals(that.roles) : that.roles != null) return false;
+        if (sid != null ? !sid.equals(that.sid) : that.sid != null) return false;
+        if (uri != null ? !uri.equals(that.uri) : that.uri != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = sid != null ? sid.hashCode() : 0;
+        result = 31 * result + (accountSid != null ? accountSid.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        result = 31 * result + (uri != null ? uri.hashCode() : 0);
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (prefs != null ? prefs.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "sid='" + sid + '\'' +
+                ", accountSid='" + accountSid + '\'' +
+                ", roles=" + roles +
+                ", uri='" + uri + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", prefs=" + prefs +
+                ", dateCreated=" + dateCreated +
+                ", dateModified=" + dateModified +
+                '}';
+    }
 }

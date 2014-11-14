@@ -95,4 +95,71 @@ public class AppClient extends AbstractClient implements IAppClient {
             throws ConnioServiceException, ConnioClientException {
         return execute(new DeleteAppRequest(appSidOrName));
     }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public AppUsageDetails getAppUsageDetails(String appSidOrName)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetAppUsageDetailsRequest(appSidOrName));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public AppLogList getAppLogs(String appSidOrName)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetAppLogsRequest(appSidOrName));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public TriggerResultSet getTriggers(String appSidOrName) {
+        return execute(new GetAppTriggersRequest(appSidOrName));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public TriggerDetails createTrigger(String appSidOrName, Trigger trigger) {
+        return execute(new CreateAppTriggerRequest(appSidOrName, trigger));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public Deleted deleteTrigger(String appSidOrName, String triggerSid) {
+        return execute(new DeleteAppTriggerRequest(appSidOrName, triggerSid));
+    }
 }

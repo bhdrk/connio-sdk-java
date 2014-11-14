@@ -17,27 +17,27 @@ public class DeleteDeviceProfileRequest extends DeviceProfileRequest<DeleteDevic
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(deviceProfileName, "DeviceProfileName");
+        Asserts.notEmpty(profileSidOrName, "ProfileName or ProfileSid");
 
         metaData.setMethod(DELETE);
-        metaData.addPath("/{device-profile-name}");
-        metaData.addPathParam("device-profile-name", deviceProfileName);
+        metaData.addPath("/{profile}");
+        metaData.addPathParam("profile", profileSidOrName);
     }
 
-    private String deviceProfileName;
+    private String profileSidOrName;
 
     public DeleteDeviceProfileRequest() {
     }
 
-    public DeleteDeviceProfileRequest(String deviceProfileName) {
-        this.deviceProfileName = deviceProfileName;
+    public DeleteDeviceProfileRequest(String profileSidOrName) {
+        this.profileSidOrName = profileSidOrName;
     }
 
-    public String getDeviceProfileName() {
-        return deviceProfileName;
+    public String getProfileSidOrName() {
+        return profileSidOrName;
     }
 
-    public void setDeviceProfileName(String deviceProfileName) {
-        this.deviceProfileName = deviceProfileName;
+    public void setProfileSidOrName(String profileSidOrName) {
+        this.profileSidOrName = profileSidOrName;
     }
 }

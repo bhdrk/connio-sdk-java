@@ -11,7 +11,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 29.09.2014
  */
-public class GenerateAccessKeyByCIDRequest extends DeviceRequest<GenerateAccessKeyResponse> {
+public class RegenerateAccessKeyByCIDRequest extends DeviceRequest<RegenerateAccessKeyResponse> {
     @Override
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
@@ -30,10 +30,10 @@ public class GenerateAccessKeyByCIDRequest extends DeviceRequest<GenerateAccessK
 
     private Cid deviceCid;
 
-    public GenerateAccessKeyByCIDRequest() {
+    public RegenerateAccessKeyByCIDRequest() {
     }
 
-    public GenerateAccessKeyByCIDRequest(Cid deviceCid) {
+    public RegenerateAccessKeyByCIDRequest(Cid deviceCid) {
         this.deviceCid = deviceCid;
     }
 

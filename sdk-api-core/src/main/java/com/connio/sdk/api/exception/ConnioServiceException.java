@@ -53,7 +53,7 @@ public class ConnioServiceException extends ConnioException {
 
     @Override
     public String toString() {
-        return "ConnioServiceException{" +
+        return getClass().getSimpleName() + "{" +
                 "status='" + status + '\'' +
                 ", causeMessage='" + causeMessage + '\'' +
                 ", details=" + details +

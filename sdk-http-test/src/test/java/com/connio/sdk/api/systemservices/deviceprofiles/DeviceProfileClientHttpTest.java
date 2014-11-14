@@ -1,7 +1,6 @@
 package com.connio.sdk.api.systemservices.deviceprofiles;
 
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileDetails;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;

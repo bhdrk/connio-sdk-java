@@ -7,11 +7,10 @@ import static com.connio.sdk.api.model.Method.GET;
 
 /**
  * TODO: javadoc
- *
- * @author bdirik
- * @since 12.09.2014
+ * <p/>
+ * Created by bdirik on 14.11.2014.
  */
-public class GetAppDetailsRequest extends AppRequest<GetAppDetailsResponse> {
+public class GetAppTriggersRequest extends AppRequest<GetAppTriggersResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
@@ -20,19 +19,16 @@ public class GetAppDetailsRequest extends AppRequest<GetAppDetailsResponse> {
         Asserts.notEmpty(appSidOrName, "AppName or AppSid");
 
         metaData.setMethod(GET);
-        metaData.addPath("/{app}");
+        metaData.addPath("/{app}/_triggers");
         metaData.addPathParam("app", appSidOrName);
     }
 
-    /**
-     * TODO: javadoc
-     */
     private String appSidOrName;
 
-    public GetAppDetailsRequest() {
+    public GetAppTriggersRequest() {
     }
 
-    public GetAppDetailsRequest(String appSidOrName) {
+    public GetAppTriggersRequest(String appSidOrName) {
         this.appSidOrName = appSidOrName;
     }
 

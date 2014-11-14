@@ -5,6 +5,10 @@ import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.accounts.model.*;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
+import com.connio.sdk.api.systemservices.devices.model.DeviceResultSet;
+import com.connio.sdk.api.systemservices.users.model.UserResultSet;
 
 /**
  * TODO: javadoc
@@ -87,7 +91,7 @@ public interface IAccountClient extends ConnioClient {
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public AuthToken createAuthenticationToken(String accountSid)
+    public AuthToken regenerateAuthenticationToken(String accountSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -99,5 +103,49 @@ public interface IAccountClient extends ConnioClient {
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     public BillingInfoList getBillingInfo(String accountSid)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public UserResultSet getUsersOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public AppResultSet getAppsOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public DeviceResultSet getDevicesOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public DeviceProfileResultSet getDeviceProfilesOfAccount(String accountSid)
             throws ConnioServiceException, ConnioClientException;
 }

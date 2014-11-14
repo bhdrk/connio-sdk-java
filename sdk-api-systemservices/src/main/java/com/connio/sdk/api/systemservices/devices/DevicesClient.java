@@ -140,8 +140,8 @@ public class DevicesClient extends AbstractClient implements IDevicesClient {
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public DeviceAccessKey generateAccessKey(String deviceSid) throws ConnioServiceException, ConnioClientException {
-        return execute(new GenerateAccessKeyBySIDRequest(deviceSid));
+    public DeviceAccessKey regenerateAccessKey(String deviceSid) throws ConnioServiceException, ConnioClientException {
+        return execute(new RegenerateAccessKeyBySIDRequest(deviceSid));
     }
 
     /**
@@ -153,8 +153,8 @@ public class DevicesClient extends AbstractClient implements IDevicesClient {
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public DeviceAccessKey generateAccessKey(Cid deviceCid) throws ConnioServiceException, ConnioClientException {
-        return execute(new GenerateAccessKeyByCIDRequest(deviceCid));
+    public DeviceAccessKey regenerateAccessKey(Cid deviceCid) throws ConnioServiceException, ConnioClientException {
+        return execute(new RegenerateAccessKeyByCIDRequest(deviceCid));
     }
 
     /**

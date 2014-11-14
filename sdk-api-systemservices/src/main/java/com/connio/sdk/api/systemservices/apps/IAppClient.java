@@ -4,9 +4,7 @@ import com.connio.sdk.api.core.ConnioClient;
 import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
-import com.connio.sdk.api.systemservices.apps.model.App;
-import com.connio.sdk.api.systemservices.apps.model.AppDetails;
-import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
+import com.connio.sdk.api.systemservices.apps.model.*;
 
 /**
  * TODO: javadoc
@@ -71,4 +69,58 @@ public interface IAppClient extends ConnioClient {
     public Deleted deleteApp(String appSidOrName)
             throws ConnioServiceException, ConnioClientException;
 
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public AppUsageDetails getAppUsageDetails(String appSidOrName)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public AppLogList getAppLogs(String appSidOrName)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public TriggerResultSet getTriggers(String appSidOrName)
+            throws ConnioServiceException, ConnioClientException;
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @param trigger
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public TriggerDetails createTrigger(String appSidOrName, Trigger trigger);
+
+    /**
+     * TODO: javadoc
+     *
+     * @param appSidOrName
+     * @param triggerSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    public Deleted deleteTrigger(String appSidOrName, String triggerSid);
 }

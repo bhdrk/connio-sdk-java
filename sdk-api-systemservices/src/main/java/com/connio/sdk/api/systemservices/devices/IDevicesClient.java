@@ -111,7 +111,7 @@ public interface IDevicesClient extends ConnioClient {
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceAccessKey generateAccessKey(String deviceSid)
+    public DeviceAccessKey regenerateAccessKey(String deviceSid)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -122,7 +122,7 @@ public interface IDevicesClient extends ConnioClient {
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceAccessKey generateAccessKey(Cid deviceCid)
+    public DeviceAccessKey regenerateAccessKey(Cid deviceCid)
             throws ConnioServiceException, ConnioClientException;
 
     /**

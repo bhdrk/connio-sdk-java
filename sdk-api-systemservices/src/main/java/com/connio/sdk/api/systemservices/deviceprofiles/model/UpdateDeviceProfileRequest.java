@@ -17,24 +17,24 @@ public class UpdateDeviceProfileRequest extends DeviceProfileRequest<UpdateDevic
     public void loadMetaData(RequestMetaData metaData) {
         super.loadMetaData(metaData);
 
-        Asserts.notEmpty(deviceProfileName, "DeviceProfileName");
+        Asserts.notEmpty(profileSidOrName, "ProfileName or ProfileSid");
         Asserts.notNull(deviceProfile, "DeviceProfile");
 
         metaData.setMethod(PUT);
-        metaData.addPath("/{device-profile-name}");
-        metaData.addPathParam("device-profile-name", deviceProfileName);
+        metaData.addPath("/{profile}");
+        metaData.addPathParam("profile", profileSidOrName);
         metaData.setRequestContent(deviceProfile);
     }
 
-    private String deviceProfileName;
+    private String profileSidOrName;
 
     private DeviceProfile deviceProfile;
 
     public UpdateDeviceProfileRequest() {
     }
 
-    public UpdateDeviceProfileRequest(String deviceProfileName, DeviceProfile deviceProfile) {
-        this.deviceProfileName = deviceProfileName;
+    public UpdateDeviceProfileRequest(String profileSidOrName, DeviceProfile deviceProfile) {
+        this.profileSidOrName = profileSidOrName;
         this.deviceProfile = deviceProfile;
     }
 
@@ -46,11 +46,11 @@ public class UpdateDeviceProfileRequest extends DeviceProfileRequest<UpdateDevic
         this.deviceProfile = deviceProfile;
     }
 
-    public String getDeviceProfileName() {
-        return deviceProfileName;
+    public String getProfileSidOrName() {
+        return profileSidOrName;
     }
 
-    public void setDeviceProfileName(String deviceProfileName) {
-        this.deviceProfileName = deviceProfileName;
+    public void setProfileSidOrName(String profileSidOrName) {
+        this.profileSidOrName = profileSidOrName;
     }
 }

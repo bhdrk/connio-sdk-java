@@ -114,9 +114,9 @@ public class AccountClientTest extends AbstractClientMockServerTestCase {
     }
 
     @Test
-    public void tesCreateAuthenticationToken() throws Exception {
-        final String expectedRequestJson = resource("json/systemservices/accounts/createAuthenticationToken/request.json");
-        final String mockResponseJson = resource("json/systemservices/accounts/createAuthenticationToken/response.json");
+    public void tesRegenerateAuthenticationToken() throws Exception {
+        final String expectedRequestJson = resource("json/systemservices/accounts/regenerateAuthenticationToken/request.json");
+        final String mockResponseJson = resource("json/systemservices/accounts/regenerateAuthenticationToken/response.json");
 
 
         final AuthToken expectedResult = new AuthToken();
@@ -127,7 +127,7 @@ public class AccountClientTest extends AbstractClientMockServerTestCase {
 
         String sid = "AC2BABAAA1DFBD4B70975B99856F54B612";
 
-        AuthToken result = client.createAuthenticationToken(sid);
+        AuthToken result = client.regenerateAuthenticationToken(sid);
 
         assertThat(result).isEqualTo(expectedResult);
 

@@ -42,15 +42,15 @@ public class DeviceProfileClient extends AbstractClient implements IDeviceProfil
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param profileSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public DeviceProfileDetails getDeviceProfileDetails(String deviceProfileName)
+    public DeviceProfileDetails getDeviceProfileDetails(String profileSidOrName)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new GetDeviceProfileDetailsRequest(deviceProfileName));
+        return execute(new GetDeviceProfileDetailsRequest(profileSidOrName));
     }
 
     /**
@@ -70,29 +70,29 @@ public class DeviceProfileClient extends AbstractClient implements IDeviceProfil
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param profileSidOrName
      * @param deviceProfile
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile
+    public DeviceProfileDetails updateDeviceProfile(String profileSidOrName, DeviceProfile deviceProfile
     ) throws ConnioServiceException, ConnioClientException {
-        return execute(new UpdateDeviceProfileRequest(deviceProfileName, deviceProfile));
+        return execute(new UpdateDeviceProfileRequest(profileSidOrName, deviceProfile));
     }
 
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param profileSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public Deleted deleteDeviceProfile(String deviceProfileName)
+    public Deleted deleteDeviceProfile(String profileSidOrName)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new DeleteDeviceProfileRequest(deviceProfileName));
+        return execute(new DeleteDeviceProfileRequest(profileSidOrName));
     }
 }

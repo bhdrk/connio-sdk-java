@@ -12,7 +12,7 @@ import static com.connio.sdk.api.model.Method.POST;
  * @author bdirik
  * @since 10.09.2014
  */
-public class CreateAuthenticationTokenRequest extends AccountRequest<CreateAuthenticationTokenResponse> {
+public class RegenerateAuthenticationTokenRequest extends AccountRequest<RegenerateAuthenticationTokenResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
@@ -31,10 +31,10 @@ public class CreateAuthenticationTokenRequest extends AccountRequest<CreateAuthe
      */
     private String accountSid;
 
-    public CreateAuthenticationTokenRequest() {
+    public RegenerateAuthenticationTokenRequest() {
     }
 
-    public CreateAuthenticationTokenRequest(String accountSid) {
+    public RegenerateAuthenticationTokenRequest(String accountSid) {
         this.accountSid = accountSid;
     }
 

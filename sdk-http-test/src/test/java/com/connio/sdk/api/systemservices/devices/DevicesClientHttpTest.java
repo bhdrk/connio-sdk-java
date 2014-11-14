@@ -1,9 +1,9 @@
 package com.connio.sdk.api.systemservices.devices;
 
+import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.model.GeoCoordinates;
 import com.connio.sdk.api.model.Location;
-import com.connio.sdk.api.TestUtils;
 import com.connio.sdk.api.systemservices.deviceprofiles.DeviceProfileClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.IDeviceProfileClient;
 import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfile;
@@ -73,7 +73,7 @@ public class DevicesClientHttpTest {
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
         assertThat(result.getStatus()).isEqualTo(testDevice.getStatus());
-        assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
+        assertThat(result.getCidMap()).isEqualTo(testDevice.getCidMap());
 
         testDeviceSID = result.getSid();
     }
@@ -88,7 +88,7 @@ public class DevicesClientHttpTest {
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
         assertThat(result.getStatus()).isEqualTo(testDevice.getStatus());
-        assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
+        assertThat(result.getCidMap()).isEqualTo(testDevice.getCidMap());
     }
 
     @Test(dependsOnMethods = "testCreateDevice")
@@ -103,7 +103,7 @@ public class DevicesClientHttpTest {
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
         assertThat(result.getStatus()).isEqualTo(testDevice.getStatus());
-        assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
+        assertThat(result.getCidMap()).isEqualTo(testDevice.getCidMap());
     }
 
     @Test(dependsOnMethods = "testCreateDevice")
@@ -137,10 +137,97 @@ public class DevicesClientHttpTest {
         assertThat(result.getTags()).containsAll(testDevice.getTags());
         assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
         assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
-        assertThat(result.getCidMap()).containsValue(testDevice.getCidMap().get(CidType._IMEI));
+        assertThat(result.getCidMap()).isEqualTo(testDevice.getCidMap());
     }
 
-    @Test(dependsOnMethods = "testUpdateDeviceBySID")
+    @Test(dependsOnMethods = "testCreateDevice", enabled = false)
+    public void testUpdateDeviceByCID() throws Exception {
+        DeviceProfile deviceProfile = new DeviceProfile();
+        deviceProfile.setName(randomName("TEST-DVPRF"));
+
+        final String imei = testDevice.getCidMap().get(CidType._IMEI);
+        final Cid cid = new Cid(testProfileName, CidType._IMEI, imei);
+
+        DeviceProfileDetails profileResult = profileClient.updateDeviceProfile(testProfileName, deviceProfile);
+        testProfileName = profileResult.getName();
+
+        testDevice.setProfileName(testProfileName);
+        testDevice.setTags(Arrays.asList("TAG3", "TAG4"));
+        testDevice.setNotes("Updated test device");
+        testDevice.setLoc(new Location("Izmir", new GeoCoordinates(38.41885D, 27.12871999999993D)));
+        testDevice.addCid(CidType._IMEI, TestUtils.generateIMEI());
+
+
+        DeviceDetails result = client.updateDevice(cid, testDevice);
+
+        assertThat(result).isNotNull();
+        assertThat(result.getProfileName()).isEqualToIgnoringCase(testDevice.getProfileName());
+        assertThat(result.getTags()).containsAll(testDevice.getTags());
+        assertThat(result.getNotes()).isEqualTo(testDevice.getNotes());
+        assertThat(result.getLoc()).isEqualTo(testDevice.getLoc());
+        assertThat(result.getCidMap()).isEqualTo(testDevice.getCidMap());
+    }
+
+    @Test(dependsOnMethods = "testCreateDevice")
+    public void testAccessKeyBySID() throws Exception {
+        final DeviceAccessKey currentAccessKey = client.getAccessKey(testDeviceSID);
+
+        assertThat(currentAccessKey).isNotNull();
+        assertThat(currentAccessKey.getAuthToken()).isNotEmpty();
+        assertThat(currentAccessKey.getAuthToken()).hasSize(32);
+
+
+        final DeviceAccessKey newAccessKey = client.regenerateAccessKey(testDeviceSID);
+
+        assertThat(newAccessKey).isNotNull();
+        assertThat(newAccessKey.getAuthToken()).isNotEmpty();
+        assertThat(newAccessKey.getAuthToken()).hasSize(32);
+
+        assertThat(newAccessKey.getAuthToken()).isNotEqualTo(currentAccessKey.getAuthToken());
+
+
+        final DeviceAccessKey lastAccessKey = client.getAccessKey(testDeviceSID);
+
+        assertThat(lastAccessKey).isNotNull();
+        assertThat(newAccessKey.getAuthToken()).isEqualTo(lastAccessKey.getAuthToken());
+    }
+
+    @Test(dependsOnMethods = "testCreateDevice", enabled = false)
+    public void testAccessKeyByCID() throws Exception {
+        final String imei = testDevice.getCidMap().get(CidType._IMEI);
+        final Cid cid = new Cid(testProfileName, CidType._IMEI, imei);
+
+        final DeviceAccessKey currentAccessKey = client.getAccessKey(cid);
+
+        assertThat(currentAccessKey).isNotNull();
+        assertThat(currentAccessKey.getAuthToken()).isNotEmpty();
+        assertThat(currentAccessKey.getAuthToken()).hasSize(32);
+
+
+        final DeviceAccessKey newAccessKey = client.regenerateAccessKey(cid);
+
+        assertThat(newAccessKey).isNotNull();
+        assertThat(newAccessKey.getAuthToken()).isNotEmpty();
+        assertThat(newAccessKey.getAuthToken()).hasSize(32);
+
+        assertThat(newAccessKey.getAuthToken()).isNotEqualTo(currentAccessKey.getAuthToken());
+
+
+        final DeviceAccessKey lastAccessKey = client.getAccessKey(cid);
+
+        assertThat(lastAccessKey).isNotNull();
+        assertThat(newAccessKey.getAuthToken()).isEqualTo(lastAccessKey.getAuthToken());
+    }
+
+    @Test(dependsOnMethods = {
+            "testUpdateDeviceBySID",
+            //"testUpdateDeviceByCID",
+            "testAccessKeyBySID",
+            //"testAccessKeyByCID",
+            "testGetDeviceDetailsBySID",
+            "testGetDeviceDetailsByCID",
+            "testGetAllDeviceDetails"
+    })
     public void testDeleteDeviceBySID() throws Exception {
         Deleted result = client.deleteDevice(testDeviceSID);
 
@@ -158,7 +245,10 @@ public class DevicesClientHttpTest {
         assertThat(result.isDeleted()).isFalse();
     }
 
-    @Test(dependsOnMethods = "testDeleteDeviceBySID")
+    @Test(dependsOnMethods = {
+            "testDeleteDeviceBySID"
+            //, "testDeleteDeviceByCID"
+    })
     public void deleteProfile() throws Exception {
         Deleted result = profileClient.deleteDeviceProfile(testProfileName);
 

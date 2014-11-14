@@ -4,6 +4,10 @@ import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.auth.ConnioCredentialsManager;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.accounts.model.*;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
+import com.connio.sdk.api.systemservices.devices.model.DeviceResultSet;
+import com.connio.sdk.api.systemservices.users.model.UserResultSet;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -61,7 +65,7 @@ public class AccountClientHttpTest {
 
     // You can only regenerate your own account's authentication token.
     @Test(dependsOnMethods = "testCreateSubAccount", enabled = false)
-    public void tesCreateAuthenticationToken() throws Exception {
+    public void tesRegenerateAuthenticationToken() throws Exception {
         String currentAuthToken;
         {
             SubAccountDetails result = client.getSubAccountDetails(testSubAccountSid);
@@ -73,7 +77,7 @@ public class AccountClientHttpTest {
             currentAuthToken = result.getAuthToken();
         }
         {
-            AuthToken result = client.createAuthenticationToken(testSubAccountSid);
+            AuthToken result = client.regenerateAuthenticationToken(testSubAccountSid);
 
             assertThat(result).isNotNull();
             assertThat(result.getAuthToken()).isNotEmpty();
@@ -130,5 +134,53 @@ public class AccountClientHttpTest {
         String currentAccountSid = ConnioCredentialsManager.getCredentials(ConnioCredentials.DEFAULT_PROFILE).getAccessKey();
 
         assertThat(accountSid).isEqualTo(currentAccountSid);
+    }
+
+    @Test
+    public void testGetUsersOfAccount() throws Exception {
+        final UserResultSet result = client.getUsersOfAccount("me");
+        // just ensure that response is valid
+        assertThat(result).isNotNull();
+        assertThat(result.getTotal()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getItemCount()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getSkip()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getLimit()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getResultSet()).isNotNull();
+    }
+
+    @Test
+    public void testGetAppsOfAccount() throws Exception {
+        final AppResultSet result = client.getAppsOfAccount("me");
+        // just ensure that response is valid
+        assertThat(result).isNotNull();
+        assertThat(result.getTotal()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getItemCount()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getSkip()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getLimit()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getResultSet()).isNotNull();
+    }
+
+    @Test
+    public void testGetDevicesOfAccount() throws Exception {
+        final DeviceResultSet result = client.getDevicesOfAccount("me");
+        // just ensure that response is valid
+        assertThat(result).isNotNull();
+        assertThat(result.getTotal()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getItemCount()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getSkip()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getLimit()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getResultSet()).isNotNull();
+    }
+
+    @Test
+    public void testGetDeviceProfilesOfAccount() throws Exception {
+        final DeviceProfileResultSet result = client.getDeviceProfilesOfAccount("me");
+        // just ensure that response is valid
+        assertThat(result).isNotNull();
+        assertThat(result.getTotal()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getItemCount()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getSkip()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getLimit()).isGreaterThanOrEqualTo(0);
+        assertThat(result.getResultSet()).isNotNull();
     }
 }

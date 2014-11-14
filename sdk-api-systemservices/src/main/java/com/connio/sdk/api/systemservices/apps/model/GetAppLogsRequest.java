@@ -6,12 +6,11 @@ import com.connio.sdk.api.utils.Asserts;
 import static com.connio.sdk.api.model.Method.GET;
 
 /**
- * TODO: javadoc
- *
- * @author bdirik
- * @since 12.09.2014
+ * TODO:javadoc
+ * <p/>
+ * Created by bdirik on 13.11.2014.
  */
-public class GetAppDetailsRequest extends AppRequest<GetAppDetailsResponse> {
+public class GetAppLogsRequest extends AppRequest<GetAppLogsResponse> {
 
     @Override
     public void loadMetaData(RequestMetaData metaData) {
@@ -20,7 +19,7 @@ public class GetAppDetailsRequest extends AppRequest<GetAppDetailsResponse> {
         Asserts.notEmpty(appSidOrName, "AppName or AppSid");
 
         metaData.setMethod(GET);
-        metaData.addPath("/{app}");
+        metaData.addPath("/{app}/_logs");
         metaData.addPathParam("app", appSidOrName);
     }
 
@@ -29,10 +28,10 @@ public class GetAppDetailsRequest extends AppRequest<GetAppDetailsResponse> {
      */
     private String appSidOrName;
 
-    public GetAppDetailsRequest() {
+    public GetAppLogsRequest() {
     }
 
-    public GetAppDetailsRequest(String appSidOrName) {
+    public GetAppLogsRequest(String appSidOrName) {
         this.appSidOrName = appSidOrName;
     }
 

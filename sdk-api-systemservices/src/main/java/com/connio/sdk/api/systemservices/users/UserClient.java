@@ -64,7 +64,7 @@ public class UserClient extends AbstractClient implements IUserClient {
     @Override
     public UserDetails createUser(User user)
             throws ConnioServiceException, ConnioClientException {
-        throw new ConnioClientException("Unsupported Operation.");
+        return execute(new CreateUserRequest(user));
     }
 
     /**
@@ -79,7 +79,7 @@ public class UserClient extends AbstractClient implements IUserClient {
     @Override
     public UserDetails updateUser(String userSid, User user)
             throws ConnioServiceException, ConnioClientException {
-        throw new ConnioClientException("Unsupported Operation.");
+        return execute(new UpdateUserRequest(userSid, user));
     }
 
     /**
@@ -93,6 +93,6 @@ public class UserClient extends AbstractClient implements IUserClient {
     @Override
     public Deleted deleteUser(String userSid)
             throws ConnioServiceException, ConnioClientException {
-        throw new ConnioClientException("Unsupported Operation.");
+        return execute(new DeleteUserRequest(userSid));
     }
 }

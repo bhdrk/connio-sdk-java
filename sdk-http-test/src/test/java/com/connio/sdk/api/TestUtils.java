@@ -16,23 +16,28 @@ import java.util.Random;
  */
 public class TestUtils {
 
-    private static final SimpleDateFormat RANDOM_NAME_SUFFIX_FORMAT = new SimpleDateFormat("-yyMMddHHmmssSSS");
+    private static final SimpleDateFormat RANDOM_NAME_SUFFIX_FORMAT = new SimpleDateFormat("yyMMddHHmmssSSS");
     private static final int RANDOM_NAME_MAX_LENGTH = 64;
 
     public static String randomName(String prefix) {
+        return randomName(prefix, true);
+    }
+
+    public static String randomName(String prefix, boolean splitChar) {
         String suffix = RANDOM_NAME_SUFFIX_FORMAT.format(new Date());
         int maxLength = RANDOM_NAME_MAX_LENGTH - suffix.length();
+        if (splitChar) maxLength--;
         Asserts.maxSize(prefix, maxLength, "Prefix");
-        return prefix + suffix;
+        return prefix + (splitChar ? "-" : "") + suffix;
     }
 
     public static String generateIMEI() {
         int pos;
         int[] array = new int[15];
         int sum = 0;
-        int final_digit = 0;
-        int t = 0;
-        int len_offset = 0;
+        int final_digit;
+        int t;
+        int len_offset;
         int len = 15;
 
         // Fill in the first two values of the string based with the specified prefix.

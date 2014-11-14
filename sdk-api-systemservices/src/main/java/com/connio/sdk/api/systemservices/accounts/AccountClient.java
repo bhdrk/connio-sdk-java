@@ -6,6 +6,10 @@ import com.connio.sdk.api.exception.ConnioClientException;
 import com.connio.sdk.api.exception.ConnioServiceException;
 import com.connio.sdk.api.model.Deleted;
 import com.connio.sdk.api.systemservices.accounts.model.*;
+import com.connio.sdk.api.systemservices.apps.model.AppResultSet;
+import com.connio.sdk.api.systemservices.deviceprofiles.model.DeviceProfileResultSet;
+import com.connio.sdk.api.systemservices.devices.model.DeviceResultSet;
+import com.connio.sdk.api.systemservices.users.model.UserResultSet;
 
 /**
  * TODO: javadoc
@@ -118,9 +122,9 @@ public class AccountClient extends AbstractClient implements IAccountClient {
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
     @Override
-    public AuthToken createAuthenticationToken(String accountSid)
+    public AuthToken regenerateAuthenticationToken(String accountSid)
             throws ConnioServiceException, ConnioClientException {
-        return execute(new CreateAuthenticationTokenRequest(accountSid));
+        return execute(new RegenerateAuthenticationTokenRequest(accountSid));
     }
 
     /**
@@ -135,5 +139,61 @@ public class AccountClient extends AbstractClient implements IAccountClient {
     public BillingInfoList getBillingInfo(String accountSid)
             throws ConnioServiceException, ConnioClientException {
         return execute(new GetBillingInfoRequest(accountSid));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public UserResultSet getUsersOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetUsersOfAccountRequest(accountSid));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public AppResultSet getAppsOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetAppsOfAccountRequest(accountSid));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public DeviceResultSet getDevicesOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetDevicesOfAccountRequest(accountSid));
+    }
+
+    /**
+     * TODO: javadoc
+     *
+     * @param accountSid
+     * @return
+     * @throws com.connio.sdk.api.exception.ConnioServiceException
+     * @throws com.connio.sdk.api.exception.ConnioClientException
+     */
+    @Override
+    public DeviceProfileResultSet getDeviceProfilesOfAccount(String accountSid)
+            throws ConnioServiceException, ConnioClientException {
+        return execute(new GetDeviceProfilesOfAccountRequest(accountSid));
     }
 }

@@ -29,12 +29,12 @@ public interface IDeviceProfileClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param profileSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceProfileDetails getDeviceProfileDetails(String deviceProfileName)
+    public DeviceProfileDetails getDeviceProfileDetails(String profileSidOrName)
             throws ConnioServiceException, ConnioClientException;
 
     /**
@@ -51,23 +51,23 @@ public interface IDeviceProfileClient extends ConnioClient {
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param profileSidOrName
      * @param deviceProfile
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public DeviceProfileDetails updateDeviceProfile(String deviceProfileName, DeviceProfile deviceProfile)
+    public DeviceProfileDetails updateDeviceProfile(String profileSidOrName, DeviceProfile deviceProfile)
             throws ConnioServiceException, ConnioClientException;
 
     /**
      * TODO: javadoc
      *
-     * @param deviceProfileName
+     * @param profileSidOrName
      * @return
      * @throws com.connio.sdk.api.exception.ConnioServiceException
      * @throws com.connio.sdk.api.exception.ConnioClientException
      */
-    public Deleted deleteDeviceProfile(String deviceProfileName)
+    public Deleted deleteDeviceProfile(String profileSidOrName)
             throws ConnioServiceException, ConnioClientException;
 }
