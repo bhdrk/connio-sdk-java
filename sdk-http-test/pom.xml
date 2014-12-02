@@ -15,6 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>com.connio.sdk</groupId>
+            <artifactId>sdk-api-core</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.connio.sdk</groupId>
             <artifactId>sdk-api-systemservices</artifactId>
             <version>${project.parent.version}</version>
             <scope>test</scope>

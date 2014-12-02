@@ -17,6 +17,7 @@
             <groupId>com.connio.sdk</groupId>
             <artifactId>sdk-api-core</artifactId>
             <version>${project.parent.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
