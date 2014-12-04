@@ -86,7 +86,8 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
                         </configuration>
                     </execution>
@@ -97,7 +98,7 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <attach>false</attach>
+                    <attach>true</attach>
                 </configuration>
             </plugin>
             <plugin>
