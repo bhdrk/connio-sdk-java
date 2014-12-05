@@ -7,5 +7,5 @@ package com.connio.sdk.api.systemservices.datachannels.model;
  * @since 12.09.2014
  */
 public enum BaseType {
-    NUMERIC, WAYPOINT, BOOLEAN, EVENT, PREDEFLIST, ANY, COUNTER
+    NUMERIC, TEXT, OBJECT, WAYPOINT, BOOLEAN, EVENT, PREDEFLIST, ANY, COUNTER
 }
