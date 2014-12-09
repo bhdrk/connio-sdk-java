@@ -18,13 +18,13 @@ import static org.fest.assertions.api.Assertions.assertThat;
 /**
  * Created by bdirik on 11.11.2014.
  */
-@Test(suiteName = "ClientTests")
+@Test(suiteName = "ClientTests", groups = "client")
 public class DataChannelClientTest extends AbstractClientMockServerTestCase {
 
     private IDataChannelClient client;
 
     @BeforeClass
-    public void setUp() throws Exception {
+    public void beforeClass() throws Exception {
         client = new DataChannelClient(ConnioBasicCredentials.DEFAULT_PROFILE, mockTransformer());
     }
 

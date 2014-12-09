@@ -9,7 +9,7 @@ import static com.connio.sdk.api.TestUtils.resource;
 /**
  * Created by bdirik on 31.10.2014.
  */
-@Test(suiteName = "EntityTests")
+@Test(suiteName = "EntityTests", groups = "entity")
 public class DataFeedDetailsTest {
 
     @Test

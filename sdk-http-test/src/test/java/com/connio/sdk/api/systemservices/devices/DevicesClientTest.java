@@ -16,7 +16,7 @@ import static com.connio.sdk.api.TestUtils.resource;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 
-@Test(suiteName = "ClientTests")
+@Test(suiteName = "ClientTests", groups = "client")
 public class DevicesClientTest extends AbstractClientMockServerTestCase {
 
     private IDevicesClient client;

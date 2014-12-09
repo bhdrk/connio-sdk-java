@@ -19,7 +19,7 @@ import static com.connio.sdk.api.systemservices.devices.model.DeviceStatusType.C
 import static org.fest.assertions.api.Assertions.assertThat;
 
 
-@Test(suiteName = "HttpTests")
+@Test(suiteName = "HttpTests", groups = "http")
 public class DevicesClientHttpTest {
 
     private IDevicesClient client;

@@ -29,7 +29,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * <p/>
  * Created by bdirik on 06.11.2014.
  */
-@Test(suiteName = "ClientTests")
+@Test(suiteName = "ClientTests", groups = "client")
 public class AppClientTest extends AbstractClientMockServerTestCase {
 
     private IAppClient client;

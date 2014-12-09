@@ -19,7 +19,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 29.09.2014
  */
-@Test(suiteName = "HttpTests")
+@Test(suiteName = "HttpTests", groups = "http")
 public class UsersClientHttpTest {
 
     private UserClient client;

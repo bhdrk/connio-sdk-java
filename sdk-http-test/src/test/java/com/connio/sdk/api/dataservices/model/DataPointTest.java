@@ -13,7 +13,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 /**
  * Created by bdirik on 27.10.2014.
  */
-@Test(suiteName = "EntityTests")
+@Test(suiteName = "EntityTests", groups = "entity")
 public class DataPointTest {
 
     @Test

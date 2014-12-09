@@ -16,7 +16,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 25.09.2014
  */
-@Test(suiteName = "HttpTests")
+@Test(suiteName = "HttpTests", groups = "http")
 public class DeviceProfileClientHttpTest {
 
     private IDeviceProfileClient client;

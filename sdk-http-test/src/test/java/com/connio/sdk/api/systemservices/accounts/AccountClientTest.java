@@ -21,7 +21,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * @author bdirik
  * @since 22.09.2014
  */
-@Test(suiteName = "ClientTests")
+@Test(suiteName = "ClientTests", groups = "client")
 public class AccountClientTest extends AbstractClientMockServerTestCase {
 
     private IAccountClient client;

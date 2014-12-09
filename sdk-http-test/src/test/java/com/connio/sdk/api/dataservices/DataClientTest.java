@@ -1,7 +1,7 @@
 package com.connio.sdk.api.dataservices;
 
-import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.AbstractClientMockServerTestCase;
+import com.connio.sdk.api.auth.ConnioCredentials;
 import com.connio.sdk.api.dataservices.model.*;
 import com.connio.sdk.api.model.GeoCoordinates;
 import com.connio.sdk.api.model.Location;
@@ -21,7 +21,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  * <p/>
  * Created by bdirik on 20.10.2014.
  */
-@Test(suiteName = "ClientTests")
+@Test(suiteName = "ClientTests", groups = "client")
 public class DataClientTest extends AbstractClientMockServerTestCase {
 
     private IDataClient dataClient;
