@@ -3,7 +3,9 @@ package com.connio.sdk.api.model;
 import com.connio.sdk.api.utils.Asserts;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.SortedMap;
 
 /**
  * TODO: javadoc
@@ -31,7 +33,7 @@ public class RequestMetaData {
     /**
      * TODO: javadoc
      */
-    private Map<String, String> queryParams = new HashMap<String, String>(0);
+    private Map<String, String> queryParams = new LinkedHashMap<String, String>(0);
 
     /**
      * TODO: javadoc
