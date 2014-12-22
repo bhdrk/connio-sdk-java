@@ -58,11 +58,11 @@ public class ClientConfigFactory {
         Map<String, String> userDefinedConfigs = getUserDefinedConfigs();
         if (isNotEmpty(userDefinedConfigs)) {
             for (Map.Entry<String, String> cnf : userDefinedConfigs.entrySet()) {
-                if (isConfigKey(cnf.getKey())) {
+                if (isConfigKey(configMap, cnf.getKey())) {
                     if (LOG.isDebugEnabled())
                         LOG.debug("Updating config from user definition: " + cnf.getKey() + " = " + cnf.getValue());
 
-                    addToConfigMap(configMap, cnf.getKey(), cnf.getValue());
+                    updateConfig(configMap, cnf.getKey(), cnf.getValue());
                 }
             }
         } else {
@@ -79,12 +79,12 @@ public class ClientConfigFactory {
         boolean found = false;
 
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            if (isConfigKey(env.getKey())) {
+            if (isConfigKey(configMap, env.getKey())) {
                 if (LOG.isDebugEnabled())
                     LOG.debug("Updating config from environment variable: " + env.getKey() + " = " + env.getValue());
 
                 String dottedKey = env.getKey().replace("_", ".");
-                addToConfigMap(configMap, dottedKey, env.getValue());
+                updateConfig(configMap, dottedKey, env.getValue());
                 found = true;
             }
         }
@@ -103,13 +103,13 @@ public class ClientConfigFactory {
         boolean found = false;
 
         for (String name : systemProperties.stringPropertyNames()) {
-            if (isConfigKey(name)) {
+            if (isConfigKey(configMap, name)) {
                 String property = systemProperties.getProperty(name);
 
                 if (LOG.isDebugEnabled())
                     LOG.debug("Updating config from system property: " + name + " = " + property);
 
-                addToConfigMap(configMap, name, property);
+                updateConfig(configMap, name, property);
                 found = true;
             }
         }
@@ -120,7 +120,7 @@ public class ClientConfigFactory {
         }
     }
 
-    private void addToConfigMap(Map<String, String> configMap, String key, String value) {
+    private void updateConfig(Map<String, String> configMap, String key, String value) {
         for (String mkey : configMap.keySet()) {
             if (mkey.equalsIgnoreCase(key)) {
                 configMap.put(mkey, value);
@@ -129,8 +129,16 @@ public class ClientConfigFactory {
         }
     }
 
-    private boolean isConfigKey(String key) {
-        return startsWithIgnoreCase(key, Constants.CONFIG_KEY_PREFIX);
+    private boolean isConfigKey(Map<String, String> configMap, String key) {
+        if (startsWithIgnoreCase(key, Constants.CONFIG_KEY_PREFIX)) {
+            if (configMap.containsKey(key)) {
+                return true;
+            } else {
+                if (LOG.isWarnEnabled())
+                    LOG.warn("'" + key + "' is not a valid configuration!");
+            }
+        }
+        return false;
     }
 
     private Map<String, String> getDefaultConfigs() {
@@ -165,16 +173,19 @@ public class ClientConfigFactory {
 
         File file = new File(userHome, Constants.USER_DEFINED_CONFIG_FILE);
 
-        if (file.exists()) {
-            if (LOG.isDebugEnabled())
-                LOG.debug("User defined config file found on path " + file.getPath());
-        } else {
-            return null;
+        if (!file.exists()) {
+            file = new File(Constants.USER_DEFINED_CONFIG_FILE);
+            if (!file.exists()) {
+                return null;
+            }
         }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("User defined config file found on path " + file.getPath());
 
         if (!file.canRead()) {
             if (LOG.isDebugEnabled())
-                LOG.debug(file.getPath() + " is not accessible!");
+                LOG.warn(file.getPath() + " is not accessible!");
 
             return null;
         }
