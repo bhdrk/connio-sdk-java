@@ -175,6 +175,6 @@ public class DataClientTest extends AbstractClientMockServerTestCase {
         final Request request = popRequest();
 
         assertThat(request.getMethod()).isEqualTo("GET");
-        assertThat(request.getPath()).isEqualTo("/v1/_apps/" + appName + "/_data/" + channelName + "?limit=10&skip=0&query=remote_ip%253A10.10.10.11&sort=-client.time");
+        assertThat(request.getPath()).isEqualTo("/v1/_apps/" + appName + "/_data/" + channelName + "?query=remote_ip%253A10.10.10.11&skip=0&limit=10&sort=-client.time");
     }
 }
