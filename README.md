@@ -120,3 +120,8 @@ SDK divided two part like API and Transformers and these parts isolated from eac
 
 That's all. SDK automatically detects your transformer and will use it.
 
+## TODOS
+
+1. Add SSL support.
+1. Add asyncron communication support.
+1. Add javadocs :)
