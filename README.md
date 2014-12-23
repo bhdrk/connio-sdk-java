@@ -122,6 +122,6 @@ That's all. SDK automatically detects your transformer and will use it.
 
 ## TODOS
 
-1. Add SSL support.
-1. Add asyncron communication support.
-1. Add javadocs :)
+- Add SSL support.
+- Add asyncron communication support.
+- Add javadocs :)
